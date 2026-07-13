@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Om oss | Scope</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Scope hjem">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="mark-circle mark-blue"></span>
+          <span class="mark-circle mark-red"></span>
+          <span class="mark-circle mark-green"></span>
+        </span>
+        <span class="brand-name">scope</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Hovedmeny">
+        <a href="customers.html">Kunder</a>
+        <a href="integrations.html">Integrasjoner</a>
+        <a href="about.html" aria-current="page">Om oss</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="header-button ghost" href="#">Logg inn</a>
+        <a class="header-button solid" href="index.html#onboarding">Book Demo</a>
+      </div>
+
+      <button class="mobile-menu-button" type="button" aria-label="Åpne meny" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="mobile-menu" id="mobile-menu">
+        <nav aria-label="Mobilmeny">
+          <a href="customers.html">Kunder</a>
+          <a href="integrations.html">Integrasjoner</a>
+          <a href="about.html" aria-current="page">Om oss</a>
+        </nav>
+        <a class="mobile-login-button" href="#">Logg inn</a>
+      </div>
+    </header>
+
+    <main class="policy-page info-page">
+      <section class="policy-hero" aria-labelledby="about-title">
+        <div class="section-inner policy-inner">
+          <a class="back-link" href="index.html">Til forsiden</a>
+          <h1 id="about-title">Om oss</h1>
+          <p>Scope Analytics bygger programvare og rådgivning for serveringsbransjen, med mål om å gjøre tallene enklere å bruke i den daglige driften.</p>
+        </div>
+      </section>
+
+      <section class="policy-section" aria-labelledby="about-work-title">
+        <div class="section-inner policy-grid">
+          <div>
+            <h2 id="about-work-title">Hva vi bygger</h2>
+            <p>Vi samler data fra systemene restauranter allerede bruker, analyserer utviklingen og gjør innsikten tilgjengelig som konkrete råd.</p>
+          </div>
+          <div class="info-stack">
+            <article class="info-card">
+              <span class="info-kicker">Produkt</span>
+              <h3>Dashboard for drift</h3>
+              <p>Et enkelt sted for salg, kostnader, bemanning, rapporter og anbefalinger.</p>
+            </article>
+            <article class="info-card">
+              <span class="info-kicker">Rådgivning</span>
+              <h3>Bedre beslutninger</h3>
+              <p>Vi hjelper serveringssteder å forstå hva tallene betyr og hva som bør gjøres videre.</p>
+            </article>
+            <article class="info-card">
+              <span class="info-kicker">Fokus</span>
+              <h3>Serveringsbransjen</h3>
+              <p>Scope er bygget rundt hverdagen til restauranter, kafeer, barer og konsepter med flere avdelinger.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="policy-section" aria-labelledby="company-title">
+        <div class="section-inner policy-inner">
+          <h2 id="company-title">Selskap</h2>
+          <div class="company-lines">
+            <p><strong>SCOPE ANALYTICS AS</strong></p>
+            <p>Org.nr. 936 372 295</p>
+            <p>post@scopeanalytics.no</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" aria-labelledby="footer-title">
+      <div class="footer-inner">
+        <div class="footer-cta">
+          <div>
+            <h2 id="footer-title">Vi ser etter testkunder!</h2>
+            <p>I en begrenset periode får du Pro-pakken gratis i tre måneder.</p>
+          </div>
+          <a class="footer-button" href="#">Ta kontakt</a>
+        </div>
+        <div class="footer-meta">
+          <div class="footer-brand">
+            <p class="footer-logo">SCOPE</p>
+            <p>Programvare og rådgivning til serveringsbransjen</p>
+            <p class="footer-company">SCOPE ANALYTICS AS · 936 372 295 · post@scopeanalytics.no</p>
+          </div>
+          <nav class="footer-links" aria-label="Footer">
+            <a href="#">Kontakt</a>
+            <a href="#">Personvern</a>
+            <a href="#">Vilkår</a>
+            <a href="cookies.html">Cookie-innstillinger</a>
+            <a href="#">Logg inn</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
+    <section class="cookie-consent" aria-labelledby="cookie-consent-title" hidden>
+      <div class="cookie-consent-copy">
+        <h2 id="cookie-consent-title">Cookies</h2>
+        <p>Vi bruker nødvendige cookies for å lagre valgene dine. Du kan også tillate analyse og markedsføring.</p>
+        <a href="cookies.html">Se cookie-innstillinger</a>
+      </div>
+      <div class="cookie-consent-options" aria-label="Cookie-valg">
+        <label>
+          <input type="checkbox" checked disabled>
+          <span>Nødvendige</span>
+        </label>
+        <label>
+          <input type="checkbox" name="consent-analytics">
+          <span>Analyse</span>
+        </label>
+        <label>
+          <input type="checkbox" name="consent-marketing">
+          <span>Markedsføring</span>
+        </label>
+      </div>
+      <div class="cookie-consent-actions">
+        <button type="button" data-cookie-consent="necessary">Kun nødvendige</button>
+        <button type="button" data-cookie-consent="save">Lagre valg</button>
+        <button type="button" data-cookie-consent="all">Godta alle</button>
+      </div>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>
