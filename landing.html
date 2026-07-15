@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Landingsside | Scope</title>
+    <meta name="description" content="Scope gjør restauranttallene dine forståelige. En interaktiv fortelling om hvordan.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="landing.css?v=20260715-scope-forteller-v1">
+    <script>
+      /* Aktiverer animasjonslaget kun når brukeren tåler bevegelse.
+         Uten JS (eller med redusert bevegelse) er alt innhold synlig som vanlig. */
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.documentElement.classList.add("motion");
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Intro: prikkene finner plassen sin -->
+    <div class="intro" id="intro" aria-hidden="true">
+      <div class="intro-brand">
+        <span class="intro-dots">
+          <i class="dot dot-blue"></i>
+          <i class="dot dot-red"></i>
+          <i class="dot dot-green"></i>
+        </span>
+        <span class="intro-name">scope</span>
+      </div>
+    </div>
+
+    <!-- Partikkelfeltet: sidens sjel -->
+    <canvas id="field" aria-hidden="true"></canvas>
+
+    <!-- Egendefinert markørprikk -->
+    <div class="cursor-dot" aria-hidden="true"></div>
+
+    <header class="lx-header">
+      <a class="lx-brand" href="index.html" aria-label="Scope – til forsiden">
+        <span class="lx-brand-dots"><i class="dot dot-blue"></i><i class="dot dot-red"></i><i class="dot dot-green"></i></span>
+        <span class="lx-brand-name">scope</span>
+      </a>
+      <a class="lx-back" href="index.html">Til forsiden <span aria-hidden="true">→</span></a>
+    </header>
+
+    <nav class="lx-rail" aria-label="Seksjoner">
+      <a href="#hei" data-rail="hei"><span>Hei</span></a>
+      <a href="#hvordan" data-rail="hvordan"><span>Slik virker det</span></a>
+      <a href="#demo" data-rail="demo"><span>Demo</span></a>
+      <a href="#priser" data-rail="priser"><span>Priser</span></a>
+      <a href="#kontakt" data-rail="kontakt"><span>Kontakt</span></a>
+    </nav>
+
+    <main id="story">
+
+      <!-- 1 · HERO -->
+      <section class="lx-hero" id="hei" data-field="chaos" aria-labelledby="hero-title">
+        <p class="lx-voice" data-narrate>Hei! Fint at du kom. La meg vise deg noe.</p>
+        <h1 class="lx-title" id="hero-title">
+          <span class="lx-line"><span>Du kan <em class="c-red">mat.</em></span></span>
+          <span class="lx-line"><span>Vi kan <em class="c-blue">tall.</em></span></span>
+        </h1>
+        <p class="lx-lead">Klar på 1-2-3. Ingen bindingstid.</p>
+        <div class="lx-cta-row">
+          <button class="lx-btn lx-btn-primary" type="button" data-scroll-to="#hvordan" data-magnetic>Bli med <span aria-hidden="true">↓</span></button>
+          <a class="lx-btn lx-btn-ghost" href="index.html" data-magnetic>Book demo</a>
+        </div>
+        <p class="lx-scroll-cue" aria-hidden="true"><span></span>Scroll</p>
+      </section>
+
+      <!-- 2 · SLIK VIRKER SCOPE -->
+      <section class="lx-how" id="hvordan" aria-label="Slik virker Scope">
+        <div class="lx-how-pin">
+          <p class="lx-kicker">Slik virker Scope</p>
+
+          <div class="lx-steps">
+            <article class="lx-step is-active" data-step="0" data-field="stream">
+              <p class="lx-step-num" aria-hidden="true">01</p>
+              <h2>Hent data</h2>
+              <p class="lx-step-voice" data-narrate>Vi kobler oss på systemene du allerede bruker — kasse, regnskap, bemanning og levering. Ingen manuell punching. Null ekstra arbeid.</p>
+              <div class="lx-marquee" aria-label="Systemer Scope kobler seg til">
+                <div class="lx-marquee-track">
+                  <span class="lx-marquee-row">
+                    <img src="assets/logos/tripletex.svg" alt="Tripletex" loading="lazy">
+                    <img src="assets/logos/fiken-icon.svg" alt="Fiken" loading="lazy">
+                    <img src="assets/logos/poweroffice.png" alt="PowerOffice" loading="lazy">
+                    <img src="assets/logos/xledger.svg" alt="Xledger" loading="lazy">
+                    <img src="assets/logos/planday.png" alt="Planday" loading="lazy">
+                    <img src="assets/logos/quinyx.svg" alt="Quinyx" loading="lazy">
+                    <img src="assets/logos/vipps.png" alt="Vipps" loading="lazy">
+                    <img src="assets/logos/wolt.jpg" alt="Wolt" loading="lazy">
+                    <img src="assets/logos/foodora.png" alt="Foodora" loading="lazy">
+                    <img src="assets/logos/lightspeed.svg" alt="Lightspeed" loading="lazy">
+                    <img src="assets/logos/munu.svg" alt="Munu" loading="lazy">
+                    <img src="assets/logos/favrit.svg" alt="Favrit" loading="lazy">
+                  </span>
+                  <span class="lx-marquee-row" aria-hidden="true">
+                    <img src="assets/logos/tripletex.svg" alt="" loading="lazy">
+                    <img src="assets/logos/fiken-icon.svg" alt="" loading="lazy">
+                    <img src="assets/logos/poweroffice.png" alt="" loading="lazy">
+                    <img src="assets/logos/xledger.svg" alt="" loading="lazy">
+                    <img src="assets/logos/planday.png" alt="" loading="lazy">
+                    <img src="assets/logos/quinyx.svg" alt="" loading="lazy">
+                    <img src="assets/logos/vipps.png" alt="" loading="lazy">
+                    <img src="assets/logos/wolt.jpg" alt="" loading="lazy">
+                    <img src="assets/logos/foodora.png" alt="" loading="lazy">
+                    <img src="assets/logos/lightspeed.svg" alt="" loading="lazy">
+                    <img src="assets/logos/munu.svg" alt="" loading="lazy">
+                    <img src="assets/logos/favrit.svg" alt="" loading="lazy">
+                  </span>
+                </div>
+              </div>
+            </article>
+
+            <article class="lx-step" data-step="1" data-field="chart">
+              <p class="lx-step-num" aria-hidden="true">02</p>
+              <h2>Analyser</h2>
+              <p class="lx-step-voice" data-narrate>Så regner vi, hele døgnet. Omsetning mot bemanning. Svinn mot innkjøp. Time for time, krone for krone.</p>
+            </article>
+
+            <article class="lx-step" data-step="2" data-field="grid">
+              <p class="lx-step-num" aria-hidden="true">03</p>
+              <h2>Kvalitetssikre</h2>
+              <p class="lx-step-voice" data-narrate>Rare tall skjer. Vi finner dem, flagger dem og rydder opp — før de får lure deg.</p>
+            </article>
+
+            <article class="lx-step" data-step="3" data-field="triad">
+              <p class="lx-step-num" aria-hidden="true">04</p>
+              <h2>Få råd</h2>
+              <p class="lx-step-voice" data-narrate>Og så det viktigste: du får beskjed om hva du bør gjøre. Konkret, prioritert, på norsk.</p>
+              <ul class="lx-advice-chips">
+                <li><i class="dot dot-blue"></i>Sett inn én ekstra i servering fredag 16–19</li>
+                <li><i class="dot dot-red"></i>Pause Wolt i 45 minutter ved fullt trykk</li>
+                <li><i class="dot dot-green"></i>Legg ut ledig vakt kl. 18–22</li>
+              </ul>
+            </article>
+          </div>
+
+          <ol class="lx-how-progress" aria-hidden="true">
+            <li data-progress="0" class="is-active"><i></i>Hent data</li>
+            <li data-progress="1"><i></i>Analyser</li>
+            <li data-progress="2"><i></i>Kvalitetssikre</li>
+            <li data-progress="3"><i></i>Få råd</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 3 · DEMO -->
+      <section class="lx-demo" id="demo" data-field="margins" aria-label="Demo">
+        <div class="lx-narrow">
+          <p class="lx-voice" data-narrate>Dette er en helt vanlig torsdag hos Varm Burger AS. Se hva Scope ser.</p>
+
+          <figure class="lx-cameo">
+            <img src="assets/team-simon-korsberg.png" alt="Simon Korsberg">
+            <figcaption><strong>Simon</strong> — medgrunnlegger — «Alt under er ekte mekanikk fra dashbordet vårt.»</figcaption>
+          </figure>
+
+          <div class="lx-shot" role="img" aria-label="Utdrag fra Scope-dashbordet til Varm Burger AS">
+            <div class="lx-shot-head">
+              <span class="lx-shot-dots"><i></i><i></i><i></i></span>
+              <span class="lx-shot-title">Scope · Varm Burger AS · torsdag</span>
+              <span class="lx-shot-badge"><i></i>Live</span>
+            </div>
+            <div class="lx-shot-body">
+              <div class="lx-kpis">
+                <div class="lx-kpi">
+                  <span class="lx-kpi-label">Omsetning</span>
+                  <strong><span data-count="67512">67 512</span> kr</strong>
+                  <p>12 % opp fra forrige uke</p>
+                  <span class="lx-kpi-status is-good">Bra</span>
+                </div>
+                <div class="lx-kpi">
+                  <span class="lx-kpi-label">Gjester nå</span>
+                  <strong><span data-count="84">84</span></strong>
+                  <p>Høyt trykk i lokalet</p>
+                  <span class="lx-kpi-status is-warn">Travelt</span>
+                </div>
+                <div class="lx-kpi">
+                  <span class="lx-kpi-label">På jobb</span>
+                  <strong><span data-count="12">12</span></strong>
+                  <p>7 gjester per servitør</p>
+                  <span class="lx-kpi-status is-ok">I balanse</span>
+                </div>
+                <div class="lx-kpi">
+                  <span class="lx-kpi-label">Reservasjoner</span>
+                  <strong><span data-count="38">38</span></strong>
+                  <p>Mange bookinger etter 18:00</p>
+                  <span class="lx-kpi-status is-warn">Følg opp</span>
+                </div>
+              </div>
+
+              <div class="lx-trend" aria-hidden="true">
+                <p class="lx-trend-label">Omsetning · per halvtime</p>
+                <div class="lx-trend-bars">
+                  <i style="--h:22%"></i><i style="--h:30%"></i><i style="--h:26%"></i><i style="--h:38%"></i>
+                  <i style="--h:44%"></i><i style="--h:52%"></i><i style="--h:47%"></i><i style="--h:60%"></i>
+                  <i style="--h:74%"></i><i style="--h:88%"></i><i class="is-peak" style="--h:100%"></i><i style="--h:82%"></i>
+                </div>
+              </div>
+
+              <div class="lx-advice-card">
+                <div class="lx-advice-head">
+                  <span class="lx-advice-priority">Høy prioritet</span>
+                  <span class="lx-advice-time">Fredag 16–19</span>
+                </div>
+                <p class="lx-advice-title" data-narrate>Sett inn én ekstra i servering fredag kl. 16–19.</p>
+                <p class="lx-advice-effect"><strong>Forventet effekt:</strong> Kortere ventetid og bedre kapasitet.</p>
+                <p class="lx-advice-why">Hvorfor? Basert på gjestetrykket nå, reservasjonene og forventet rush mellom kl. 16 og 19.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="lx-cta-row">
+            <a class="lx-btn lx-btn-primary" href="index.html#demo" data-magnetic>Utforsk hele demoen <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4 · PRISER -->
+      <section class="lx-pricing" id="priser" data-field="margins" aria-labelledby="pricing-title">
+        <div class="lx-narrow">
+          <p class="lx-voice" data-narrate>Og hva koster det? Mindre enn én dårlig fredag.</p>
+          <div class="lx-pricing-head">
+            <h2 id="pricing-title">Priser</h2>
+            <div class="lx-billing" role="group" aria-label="Faktureringsperiode">
+              <button class="is-active" type="button" data-billing="monthly">Månedlig</button>
+              <button type="button" data-billing="yearly">Årlig</button>
+            </div>
+            <p class="lx-billing-note">Spar 20 % med årlig abonnement</p>
+          </div>
+
+          <div class="lx-price-grid">
+            <article class="lx-price-card">
+              <h3>Testkunde</h3>
+              <p class="lx-price" data-monthly="0,-" data-yearly="0,-">0,-<span>/mnd</span></p>
+              <ul class="lx-features">
+                <li class="is-on">Integrasjon med 3 systemer</li>
+                <li>Full råd- og rapportpakke</li>
+                <li>Eget dashbord til kokker og servitører</li>
+                <li>Du får en personlig kontaktperson</li>
+                <li>Personlige tilpasninger i alle dashbord</li>
+                <li>Markedsanalyser i restaurantbransjen</li>
+              </ul>
+            </article>
+            <article class="lx-price-card">
+              <h3>Basic</h3>
+              <p class="lx-price" data-monthly="999,-" data-yearly="799,-">999,-<span>/mnd</span></p>
+              <ul class="lx-features">
+                <li class="is-on">Integrasjon med opptil 3 systemer</li>
+                <li class="is-on">Full råd- og rapportpakke</li>
+                <li>Eget dashbord til kokker og servitører</li>
+                <li>Du får en personlig kontaktperson</li>
+                <li>Personlige tilpasninger i alle dashbord</li>
+                <li>Markedsanalyser i restaurantbransjen</li>
+              </ul>
+            </article>
+            <article class="lx-price-card is-pro">
+              <h3>Pro</h3>
+              <p class="lx-price" data-monthly="2 499,-" data-yearly="1 999,-">2 499,-<span>/mnd</span></p>
+              <ul class="lx-features">
+                <li class="is-on">Integrasjon med alle deres systemer</li>
+                <li class="is-on">Full råd- og rapportpakke</li>
+                <li class="is-on">Eget dashbord til kokker og servitører</li>
+                <li class="is-on">Du får en personlig kontaktperson</li>
+                <li class="is-on">Personlige tilpasninger i alle dashbord</li>
+                <li class="is-on">Markedsanalyser i restaurantbransjen</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5 · KONTAKT / FOOTER -->
+      <footer class="lx-footer" id="kontakt" data-field="triad" aria-labelledby="footer-title">
+        <div class="lx-narrow">
+          <p class="lx-voice" data-narrate>Det var historien. Nå vil vi gjerne møte deg.</p>
+          <h2 id="footer-title">Vi ser etter <em class="c-green">testkunder!</em></h2>
+          <p class="lx-footer-lede">I en begrenset periode får du Pro-pakken gratis i tre måneder.</p>
+
+          <div class="lx-founders">
+            <figure>
+              <img src="assets/team-ole-froiland.png" alt="Ole Frøiland">
+              <figcaption>Ole</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/team-sigurd-dahl.png" alt="Sigurd Dahl">
+              <figcaption>Sigurd</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/team-simon-korsberg.png" alt="Simon Korsberg">
+              <figcaption>Simon</figcaption>
+            </figure>
+          </div>
+
+          <div class="lx-cta-row">
+            <a class="lx-btn lx-btn-primary" href="mailto:post@scopeanalytics.no" data-magnetic>Ta kontakt</a>
+            <a class="lx-btn lx-btn-ghost" href="index.html" data-magnetic>Tilbake til forsiden</a>
+          </div>
+
+          <div class="lx-footer-meta">
+            <p>SCOPE ANALYTICS AS · 936 372 295 · post@scopeanalytics.no</p>
+            <nav aria-label="Bunnlenker">
+              <a href="index.html">Forsiden</a>
+              <a href="about.html">Om oss</a>
+              <a href="cookies.html">Cookie-innstillinger</a>
+            </nav>
+          </div>
+        </div>
+      </footer>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script type="importmap">
+      { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+    </script>
+    <script type="module" src="landing.js?v=20260715-scope-forteller-v1"></script>
+  </body>
+</html>
