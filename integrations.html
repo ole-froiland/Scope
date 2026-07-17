@@ -4,211 +4,93 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Integrasjoner | Scope</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Scope kobler sammen tall fra regnskap, kasse, bemanning og andre sentrale systemer.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=20260716-mobile-footer-v1">
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="index.html" aria-label="Scope hjem">
-        <span class="brand-mark" aria-hidden="true">
-          <span class="mark-circle mark-blue"></span>
-          <span class="mark-circle mark-red"></span>
-          <span class="mark-circle mark-green"></span>
-        </span>
-        <span class="brand-name">scope</span>
-      </a>
-
-      <nav class="main-nav" aria-label="Hovedmeny">
+    <header class="site-header compact-landing-header">
+      <a class="brand" href="index.html" aria-label="Scope hjem"><span class="brand-mark" aria-hidden="true"><span class="mark-circle mark-blue"></span><span class="mark-circle mark-red"></span><span class="mark-circle mark-green"></span></span><span class="brand-name">scope</span></a>
+      <nav class="main-nav compact-landing-nav" aria-label="Hovedmeny">
         <a href="customers.html">Kunder</a>
         <a href="integrations.html" aria-current="page">Integrasjoner</a>
         <a href="about.html">Om oss</a>
+        <a href="faq.html">Ofte stilte spørsmål</a>
       </nav>
-
-      <div class="header-actions">
-        <a class="header-button ghost" href="#">Logg inn</a>
-        <a class="header-button solid" href="index.html#onboarding">Book Demo</a>
-      </div>
-
-      <button class="mobile-menu-button" type="button" aria-label="Åpne meny" aria-expanded="false" aria-controls="mobile-menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <div class="mobile-menu" id="mobile-menu">
-        <nav aria-label="Mobilmeny">
-          <a href="customers.html">Kunder</a>
-          <a href="integrations.html" aria-current="page">Integrasjoner</a>
-          <a href="about.html">Om oss</a>
-        </nav>
-        <a class="mobile-login-button" href="#">Logg inn</a>
-      </div>
+      <a class="compact-header-cta" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20se%20Scope">Book en prat <span aria-hidden="true">↗</span></a>
+      <button class="mobile-menu-button" type="button" aria-label="Åpne meny" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span><b>Meny</b></button>
+      <div class="mobile-menu" id="mobile-menu"><nav aria-label="Mobilmeny"><a href="customers.html">Kunder</a><a href="integrations.html" aria-current="page">Integrasjoner</a><a href="about.html">Om oss</a><a href="faq.html">Ofte stilte spørsmål</a></nav><a class="mobile-login-button" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20se%20Scope">Book en prat ↗</a></div>
     </header>
 
-    <main>
-      <section class="slide" id="integrations" aria-labelledby="integrations-title">
-        <div class="section-inner">
-          <div class="section-heading">
-            <h1 id="integrations-title">Våre integrasjoner</h1>
-          </div>
+    <main class="marketing-page compact-marketing-page">
+      <section class="compact-hero compact-hero-green" aria-labelledby="integrations-title">
+        <div class="compact-shell"><span class="eyebrow eyebrow-green">Integrasjoner</span><h1 id="integrations-title">Systemene du allerede bruker</h1><p>Scope kobler sammen tall fra regnskap, kasse, bemanning og andre sentrale systemer.</p></div>
+      </section>
+
+      <section class="compact-section compact-integration-catalog" aria-label="Integrasjoner etter kategori">
+        <div class="compact-shell">
           <div class="integration-buttons" aria-label="Integrasjonskategorier">
             <button class="is-active" type="button" data-color="green" data-category="accounting">Regnskap</button>
             <button type="button" data-color="blue" data-category="pos">Kasse</button>
             <button type="button" data-color="red" data-category="staff">Bemanning</button>
             <button type="button" data-color="orange" data-category="other">Andre</button>
           </div>
+
           <div class="accounting-grid integration-panel is-active" data-panel="accounting" aria-label="Regnskapssystemer">
-            <div class="accounting-card">
-              <img class="logo-tripletex" src="assets/logos/tripletex.svg" alt="Tripletex">
-            </div>
-            <div class="accounting-card">
-              <img class="logo-poweroffice" src="assets/logos/poweroffice-farge01.png" alt="PowerOffice Go">
-              <span class="coming-soon">Kommer snart</span>
-            </div>
-            <div class="accounting-card">
-              <span class="logo-combo fiken-logo">
-                <img src="assets/logos/fiken-icon.svg" alt="">
-                <span>fiken</span>
-              </span>
-              <span class="coming-soon">Kommer snart</span>
-            </div>
-            <div class="accounting-card">
-              <img class="logo-xledger" src="assets/logos/xledger.svg" alt="Xledger">
-              <span class="coming-soon">Kommer snart</span>
-            </div>
-            <div class="accounting-card">
-              <img class="logo-dynamics" src="assets/logos/dynamics365.svg" alt="Microsoft Dynamics 365">
-              <span class="coming-soon">Kommer snart</span>
-            </div>
-            <div class="accounting-card">
-              <img class="logo-business-nxt" src="assets/logos/business-nxt.webp" alt="Business NXT by Visma">
-              <span class="coming-soon">Kommer snart</span>
-            </div>
-            <div class="accounting-card">
-              <img class="logo-conta" src="assets/logos/conta.svg" alt="Conta">
-              <span class="coming-soon">Kommer snart</span>
-            </div>
-            <div class="accounting-card">
-              <span class="text-logo unimicro">unimicro</span>
-              <span class="coming-soon">Kommer snart</span>
-            </div>
+            <article class="accounting-card"><img class="logo-tripletex" src="assets/logos/tripletex.svg" alt="Tripletex"><a class="integration-connect-link" href="/onboarding">Koble til Tripletex →</a><span class="integration-available">Tilgjengelig</span></article>
+            <article class="accounting-card"><img class="logo-poweroffice" src="assets/logos/poweroffice-farge01.png" alt="PowerOffice Go"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><span class="logo-combo fiken-logo"><img src="assets/logos/fiken-icon.svg" alt=""><span>fiken</span></span><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-xledger" src="assets/logos/xledger.svg" alt="Xledger"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-dynamics" src="assets/logos/dynamics365.svg" alt="Microsoft Dynamics 365"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-business-nxt" src="assets/logos/business-nxt.webp" alt="Business NXT by Visma"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-conta" src="assets/logos/conta.svg" alt="Conta"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><span class="text-logo unimicro">unimicro</span><span class="coming-soon">Kommer snart</span></article>
           </div>
-          <div class="accounting-grid integration-panel" data-panel="empty" aria-label="Kommer snart">
-            <div class="accounting-card empty-card"></div>
-            <div class="accounting-card empty-card"></div>
-            <div class="accounting-card empty-card"></div>
-            <div class="accounting-card empty-card"></div>
-            <div class="accounting-card empty-card"></div>
-            <div class="accounting-card empty-card"></div>
-            <div class="accounting-card empty-card"></div>
-            <div class="accounting-card empty-card"></div>
-          </div>
+
           <div class="accounting-grid integration-panel" data-panel="pos" aria-label="Kassesystemer">
-            <div class="accounting-card">
-              <img class="logo-lightspeed" src="assets/logos/lightspeed.png" alt="Lightspeed">
-            </div>
-            <div class="accounting-card">
-              <img class="logo-baemingo" src="assets/logos/baemingo.png" alt="Baemingo">
-            </div>
-            <div class="accounting-card">
-              <img class="logo-munu" src="assets/logos/munu.svg" alt="Munu">
-              <span class="coming-soon">Kommer snart</span>
-            </div>
-            <div class="accounting-card">
-              <img class="logo-restolution" src="assets/logos/restolution-new.png" alt="Restolution">
-              <span class="coming-soon">Kommer snart</span>
-            </div>
-            <div class="accounting-card">
-              <img class="logo-favrit" src="assets/logos/favrit.svg" alt="Favrit">
-              <span class="coming-soon">Kommer snart</span>
-            </div>
-            <div class="accounting-card">
-              <img class="logo-orderx" src="assets/logos/orderx.png" alt="Order X">
-              <span class="coming-soon">Kommer snart</span>
-            </div>
-            <div class="accounting-card">
-              <img class="logo-pck" src="assets/logos/pckasse.svg" alt="PCK">
-              <span class="coming-soon">Kommer snart</span>
-            </div>
-            <div class="accounting-card">
-              <img class="logo-amendo" src="assets/logos/amendo.png" alt="Amendo">
-              <span class="coming-soon">Kommer snart</span>
-            </div>
+            <article class="accounting-card"><img class="logo-lightspeed" src="assets/logos/lightspeed.png" alt="Lightspeed"><span class="integration-available">Tilgjengelig</span></article>
+            <article class="accounting-card"><img class="logo-baemingo" src="assets/logos/baemingo.png" alt="Baemingo"><span class="integration-available">Tilgjengelig</span></article>
+            <article class="accounting-card"><img class="logo-munu" src="assets/logos/munu.svg" alt="Munu"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-restolution" src="assets/logos/restolution-new.png" alt="Restolution"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-favrit" src="assets/logos/favrit.svg" alt="Favrit"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-orderx" src="assets/logos/orderx.png" alt="Order X"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-pck" src="assets/logos/pckasse.svg" alt="PCK"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-amendo" src="assets/logos/amendo.png" alt="Amendo"><span class="coming-soon">Kommer snart</span></article>
           </div>
-          <div class="accounting-grid integration-panel" data-panel="staff" aria-label="Vaktplanleggingssystemer">
-            <div class="accounting-card"><img class="logo-tamigo" src="assets/logos/tamigo.svg" alt="Tamigo"></div>
-            <div class="accounting-card"><img class="logo-connecteam" src="assets/logos/connecteam.webp" alt="Connecteam"><span class="coming-soon">Kommer snart</span></div>
-            <div class="accounting-card"><img class="logo-samesystem" src="assets/logos/samesystem.webp" alt="SameSystem"><span class="coming-soon">Kommer snart</span></div>
-            <div class="accounting-card"><img class="logo-tidsbanken" src="assets/logos/tidsbanken.webp" alt="Tidsbanken"><span class="coming-soon">Kommer snart</span></div>
-            <div class="accounting-card"><img class="logo-timegrip" src="assets/logos/timegrip.png" alt="Timegrip"><span class="coming-soon">Kommer snart</span></div>
-            <div class="accounting-card"><img class="logo-easyatwork" src="assets/logos/easyatwork.png" alt="Easy@work"><span class="coming-soon">Kommer snart</span></div>
-            <div class="accounting-card"><img class="logo-quinyx" src="assets/logos/quinyx.svg" alt="Quinyx"><span class="coming-soon">Kommer snart</span></div>
-            <div class="accounting-card"><img class="logo-planday" src="assets/logos/planday.png" alt="Planday"><span class="coming-soon">Kommer snart</span></div>
+
+          <div class="accounting-grid integration-panel" data-panel="staff" aria-label="Bemanningssystemer">
+            <article class="accounting-card"><img class="logo-tamigo" src="assets/logos/tamigo.svg" alt="Tamigo"><span class="integration-available">Tilgjengelig</span></article>
+            <article class="accounting-card"><img class="logo-connecteam" src="assets/logos/connecteam.webp" alt="Connecteam"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-samesystem" src="assets/logos/samesystem.webp" alt="SameSystem"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-tidsbanken" src="assets/logos/tidsbanken.webp" alt="Tidsbanken"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-timegrip" src="assets/logos/timegrip.png" alt="Timegrip"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-easyatwork" src="assets/logos/easyatwork.png" alt="Easy@work"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-quinyx" src="assets/logos/quinyx.svg" alt="Quinyx"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-planday" src="assets/logos/planday.png" alt="Planday"><span class="coming-soon">Kommer snart</span></article>
           </div>
+
           <div class="accounting-grid integration-panel" data-panel="other" aria-label="Andre systemer">
-            <div class="accounting-card"><img class="logo-stockifi" src="assets/logos/stockifi.jpg" alt="Stockifi"><span class="coming-soon">Kommer snart</span></div>
-            <div class="accounting-card"><img class="logo-google-reviews" src="assets/logos/google-reviews.png" alt="Google Reviews"><span class="coming-soon">Kommer snart</span></div>
-            <div class="accounting-card"><img class="logo-tripadvisor" src="assets/logos/tripadvisor.png" alt="Tripadvisor"><span class="coming-soon">Kommer snart</span></div>
-            <div class="accounting-card"><img class="logo-gastroplanner" src="assets/logos/gastroplanner.jpeg" alt="GastroPlanner"><span class="coming-soon">Kommer snart</span></div>
-            <div class="accounting-card"><img class="logo-foodora" src="assets/logos/foodora.png" alt="Foodora"><span class="coming-soon">Kommer snart</span></div>
-            <div class="accounting-card"><img class="logo-wolt" src="assets/logos/wolt.jpg" alt="Wolt"><span class="coming-soon">Kommer snart</span></div>
-            <div class="accounting-card"><img class="logo-vipps" src="assets/logos/vipps.png" alt="Vipps"><span class="coming-soon">Kommer snart</span></div>
-            <div class="accounting-card"><img class="logo-et" src="assets/logos/et-gradient.svg" alt="ET"><span class="coming-soon">Kommer snart</span></div>
+            <article class="accounting-card"><img class="logo-stockifi" src="assets/logos/stockifi.jpg" alt="Stockifi"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-google-reviews" src="assets/logos/google-reviews.png" alt="Google Reviews"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-tripadvisor" src="assets/logos/tripadvisor.png" alt="Tripadvisor"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-gastroplanner" src="assets/logos/gastroplanner.jpeg" alt="GastroPlanner"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-foodora" src="assets/logos/foodora.png" alt="Foodora"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-wolt" src="assets/logos/wolt.jpg" alt="Wolt"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-vipps" src="assets/logos/vipps.png" alt="Vipps"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-et" src="assets/logos/et-gradient.svg" alt="ET"><span class="coming-soon">Kommer snart</span></article>
           </div>
         </div>
       </section>
+
+      <section class="compact-testers compact-testers-yellow" aria-labelledby="integrations-testers-title">
+        <div class="compact-shell compact-testers-inner"><div><h2 id="integrations-testers-title">Vi ser etter testkunder!</h2><p>I en begrenset periode får du Pro-pakken gratis i tre måneder.</p></div><a class="compact-button" href="index.html#onboarding">Book demo</a></div>
+      </section>
     </main>
 
-    <footer class="site-footer" aria-labelledby="footer-title">
-      <div class="footer-inner">
-        <div class="footer-cta">
-          <div>
-            <h2 id="footer-title">Vi ser etter testkunder!</h2>
-            <p>I en begrenset periode får du Pro-pakken gratis i tre måneder.</p>
-          </div>
-          <a class="footer-button" href="#">Ta kontakt</a>
-        </div>
-        <div class="footer-meta">
-          <div class="footer-brand">
-            <p class="footer-logo">SCOPE</p>
-            <p>Programvare og rådgivning til serveringsbransjen</p>
-            <p class="footer-company">SCOPE ANALYTICS AS · 936 372 295 · post@scopeanalytics.no</p>
-          </div>
-          <nav class="footer-links" aria-label="Footer">
-            <a href="#">Kontakt</a>
-            <a href="#">Personvern</a>
-            <a href="#">Vilkår</a>
-            <a href="cookies.html">Cookie-innstillinger</a>
-            <a href="#">Logg inn</a>
-          </nav>
-        </div>
-      </div>
-    </footer>
-    <section class="cookie-consent" aria-labelledby="cookie-consent-title" hidden>
-      <div class="cookie-consent-copy">
-        <h2 id="cookie-consent-title">Cookies</h2>
-        <p>Vi bruker nødvendige cookies for å lagre valgene dine. Du kan også tillate analyse og markedsføring.</p>
-        <a href="cookies.html">Se cookie-innstillinger</a>
-      </div>
-      <div class="cookie-consent-options" aria-label="Cookie-valg">
-        <label>
-          <input type="checkbox" checked disabled>
-          <span>Nødvendige</span>
-        </label>
-        <label>
-          <input type="checkbox" name="consent-analytics">
-          <span>Analyse</span>
-        </label>
-        <label>
-          <input type="checkbox" name="consent-marketing">
-          <span>Markedsføring</span>
-        </label>
-      </div>
-      <div class="cookie-consent-actions">
-        <button type="button" data-cookie-consent="necessary">Kun nødvendige</button>
-        <button type="button" data-cookie-consent="save">Lagre valg</button>
-        <button type="button" data-cookie-consent="all">Godta alle</button>
-      </div>
-    </section>
+    <footer class="site-footer compact-site-footer" aria-label="Sidefot"><div class="footer-inner"><div class="footer-meta"><div class="footer-brand"><p class="footer-logo">SCOPE</p><p>Programvare og rådgivning til serveringsbransjen</p><p class="footer-company">SCOPE ANALYTICS AS · 936 372 295 · post@scopeanalytics.no</p></div><nav class="footer-links" aria-label="Footer"><a href="mailto:post@scopeanalytics.no">Kontakt</a><a href="#">Personvern</a><a href="#">Vilkår</a><a href="cookies.html">Cookie-innstillinger</a><a href="index.html?login=1">Logg inn</a></nav></div></div></footer>
+    <section class="cookie-consent" aria-labelledby="cookie-consent-title" hidden><div class="cookie-consent-copy"><h2 id="cookie-consent-title">Cookies</h2><p>Vi bruker nødvendige cookies for å lagre valgene dine. Du kan også tillate analyse og markedsføring.</p><a href="cookies.html">Se cookie-innstillinger</a></div><div class="cookie-consent-options" aria-label="Cookie-valg"><label><input type="checkbox" checked disabled><span>Nødvendige</span></label><label><input type="checkbox" name="consent-analytics"><span>Analyse</span></label><label><input type="checkbox" name="consent-marketing"><span>Markedsføring</span></label></div><div class="cookie-consent-actions"><button type="button" data-cookie-consent="necessary">Kun nødvendige</button><button type="button" data-cookie-consent="save">Lagre valg</button><button type="button" data-cookie-consent="all">Godta alle</button></div></section>
     <script src="script.js"></script>
   </body>
 </html>

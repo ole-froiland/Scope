@@ -1,240 +1,473 @@
 <!doctype html>
-<html lang="no">
+<html lang="no" class="has-motion">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Landingsside | Scope</title>
-    <meta name="description" content="Scope gjør restauranttallene dine forståelige. En interaktiv fortelling om hvordan.">
+    <meta name="description" content="Scope samler restaurantens viktigste tall og gjør dem om til konkrete råd for bedre drift.">
+    <meta name="theme-color" content="#fff9ee">
+    <title>Scope — fra magefølelse til full oversikt</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='20' r='18' fill='%23064dff'/%3E%3Ccircle cx='44' cy='40' r='18' fill='%23ff3c38'/%3E%3Ccircle cx='20' cy='40' r='18' fill='%2300bd7b'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="landing.css?v=20260715-scope-forteller-v1">
-    <script>
-      /* Aktiverer animasjonslaget kun når brukeren tåler bevegelse.
-         Uten JS (eller med redusert bevegelse) er alt innhold synlig som vanlig. */
-      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        document.documentElement.classList.add("motion");
-      }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="landing.css?v=20260716-contact-data-v1">
   </head>
   <body>
-    <!-- Intro: prikkene finner plassen sin -->
-    <div class="intro" id="intro" aria-hidden="true">
-      <div class="intro-brand">
-        <span class="intro-dots">
-          <i class="dot dot-blue"></i>
-          <i class="dot dot-red"></i>
-          <i class="dot dot-green"></i>
-        </span>
-        <span class="intro-name">scope</span>
-      </div>
+    <div class="loader" aria-hidden="true">
+      <span class="loader-brand">
+        <span class="loader-mark"><i></i><i></i><i></i></span>
+        <strong>scope</strong>
+      </span>
     </div>
 
-    <!-- Partikkelfeltet: sidens sjel -->
-    <canvas id="field" aria-hidden="true"></canvas>
+    <a class="skip-link" href="#innhold">Hopp til innhold</a>
 
-    <!-- Egendefinert markørprikk -->
-    <div class="cursor-dot" aria-hidden="true"></div>
-
-    <header class="lx-header">
-      <a class="lx-brand" href="index.html" aria-label="Scope – til forsiden">
-        <span class="lx-brand-dots"><i class="dot dot-blue"></i><i class="dot dot-red"></i><i class="dot dot-green"></i></span>
-        <span class="lx-brand-name">scope</span>
+    <div class="page-noise" aria-hidden="true"></div>
+    <header class="site-header" data-header>
+      <a class="brand" href="index.html" aria-label="Scope, tilbake til hovedsiden">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>scope</span>
       </a>
-      <a class="lx-back" href="index.html">Til forsiden <span aria-hidden="true">→</span></a>
+
+      <nav class="desktop-nav" aria-label="Hovednavigasjon">
+        <a href="customers.html">Kunder</a>
+        <a href="integrations.html">Integrasjoner</a>
+        <a href="about.html">Om oss</a>
+        <a href="faq.html">Ofte stilte spørsmål</a>
+      </nav>
+
+      <a class="header-cta" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20se%20Scope">
+        Book en prat <span aria-hidden="true">↗</span>
+      </a>
+
+      <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+        <span class="mobile-menu-toggle-icon" aria-hidden="true"><i></i><i></i></span>
+        <span data-menu-toggle-label>Meny</span>
+      </button>
     </header>
 
-    <nav class="lx-rail" aria-label="Seksjoner">
-      <a href="#hei" data-rail="hei"><span>Hei</span></a>
-      <a href="#hvordan" data-rail="hvordan"><span>Slik virker det</span></a>
-      <a href="#demo" data-rail="demo"><span>Demo</span></a>
-      <a href="#priser" data-rail="priser"><span>Priser</span></a>
-      <a href="#kontakt" data-rail="kontakt"><span>Kontakt</span></a>
-    </nav>
-
-    <main id="story">
-
-      <!-- 1 · HERO -->
-      <section class="lx-hero" id="hei" data-field="chaos" aria-labelledby="hero-title">
-        <p class="lx-voice" data-narrate>Hei! Fint at du kom. La meg vise deg noe.</p>
-        <h1 class="lx-title" id="hero-title">
-          <span class="lx-line"><span>Du kan <em class="c-red">mat.</em></span></span>
-          <span class="lx-line"><span>Vi kan <em class="c-blue">tall.</em></span></span>
-        </h1>
-        <p class="lx-lead">Klar på 1-2-3. Ingen bindingstid.</p>
-        <div class="lx-cta-row">
-          <button class="lx-btn lx-btn-primary" type="button" data-scroll-to="#hvordan" data-magnetic>Bli med <span aria-hidden="true">↓</span></button>
-          <a class="lx-btn lx-btn-ghost" href="index.html" data-magnetic>Book demo</a>
+    <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Hovedmeny" data-mobile-menu hidden>
+      <nav class="mobile-menu-panel" aria-label="Mobilnavigasjon">
+        <div class="mobile-menu-head">
+          <span>Meny</span>
+          <button class="mobile-menu-close" type="button" aria-label="Lukk meny" data-menu-close>×</button>
         </div>
-        <p class="lx-scroll-cue" aria-hidden="true"><span></span>Scroll</p>
-      </section>
+        <div class="mobile-menu-links">
+          <a href="#plattformen" aria-current="page">Produkt <span aria-hidden="true">01</span></a>
+          <a href="customers.html">Kunder <span aria-hidden="true">02</span></a>
+          <a href="integrations.html">Integrasjoner <span aria-hidden="true">03</span></a>
+          <a href="about.html">Om oss <span aria-hidden="true">04</span></a>
+          <a href="faq.html">Ofte stilte spørsmål <span aria-hidden="true">05</span></a>
+        </div>
+        <div class="mobile-menu-actions">
+          <a class="button button-outline" href="landing-enkel.html?demo=1">Se demo <span aria-hidden="true">↗</span></a>
+          <a class="button button-dark" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20se%20Scope">Book en prat <span aria-hidden="true">→</span></a>
+        </div>
+      </nav>
+    </div>
 
-      <!-- 2 · SLIK VIRKER SCOPE -->
-      <section class="lx-how" id="hvordan" aria-label="Slik virker Scope">
-        <div class="lx-how-pin">
-          <p class="lx-kicker">Slik virker Scope</p>
+    <main id="innhold">
+      <section class="hero" id="topp" data-scene aria-labelledby="hero-title">
+        <div class="hero-glow hero-glow-one" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow-two" aria-hidden="true"></div>
 
-          <div class="lx-steps">
-            <article class="lx-step is-active" data-step="0" data-field="stream">
-              <p class="lx-step-num" aria-hidden="true">01</p>
-              <h2>Hent data</h2>
-              <p class="lx-step-voice" data-narrate>Vi kobler oss på systemene du allerede bruker — kasse, regnskap, bemanning og levering. Ingen manuell punching. Null ekstra arbeid.</p>
-              <div class="lx-marquee" aria-label="Systemer Scope kobler seg til">
-                <div class="lx-marquee-track">
-                  <span class="lx-marquee-row">
-                    <img src="assets/logos/tripletex.svg" alt="Tripletex" loading="lazy">
-                    <img src="assets/logos/fiken-icon.svg" alt="Fiken" loading="lazy">
-                    <img src="assets/logos/poweroffice.png" alt="PowerOffice" loading="lazy">
-                    <img src="assets/logos/xledger.svg" alt="Xledger" loading="lazy">
-                    <img src="assets/logos/planday.png" alt="Planday" loading="lazy">
-                    <img src="assets/logos/quinyx.svg" alt="Quinyx" loading="lazy">
-                    <img src="assets/logos/vipps.png" alt="Vipps" loading="lazy">
-                    <img src="assets/logos/wolt.jpg" alt="Wolt" loading="lazy">
-                    <img src="assets/logos/foodora.png" alt="Foodora" loading="lazy">
-                    <img src="assets/logos/lightspeed.svg" alt="Lightspeed" loading="lazy">
-                    <img src="assets/logos/munu.svg" alt="Munu" loading="lazy">
-                    <img src="assets/logos/favrit.svg" alt="Favrit" loading="lazy">
-                  </span>
-                  <span class="lx-marquee-row" aria-hidden="true">
-                    <img src="assets/logos/tripletex.svg" alt="" loading="lazy">
-                    <img src="assets/logos/fiken-icon.svg" alt="" loading="lazy">
-                    <img src="assets/logos/poweroffice.png" alt="" loading="lazy">
-                    <img src="assets/logos/xledger.svg" alt="" loading="lazy">
-                    <img src="assets/logos/planday.png" alt="" loading="lazy">
-                    <img src="assets/logos/quinyx.svg" alt="" loading="lazy">
-                    <img src="assets/logos/vipps.png" alt="" loading="lazy">
-                    <img src="assets/logos/wolt.jpg" alt="" loading="lazy">
-                    <img src="assets/logos/foodora.png" alt="" loading="lazy">
-                    <img src="assets/logos/lightspeed.svg" alt="" loading="lazy">
-                    <img src="assets/logos/munu.svg" alt="" loading="lazy">
-                    <img src="assets/logos/favrit.svg" alt="" loading="lazy">
-                  </span>
-                </div>
-              </div>
-            </article>
+        <div class="hero-copy">
+          <p class="eyebrow reveal"><span aria-hidden="true"></span>Bedre beslutninger, hver dag</p>
+          <h1 id="hero-title">
+            <span class="hero-line"><span>Full oversikt.</span></span>
+            <span class="hero-line"><span>Bedre <em>drift.</em></span></span>
+          </h1>
+          <p class="hero-lede reveal">Scope samler data og viser hva som bør gjøres: konkret og enkelt.</p>
+          <div class="hero-actions reveal">
+            <a class="button button-dark magnetic" href="#plattformen">Se Scope i praksis <span aria-hidden="true">↓</span></a>
+            <a class="button button-outline magnetic" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20se%20Scope">Book en prat <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
 
-            <article class="lx-step" data-step="1" data-field="chart">
-              <p class="lx-step-num" aria-hidden="true">02</p>
-              <h2>Analyser</h2>
-              <p class="lx-step-voice" data-narrate>Så regner vi, hele døgnet. Omsetning mot bemanning. Svinn mot innkjøp. Time for time, krone for krone.</p>
-            </article>
+        <div class="signal-world" aria-label="Scope samler systemdata, prioriterer tre råd og måler effekten">
+          <div class="orbit orbit-one" aria-hidden="true"></div>
+          <div class="orbit orbit-two" aria-hidden="true"></div>
 
-            <article class="lx-step" data-step="2" data-field="grid">
-              <p class="lx-step-num" aria-hidden="true">03</p>
-              <h2>Kvalitetssikre</h2>
-              <p class="lx-step-voice" data-narrate>Rare tall skjer. Vi finner dem, flagger dem og rydder opp — før de får lure deg.</p>
-            </article>
-
-            <article class="lx-step" data-step="3" data-field="triad">
-              <p class="lx-step-num" aria-hidden="true">04</p>
-              <h2>Få råd</h2>
-              <p class="lx-step-voice" data-narrate>Og så det viktigste: du får beskjed om hva du bør gjøre. Konkret, prioritert, på norsk.</p>
-              <ul class="lx-advice-chips">
-                <li><i class="dot dot-blue"></i>Sett inn én ekstra i servering fredag 16–19</li>
-                <li><i class="dot dot-red"></i>Pause Wolt i 45 minutter ved fullt trykk</li>
-                <li><i class="dot dot-green"></i>Legg ut ledig vakt kl. 18–22</li>
-              </ul>
-            </article>
+          <div class="scope-orb">
+            <span class="scope-orb-brand" aria-label="Scope">
+              <span class="scope-orb-brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span>scope</span>
+            </span>
+            <strong>AI-rådgivning</strong>
+            <span class="scope-orb-subtitle">for serveringsbransjen</span>
           </div>
 
-          <ol class="lx-how-progress" aria-hidden="true">
-            <li data-progress="0" class="is-active"><i></i>Hent data</li>
-            <li data-progress="1"><i></i>Analyser</li>
-            <li data-progress="2"><i></i>Kvalitetssikre</li>
-            <li data-progress="3"><i></i>Få råd</li>
-          </ol>
+          <article class="orbit-card orbit-source source-kasse">
+            <span>Omsetning</span><strong>68 240 kr</strong><small>↓ 11 % fra forrige tirsdag</small>
+          </article>
+          <article class="orbit-card orbit-source source-vaktplan">
+            <span>Vaktplan</span><strong>124 timer</strong><small>Planlagt denne uken</small>
+          </article>
+          <article class="orbit-card orbit-source source-regnskap">
+            <span>Varekost øl</span><strong>37 %</strong><small>4 % over målet</small>
+          </article>
+          <article class="orbit-card orbit-source source-innkjop">
+            <span>Bookinger</span><strong>7 bord</strong><small>I morgen kveld</small>
+          </article>
+
+          <section class="advice-window" aria-label="Tre prioriterte råd fra Scope">
+            <div class="advice-window-head">
+              <span><i></i><i></i><i></i></span>
+              <strong>scope / dagens råd</strong>
+              <b>3 råd</b>
+            </div>
+            <div class="advice-window-body">
+              <p>Størst estimert effekt akkurat nå</p>
+              <article class="advice-task"><b>✓</b><span><strong>Legg til en vakt 10–18 på fredag</strong><small>Forventet høyere trykk enn normalt</small></span></article>
+              <article class="advice-task"><b>✓</b><span><strong>Steng to timer tidligere mandag og tirsdag</strong><small>Lav omsetning de siste seks ukene</small></span></article>
+              <article class="advice-task"><b>✓</b><span><strong>Øk prisen på signaturpizzaen med 7 kr</strong><small>Bedre margin uten å miste konkurransekraft</small></span></article>
+              <div class="advice-impact"><span>Estimert positiv effekt denne måneden</span><strong>5 726 kr</strong><small>Basert på fullførte råd</small></div>
+              <i class="advice-cursor" aria-hidden="true">➤</i>
+            </div>
+          </section>
         </div>
+
       </section>
 
-      <!-- 3 · DEMO -->
-      <section class="lx-demo" id="demo" data-field="margins" aria-label="Demo">
-        <div class="lx-narrow">
-          <p class="lx-voice" data-narrate>Dette er en helt vanlig torsdag hos Varm Burger AS. Se hva Scope ser.</p>
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker-track">
+          <span>Færre løse tråder <b>✦</b> Bedre beslutninger <b>✦</b> Mer lønnsom drift <b>✦</b> Mindre tid i regneark <b>✦</b></span>
+          <span>Færre løse tråder <b>✦</b> Bedre beslutninger <b>✦</b> Mer lønnsom drift <b>✦</b> Mindre tid i regneark <b>✦</b></span>
+        </div>
+      </div>
 
-          <figure class="lx-cameo">
-            <img src="assets/team-simon-korsberg.png" alt="Simon Korsberg">
-            <figcaption><strong>Simon</strong> — medgrunnlegger — «Alt under er ekte mekanikk fra dashbordet vårt.»</figcaption>
-          </figure>
+      <section class="story" id="slik-fungerer" data-scene data-sticky-blocker aria-labelledby="story-title">
+        <div class="section-intro">
+          <h2 id="story-title">Slik fungerer Scope</h2>
+        </div>
 
-          <div class="lx-shot" role="img" aria-label="Utdrag fra Scope-dashbordet til Varm Burger AS">
-            <div class="lx-shot-head">
-              <span class="lx-shot-dots"><i></i><i></i><i></i></span>
-              <span class="lx-shot-title">Scope · Varm Burger AS · torsdag</span>
-              <span class="lx-shot-badge"><i></i>Live</span>
+        <div class="story-grid">
+          <article class="story-card story-card-blue reveal-card">
+            <span class="card-number">01</span>
+            <div class="story-visual story-visual-collect" role="img" aria-label="Tripletex, Tamigo, Lightspeed og Planday sender regnskaps-, bemannings-, kasse- og bookingdata inn til Scope.">
+              <svg class="story-connectors" viewBox="0 0 560 300" aria-hidden="true">
+                <path d="M158 69 C218 69 213 119 253 132"></path>
+                <path d="M402 69 C342 69 347 119 307 132"></path>
+                <path d="M158 231 C218 231 213 181 253 168"></path>
+                <path d="M402 231 C342 231 347 181 307 168"></path>
+              </svg>
+              <div class="story-integration story-integration-one"><small>Regnskap</small><img src="assets/logos/tripletex.svg" alt="" loading="lazy" decoding="async"><span>Bilag · lønn</span></div>
+              <div class="story-integration story-integration-two"><small>Bemanning</small><img src="assets/logos/tamigo.svg" alt="" loading="lazy" decoding="async"><span>Vakter · timer</span></div>
+              <div class="story-integration story-integration-three"><small>Booking</small><img src="assets/logos/planday.png" alt="" loading="lazy" decoding="async"><span>Plan · kapasitet</span></div>
+              <div class="story-integration story-integration-four"><small>Kasse</small><img src="assets/logos/lightspeed.svg" alt="" loading="lazy" decoding="async"><span>Salg · varer</span></div>
+              <div class="story-scope-core" aria-hidden="true"><span class="story-scope-dots"><i></i><i></i><i></i></span><strong>scope</strong><small>Alt samlet</small></div>
             </div>
-            <div class="lx-shot-body">
-              <div class="lx-kpis">
-                <div class="lx-kpi">
-                  <span class="lx-kpi-label">Omsetning</span>
-                  <strong><span data-count="67512">67 512</span> kr</strong>
-                  <p>12 % opp fra forrige uke</p>
-                  <span class="lx-kpi-status is-good">Bra</span>
-                </div>
-                <div class="lx-kpi">
-                  <span class="lx-kpi-label">Gjester nå</span>
-                  <strong><span data-count="84">84</span></strong>
-                  <p>Høyt trykk i lokalet</p>
-                  <span class="lx-kpi-status is-warn">Travelt</span>
-                </div>
-                <div class="lx-kpi">
-                  <span class="lx-kpi-label">På jobb</span>
-                  <strong><span data-count="12">12</span></strong>
-                  <p>7 gjester per servitør</p>
-                  <span class="lx-kpi-status is-ok">I balanse</span>
-                </div>
-                <div class="lx-kpi">
-                  <span class="lx-kpi-label">Reservasjoner</span>
-                  <strong><span data-count="38">38</span></strong>
-                  <p>Mange bookinger etter 18:00</p>
-                  <span class="lx-kpi-status is-warn">Følg opp</span>
-                </div>
-              </div>
+            <div>
+              <h3>Samler data</h3>
+              <p>Vi henter inn all data fra alle dine systemer, hver dag.</p>
+            </div>
+          </article>
 
-              <div class="lx-trend" aria-hidden="true">
-                <p class="lx-trend-label">Omsetning · per halvtime</p>
-                <div class="lx-trend-bars">
-                  <i style="--h:22%"></i><i style="--h:30%"></i><i style="--h:26%"></i><i style="--h:38%"></i>
-                  <i style="--h:44%"></i><i style="--h:52%"></i><i style="--h:47%"></i><i style="--h:60%"></i>
-                  <i style="--h:74%"></i><i style="--h:88%"></i><i class="is-peak" style="--h:100%"></i><i style="--h:82%"></i>
+          <article class="story-card story-card-red reveal-card">
+            <span class="card-number">02</span>
+            <div class="story-visual story-visual-analyze" role="img" aria-label="Scope går fra signalet Personalkostnad pluss 2,4 prosentpoeng, via timer, salg, bemanning og reservasjoner, til innsikten om at ekstra timer på rolige vakter forklarer økningen.">
+              <div class="story-analysis-flow" aria-hidden="true">
+                <svg class="story-analysis-connectors" viewBox="0 0 540 300">
+                  <path d="M135 150 C156 150 152 62 176 62"></path>
+                  <path d="M135 150 C156 150 152 125 176 125"></path>
+                  <path d="M135 150 C156 150 152 188 176 188"></path>
+                  <path d="M135 150 C156 150 152 251 176 251"></path>
+                  <path d="M362 62 C384 62 378 150 401 150"></path>
+                  <path d="M362 125 C384 125 378 150 401 150"></path>
+                  <path d="M362 188 C384 188 378 150 401 150"></path>
+                  <path d="M362 251 C384 251 378 150 401 150"></path>
+                </svg>
+                <article class="story-analysis-signal">
+                  <small>Hovedsignal</small>
+                  <span>Personalkostnad</span>
+                  <strong>+2,4 pp</strong>
+                  <em>over mål</em>
+                </article>
+                <div class="story-analysis-clues">
+                  <article><i>↗</i><span><small>Timer</small><strong>Flere timer enn planlagt</strong></span></article>
+                  <article><i>↘</i><span><small>Salg</small><strong>Lavere salg enn forventet</strong></span></article>
+                  <article><i>+</i><span><small>Bemanning</small><strong>Ekstra bemanning tirsdag kveld</strong></span></article>
+                  <article><i>−</i><span><small>Reservasjoner</small><strong>Under normalt</strong></span></article>
                 </div>
-              </div>
-
-              <div class="lx-advice-card">
-                <div class="lx-advice-head">
-                  <span class="lx-advice-priority">Høy prioritet</span>
-                  <span class="lx-advice-time">Fredag 16–19</span>
-                </div>
-                <p class="lx-advice-title" data-narrate>Sett inn én ekstra i servering fredag kl. 16–19.</p>
-                <p class="lx-advice-effect"><strong>Forventet effekt:</strong> Kortere ventetid og bedre kapasitet.</p>
-                <p class="lx-advice-why">Hvorfor? Basert på gjestetrykket nå, reservasjonene og forventet rush mellom kl. 16 og 19.</p>
+                <article class="story-analysis-insight">
+                  <span><i></i><i></i><i></i><small>Scope-innsikt</small></span>
+                  <strong>Økningen skyldes ekstra timer på rolige vakter.</strong>
+                  <small>Tallene er satt i sammenheng.</small>
+                </article>
               </div>
             </div>
-          </div>
+            <div>
+              <h3>Analyserer</h3>
+              <p>Vår AI analyserer all data og foreslår hva som kan gjøres bedre.</p>
+            </div>
+          </article>
 
-          <div class="lx-cta-row">
-            <a class="lx-btn lx-btn-primary" href="index.html#demo" data-magnetic>Utforsk hele demoen <span aria-hidden="true">→</span></a>
+          <article class="story-card story-card-green reveal-card">
+            <span class="card-number">03</span>
+            <div class="story-visual story-visual-quality" role="img" aria-label="Scope kontrollerer at integrasjonene fungerer, at tallene er riktig hentet inn, at analysen er tolket riktig og at rådet passer driften, før et kvalitetssikret råd vises.">
+              <div class="story-quality-flow" aria-hidden="true">
+                <div class="story-quality-stack">
+                  <article><i>1</i><strong>Integrasjoner fungerer</strong></article>
+                  <b>↓</b>
+                  <article><i>2</i><strong>Tallene er riktig hentet inn</strong></article>
+                  <b>↓</b>
+                  <article><i>3</i><strong>Analysen er tolket riktig</strong></article>
+                  <b>↓</b>
+                  <article><i>4</i><strong>Rådet passer driften</strong></article>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3>Kvalitetssikrer</h3>
+              <p>Vi går gjennom analysene og kvalitetssikrer rådene sammen med folk som kan analyse og kjenner bransjen.</p>
+            </div>
+          </article>
+
+          <article class="story-card story-card-yellow reveal-card">
+            <span class="card-number">04</span>
+            <div class="story-visual story-visual-advice" role="img" aria-label="Scope viser tre prioriterte, konkrete råd for bemanning, innkjøp og margin med forventet effekt.">
+              <div class="story-panel story-advice-panel" aria-hidden="true">
+                <div class="story-panel-head story-advice-head"><span><i></i><i></i><i></i></span><strong>Dagens råd</strong><small><i></i> Oppdatert i dag · 4 nye</small></div>
+                <div class="story-advice-list">
+                  <article><span class="story-priority story-priority-high">Høy</span><div><strong>Sett inn én ekstra fredag 16–18</strong><small>Reservasjonene viser høyere trykk enn normalt.</small></div><b><small>Forventet effekt</small>+4 500 kr</b></article>
+                  <article><span class="story-priority story-priority-medium">Middels</span><div><strong>Reduser innkjøp av brioche med 8 %</strong><small>Svinnet har økt tre uker på rad.</small></div><b><small>Forventet effekt</small>Mindre svinn</b></article>
+                  <article><span class="story-priority story-priority-low">Lav</span><div><strong>Pause rabattkoden mellom 18 og 20</strong><small>Etterspørselen er allerede høy i perioden.</small></div><b><small>Forventet effekt</small>Høyere margin</b></article>
+                </div>
+                <div class="story-advice-footer"><span>Estimert effekt denne måneden</span><strong>+11 200 kr</strong></div>
+              </div>
+            </div>
+            <div>
+              <h3>Få råd</h3>
+              <p>Du logger inn og får ferske råd etter hver driftsdag.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="product" id="plattformen" data-scene aria-labelledby="product-title">
+        <div class="product-copy">
+          <h2 id="product-title">God morgen.<br><em>Her er planen.</em></h2>
+          <p>Scope viser hva som skjer i driften, hvorfor det skjer og hva du bør gjøre videre.</p>
+          <div class="mobile-product-tabs" role="tablist" aria-label="Utforsk Scope på mobil" data-product-tabs>
+            <button class="is-active" type="button" role="tab" aria-selected="true" aria-controls="product-view-today" data-product-tab="today">Akkurat nå</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="product-view-report" data-product-tab="report">Rapporter</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="product-view-mobile" data-product-tab="mobile">Mobilapp</button>
+          </div>
+          <ul class="product-points" role="tablist" aria-label="Utforsk Scope" data-product-tabs>
+            <li><button class="is-active" type="button" role="tab" aria-selected="true" aria-controls="product-view-today" data-product-tab="today"><span>1</span><span><strong>Dagens drift</strong><small>Se hva som skjer akkurat nå</small></span></button></li>
+            <li><button type="button" role="tab" aria-selected="false" aria-controls="product-view-advice" data-product-tab="advice"><span>2</span><span><strong>Konkrete råd</strong><small>Prioriter det som gir størst effekt</small></span></button></li>
+            <li><button type="button" role="tab" aria-selected="false" aria-controls="product-view-report" data-product-tab="report"><span>3</span><span><strong>Dokumentert effekt</strong><small>Se hvordan lønnsomheten utvikler seg</small></span></button></li>
+            <li><button type="button" role="tab" aria-selected="false" aria-controls="product-view-mobile" data-product-tab="mobile"><span>4</span><span><strong>Mobilapp</strong><small>Ha dagens viktigste tall i lomma</small></span></button></li>
+          </ul>
+          <a class="button product-demo-link" href="landing-enkel.html?demo=1" target="_blank" rel="noopener" data-sticky-blocker>
+            Åpne interaktiv demo <span aria-hidden="true">↗</span>
+          </a>
+          <small class="product-demo-note">Ingen innlogging nødvendig</small>
+        </div>
+
+        <div class="dashboard-wrap" data-sticky-blocker>
+          <div class="dashboard-orbit dashboard-orbit-one" aria-hidden="true"></div>
+          <div class="dashboard-orbit dashboard-orbit-two" aria-hidden="true"></div>
+          <span class="dashboard-label">Interaktiv demo</span>
+          <div class="dashboard" data-dashboard>
+            <div class="dash-sidebar">
+              <span class="dash-logo"><i></i><i></i><i></i></span>
+              <span class="dash-nav is-on">⌁</span><span class="dash-nav">▦</span><span class="dash-nav">◇</span><span class="dash-nav">⚙</span>
+            </div>
+            <div class="dash-main">
+              <div class="dash-top">
+                <div><small>Eksempeldata · uke 29</small><strong>God morgen, Warm Burger</strong></div>
+              </div>
+
+              <div class="dash-view is-active" id="product-view-today" role="tabpanel" aria-hidden="false" data-view="today">
+                <div class="dash-kpis">
+                  <article><span>Omsetning</span><strong><b data-count="67512">67 512</b> kr</strong><small class="positive">↗ 12 % fra sist uke</small></article>
+                  <article><span>Gjester nå</span><strong><b data-count="84">84</b></strong><small>Travelt akkurat nå</small></article>
+                  <article><span>På jobb</span><strong><b data-count="12">12</b></strong><small class="positive">Godt bemannet</small></article>
+                </div>
+                <div class="dash-lower">
+                  <article class="chart-card">
+                    <div class="dash-card-head"><strong>Omsetning i dag</strong><span>09–23</span></div>
+                    <div class="bar-chart" aria-hidden="true"><i style="--h:26%"></i><i style="--h:34%"></i><i style="--h:29%"></i><i style="--h:46%"></i><i style="--h:60%"></i><i style="--h:54%"></i><i style="--h:74%"></i><i style="--h:94%"></i><i class="peak" style="--h:82%"></i><i style="--h:68%"></i></div>
+                  </article>
+                  <article class="advice-card">
+                    <span class="priority">Høy prioritet</span>
+                    <strong>Sett inn én ekstra i servering fredag</strong>
+                    <p>Forventet rush mellom kl. 16 og 19.</p>
+                    <button type="button">Se hvorfor <span>→</span></button>
+                  </article>
+                </div>
+              </div>
+
+              <div class="dash-view" id="product-view-advice" role="tabpanel" aria-hidden="true" data-view="advice">
+                <p class="view-title">3 råd med størst effekt</p>
+                <div class="advice-list">
+                  <button type="button" aria-expanded="false" data-advice-item data-detail-title="Bemanning fredag" data-detail-copy="Legg inn én ekstra vakt i servering fra kl. 16 til 19."><span class="advice-rank">01</span><span><strong>Juster bemanningen før fredagsrushet</strong><small>Reservasjonene peker mot høyere trykk enn normalt.</small></span><em class="is-high">Høy</em><i aria-hidden="true">→</i></button>
+                  <button type="button" aria-expanded="false" data-advice-item data-detail-title="Innkjøp denne uken" data-detail-copy="Reduser bestillingen og følg svinnet gjennom neste uke."><span class="advice-rank">02</span><span><strong>Bestill 8 % mindre brioche denne uken</strong><small>Svinnet har økt de siste tre ukene.</small></span><em class="is-medium">Middels</em><i aria-hidden="true">→</i></button>
+                  <button type="button" aria-expanded="false" data-advice-item data-detail-title="Varelevering tirsdag" data-detail-copy="Flytt leveringen én dag for en roligere oppstart på uken."><span class="advice-rank">03</span><span><strong>Flytt vareleveringen til tirsdag</strong><small>Det gir bedre flyt på kjøkkenet mandag morgen.</small></span><em class="is-low">Lav</em><i aria-hidden="true">→</i></button>
+                </div>
+                <aside class="advice-detail" aria-live="polite"><span>Velg et råd for å se detaljene</span><strong data-advice-detail-title>Prioriter det viktigste først</strong><p data-advice-detail-copy>Scope forklarer både hvorfor rådet er viktig og hva du konkret kan gjøre.</p></aside>
+              </div>
+
+              <div class="dash-view" id="product-view-report" role="tabpanel" aria-hidden="true" data-view="report">
+                <p class="view-title">Driften beveger seg riktig vei</p>
+                <div class="report-layout">
+                  <article class="report-score"><span>Driftsscore</span><strong>82</strong><small>+7 poeng</small></article>
+                  <article class="report-chart">
+                    <div class="report-chart-head"><span>Utvikling siste 12 uker</span><small>Uke 18–29</small></div>
+                    <div class="report-line" aria-hidden="true"><svg viewBox="0 0 480 150"><path d="M10 128 C85 120 108 86 166 96 S250 52 306 68 S390 28 470 18"></path><circle cx="470" cy="18" r="6"></circle></svg></div>
+                    <div class="report-effect"><strong>+38 600 kr i dokumentert effekt</strong><span>Etter gjennomførte tiltak de siste 90 dagene.</span></div>
+                  </article>
+                </div>
+              </div>
+
+              <div class="dash-view dash-view-mobile" id="product-view-mobile" role="tabpanel" aria-hidden="true" data-view="mobile">
+                <div class="phone-mockup" aria-label="Eksempel på Scope mobilapp">
+                  <div class="phone-speaker" aria-hidden="true"></div>
+                  <div class="phone-screen">
+                    <div class="phone-status"><span>09:41</span><span aria-hidden="true">● ◒</span></div>
+                    <div class="phone-app-head">
+                      <div><small>Onsdag 16. juli</small><strong>Hei, Warm Burger</strong></div>
+                      <span class="phone-avatar">WB</span>
+                    </div>
+                    <article class="phone-primary-card">
+                      <span>Omsetning i dag</span>
+                      <strong>67 512 kr</strong>
+                      <small>↗ 12 % fra sist uke</small>
+                      <div class="phone-sparkline" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </article>
+                    <div class="phone-metrics">
+                      <article><span>Gjester nå</span><strong>84</strong><small>Travelt</small></article>
+                      <article><span>På jobb</span><strong>12</strong><small>God dekning</small></article>
+                    </div>
+                    <article class="phone-advice">
+                      <span>Dagens viktigste råd</span>
+                      <strong>Sett inn én ekstra fredag 16–18</strong>
+                      <span class="phone-advice-link">Se hvorfor <span aria-hidden="true">→</span></span>
+                    </article>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- 4 · PRISER -->
-      <section class="lx-pricing" id="priser" data-field="margins" aria-labelledby="pricing-title">
-        <div class="lx-narrow">
-          <p class="lx-voice" data-narrate>Og hva koster det? Mindre enn én dårlig fredag.</p>
-          <div class="lx-pricing-head">
+      <section class="benefits" id="gevinster" data-scene aria-labelledby="benefits-title">
+        <div class="benefits-heading">
+          <h2 id="benefits-title">Scope skal gjøre serverings&shy;bransjen <em>mer lønnsom.</em></h2>
+        </div>
+        <div class="benefit-bento" data-carousel="benefits" data-carousel-mode="deck" tabindex="0" aria-label="Fire fordeler med Scope. Sveip eller bruk pilene for å bla.">
+          <article class="benefit-card benefit-yellow" data-carousel-item>
+            <div class="benefit-copy">
+              <h3>Serverings&shy;bransjen er knallhard</h3>
+              <p>Marginene er små og konkurransen høy. Derfor teller hver krone – og hver time.</p>
+            </div>
+            <div class="benefit-visual" aria-hidden="true">
+              <svg class="benefit-illustration" viewBox="0 0 360 144">
+                <path class="visual-line visual-gridline" d="M8 118H352"></path>
+                <rect class="visual-paper" x="20" y="18" width="78" height="100" rx="8"></rect>
+                <rect class="visual-paper" x="141" y="24" width="78" height="94" rx="8"></rect>
+                <rect class="visual-accent" x="262" y="108" width="78" height="10" rx="5"></rect>
+                <text class="visual-value" x="59" y="42" text-anchor="middle">100 %</text>
+                <text class="visual-value" x="180" y="48" text-anchor="middle">96 %</text>
+                <text class="visual-value" x="301" y="99" text-anchor="middle">4 %</text>
+                <text class="visual-caption" x="59" y="138" text-anchor="middle">OMSETNING</text>
+                <text class="visual-caption" x="180" y="138" text-anchor="middle">KOSTNADER</text>
+                <text class="visual-caption" x="301" y="138" text-anchor="middle">OVERSKUDD</text>
+              </svg>
+            </div>
+          </article>
+          <article class="benefit-card benefit-purple" data-carousel-item>
+            <div class="benefit-copy">
+              <h3>Små avvik gir store utslag</h3>
+              <p>Litt for høy bemanning eller varekost kan raskt spise opp overskuddet.</p>
+            </div>
+            <div class="benefit-visual" aria-hidden="true">
+              <svg class="benefit-illustration" viewBox="0 0 360 144">
+                <path class="visual-line visual-gridline" d="M8 118H146M214 118H352"></path>
+                <rect class="visual-paper" x="24" y="66" width="48" height="52" rx="7"></rect>
+                <rect class="visual-accent" x="82" y="57" width="48" height="61" rx="7"></rect>
+                <path class="visual-accent-line" d="M48 54V39M41 46L48 39L55 46"></path>
+                <rect class="visual-paper" x="230" y="36" width="48" height="82" rx="7"></rect>
+                <rect class="visual-accent" x="288" y="90" width="48" height="28" rx="7"></rect>
+                <path class="visual-accent-line" d="M312 38V76M305 69L312 76L319 69"></path>
+                <path class="visual-line" d="M153 72H204M196 64L204 72L196 80"></path>
+                <text class="visual-value" x="106" y="49" text-anchor="middle">+4 %</text>
+                <text class="visual-value" x="312" y="84" text-anchor="middle">−28 %</text>
+                <text class="visual-caption" x="77" y="138" text-anchor="middle">KOSTNAD</text>
+                <text class="visual-caption" x="283" y="138" text-anchor="middle">RESULTAT</text>
+              </svg>
+            </div>
+          </article>
+          <article class="benefit-card benefit-mint" data-carousel-item>
+            <div class="benefit-copy">
+              <h3>De største har et forsprang</h3>
+              <p>Store kjeder har analytikere, gode systemer og bedre beslutningsstøtte. Scope gir flere tilgang til de samme fordelene.</p>
+            </div>
+            <div class="benefit-visual" aria-hidden="true">
+              <svg class="benefit-illustration" viewBox="0 0 360 144">
+                <path class="visual-line visual-gridline" d="M8 121H352"></path>
+                <rect class="visual-paper" x="14" y="98" width="112" height="23" rx="7"></rect>
+                <rect class="visual-paper" x="235" y="98" width="112" height="23" rx="7"></rect>
+                <rect class="visual-paper" x="18" y="61" width="28" height="30" rx="5"></rect>
+                <rect class="visual-accent" x="56" y="61" width="28" height="30" rx="5"></rect>
+                <rect class="visual-accent" x="94" y="61" width="28" height="30" rx="5"></rect>
+                <rect class="visual-paper" x="239" y="61" width="28" height="30" rx="5"></rect>
+                <rect class="visual-paper" x="277" y="61" width="28" height="30" rx="5"></rect>
+                <rect class="visual-paper" x="315" y="61" width="28" height="30" rx="5"></rect>
+                <rect class="visual-accent" x="139" y="51" width="82" height="38" rx="19"></rect>
+                <path class="visual-line" d="M139 70H128M134 64L128 70L134 76"></path>
+                <text class="visual-accent-text visual-value" x="180" y="75" text-anchor="middle">SCOPE</text>
+                <text class="visual-caption" x="70" y="139" text-anchor="middle">MINDRE AKTØR</text>
+                <text class="visual-caption" x="291" y="139" text-anchor="middle">STOR KJEDE</text>
+              </svg>
+            </div>
+          </article>
+          <article class="benefit-card benefit-coral" data-carousel-item>
+            <div class="benefit-copy">
+              <h3>Bruk dataene du allerede har</h3>
+              <p>Tallene finnes allerede i systemene dine. Scope samler dem, forklarer dem og viser hva du bør gjøre.</p>
+            </div>
+            <div class="benefit-visual" aria-hidden="true">
+              <svg class="benefit-illustration" viewBox="0 0 360 144">
+                <rect class="visual-paper" x="8" y="24" width="96" height="88" rx="10"></rect>
+                <path class="visual-line" d="M112 68H125M119 61L126 68L119 75"></path>
+                <rect class="visual-paper" x="132" y="24" width="96" height="88" rx="10"></rect>
+                <path class="visual-line" d="M236 68H249M243 61L250 68L243 75"></path>
+                <rect class="visual-accent" x="256" y="24" width="96" height="88" rx="10"></rect>
+                <text class="visual-value" x="56" y="60" text-anchor="middle">DATA</text>
+                <text class="visual-subtitle" x="56" y="81" text-anchor="middle">SYSTEMENE</text>
+                <text class="visual-value" x="180" y="60" text-anchor="middle">INNSIKT</text>
+                <text class="visual-subtitle" x="180" y="81" text-anchor="middle">FORKLART</text>
+                <text class="visual-accent-text visual-value" x="304" y="60" text-anchor="middle">TILTAK</text>
+                <text class="visual-accent-text visual-subtitle" x="304" y="81" text-anchor="middle">KONKRET</text>
+              </svg>
+            </div>
+          </article>
+        </div>
+        <div class="carousel-controls" data-carousel-controls="benefits" data-sticky-blocker>
+          <button type="button" data-carousel-prev aria-label="Forrige fordel">←</button>
+          <div class="carousel-progress"><span data-carousel-status aria-live="polite">1 / 4</span><span class="carousel-dots" data-carousel-dots aria-hidden="true"></span></div>
+          <button type="button" data-carousel-next aria-label="Neste fordel">→</button>
+        </div>
+      </section>
+
+      <section class="pricing" id="priser" data-scene aria-labelledby="pricing-title">
+        <div class="pricing-shell">
+          <div class="pricing-heading">
             <h2 id="pricing-title">Priser</h2>
-            <div class="lx-billing" role="group" aria-label="Faktureringsperiode">
+            <div class="billing-toggle" role="group" aria-label="Faktureringsperiode">
               <button class="is-active" type="button" data-billing="monthly">Månedlig</button>
               <button type="button" data-billing="yearly">Årlig</button>
             </div>
-            <p class="lx-billing-note">Spar 20 % med årlig abonnement</p>
+            <p class="billing-note">Spar 20% med årlig abonnement</p>
           </div>
-
-          <div class="lx-price-grid">
-            <article class="lx-price-card">
+          <div class="pricing-grid" data-carousel="pricing" tabindex="0" aria-label="Prisplaner" data-sticky-blocker>
+            <article class="price-card" data-carousel-item>
               <h3>Testkunde</h3>
-              <p class="lx-price" data-monthly="0,-" data-yearly="0,-">0,-<span>/mnd</span></p>
-              <ul class="lx-features">
+              <p class="price" data-monthly="0,-|/mnd" data-yearly="0,-|/mnd">0,-<span class="price-period">/mnd</span></p>
+              <ul class="feature-list">
                 <li class="is-on">Integrasjon med 3 systemer</li>
                 <li>Full råd- og rapportpakke</li>
                 <li>Eget dashbord til kokker og servitører</li>
@@ -242,11 +475,12 @@
                 <li>Personlige tilpasninger i alle dashbord</li>
                 <li>Markedsanalyser i restaurantbransjen</li>
               </ul>
+              <a class="price-card-cta" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20bli%20testkunde" data-sticky-blocker>Velg Testkunde <span aria-hidden="true">→</span></a>
             </article>
-            <article class="lx-price-card">
+            <article class="price-card" data-carousel-item>
               <h3>Basic</h3>
-              <p class="lx-price" data-monthly="999,-" data-yearly="799,-">999,-<span>/mnd</span></p>
-              <ul class="lx-features">
+              <p class="price" data-monthly="999,-|/mnd" data-yearly="799,-|/mnd">999,-<span class="price-period">/mnd</span></p>
+              <ul class="feature-list">
                 <li class="is-on">Integrasjon med opptil 3 systemer</li>
                 <li class="is-on">Full råd- og rapportpakke</li>
                 <li>Eget dashbord til kokker og servitører</li>
@@ -254,11 +488,12 @@
                 <li>Personlige tilpasninger i alle dashbord</li>
                 <li>Markedsanalyser i restaurantbransjen</li>
               </ul>
+              <a class="price-card-cta" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20ha%20Basic" data-sticky-blocker>Velg Basic <span aria-hidden="true">→</span></a>
             </article>
-            <article class="lx-price-card is-pro">
+            <article class="price-card" data-carousel-item>
               <h3>Pro</h3>
-              <p class="lx-price" data-monthly="2 499,-" data-yearly="1 999,-">2 499,-<span>/mnd</span></p>
-              <ul class="lx-features">
+              <p class="price" data-monthly="2 499,-|/mnd" data-yearly="1 999,-|/mnd">2 499,-<span class="price-period">/mnd</span></p>
+              <ul class="feature-list">
                 <li class="is-on">Integrasjon med alle deres systemer</li>
                 <li class="is-on">Full råd- og rapportpakke</li>
                 <li class="is-on">Eget dashbord til kokker og servitører</li>
@@ -266,56 +501,122 @@
                 <li class="is-on">Personlige tilpasninger i alle dashbord</li>
                 <li class="is-on">Markedsanalyser i restaurantbransjen</li>
               </ul>
+              <a class="price-card-cta" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20ha%20Pro" data-sticky-blocker>Velg Pro <span aria-hidden="true">→</span></a>
             </article>
+          </div>
+          <div class="carousel-controls" data-carousel-controls="pricing" data-sticky-blocker>
+            <button type="button" data-carousel-prev aria-label="Forrige prisplan">←</button>
+            <div class="carousel-progress"><span data-carousel-status>1 / 3</span><span class="carousel-dots" data-carousel-dots aria-hidden="true"></span></div>
+            <button type="button" data-carousel-next aria-label="Neste prisplan">→</button>
           </div>
         </div>
       </section>
-
-      <!-- 5 · KONTAKT / FOOTER -->
-      <footer class="lx-footer" id="kontakt" data-field="triad" aria-labelledby="footer-title">
-        <div class="lx-narrow">
-          <p class="lx-voice" data-narrate>Det var historien. Nå vil vi gjerne møte deg.</p>
-          <h2 id="footer-title">Vi ser etter <em class="c-green">testkunder!</em></h2>
-          <p class="lx-footer-lede">I en begrenset periode får du Pro-pakken gratis i tre måneder.</p>
-
-          <div class="lx-founders">
-            <figure>
-              <img src="assets/team-ole-froiland.png" alt="Ole Frøiland">
-              <figcaption>Ole</figcaption>
-            </figure>
-            <figure>
-              <img src="assets/team-sigurd-dahl.png" alt="Sigurd Dahl">
-              <figcaption>Sigurd</figcaption>
-            </figure>
-            <figure>
-              <img src="assets/team-simon-korsberg.png" alt="Simon Korsberg">
-              <figcaption>Simon</figcaption>
-            </figure>
-          </div>
-
-          <div class="lx-cta-row">
-            <a class="lx-btn lx-btn-primary" href="mailto:post@scopeanalytics.no" data-magnetic>Ta kontakt</a>
-            <a class="lx-btn lx-btn-ghost" href="index.html" data-magnetic>Tilbake til forsiden</a>
-          </div>
-
-          <div class="lx-footer-meta">
-            <p>SCOPE ANALYTICS AS · 936 372 295 · post@scopeanalytics.no</p>
-            <nav aria-label="Bunnlenker">
-              <a href="index.html">Forsiden</a>
-              <a href="about.html">Om oss</a>
-              <a href="cookies.html">Cookie-innstillinger</a>
-            </nav>
-          </div>
-        </div>
-      </footer>
-
     </main>
+
+    <a class="mobile-sticky-cta" href="landing-enkel.html?demo=1" data-sticky-cta aria-hidden="true" tabindex="-1">
+      <span>Se demo</span><span aria-hidden="true">↗</span>
+    </a>
+
+    <footer class="site-footer" id="kontakt" aria-labelledby="footer-title">
+      <div class="footer-inner">
+        <span class="footer-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 4v15"></path><path d="m5 13 7 7 7-7"></path></svg>
+        </span>
+        <div class="footer-cta" data-sticky-blocker>
+          <div>
+            <h2 id="footer-title">Vi ser etter testkunder!</h2>
+            <p>I en begrenset periode får du Pro-pakken gratis i tre måneder.</p>
+          </div>
+          <a class="footer-button" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20bli%20testkunde">Ta kontakt</a>
+        </div>
+        <div class="footer-meta">
+          <div class="footer-brand">
+            <p class="footer-logo">SCOPE</p>
+            <p>Programvare og rådgivning til serveringsbransjen</p>
+            <p class="footer-company">SCOPE ANALYTICS AS · 936 372 295 · post@scopeanalytics.no</p>
+          </div>
+          <nav class="footer-links" aria-label="Footer">
+            <a href="mailto:post@scopeanalytics.no">Kontakt</a>
+            <a href="cookies.html">Personvern</a>
+            <a href="index.html">Vilkår</a>
+            <a href="cookies.html">Cookie-innstillinger</a>
+            <a href="landing-enkel.html?login=1">Logg inn</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
+
+    <div class="contact-widget">
+      <section class="contact-panel" id="contact-panel" role="dialog" aria-modal="false" aria-labelledby="contact-panel-title" hidden>
+        <div class="contact-panel-head">
+          <button class="contact-back" type="button" aria-label="Tilbake til valg" hidden>←</button>
+          <div>
+            <h2 id="contact-panel-title">Hei!</h2>
+            <p>Hva gjelder det?</p>
+          </div>
+          <button class="contact-close" type="button" aria-label="Lukk chat">×</button>
+        </div>
+        <div class="contact-choice" aria-label="Velg kundestatus">
+          <button type="button" data-contact-type="customer">Er kunde</button>
+          <button type="button" data-contact-type="prospect">Vil bli kunde</button>
+        </div>
+        <form class="contact-form" data-contact-form="customer" hidden novalidate>
+          <label class="contact-wide">
+            <span>Navn</span>
+            <input type="text" name="name" autocomplete="name" required maxlength="100">
+          </label>
+          <label class="contact-wide">
+            <span>Bedrift / restaurant</span>
+            <input type="text" name="company" autocomplete="organization" required maxlength="120">
+          </label>
+          <label>
+            <span>E-post</span>
+            <input type="email" name="email" autocomplete="email" inputmode="email" required maxlength="160">
+          </label>
+          <label>
+            <span>Telefon <small>valgfritt</small></span>
+            <input type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="30">
+          </label>
+          <label class="contact-wide">
+            <span>Hva trenger du hjelp med?</span>
+            <input type="text" name="subject" required maxlength="180">
+          </label>
+          <label class="contact-wide">
+            <span>Kategori</span>
+            <select name="category" required><option value="">Velg kategori</option><option>Innlogging</option><option>Integrasjon</option><option>Rapport</option><option>Råd</option><option>Faktura</option><option>Teknisk problem</option><option>Annet</option></select>
+          </label>
+          <label class="contact-wide">
+            <span>Beskriv problemet</span>
+            <textarea name="message" rows="5" required maxlength="3000"></textarea>
+          </label>
+          <input class="contact-honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <p class="contact-privacy contact-wide">Når du sender inn skjemaet, bruker vi opplysningene til å følge opp henvendelsen din. <a href="cookies.html">Les personvernerklæringen</a>.</p>
+          <p class="contact-status contact-wide" aria-live="polite"></p>
+          <button class="contact-submit contact-wide" type="submit">Send spørsmål</button>
+        </form>
+        <form class="contact-form" data-contact-form="prospect" hidden novalidate>
+          <label class="contact-wide"><span>Navn</span><input type="text" name="name" autocomplete="name" required maxlength="100"></label>
+          <label class="contact-wide"><span>Bedriftsnavn</span><input type="text" name="company" autocomplete="organization" required maxlength="120"></label>
+          <label><span>E-post</span><input type="email" name="email" autocomplete="email" inputmode="email" required maxlength="160"></label>
+          <label><span>Telefon <small>valgfritt</small></span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="30"></label>
+          <label><span>Type virksomhet</span><select name="businessType" required><option value="">Velg type</option><option>Restaurant</option><option>Bar</option><option>Kafé</option><option>Nattklubb</option><option>Kjede</option><option>Annet</option></select></label>
+          <label><span>Antall lokasjoner</span><input type="number" name="locations" min="1" max="999" required></label>
+          <fieldset class="contact-systems contact-wide"><legend>Hvilke systemer bruker dere?</legend><div><label><input type="checkbox" name="systems" value="Tripletex"><span>Tripletex</span></label><label><input type="checkbox" name="systems" value="PowerOffice"><span>PowerOffice</span></label><label><input type="checkbox" name="systems" value="Lightspeed"><span>Lightspeed</span></label><label><input type="checkbox" name="systems" value="Tamigo"><span>Tamigo</span></label><label><input type="checkbox" name="systems" value="Planday"><span>Planday</span></label><label><input type="checkbox" name="systems" value="Wolt"><span>Wolt</span></label><label><input type="checkbox" name="systems" value="Foodora"><span>Foodora</span></label><label><input type="checkbox" name="systems" value="Deliverect"><span>Deliverect</span></label><label><input type="checkbox" name="systems" value="Annet"><span>Annet</span></label></div></fieldset>
+          <label class="contact-wide"><span>Kort melding <small>valgfritt</small></span><textarea name="message" rows="4" maxlength="3000"></textarea></label>
+          <input class="contact-honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <p class="contact-privacy contact-wide">Når du sender inn skjemaet, bruker vi opplysningene til å følge opp henvendelsen din. <a href="cookies.html">Les personvernerklæringen</a>.</p>
+          <p class="contact-status contact-wide" aria-live="polite"></p>
+          <button class="contact-submit contact-wide" type="submit">Send forespørsel</button>
+        </form>
+        <div class="contact-success" hidden aria-live="polite"><strong></strong><p class="contact-reference"></p><p class="contact-success-detail"></p><button class="contact-reset" type="button">Send en ny henvendelse</button></div>
+      </section>
+      <button class="contact-bubble" type="button" aria-label="Åpne chat" aria-expanded="false" aria-controls="contact-panel">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-8.5 8 9.4 9.4 0 0 1-3.8-.9L3 20l1.4-4.1A8 8 0 1 1 20 11.5Z"></path></svg>
+      </button>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <script type="importmap">
-      { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
-    </script>
-    <script type="module" src="landing.js?v=20260715-scope-forteller-v1"></script>
+    <script src="landing.js?v=20260716-contact-data-v1" defer></script>
   </body>
 </html>

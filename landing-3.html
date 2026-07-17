@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>Scope — testlandingsside 3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="landing-3.css?v=20260717-scope-redesign-v2">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/landing-3" aria-label="Scope, tilbake til testlandingssiden">
+        <img class="brand-logo" src="assets/scope-logo-blue-transparent.png" alt="Scope">
+      </a>
+
+      <nav class="desktop-nav" aria-label="Hovednavigasjon">
+        <a href="/landing-3-kunder.html">Kunder</a>
+        <a href="/landing-3-integrasjoner.html">Integrasjoner</a>
+        <a href="/landing-3-om-oss.html">Om oss</a>
+        <a href="/landing-3-faq.html">Ofte stilte spørsmål</a>
+      </nav>
+
+      <a class="header-cta" href="/landing-3-logg-inn.html">
+        Logg inn
+      </a>
+
+      <button class="mobile-menu-toggle" type="button" aria-label="Åpne meny" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </header>
+
+    <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Hovedmeny" data-mobile-menu hidden>
+      <nav class="mobile-menu-panel" aria-label="Mobilnavigasjon">
+        <div class="mobile-menu-links">
+          <a href="/landing-3-kunder.html">Kunder</a>
+          <a href="/landing-3-integrasjoner.html">Integrasjoner</a>
+          <a href="/landing-3-om-oss.html">Om oss</a>
+          <a href="/landing-3-faq.html">Ofte stilte spørsmål</a>
+        </div>
+        <div class="mobile-menu-actions">
+          <a class="mobile-menu-action mobile-menu-login" href="/landing-3-logg-inn.html">Logg inn</a>
+          <a class="mobile-menu-action mobile-menu-trial" href="/landing-3-test-gratis.html">Test gratis</a>
+        </div>
+      </nav>
+    </div>
+
+    <main>
+      <section class="hero-image" aria-label="To kokker på kjøkkenet">
+        <picture>
+          <source media="(max-width: 800px)" srcset="assets/landing-3-chefs-aprons-mobile.png">
+          <img src="assets/landing-3-chefs-aprons.png" alt="To kokker som smiler på kjøkkenet" fetchpriority="high">
+        </picture>
+        <div class="hero-content">
+          <h1 class="hero-title">
+            <span class="scope-blue">Vi</span> gir rådene som hjelper <span class="scope-blue">deg</span> å tjene mer.
+          </h1>
+          <div class="hero-actions" aria-label="Kom i gang med Scope">
+            <a class="hero-action hero-action-primary" href="/landing-3-test-gratis.html">Test gratis</a>
+            <a class="hero-action hero-action-secondary" href="/landing-3-book-et-mote.html">Book et møte</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="landing-section how-section" id="slik-virker-scope">
+        <div class="section-shell">
+          <h2>Slik virker Scope</h2>
+
+          <div class="scope-carousel" data-scope-carousel>
+            <ol class="scope-carousel-track" data-carousel-track tabindex="0" aria-label="Fem steg som forklarer hvordan Scope virker">
+              <li class="scope-step-card scope-card-blue is-active" data-carousel-card data-deck-position="0" aria-hidden="false">
+                <span class="scope-card-number">01 / 05</span>
+                <p class="scope-card-copy">Koble til systemene dine på under 15 minutter gjennom onboardingen vår eller i et gratis møte.</p>
+              </li>
+              <li class="scope-step-card scope-card-olive" data-carousel-card data-deck-position="1" aria-hidden="true">
+                <span class="scope-card-number">02 / 05</span>
+                <p class="scope-card-copy">Etterpå henter Scope automatisk ferske data fra systemene dine hver eneste dag.</p>
+              </li>
+              <li class="scope-step-card scope-card-terracotta" data-carousel-card data-deck-position="2" aria-hidden="true">
+                <span class="scope-card-number">03 / 05</span>
+                <p class="scope-card-copy">AI-agentene våre analyserer dataene og lager konkrete råd for driften din.</p>
+              </li>
+              <li class="scope-step-card scope-card-cream" data-carousel-card data-deck-position="3" aria-hidden="true">
+                <span class="scope-card-number">04 / 05</span>
+                <p class="scope-card-copy">Folk som kjenner bransjen går gjennom rådene og kvalitetssikrer dem.</p>
+              </li>
+              <li class="scope-step-card scope-card-blue-deep" data-carousel-card data-deck-position="4" aria-hidden="true">
+                <span class="scope-card-number">05 / 05</span>
+                <p class="scope-card-copy">Du logger inn og får ferske, tydelige råd som hjelper deg å forbedre driften hver dag.</p>
+              </li>
+            </ol>
+
+            <div class="scope-carousel-controls">
+              <button class="scope-carousel-arrow" type="button" data-carousel-prev aria-label="Forrige steg" disabled>&larr;</button>
+              <div class="scope-carousel-status">
+                <span data-carousel-count>1 / 5</span>
+                <div class="scope-carousel-dots" aria-label="Velg steg">
+                  <button type="button" data-carousel-dot="0" aria-label="Vis steg 1" aria-current="true"></button>
+                  <button type="button" data-carousel-dot="1" aria-label="Vis steg 2"></button>
+                  <button type="button" data-carousel-dot="2" aria-label="Vis steg 3"></button>
+                  <button type="button" data-carousel-dot="3" aria-label="Vis steg 4"></button>
+                  <button type="button" data-carousel-dot="4" aria-label="Vis steg 5"></button>
+                </div>
+              </div>
+              <button class="scope-carousel-arrow" type="button" data-carousel-next aria-label="Neste steg">&rarr;</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="landing-section demo-section" id="demo">
+        <div class="section-shell demo-layout">
+          <div class="demo-phones" aria-label="Tre eksempelvisninger fra Scope-appen">
+            <article class="phone-mockup" aria-label="Scope Råd">
+              <div class="phone-screen">
+                <span class="phone-island" aria-hidden="true"></span>
+                <header class="phone-header">
+                  <span class="phone-brand-group">
+                    <span class="phone-brand"><span class="phone-brand-mark">S</span>Scope</span>
+                    <small>Bistro Nord</small>
+                  </span>
+                </header>
+                <div class="phone-content advice-phone-content">
+                  <div class="phone-page-title">
+                    <span>I dag · 3 nye</span>
+                    <h3>Råd</h3>
+                  </div>
+                  <div class="advice-list">
+                    <article class="phone-advice-card">
+                      <span class="advice-checkbox" aria-hidden="true"></span>
+                      <div><strong>Reduser tirsdagens varebestilling</strong><small>Basert på roligere salg de siste seks tirsdagene.</small></div>
+                      <b><span class="krone-icon" aria-hidden="true">kr</span>4 800</b>
+                    </article>
+                    <article class="phone-advice-card">
+                      <span class="advice-checkbox is-checked" aria-hidden="true">✓</span>
+                      <div><strong>Flytt én vakt til fredag kveld</strong><small>Fredagstoppen trenger én ekstra i serveringen.</small></div>
+                      <b><span class="krone-icon" aria-hidden="true">kr</span>3 200</b>
+                    </article>
+                    <article class="phone-advice-card">
+                      <span class="advice-checkbox" aria-hidden="true"></span>
+                      <div><strong>Juster innkjøpet av fersk fisk</strong><small>Bestill fire kilo mindre ut fra dagens bookinger.</small></div>
+                      <b><span class="krone-icon" aria-hidden="true">kr</span>2 150</b>
+                    </article>
+                  </div>
+                  <button class="phone-primary-button" type="button">UTFØR VALGTE</button>
+                  <div class="phone-history">
+                    <div class="phone-subheading"><strong>Tidligere råd</strong><span>Siste 30 dager</span></div>
+                    <div class="history-row"><span>Redusert svinn på kjøkkenet</span><b>+6 400 kr</b></div>
+                    <div class="history-row"><span>Tilpasset helgebemanning</span><b>+4 900 kr</b></div>
+                  </div>
+                </div>
+                <nav class="phone-nav" aria-label="Navigasjon i Scope">
+                  <span class="phone-tab is-active"><span class="phone-tab-icon phone-advice-icon" aria-hidden="true"></span>Råd</span>
+                  <span class="phone-tab"><span class="phone-tab-icon phone-chart-icon" aria-hidden="true"></span>Nåtid</span>
+                  <span class="phone-tab"><span class="phone-tab-icon phone-user-icon" aria-hidden="true"></span>Bruker</span>
+                </nav>
+              </div>
+            </article>
+
+            <article class="phone-mockup" aria-label="Scope Nåtid">
+              <div class="phone-screen">
+                <span class="phone-island" aria-hidden="true"></span>
+                <header class="phone-header">
+                  <span class="phone-brand"><span class="phone-brand-mark">S</span>Scope</span>
+                  <span class="phone-restaurant">Bistro Nord</span>
+                </header>
+                <div class="phone-content now-phone-content">
+                  <div class="phone-page-title">
+                    <span>Fredag 17. juli</span>
+                    <h3>Nåtid</h3>
+                  </div>
+                  <div class="now-metric-grid">
+                    <article class="now-revenue-card"><span>Omsetning i dag</span><strong>84 600 kr</strong><b>↑ 12 %</b></article>
+                    <article><span>Gjester i dag</span><strong>46</strong><small>8 nye bookinger</small></article>
+                    <article><span>Gjester akkurat nå</span><strong>24</strong><small>Rolig flyt</small></article>
+                    <article><span>Ansatte på jobb</span><strong>5</strong><small>2 kommer før kveldstoppen</small></article>
+                  </div>
+                  <p class="ai-summary"><span aria-hidden="true">🤖</span><strong>AI-sammendrag:</strong> Dagen går bra – omsetningen er 12 % over normalen. Bookingen er jevn, men vær obs på kveldstoppen.</p>
+                  <p class="phone-updated"><span aria-hidden="true"></span>Sist oppdatert 14:32</p>
+                </div>
+                <nav class="phone-nav" aria-label="Navigasjon i Scope">
+                  <span class="phone-tab"><span class="phone-tab-icon phone-advice-icon" aria-hidden="true"></span>Råd</span>
+                  <span class="phone-tab is-active"><span class="phone-tab-icon phone-chart-icon" aria-hidden="true"></span>Nåtid</span>
+                  <span class="phone-tab"><span class="phone-tab-icon phone-user-icon" aria-hidden="true"></span>Bruker</span>
+                </nav>
+              </div>
+            </article>
+
+            <article class="phone-mockup" aria-label="Scope Bruker">
+              <div class="phone-screen">
+                <span class="phone-island" aria-hidden="true"></span>
+                <header class="phone-header">
+                  <span class="phone-brand"><span class="phone-brand-mark">S</span>Scope</span>
+                  <span class="phone-restaurant">Bistro Nord</span>
+                </header>
+                <div class="phone-content user-phone-content">
+                  <div class="phone-page-title">
+                    <span>Din restaurant</span>
+                    <h3>Bistro Nord</h3>
+                  </div>
+                  <div class="savings-card">
+                    <span>Total sparing</span>
+                    <strong>82 400 kr</strong>
+                    <small>Siden du startet med Scope</small>
+                  </div>
+                  <div class="savings-breakdown">
+                    <div><span class="savings-icon" aria-hidden="true">−</span><span>Systemkostnad</span><strong>9 900 kr</strong></div>
+                    <div><span class="savings-icon" aria-hidden="true">+</span><span>Netto besparelse</span><strong>72 500 kr</strong></div>
+                  </div>
+                  <div class="connected-systems">
+                    <div class="phone-subheading"><strong>Tilkoblede systemer</strong><span>4 aktive</span></div>
+                    <div><span class="system-logo">L</span><span>Lightspeed</span><b>✓</b></div>
+                    <div><span class="system-logo">T</span><span>Tripletex</span><b>✓</b></div>
+                    <div><span class="system-logo">Ta</span><span>Tamigo</span><b>✓</b></div>
+                    <div><span class="system-logo">Y</span><span>Yr</span><b>✓</b></div>
+                  </div>
+                  <a class="cancel-link" href="/landing-3-logg-inn.html">Si opp abonnement</a>
+                </div>
+                <nav class="phone-nav" aria-label="Navigasjon i Scope">
+                  <span class="phone-tab"><span class="phone-tab-icon phone-advice-icon" aria-hidden="true"></span>Råd</span>
+                  <span class="phone-tab"><span class="phone-tab-icon phone-chart-icon" aria-hidden="true"></span>Nåtid</span>
+                  <span class="phone-tab is-active"><span class="phone-tab-icon phone-user-icon" aria-hidden="true"></span>Bruker</span>
+                </nav>
+              </div>
+            </article>
+          </div>
+
+          <div class="demo-swipe-hint" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <small>Sveip for å se mer</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="landing-section testers-section" id="testkunder">
+        <div class="section-shell testers-layout">
+          <div>
+            <p class="section-kicker">Bli med fra starten</p>
+            <h2>Vi søker testkunder</h2>
+          </div>
+          <div class="testers-copy">
+            <p class="testers-lead">Driver du restaurant, kafé eller bar?</p>
+            <ul>
+              <li>Prøv Scope gratis med dine egne tall</li>
+              <li>Få tett oppfølging underveis</li>
+              <li>Ingen forpliktelse eller binding</li>
+            </ul>
+            <p class="testers-note"><em>Vi er et oppstartsselskap som vil hjelpe en bransje med små marginer – og gi deg verktøyene til å konkurrere på like vilkår med de store kjedene.</em></p>
+            <a class="section-cta testers-cta" href="/landing-3-book-et-mote.html">BLI TESTKUNDE</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="contact-widget">
+      <section class="contact-panel" id="contact-panel" role="dialog" aria-modal="false" aria-labelledby="contact-panel-title" hidden>
+        <div class="contact-panel-head">
+          <button class="contact-back" type="button" aria-label="Tilbake til valg" hidden>←</button>
+          <div>
+            <h2 id="contact-panel-title">Hei!</h2>
+            <p>Hva gjelder det?</p>
+          </div>
+          <button class="contact-close" type="button" aria-label="Lukk chat">×</button>
+        </div>
+        <div class="contact-choice" aria-label="Velg kundestatus">
+          <button type="button" data-contact-type="customer">Er kunde</button>
+          <button type="button" data-contact-type="prospect">Vil bli kunde</button>
+        </div>
+        <form class="contact-form" data-contact-form="customer" hidden novalidate>
+          <label class="contact-wide"><span>Navn</span><input type="text" name="name" autocomplete="name" required maxlength="100"></label>
+          <label class="contact-wide"><span>Bedrift / restaurant</span><input type="text" name="company" autocomplete="organization" required maxlength="120"></label>
+          <label><span>E-post</span><input type="email" name="email" autocomplete="email" inputmode="email" required maxlength="160"></label>
+          <label><span>Telefon <small>valgfritt</small></span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="30"></label>
+          <label class="contact-wide"><span>Hva trenger du hjelp med?</span><input type="text" name="subject" required maxlength="180"></label>
+          <label class="contact-wide"><span>Kategori</span><select name="category" required><option value="">Velg kategori</option><option>Innlogging</option><option>Integrasjon</option><option>Rapport</option><option>Råd</option><option>Faktura</option><option>Teknisk problem</option><option>Annet</option></select></label>
+          <label class="contact-wide"><span>Beskriv problemet</span><textarea name="message" rows="5" required maxlength="3000"></textarea></label>
+          <input class="contact-honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <p class="contact-privacy contact-wide">Når du sender inn skjemaet, bruker vi opplysningene til å følge opp henvendelsen din. <a href="/cookies.html">Les personvernerklæringen</a>.</p>
+          <p class="contact-status contact-wide" aria-live="polite"></p>
+          <button class="contact-submit contact-wide" type="submit">Send spørsmål</button>
+        </form>
+        <form class="contact-form" data-contact-form="prospect" hidden novalidate>
+          <label class="contact-wide"><span>Navn</span><input type="text" name="name" autocomplete="name" required maxlength="100"></label>
+          <label class="contact-wide"><span>Bedriftsnavn</span><input type="text" name="company" autocomplete="organization" required maxlength="120"></label>
+          <label><span>E-post</span><input type="email" name="email" autocomplete="email" inputmode="email" required maxlength="160"></label>
+          <label><span>Telefon <small>valgfritt</small></span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" maxlength="30"></label>
+          <label><span>Type virksomhet</span><select name="businessType" required><option value="">Velg type</option><option>Restaurant</option><option>Bar</option><option>Kafé</option><option>Nattklubb</option><option>Kjede</option><option>Annet</option></select></label>
+          <label><span>Antall lokasjoner</span><input type="number" name="locations" min="1" max="999" required></label>
+          <fieldset class="contact-systems contact-wide"><legend>Hvilke systemer bruker dere?</legend><div><label><input type="checkbox" name="systems" value="Tripletex"><span>Tripletex</span></label><label><input type="checkbox" name="systems" value="PowerOffice"><span>PowerOffice</span></label><label><input type="checkbox" name="systems" value="Lightspeed"><span>Lightspeed</span></label><label><input type="checkbox" name="systems" value="Tamigo"><span>Tamigo</span></label><label><input type="checkbox" name="systems" value="Planday"><span>Planday</span></label><label><input type="checkbox" name="systems" value="Wolt"><span>Wolt</span></label><label><input type="checkbox" name="systems" value="Foodora"><span>Foodora</span></label><label><input type="checkbox" name="systems" value="Deliverect"><span>Deliverect</span></label><label><input type="checkbox" name="systems" value="Annet"><span>Annet</span></label></div></fieldset>
+          <label class="contact-wide"><span>Kort melding <small>valgfritt</small></span><textarea name="message" rows="4" maxlength="3000"></textarea></label>
+          <input class="contact-honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <p class="contact-privacy contact-wide">Når du sender inn skjemaet, bruker vi opplysningene til å følge opp henvendelsen din. <a href="/cookies.html">Les personvernerklæringen</a>.</p>
+          <p class="contact-status contact-wide" aria-live="polite"></p>
+          <button class="contact-submit contact-wide" type="submit">Send forespørsel</button>
+        </form>
+        <div class="contact-success" hidden aria-live="polite"><strong></strong><p class="contact-reference"></p><p class="contact-success-detail"></p><button class="contact-reset" type="button">Send en ny henvendelse</button></div>
+      </section>
+      <button class="contact-bubble" type="button" aria-label="Åpne chat" aria-expanded="false" aria-controls="contact-panel">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-8.5 8 9.4 9.4 0 0 1-3.8-.9L3 20l1.4-4.1A8 8 0 1 1 20 11.5Z"></path></svg>
+      </button>
+    </div>
+
+    <script src="landing-3.js?v=20260717-nav-chat-v1" defer></script>
+  </body>
+</html>
