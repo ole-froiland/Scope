@@ -1,7 +1,6 @@
-/clean/  /clean  301!
-/leken/  /leken  301!
-/enkel/  /enkel  301!
-
-/clean  /landing-3.html  200
-/leken  /landing.html  200
-/enkel  /landing-enkel.html  200
+/clean   /landing-3.html      200!
+/clean/  /landing-3.html      200!
+/leken   /landing.html        200!
+/leken/  /landing.html        200!
+/enkel   /landing-enkel.html  200!
+/enkel/  /landing-enkel.html  200!

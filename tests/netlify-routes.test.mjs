@@ -12,7 +12,8 @@ test("Netlify serverer de samme korte landingsadressene som devserveren", () => 
   ];
 
   routes.forEach(([route, file]) => {
-    assert.match(redirects, new RegExp(`^/${route}/\\s+/${route}\\s+301!$`, "m"));
-    assert.match(redirects, new RegExp(`^/${route}\\s+/${file.replace(".", "\\.")}\\s+200$`, "m"));
+    const escapedFile = file.replace(".", "\\.");
+    assert.match(redirects, new RegExp(`^/${route}\\s+/${escapedFile}\\s+200!$`, "m"));
+    assert.match(redirects, new RegExp(`^/${route}/\\s+/${escapedFile}\\s+200!$`, "m"));
   });
 });
