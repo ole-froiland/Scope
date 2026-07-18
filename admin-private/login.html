@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Logg inn · Scope admin</title>
+  <style>
+    :root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #171715; background: #f4efe4; }
+    * { box-sizing: border-box; }
+    body { min-height: 100vh; margin: 0; display: grid; place-items: center; padding: 24px; background: radial-gradient(circle at 12% 15%, #f4ce45 0 7%, transparent 7.2%), radial-gradient(circle at 91% 84%, #27c780 0 10%, transparent 10.2%), #f4efe4; }
+    main { width: min(100%, 940px); min-height: 590px; display: grid; grid-template-columns: .9fr 1.1fr; overflow: hidden; border: 2px solid #171715; border-radius: 28px; background: #fffdf7; box-shadow: 12px 12px 0 #171715; }
+    .intro { display: flex; flex-direction: column; justify-content: space-between; padding: 42px; color: white; background: #171715; }
+    .brand { display: flex; align-items: center; gap: 12px; font-size: 1.45rem; font-weight: 850; letter-spacing: -.04em; }
+    .mark { position: relative; width: 35px; height: 32px; }
+    .mark i { position: absolute; width: 18px; height: 18px; border: 1.5px solid #171715; border-radius: 50%; }
+    .mark i:nth-child(1) { top: 0; left: 8px; background: #1559f7; }
+    .mark i:nth-child(2) { right: 0; bottom: 0; background: #f04d43; }
+    .mark i:nth-child(3) { bottom: 0; left: 0; background: #27c780; }
+    .intro h1 { max-width: 350px; margin: 0; font-size: clamp(2.8rem, 6vw, 4.8rem); line-height: .93; letter-spacing: -.075em; }
+    .intro p { max-width: 330px; margin: 20px 0 0; color: #c8c7c1; line-height: 1.55; }
+    .security-note { display: flex; gap: 10px; align-items: flex-start; margin-top: 40px; color: #aaa9a4; font-size: .8rem; }
+    .security-note svg { flex: 0 0 18px; }
+    .form-wrap { display: grid; align-content: center; padding: 54px; }
+    .eyebrow { margin: 0 0 10px; color: #1559f7; font-size: .76rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+    h2 { margin: 0; font-size: 2rem; letter-spacing: -.045em; }
+    .lead { margin: 10px 0 30px; color: #67635c; }
+    label { display: grid; gap: 8px; margin-top: 18px; font-size: .84rem; font-weight: 750; }
+    input { min-height: 52px; width: 100%; border: 1.5px solid #171715; border-radius: 12px; padding: 0 15px; color: #171715; background: #fff; font: inherit; outline: none; transition: box-shadow .18s, border-color .18s; }
+    input:focus { border-color: #1559f7; box-shadow: 0 0 0 4px rgba(21, 89, 247, .12); }
+    button { min-height: 52px; width: 100%; margin-top: 24px; border: 2px solid #171715; border-radius: 12px; color: white; background: #1559f7; box-shadow: 4px 4px 0 #171715; font: inherit; font-weight: 800; cursor: pointer; transition: transform .18s, box-shadow .18s; }
+    button:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #171715; }
+    button:disabled { cursor: wait; opacity: .65; }
+    .message { min-height: 22px; margin: 16px 0 0; border-radius: 9px; color: #b52d27; font-size: .84rem; font-weight: 650; }
+    .message.success { color: #087c4c; }
+    .mfa { margin: 20px 0 0; padding-top: 18px; border-top: 1px solid #dedbd2; color: #77736d; font-size: .78rem; line-height: 1.5; }
+    @media (max-width: 720px) { main { grid-template-columns: 1fr; min-height: 0; } .intro { min-height: 260px; padding: 30px; } .intro h1 { margin-top: 50px; font-size: 3rem; } .security-note { display: none; } .form-wrap { padding: 34px 28px 40px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="intro" aria-label="Scope admin">
+      <div class="brand"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span><span>scope / admin</span></div>
+      <div><h1>Kontrollrommet.</h1><p>Følg kunder, produktbruk og systemer fra ett sikkert sted.</p></div>
+      <div class="security-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>Tilgangen kontrolleres på serveren. Aktiviteten din blir loggført.</span></div>
+    </section>
+    <section class="form-wrap">
+      <p class="eyebrow">Intern tilgang</p>
+      <h2>Velkommen tilbake</h2>
+      <p class="lead">Logg inn med administratorkontoen din.</p>
+      <form id="login-form">
+        <label>E-postadresse<input name="email" type="email" autocomplete="username" required></label>
+        <label>Passord<input name="password" type="password" autocomplete="current-password" minlength="12" required></label>
+        <button type="submit">Logg inn</button>
+        <p class="message" id="login-message" role="alert" aria-live="polite"></p>
+      </form>
+      <p class="mfa">Tofaktorautentisering kan håndheves når Scope kobles til virksomhetens identitetsleverandør. Ingen nøkler eller passord lagres i nettleseren.</p>
+    </section>
+  </main>
+  <script src="/admin/assets/login.js"></script>
+</body>
+</html>

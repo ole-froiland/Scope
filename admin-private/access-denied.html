@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ingen tilgang · Scope</title>
+  <style>
+    :root { font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #171715; background: #f4efe4; }
+    body { min-height: 100vh; margin: 0; display: grid; place-items: center; padding: 24px; }
+    main { width: min(100%, 520px); border: 2px solid #171715; border-radius: 24px; padding: 42px; background: #fffdf7; box-shadow: 8px 8px 0 #171715; }
+    .code { display: inline-grid; place-items: center; width: 54px; height: 54px; border: 2px solid #171715; border-radius: 50%; background: #f04d43; color: #fff; font-weight: 900; }
+    h1 { margin: 24px 0 10px; font-size: 2.5rem; letter-spacing: -.06em; }
+    p { color: #67635c; line-height: 1.6; }
+    button { margin-top: 18px; border: 2px solid #171715; border-radius: 10px; padding: 12px 18px; color: #fff; background: #171715; font: inherit; font-weight: 750; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <main><span class="code">403</span><h1>Ingen tilgang</h1><p>Denne kontoen er innlogget, men har ikke administratorrollen som kreves for å åpne kontrollrommet.</p><button id="sign-out" type="button">Logg ut</button></main>
+  <script src="/admin/assets/access-denied.js"></script>
+</body>
+</html>

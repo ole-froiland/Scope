@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Scope admin</title>
+  <link rel="stylesheet" href="/admin/assets/admin.css">
+</head>
+<body>
+  <div class="app-shell" id="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand"><span class="scope-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>scope</span><small>ADMIN</small></div>
+      <nav class="sidebar-nav" aria-label="Adminmeny" id="main-nav"></nav>
+      <div class="sidebar-user">
+        <div class="sidebar-user-main"><span class="avatar" id="user-avatar">SA</span><span><strong id="user-name">Laster …</strong><small id="user-email"></small></span></div>
+        <div class="role-row"><span id="user-role">Administrator</span><span class="security-dot" title="Sikker økt"></span></div>
+        <button class="logout-button" id="logout-button" type="button"><span aria-hidden="true">↗</span> Logg ut</button>
+      </div>
+    </aside>
+
+    <div class="app-main">
+      <header class="topbar">
+        <button class="mobile-nav-button" id="mobile-nav-button" type="button" aria-label="Åpne meny" aria-expanded="false">☰</button>
+        <div class="global-search-wrap"><label class="global-search"><span aria-hidden="true">⌕</span><input id="global-search" type="search" placeholder="Søk i kunder, henvendelser og integrasjoner" autocomplete="off" aria-controls="global-search-results" aria-expanded="false"><kbd>⌘ K</kbd></label><section class="global-search-results" id="global-search-results" hidden></section></div>
+        <div class="topbar-actions">
+          <button class="icon-button" id="notifications-button" type="button" aria-label="Åpne varslinger"><span aria-hidden="true">♢</span><i id="notification-count" hidden>0</i></button>
+          <button class="refresh-button" id="refresh-button" type="button"><span aria-hidden="true">↻</span><span>Oppdater data</span></button>
+        </div>
+      </header>
+
+      <div class="update-strip"><span>Sist oppdatert <strong id="last-updated">–</strong></span><span class="live-indicator"><i></i> Koblet til Scope-databasen</span></div>
+      <main class="content" id="page-content" tabindex="-1" aria-live="polite"></main>
+    </div>
+  </div>
+
+  <div class="sidebar-scrim" id="sidebar-scrim"></div>
+  <aside class="side-panel" id="side-panel" aria-hidden="true" aria-label="Detaljer"><div class="panel-content" id="panel-content"></div></aside>
+  <div class="panel-scrim" id="panel-scrim"></div>
+  <section class="notification-panel" id="notification-panel" aria-hidden="true"></section>
+  <div class="toast-region" id="toast-region" aria-live="polite"></div>
+  <dialog class="app-dialog" id="app-dialog"><div id="dialog-content"></div></dialog>
+  <script src="/admin/assets/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,570 @@
+/* Onboarding og kunde-Oversikt. Roligere enn hoveddashboardet:
+   varm off-white, én aksentfarge per steg, svarte konturer, god luft. */
+
+:root {
+  --ob-paper: #f6f2e9;
+  --ob-card: #fffdf7;
+  --ob-ink: #171715;
+  --ob-muted: #67635c;
+  --ob-line: rgba(23, 23, 21, 0.14);
+  --ob-green: #27c780;
+  --ob-blue: #1559f7;
+  --ob-red: #f04d43;
+  --ob-yellow: #f4ce45;
+  --ob-accent: var(--ob-green);
+  --ob-accent-soft: rgba(39, 199, 128, 0.14);
+  --ob-radius: 20px;
+  --ob-shadow: 0 18px 40px -30px rgba(23, 23, 21, 0.45);
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body.ob-page {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--ob-paper);
+  color: var(--ob-ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  display: flex;
+  flex-direction: column;
+}
+
+[data-accent="green"] { --ob-accent: var(--ob-green); --ob-accent-soft: rgba(39, 199, 128, 0.16); }
+[data-accent="blue"] { --ob-accent: var(--ob-blue); --ob-accent-soft: rgba(21, 89, 247, 0.12); }
+[data-accent="yellow"] { --ob-accent: #d9ab13; --ob-accent-soft: rgba(244, 206, 69, 0.22); }
+[data-accent="red"] { --ob-accent: var(--ob-red); --ob-accent-soft: rgba(240, 77, 67, 0.13); }
+
+.ob-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.ob-skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 12px;
+  background: var(--ob-ink);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 999px;
+  z-index: 50;
+}
+
+.ob-skip-link:focus { left: 12px; }
+
+/* ---------- Topplinje ---------- */
+
+.ob-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px clamp(16px, 4vw, 32px);
+  padding-top: calc(18px + env(safe-area-inset-top, 0px));
+}
+
+.ob-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--ob-ink);
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+.ob-brand-mark { display: inline-flex; gap: 3px; }
+
+.ob-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.ob-dot-blue { background: var(--ob-blue); }
+.ob-dot-red { background: var(--ob-red); }
+.ob-dot-green { background: var(--ob-green); }
+
+/* ---------- Hovedflate ---------- */
+
+.ob-main {
+  width: min(620px, 100%);
+  margin: 0 auto;
+  padding: 8px clamp(16px, 4vw, 24px) calc(40px + env(safe-area-inset-bottom, 0px));
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ob-progress { margin: 4px 4px 14px; }
+
+.ob-progress-label {
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ob-muted);
+}
+
+.ob-progress-track {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(23, 23, 21, 0.1);
+  overflow: hidden;
+}
+
+.ob-progress-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: var(--ob-accent);
+  transition: width 0.4s ease;
+}
+
+.ob-card {
+  background: var(--ob-card);
+  border: 1.5px solid var(--ob-ink);
+  border-radius: var(--ob-radius);
+  box-shadow: var(--ob-shadow);
+  padding: clamp(22px, 5vw, 34px);
+}
+
+.ob-eyebrow {
+  display: inline-block;
+  margin: 0 0 14px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--ob-accent-soft);
+  color: var(--ob-ink);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ob-card h1 {
+  margin: 0 0 10px;
+  font-size: clamp(1.45rem, 4.4vw, 1.85rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+}
+
+.ob-card h1:focus { outline: none; }
+
+.ob-intro { margin: 0 0 18px; color: var(--ob-muted); }
+
+.ob-footnote {
+  margin: 16px 8px 0;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--ob-muted);
+}
+
+/* ---------- Lister og fordeler ---------- */
+
+.ob-benefits { list-style: none; margin: 0 0 22px; padding: 0; display: grid; gap: 10px; }
+
+.ob-benefits li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--ob-line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.5);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.ob-check-icon {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--ob-accent-soft);
+  color: var(--ob-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.ob-safety { list-style: none; margin: 0 0 20px; padding: 14px 16px; border: 1px dashed var(--ob-line); border-radius: 14px; display: grid; gap: 8px; }
+
+.ob-safety li { display: flex; gap: 9px; align-items: flex-start; font-size: 0.88rem; color: var(--ob-muted); }
+
+.ob-safety li::before { content: "✓"; font-weight: 800; color: var(--ob-ink); }
+
+.ob-howto { margin: 0 0 18px; padding-left: 20px; display: grid; gap: 6px; font-size: 0.92rem; }
+
+/* ---------- Skjema ---------- */
+
+.ob-fields { display: grid; gap: 14px; margin-bottom: 22px; }
+
+.ob-fields.two-columns { grid-template-columns: 1fr 1fr; }
+
+.ob-field { display: grid; gap: 6px; }
+
+.ob-field.full { grid-column: 1 / -1; }
+
+.ob-field > span { font-size: 0.82rem; font-weight: 700; }
+
+.ob-field small { font-weight: 500; color: var(--ob-muted); }
+
+.ob-field input,
+.ob-field select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--ob-ink);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--ob-ink);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.ob-field input:focus-visible,
+.ob-field select:focus-visible,
+.ob-button:focus-visible,
+.ob-quiet-button:focus-visible,
+.ob-choice:focus-within,
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--ob-blue);
+  outline-offset: 2px;
+}
+
+.ob-field.has-error input,
+.ob-field.has-error select { border-color: var(--ob-red); }
+
+.ob-field-error { margin: 0; font-size: 0.8rem; font-weight: 600; color: #a12722; }
+
+.ob-help { margin: 8px 0 0; font-size: 0.82rem; color: var(--ob-muted); }
+
+/* ---------- Knapper ---------- */
+
+.ob-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 6px; }
+
+.ob-actions .push { margin-left: auto; }
+
+.ob-button {
+  appearance: none;
+  border: 1.5px solid var(--ob-ink);
+  border-radius: 999px;
+  padding: 13px 24px;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.98rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.ob-button.primary { background: var(--ob-ink); color: #fff; }
+
+.ob-button.primary:hover { transform: translateY(-1px); }
+
+.ob-button.secondary { background: transparent; color: var(--ob-ink); }
+
+.ob-button.secondary:hover { background: rgba(23, 23, 21, 0.05); }
+
+.ob-button[disabled] { opacity: 0.55; cursor: wait; transform: none; }
+
+.ob-quiet-button {
+  appearance: none;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ob-muted);
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 999px;
+}
+
+.ob-quiet-button:hover { color: var(--ob-ink); background: rgba(23, 23, 21, 0.06); }
+
+.ob-link-button { appearance: none; border: none; background: none; font: inherit; font-weight: 700; color: var(--ob-blue); cursor: pointer; padding: 0; text-decoration: underline; }
+
+/* ---------- Valgkort (selskap og data) ---------- */
+
+.ob-choices { display: grid; gap: 10px; margin-bottom: 20px; }
+
+.ob-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--ob-line);
+  border-radius: 14px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.ob-choice:hover { border-color: var(--ob-ink); }
+
+.ob-choice input { margin-top: 4px; accent-color: var(--ob-ink); width: 18px; height: 18px; flex: none; }
+
+.ob-choice.is-selected { border-color: var(--ob-ink); background: var(--ob-accent-soft); }
+
+.ob-choice.is-locked { cursor: default; background: rgba(255, 255, 255, 0.6); }
+
+.ob-choice-body { display: grid; gap: 2px; min-width: 0; }
+
+.ob-choice-body strong { font-size: 0.98rem; }
+
+.ob-choice-body span { font-size: 0.84rem; color: var(--ob-muted); }
+
+.ob-chip {
+  flex: none;
+  margin-left: auto;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--ob-line);
+  color: var(--ob-muted);
+  white-space: nowrap;
+}
+
+.ob-chip.required { background: var(--ob-ink); border-color: var(--ob-ink); color: #fff; }
+
+.ob-search { margin-bottom: 14px; }
+
+.ob-search input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--ob-ink);
+  border-radius: 12px;
+  font: inherit;
+}
+
+/* ---------- Status, testsjekker og synkronisering ---------- */
+
+.ob-checks { list-style: none; margin: 0 0 20px; padding: 0; display: grid; gap: 10px; }
+
+.ob-checks li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--ob-line);
+  border-radius: 14px;
+  background: #fff;
+  font-weight: 600;
+  font-size: 0.94rem;
+}
+
+.ob-checks li small { display: block; font-weight: 500; color: var(--ob-muted); }
+
+.ob-check-state {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+  border: 1.5px solid var(--ob-line);
+  color: var(--ob-muted);
+  background: #fff;
+}
+
+li.is-ok .ob-check-state { background: var(--ob-green); border-color: var(--ob-green); color: #0c3b26; }
+
+li.is-failed .ob-check-state { background: var(--ob-red); border-color: var(--ob-red); color: #fff; }
+
+li.is-running .ob-check-state { border-color: var(--ob-ink); }
+
+li.is-failed { border-color: rgba(240, 77, 67, 0.6); }
+
+.ob-banner {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  border: 1.5px solid var(--ob-line);
+  background: #fff;
+  font-size: 0.92rem;
+}
+
+.ob-banner strong { display: block; margin-bottom: 2px; }
+
+.ob-banner.is-error { border-color: var(--ob-red); background: rgba(240, 77, 67, 0.07); }
+
+.ob-banner.is-success { border-color: var(--ob-green); background: rgba(39, 199, 128, 0.1); }
+
+.ob-banner.is-info { border-color: var(--ob-line); background: rgba(21, 89, 247, 0.05); }
+
+.ob-banner-icon { flex: none; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.78rem; background: var(--ob-ink); color: #fff; }
+
+.ob-banner.is-error .ob-banner-icon { background: var(--ob-red); }
+
+.ob-banner.is-success .ob-banner-icon { background: var(--ob-green); color: #0c3b26; }
+
+.ob-helplist { margin: 8px 0 0; padding-left: 18px; display: grid; gap: 4px; font-size: 0.88rem; color: var(--ob-muted); }
+
+.ob-spinner {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(23, 23, 21, 0.2);
+  border-top-color: var(--ob-ink);
+  display: inline-block;
+  animation: ob-spin 0.9s linear infinite;
+}
+
+.ob-loading { display: grid; justify-items: center; gap: 14px; padding: 30px 10px; text-align: center; color: var(--ob-muted); }
+
+@keyframes ob-spin { to { transform: rotate(360deg); } }
+
+/* ---------- Oppsummering (ferdig-steget og Oversikt) ---------- */
+
+.ob-summary { display: grid; gap: 0; margin: 0 0 20px; border: 1px solid var(--ob-line); border-radius: 14px; overflow: hidden; }
+
+.ob-summary > div { display: flex; justify-content: space-between; gap: 14px; padding: 11px 16px; background: #fff; font-size: 0.9rem; }
+
+.ob-summary > div + div { border-top: 1px solid var(--ob-line); }
+
+.ob-summary span { color: var(--ob-muted); }
+
+.ob-summary strong { text-align: right; }
+
+.ob-next-steps { list-style: none; counter-reset: steps; margin: 0 0 22px; padding: 0; display: grid; gap: 10px; }
+
+.ob-next-steps li { counter-increment: steps; display: flex; gap: 12px; align-items: center; padding: 12px 14px; border: 1px solid var(--ob-line); border-radius: 14px; background: #fff; font-weight: 600; font-size: 0.94rem; }
+
+.ob-next-steps li::before {
+  content: counter(steps);
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--ob-accent-soft);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.ob-done-mark {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--ob-green);
+  color: #0c3b26;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+/* ---------- Oversikt-siden ---------- */
+
+.ov-main { width: min(880px, 100%); margin: 0 auto; padding: 8px clamp(16px, 4vw, 24px) calc(48px + env(safe-area-inset-bottom, 0px)); flex: 1; }
+
+.ov-head { margin: 6px 4px 20px; }
+
+.ov-head h1 { margin: 0 0 4px; font-size: clamp(1.5rem, 4.5vw, 2rem); letter-spacing: -0.02em; }
+
+.ov-head p { margin: 0; color: var(--ob-muted); }
+
+.ov-grid { display: grid; gap: 16px; }
+
+.ov-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+
+.ov-metric { background: var(--ob-card); border: 1.5px solid var(--ob-ink); border-radius: 16px; padding: 16px 18px; }
+
+.ov-metric small { display: block; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ob-muted); margin-bottom: 6px; }
+
+.ov-metric strong { font-size: 1.3rem; letter-spacing: -0.02em; }
+
+.ov-metric span { display: block; font-size: 0.78rem; color: var(--ob-muted); margin-top: 4px; }
+
+.ov-card { background: var(--ob-card); border: 1.5px solid var(--ob-ink); border-radius: var(--ob-radius); padding: clamp(18px, 4vw, 26px); box-shadow: var(--ob-shadow); }
+
+.ov-card h2 { margin: 0 0 6px; font-size: 1.1rem; letter-spacing: -0.01em; }
+
+.ov-card > p { margin: 0 0 14px; color: var(--ob-muted); font-size: 0.92rem; }
+
+.ov-checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+
+.ov-checklist li { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border: 1px solid var(--ob-line); border-radius: 12px; background: #fff; font-size: 0.92rem; font-weight: 600; }
+
+.ov-checklist li.is-done { color: var(--ob-muted); }
+
+.ov-checklist li small { display: block; font-weight: 500; color: var(--ob-muted); }
+
+.ov-check-mark { flex: none; width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--ob-line); display: inline-flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; color: transparent; }
+
+li.is-done .ov-check-mark { background: var(--ob-green); border-color: var(--ob-green); color: #0c3b26; }
+
+.ov-task { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+
+.ov-task-copy { flex: 1; min-width: 220px; }
+
+.ov-locked { border-style: dashed; opacity: 0.85; }
+
+/* ---------- Diverse ---------- */
+
+.ob-noscript { max-width: 560px; margin: 40px auto; padding: 20px; border: 1.5px solid var(--ob-ink); border-radius: 16px; background: var(--ob-card); text-align: center; }
+
+.ob-env-note { display: inline-flex; align-items: center; gap: 6px; margin: 0 0 14px; padding: 4px 10px; border-radius: 999px; background: rgba(244, 206, 69, 0.25); border: 1px solid rgba(23, 23, 21, 0.2); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+
+details.ob-details { margin: 0 0 18px; border: 1px solid var(--ob-line); border-radius: 12px; background: #fff; }
+
+details.ob-details summary { cursor: pointer; padding: 12px 14px; font-weight: 700; font-size: 0.9rem; }
+
+details.ob-details[open] summary { border-bottom: 1px solid var(--ob-line); }
+
+details.ob-details .ob-details-body { padding: 12px 14px; font-size: 0.9rem; color: var(--ob-muted); }
+
+/* ---------- Mobil ---------- */
+
+@media (max-width: 640px) {
+  .ob-fields.two-columns { grid-template-columns: 1fr; }
+
+  .ob-actions { flex-direction: column-reverse; align-items: stretch; }
+
+  .ob-actions .push { margin-left: 0; }
+
+  .ob-button { width: 100%; padding: 15px 24px; }
+
+  .ob-card { border-radius: 18px; }
+
+  .ob-summary strong { text-align: right; max-width: 60%; overflow-wrap: anywhere; }
+}
+
+/* ---------- Redusert bevegelse ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .ob-progress-fill { transition: none; }
+  .ob-button { transition: none; }
+  .ob-button.primary:hover { transform: none; }
+  .ob-spinner { animation-duration: 1.8s; }
+}

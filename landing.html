@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Scope samler restaurantens viktigste tall og gjør dem om til konkrete råd for bedre drift.">
     <meta name="theme-color" content="#fff9ee">
-    <title>Scope — fra magefølelse til full oversikt</title>
+    <title>Scope - AI-rådgivning</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='20' r='18' fill='%23064dff'/%3E%3Ccircle cx='44' cy='40' r='18' fill='%23ff3c38'/%3E%3Ccircle cx='20' cy='40' r='18' fill='%2300bd7b'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="landing.css?v=20260716-contact-data-v1">
+    <link rel="stylesheet" href="cookie-consent.css?v=20260718-v1">
   </head>
   <body>
     <div class="loader" aria-hidden="true">
@@ -24,7 +25,7 @@
 
     <div class="page-noise" aria-hidden="true"></div>
     <header class="site-header" data-header>
-      <a class="brand" href="index.html" aria-label="Scope, tilbake til hovedsiden">
+      <a class="brand" href="/leken" aria-label="Scope, tilbake til Leken">
         <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
         <span>scope</span>
       </a>
@@ -60,7 +61,7 @@
           <a href="faq.html">Ofte stilte spørsmål <span aria-hidden="true">05</span></a>
         </div>
         <div class="mobile-menu-actions">
-          <a class="button button-outline" href="landing-enkel.html?demo=1">Se demo <span aria-hidden="true">↗</span></a>
+          <a class="button button-outline" href="/enkel?demo=1">Se demo <span aria-hidden="true">↗</span></a>
           <a class="button button-dark" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20se%20Scope">Book en prat <span aria-hidden="true">→</span></a>
         </div>
       </nav>
@@ -259,7 +260,7 @@
             <li><button type="button" role="tab" aria-selected="false" aria-controls="product-view-report" data-product-tab="report"><span>3</span><span><strong>Dokumentert effekt</strong><small>Se hvordan lønnsomheten utvikler seg</small></span></button></li>
             <li><button type="button" role="tab" aria-selected="false" aria-controls="product-view-mobile" data-product-tab="mobile"><span>4</span><span><strong>Mobilapp</strong><small>Ha dagens viktigste tall i lomma</small></span></button></li>
           </ul>
-          <a class="button product-demo-link" href="landing-enkel.html?demo=1" target="_blank" rel="noopener" data-sticky-blocker>
+          <a class="button product-demo-link" href="/enkel?demo=1" target="_blank" rel="noopener" data-sticky-blocker>
             Åpne interaktiv demo <span aria-hidden="true">↗</span>
           </a>
           <small class="product-demo-note">Ingen innlogging nødvendig</small>
@@ -513,7 +514,7 @@
       </section>
     </main>
 
-    <a class="mobile-sticky-cta" href="landing-enkel.html?demo=1" data-sticky-cta aria-hidden="true" tabindex="-1">
+    <a class="mobile-sticky-cta" href="/enkel?demo=1" data-sticky-cta aria-hidden="true" tabindex="-1">
       <span>Se demo</span><span aria-hidden="true">↗</span>
     </a>
 
@@ -540,7 +541,7 @@
             <a href="cookies.html">Personvern</a>
             <a href="index.html">Vilkår</a>
             <a href="cookies.html">Cookie-innstillinger</a>
-            <a href="landing-enkel.html?login=1">Logg inn</a>
+            <a href="/enkel?login=1">Logg inn</a>
           </nav>
         </div>
       </div>
@@ -615,8 +616,21 @@
       </button>
     </div>
 
+    <section class="simple-cookie-consent" data-simple-cookie-consent data-cookie-theme="playful" aria-label="Cookievalg" hidden>
+      <div class="simple-cookie-copy">
+        <strong>Vi bruker cookies</strong>
+        <p>Nødvendige cookies får siden til å fungere. Du velger selv om vi også kan bruke analyse og markedsføring.</p>
+        <a href="cookies.html">Les om cookie-innstillingene</a>
+      </div>
+      <div class="simple-cookie-actions">
+        <button type="button" data-cookie-choice="necessary">Kun nødvendige</button>
+        <button class="simple-cookie-primary" type="button" data-cookie-choice="all">Godta alle</button>
+      </div>
+    </section>
+
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="landing.js?v=20260716-contact-data-v1" defer></script>
+    <script src="cookie-consent.js?v=20260718-v1" defer></script>
   </body>
 </html>

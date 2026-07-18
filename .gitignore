@@ -1,2 +1,10 @@
 .superpowers/
 .DS_Store
+.scope-admin-data/
+.playwright-cli/
+output/
+.env
+.env.*
+!.env.example
+*.pem
+*.key

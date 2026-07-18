@@ -90,7 +90,7 @@ function playInteractiveLogin() {
 
     document.body.classList.add("login-loading-complete");
     window.setTimeout(() => {
-      window.location.replace("landing-enkel.html?demo=1");
+      window.location.replace("/enkel?demo=1");
     }, reducedMotion ? 80 : 420);
   };
 
