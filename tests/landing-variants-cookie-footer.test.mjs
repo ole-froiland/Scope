@@ -33,3 +33,14 @@ test("Clean har en responsiv footer med viktige lenker", () => {
   assert.match(cleanCss, /\.clean-footer-inner/);
   assert.match(cleanCss, /@media \(max-width: 800px\)[\s\S]*?\.clean-footer-inner\s*\{\s*grid-template-columns: 1fr/);
 });
+
+test("Clean viser råd uten estimat og bruker tydelige navigasjonsikoner", () => {
+  assert.doesNotMatch(cleanHtml, /class="krone-icon"/);
+  assert.doesNotMatch(cleanHtml, />4 800<|>3 200<|>2 150</);
+  assert.equal((cleanHtml.match(/assets\/icons\/heroicons-light-bulb\.svg/g) || []).length, 3);
+  assert.equal((cleanHtml.match(/assets\/icons\/heroicons-chart-bar-square\.svg/g) || []).length, 3);
+  assert.equal((cleanHtml.match(/assets\/icons\/heroicons-user-circle\.svg/g) || []).length, 3);
+  assert.match(cleanCss, /\.phone-advice-card\s*\{[^}]*grid-template-columns:\s*26px minmax\(0, 1fr\)/);
+  assert.match(cleanCss, /\.testers-section\s*\{[^}]*background:\s*linear-gradient\([^}]*var\(--scope-blue-dark\)/);
+  assert.match(cleanCss, /\.clean-footer\s*\{[^}]*background:\s*var\(--scope-cream\)/);
+});
