@@ -2549,61 +2549,28 @@ h3 {
   line-height: 1.32;
 }
 
-/* ===== Slik virker Scope: stablede fargeflater ===== */
+/* ===== Slik virker Scope: stablede steg-flater ===== */
 
 #how {
   align-items: flex-start;
-  padding-top: clamp(76px, 9vw, 130px);
+  padding-top: clamp(72px, 8vw, 116px);
   padding-bottom: clamp(64px, 8vw, 110px);
   background: #f6f4ee;
 }
 
 .scope-steps-head {
   max-width: 800px;
-  margin: 0 0 clamp(30px, 4.2vw, 58px);
-}
-
-.scope-steps-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  margin: 0;
-  color: #1559f7;
-  font-size: 0.78rem;
-  font-weight: 850;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.scope-steps-eyebrow::before {
-  content: "";
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: currentColor;
+  margin: 0 0 clamp(26px, 3.4vw, 46px);
 }
 
 .scope-steps-title {
-  margin: 16px 0 0;
+  margin: 0;
   color: #171715;
-  font-size: clamp(2.3rem, 5vw, 4.1rem);
+  font-size: clamp(1.35rem, 2.2vw, 1.9rem);
   font-weight: 850;
-  letter-spacing: -0.055em;
-  line-height: 0.98;
-  text-wrap: balance;
-}
-
-.scope-steps-title em {
-  color: #1559f7;
-  font-style: normal;
-}
-
-.scope-steps-lede {
-  max-width: 560px;
-  margin: 18px 0 0;
-  color: #5c584f;
-  font-size: clamp(1rem, 1.35vw, 1.16rem);
-  line-height: 1.5;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
 }
 
 .scope-stack {
@@ -2617,8 +2584,8 @@ h3 {
 }
 
 .scope-panel {
-  --panel-bg: #1559f7;
-  --panel-ink: #171715;
+  --panel-accent: #064dff;
+  --panel-tint: #eef2fd;
   --panel-index: 0;
   position: sticky;
   top: calc(var(--stack-top) + var(--panel-index) * var(--stack-peek));
@@ -2627,15 +2594,15 @@ h3 {
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.72fr);
   align-items: center;
   gap: clamp(24px, 4vw, 56px);
-  min-height: min(600px, 66vh);
+  min-height: min(520px, 58vh);
   margin-bottom: clamp(120px, 18vh, 240px);
-  border: 2px solid #171715;
-  border-radius: clamp(20px, 2.2vw, 30px);
-  background: var(--panel-bg);
-  color: var(--panel-ink);
+  border: 1px solid #e5e1d6;
+  border-radius: clamp(20px, 2.2vw, 28px);
+  background: var(--panel-tint);
+  color: #171715;
   padding: clamp(28px, 3.6vw, 60px);
   overflow: hidden;
-  box-shadow: 0 22px 50px rgba(23, 23, 21, 0.16);
+  box-shadow: 0 24px 60px rgba(23, 23, 21, 0.09), 0 3px 10px rgba(23, 23, 21, 0.04);
   transform: translate3d(0, var(--stack-lift, 0px), 0) scale(var(--stack-scale, 1));
   transform-origin: center top;
   filter: brightness(var(--stack-brightness, 1));
@@ -2644,7 +2611,7 @@ h3 {
 }
 
 .scope-panel.is-active {
-  box-shadow: 0 26px 64px rgba(23, 23, 21, 0.22);
+  box-shadow: 0 30px 74px rgba(23, 23, 21, 0.12), 0 4px 12px rgba(23, 23, 21, 0.05);
 }
 
 .scope-panel.is-covered {
@@ -2661,23 +2628,23 @@ h3 {
 }
 
 .scope-panel--data {
-  --panel-bg: #1559f7;
-  --panel-ink: #ffffff;
+  --panel-accent: #064dff;
+  --panel-tint: #eef2fd;
 }
 
 .scope-panel--analysis {
-  --panel-bg: #f04d43;
-  --panel-ink: #171715;
+  --panel-accent: #c2372e;
+  --panel-tint: #fdefed;
 }
 
 .scope-panel--review {
-  --panel-bg: #27c780;
-  --panel-ink: #171715;
+  --panel-accent: #007a4e;
+  --panel-tint: #e9f6f0;
 }
 
 .scope-panel--advice {
-  --panel-bg: #f4ce45;
-  --panel-ink: #171715;
+  --panel-accent: #064dff;
+  --panel-tint: #eef2fd;
 }
 
 .scope-panel-copy {
@@ -2688,56 +2655,36 @@ h3 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 52px;
-  height: 34px;
-  border: 2px solid currentColor;
+  min-width: 50px;
+  height: 30px;
   border-radius: 999px;
-  padding: 0 14px;
-  font-size: 0.82rem;
+  background: var(--panel-accent);
+  color: #ffffff;
+  padding: 0 13px;
+  font-size: 0.76rem;
   font-weight: 850;
   letter-spacing: 0.14em;
   line-height: 1;
 }
 
 .scope-panel-title {
-  margin: clamp(18px, 2vw, 26px) 0 0;
-  font-size: clamp(2.6rem, 6.4vw, 5.2rem);
+  margin: clamp(16px, 1.8vw, 24px) 0 0;
+  color: var(--panel-accent);
+  font-size: clamp(2.4rem, 5.6vw, 4.4rem);
   font-weight: 850;
-  letter-spacing: -0.06em;
-  line-height: 0.92;
+  letter-spacing: -0.055em;
+  line-height: 0.94;
   text-wrap: balance;
 }
 
 .scope-panel-text {
-  max-width: 30ch;
-  margin: clamp(14px, 1.6vw, 22px) 0 0;
-  font-size: clamp(1.04rem, 1.5vw, 1.34rem);
+  max-width: 34ch;
+  margin: clamp(14px, 1.6vw, 20px) 0 0;
+  color: #45443f;
+  font-size: clamp(1.02rem, 1.4vw, 1.24rem);
   font-weight: 500;
-  line-height: 1.42;
+  line-height: 1.48;
   text-wrap: pretty;
-}
-
-.scope-panel-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: clamp(20px, 2.4vw, 30px) 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.scope-panel-tags li {
-  border: 2px solid currentColor;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.18);
-  padding: 6px 14px;
-  font-size: 0.82rem;
-  font-weight: 780;
-  line-height: 1.2;
-}
-
-.scope-panel--data .scope-panel-tags li {
-  background: rgba(255, 255, 255, 0.14);
 }
 
 .scope-panel-art {
@@ -2746,10 +2693,18 @@ h3 {
   min-width: 0;
 }
 
+.scope-panel-art .art-accent {
+  fill: var(--panel-accent);
+}
+
+.scope-panel-art .art-accent-line {
+  stroke: var(--panel-accent);
+}
+
 .scope-panel-art svg {
-  width: min(100%, 360px);
+  width: min(100%, 330px);
   height: auto;
-  filter: drop-shadow(8px 9px 0 rgba(23, 23, 21, 0.2));
+  filter: drop-shadow(0 12px 20px rgba(23, 23, 21, 0.12));
 }
 
 .simple-box:hover .gear-icon svg {
@@ -5974,21 +5929,11 @@ body.has-cookie-consent .contact-widget {
   }
 
   .scope-steps-head {
-    margin-bottom: 26px;
-  }
-
-  .scope-steps-eyebrow {
-    font-size: 0.72rem;
+    margin-bottom: 22px;
   }
 
   .scope-steps-title {
-    margin-top: 12px;
-    font-size: clamp(2rem, 8.6vw, 2.9rem);
-  }
-
-  .scope-steps-lede {
-    margin-top: 14px;
-    font-size: 1rem;
+    font-size: 1.12rem;
   }
 
   .scope-stack {
@@ -6000,28 +5945,28 @@ body.has-cookie-consent .contact-widget {
     grid-template-columns: minmax(0, 1fr);
     align-content: space-between;
     align-items: start;
-    gap: 20px;
-    min-height: min(480px, 66vh);
+    gap: 18px;
+    min-height: min(430px, 60vh);
     margin-bottom: clamp(88px, 13vh, 150px);
     border-radius: 20px;
     padding: 24px 22px 26px;
-    box-shadow: 0 16px 34px rgba(23, 23, 21, 0.16);
+    box-shadow: 0 18px 44px rgba(23, 23, 21, 0.08);
   }
 
   .scope-panel.is-active {
-    box-shadow: 0 18px 40px rgba(23, 23, 21, 0.2);
+    box-shadow: 0 20px 48px rgba(23, 23, 21, 0.11);
   }
 
   .scope-panel-num {
     min-width: 46px;
-    height: 30px;
+    height: 28px;
     padding: 0 12px;
-    font-size: 0.74rem;
+    font-size: 0.72rem;
   }
 
   .scope-panel-title {
     margin-top: 14px;
-    font-size: clamp(2.3rem, 12vw, 3.4rem);
+    font-size: clamp(2.2rem, 11vw, 3.1rem);
   }
 
   .scope-panel-text {
@@ -6030,24 +5975,14 @@ body.has-cookie-consent .contact-widget {
     font-size: 1.02rem;
   }
 
-  .scope-panel-tags {
-    gap: 7px;
-    margin-top: 16px;
-  }
-
-  .scope-panel-tags li {
-    padding: 5px 12px;
-    font-size: 0.74rem;
-  }
-
   .scope-panel-art {
     justify-items: end;
     align-self: end;
   }
 
   .scope-panel-art svg {
-    width: min(46vw, 190px);
-    filter: drop-shadow(6px 7px 0 rgba(23, 23, 21, 0.2));
+    width: min(44vw, 180px);
+    filter: drop-shadow(0 8px 16px rgba(23, 23, 21, 0.12));
   }
 
   .scope-flow {
