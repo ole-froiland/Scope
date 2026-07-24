@@ -2559,18 +2559,19 @@ h3 {
 }
 
 .scope-steps-head {
-  max-width: 800px;
-  margin: 0 0 clamp(26px, 3.4vw, 46px);
+  max-width: 820px;
+  margin: 0 auto clamp(34px, 4.4vw, 58px);
+  text-align: center;
 }
 
 .scope-steps-title {
   margin: 0;
-  color: #171715;
-  font-size: clamp(1.35rem, 2.2vw, 1.9rem);
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  line-height: 1.2;
-  text-transform: uppercase;
+  color: #111111;
+  font-size: clamp(2.4rem, 5.4vw, 4.2rem);
+  font-weight: 650;
+  letter-spacing: 0;
+  line-height: 1.02;
+  text-wrap: balance;
 }
 
 .scope-stack {
@@ -2585,7 +2586,8 @@ h3 {
 
 .scope-panel {
   --panel-accent: #064dff;
-  --panel-tint: #eef2fd;
+  --panel-tint: #dde6ff;
+  --panel-line: #c3d3ff;
   --panel-index: 0;
   position: sticky;
   top: calc(var(--stack-top) + var(--panel-index) * var(--stack-peek));
@@ -2596,7 +2598,7 @@ h3 {
   gap: clamp(24px, 4vw, 56px);
   min-height: min(520px, 58vh);
   margin-bottom: clamp(120px, 18vh, 240px);
-  border: 1px solid #e5e1d6;
+  border: 1px solid var(--panel-line);
   border-radius: clamp(20px, 2.2vw, 28px);
   background: var(--panel-tint);
   color: #171715;
@@ -2629,22 +2631,26 @@ h3 {
 
 .scope-panel--data {
   --panel-accent: #064dff;
-  --panel-tint: #eef2fd;
+  --panel-tint: #dde6ff;
+  --panel-line: #c3d3ff;
 }
 
 .scope-panel--analysis {
-  --panel-accent: #c2372e;
-  --panel-tint: #fdefed;
+  --panel-accent: #b02f27;
+  --panel-tint: #fbdfdb;
+  --panel-line: #f2c4bd;
 }
 
 .scope-panel--review {
-  --panel-accent: #007a4e;
-  --panel-tint: #e9f6f0;
+  --panel-accent: #006f45;
+  --panel-tint: #d6efe2;
+  --panel-line: #b6ddc9;
 }
 
 .scope-panel--advice {
   --panel-accent: #064dff;
-  --panel-tint: #eef2fd;
+  --panel-tint: #dde6ff;
+  --panel-line: #c3d3ff;
 }
 
 .scope-panel-copy {
@@ -5929,11 +5935,11 @@ body.has-cookie-consent .contact-widget {
   }
 
   .scope-steps-head {
-    margin-bottom: 22px;
+    margin-bottom: 26px;
   }
 
   .scope-steps-title {
-    font-size: 1.12rem;
+    font-size: clamp(1.9rem, 8.6vw, 2.5rem);
   }
 
   .scope-stack {
