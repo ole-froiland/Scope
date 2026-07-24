@@ -262,9 +262,7 @@ async function runTypewriter() {
 
 runTypewriter();
 
-const scopeStackSteps = Array.from(document.querySelectorAll("[data-scope-step]"));
 const scopeStackCards = Array.from(document.querySelectorAll("[data-scope-card]"));
-const scopeStackNavButtons = Array.from(document.querySelectorAll("[data-scope-nav]"));
 let scopeStackActiveIndex = -1;
 let scopeStackFrame = 0;
 
@@ -274,16 +272,6 @@ function setScopeStackActiveIndex(activeIndex) {
   }
 
   scopeStackActiveIndex = activeIndex;
-  scopeStackNavButtons.forEach((button, index) => {
-    const isActive = index === activeIndex;
-
-    button.classList.toggle("is-active", isActive);
-    if (isActive) {
-      button.setAttribute("aria-current", "step");
-    } else {
-      button.removeAttribute("aria-current");
-    }
-  });
   scopeStackCards.forEach((card, index) => {
     card.classList.toggle("is-active", index === activeIndex);
   });
@@ -293,22 +281,6 @@ function clampScopeStackValue(value, minimum, maximum) {
   return Math.min(Math.max(value, minimum), maximum);
 }
 
-function getScopeStackDocumentTop(element) {
-  const inlinePosition = element.style.position;
-  const inlineTop = element.style.top;
-  const inlineTransform = element.style.transform;
-
-  element.style.position = "relative";
-  element.style.top = "auto";
-  element.style.transform = "none";
-  const documentTop = element.getBoundingClientRect().top + window.scrollY;
-  element.style.position = inlinePosition;
-  element.style.top = inlineTop;
-  element.style.transform = inlineTransform;
-
-  return documentTop;
-}
-
 function updateScopeStack() {
   scopeStackFrame = 0;
 
@@ -316,9 +288,9 @@ function updateScopeStack() {
     return;
   }
 
-  const usesStickyStack = window.matchMedia("(min-width: 861px)").matches;
+  const usesStickyStack = window.getComputedStyle(scopeStackCards[0]).position === "sticky";
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const transitionDistance = clampScopeStackValue(window.innerHeight * 0.58, 360, 620);
+  const transitionDistance = clampScopeStackValue(window.innerHeight * 0.58, 300, 620);
   const viewportCenter = window.innerHeight / 2;
   let activeIndex = 0;
   let closestDistance = Number.POSITIVE_INFINITY;
@@ -353,9 +325,9 @@ function updateScopeStack() {
     }
 
     const visualProgress = prefersReducedMotion ? 0 : overlapProgress;
-    card.style.setProperty("--stack-scale", String(1 - visualProgress * 0.032));
-    card.style.setProperty("--stack-lift", `${visualProgress * -18}px`);
-    card.style.setProperty("--stack-brightness", String(1 - visualProgress * 0.08));
+    card.style.setProperty("--stack-scale", String(1 - visualProgress * 0.04));
+    card.style.setProperty("--stack-lift", "0px");
+    card.style.setProperty("--stack-brightness", String(1 - visualProgress * 0.12));
     const isCovered = usesStickyStack && overlapProgress > 0.985;
     card.classList.toggle("is-covered", isCovered);
     card.inert = isCovered;
@@ -378,56 +350,6 @@ if (scopeStackCards.length > 0) {
   window.addEventListener("resize", requestScopeStackUpdate);
   window.addEventListener("load", requestScopeStackUpdate, { once: true });
 }
-
-scopeStackNavButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const index = Number(button.dataset.scopeNav);
-    const card = scopeStackCards[index];
-    const step = scopeStackSteps[index];
-
-    if (!card) {
-      return;
-    }
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const usesStickyStack = window.matchMedia("(min-width: 861px)").matches;
-
-    if (!usesStickyStack && step) {
-      step.scrollIntoView({
-        block: "center",
-        behavior: prefersReducedMotion ? "auto" : "smooth",
-      });
-      return;
-    }
-
-    const stickyTop = Number.parseFloat(window.getComputedStyle(card).top) || 92;
-    window.scrollTo({
-      top: getScopeStackDocumentTop(card) - stickyTop,
-      behavior: prefersReducedMotion ? "auto" : "smooth",
-    });
-    requestScopeStackUpdate();
-  });
-});
-
-document.querySelectorAll("[data-scope-advice-why]").forEach((button) => {
-  button.addEventListener("click", () => {
-    const explanation = document.getElementById(button.getAttribute("aria-controls"));
-
-    if (!explanation) {
-      return;
-    }
-
-    const isOpen = button.getAttribute("aria-expanded") === "true";
-    button.setAttribute("aria-expanded", String(!isOpen));
-    explanation.hidden = isOpen;
-  });
-});
-
-document.querySelectorAll("[data-scope-advice-done]").forEach((checkbox) => {
-  checkbox.addEventListener("change", () => {
-    checkbox.closest(".scope-advice-item")?.classList.toggle("is-done", checkbox.checked);
-  });
-});
 
 const integrationButtons = document.querySelectorAll(".integration-buttons button");
 const integrationPanels = document.querySelectorAll(".integration-panel");

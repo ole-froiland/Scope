@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Boldonse&amp;family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260716-mobile-footer-v1">
+    <link rel="stylesheet" href="styles.css?v=20260724-how-stacked-panels-v1">
   </head>
   <body>
     <div class="login-intro" aria-hidden="true">
@@ -107,257 +107,113 @@
         </div>
       </section>
 
-      <section class="slide" id="how" aria-label="Slik virker scope">
+      <section class="slide" id="how" aria-label="Slik virker Scope">
         <div class="section-inner">
-          <div class="scope-services-layout">
-            <nav class="scope-stack-nav" aria-label="Steg i Scope">
-              <p class="scope-stack-nav-title">Slik virker Scope</p>
-              <div class="scope-stack-nav-list">
-                <button class="is-active" type="button" data-scope-nav="0" aria-current="step"><span>01</span><strong>Hent data</strong></button>
-                <button type="button" data-scope-nav="1"><span>02</span><strong>Analyser</strong></button>
-                <button type="button" data-scope-nav="2"><span>03</span><strong>Kvalitetssikre</strong></button>
-                <button type="button" data-scope-nav="3"><span>04</span><strong>Få råd</strong></button>
-              </div>
-            </nav>
-            <div class="scope-stack" aria-label="Slik virker Scope steg for steg">
+          <header class="scope-steps-head">
+            <p class="scope-steps-eyebrow">Slik virker Scope</p>
+            <h2 class="scope-steps-title">Fra rot i tallene til <em>ett tydelig neste steg</em>.</h2>
+            <p class="scope-steps-lede">Fire steg. Vi gjør jobben med tallene – du får svaret.</p>
+          </header>
+
+          <div class="scope-stack" aria-label="Slik virker Scope steg for steg">
 
             <div class="scope-stack-step" id="hvordan-steg-1" data-scope-step>
-            <article class="scope-stack-card scope-stack-card--sources is-active" data-scope-card>
-              <div class="scope-shot">
-                <header class="shot-head" aria-hidden="true">
-                  <span class="shot-dots"><i></i><i></i><i></i></span>
-                  <span class="shot-title">Scope · Integrasjoner</span>
-                  <span class="shot-badge"><i></i>8 kilder tilkoblet</span>
-                </header>
-                <div class="shot-body shot-body--sources" aria-hidden="true">
-                  <svg class="source-connections" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <g class="source-connections-base">
-                      <path d="M25.5 12.5 C30.5 12.5 28.5 38 33 38"></path>
-                      <path d="M25.5 37.5 C29.5 37.5 29 46 33 46"></path>
-                      <path d="M25.5 62.5 C29.5 62.5 29 54 33 54"></path>
-                      <path d="M25.5 87.5 C30.5 87.5 28.5 62 33 62"></path>
-                      <path d="M74.5 12.5 C69.5 12.5 71.5 38 67 38"></path>
-                      <path d="M74.5 37.5 C70.5 37.5 71 46 67 46"></path>
-                      <path d="M74.5 62.5 C70.5 62.5 71 54 67 54"></path>
-                      <path d="M74.5 87.5 C69.5 87.5 71.5 62 67 62"></path>
-                    </g>
-                    <g class="source-connections-flow">
-                      <path d="M25.5 12.5 C30.5 12.5 28.5 38 33 38"></path>
-                      <path d="M25.5 37.5 C29.5 37.5 29 46 33 46"></path>
-                      <path d="M25.5 62.5 C29.5 62.5 29 54 33 54"></path>
-                      <path d="M25.5 87.5 C30.5 87.5 28.5 62 33 62"></path>
-                      <path d="M74.5 12.5 C69.5 12.5 71.5 38 67 38"></path>
-                      <path d="M74.5 37.5 C70.5 37.5 71 46 67 46"></path>
-                      <path d="M74.5 62.5 C70.5 62.5 71 54 67 54"></path>
-                      <path d="M74.5 87.5 C69.5 87.5 71.5 62 67 62"></path>
-                    </g>
-                  </svg>
-                  <div class="source-col source-col--left">
-                    <div class="source-node"><img class="source-logo source-logo--lightspeed" src="assets/logos/lightspeed.svg" alt=""><span>Kasse</span></div>
-                    <div class="source-node"><img class="source-logo source-logo--poweroffice" src="assets/logos/poweroffice-farge01.png" alt=""><span>Regnskap</span></div>
-                    <div class="source-node"><img class="source-logo source-logo--planday" src="assets/logos/planday.png" alt=""><span>Bemanning</span></div>
-                    <div class="source-node"><img class="source-logo source-logo--favrit" src="assets/logos/favrit.svg" alt=""><span>Kasse</span></div>
-                  </div>
-                  <div class="scope-app">
-                    <div class="scope-app-bar">
-                      <span class="scope-app-dots"><i></i><i></i><i></i></span>
-                      <span class="scope-app-name">scope</span>
-                    </div>
-                    <div class="scope-app-body">
-                      <div class="scope-app-kpis">
-                        <div><small>Omsetning</small><b>142 800</b></div>
-                        <div><small>Lønn</small><b>28,4 %</b></div>
-                        <div><small>Margin</small><b>71,6 %</b></div>
-                      </div>
-                      <div class="scope-app-chart">
-                        <svg viewBox="0 0 200 56" preserveAspectRatio="none">
-                          <path class="scope-app-chart-fill" d="M0 44 C20 40 32 28 52 30 C72 32 84 18 108 20 C132 22 148 10 172 12 C182 13 192 8 200 6 L200 56 L0 56 Z"></path>
-                          <path class="scope-app-chart-line" d="M0 44 C20 40 32 28 52 30 C72 32 84 18 108 20 C132 22 148 10 172 12 C182 13 192 8 200 6"></path>
-                        </svg>
-                      </div>
-                      <span class="scope-app-sync"><i></i>Synkronisert i natt 04:12</span>
-                    </div>
-                  </div>
-                  <div class="source-col source-col--right">
-                    <div class="source-node"><img class="source-logo source-logo--tripletex" src="assets/logos/tripletex.svg" alt=""><span>Regnskap</span></div>
-                    <div class="source-node"><img class="source-logo source-logo--tamigo" src="assets/logos/tamigo.svg" alt=""><span>Bemanning</span></div>
-                    <div class="source-node"><img class="source-logo source-logo--munu" src="assets/logos/munu.svg" alt=""><span>Kasse</span></div>
-                    <div class="source-node"><img class="source-logo source-logo--xledger" src="assets/logos/xledger.svg" alt=""><span>Regnskap</span></div>
-                  </div>
+              <article class="scope-panel scope-panel--data is-active" data-scope-card>
+                <div class="scope-panel-copy">
+                  <span class="scope-panel-num">01</span>
+                  <h3 class="scope-panel-title">Hent data</h3>
+                  <p class="scope-panel-text">Vi kobler oss på kassa, regnskapet og bemanningen, og henter inn alle tallene dine – hver eneste natt.</p>
+                  <ul class="scope-panel-tags">
+                    <li>Kasse</li>
+                    <li>Regnskap</li>
+                    <li>Bemanning</li>
+                  </ul>
                 </div>
-              </div>
-              <div class="scope-stack-copy">
-                <p class="scope-stack-statement">Vi henter inn all data fra alle dine systemer, hver dag.</p>
-              </div>
-            </article>
+                <div class="scope-panel-art" aria-hidden="true">
+                  <svg viewBox="0 0 240 240" fill="none" stroke="#171715" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                    <path d="M62 46C82 46 78 96 96 100M62 114H96M62 182C82 182 78 136 96 130"></path>
+                    <path d="M97 68V170a58 22 0 0 0 116 0V68Z" fill="#fffdf7"></path>
+                    <path d="M97 116a58 22 0 0 0 116 0"></path>
+                    <ellipse cx="155" cy="68" rx="58" ry="22" fill="#f4ce45"></ellipse>
+                    <rect x="18" y="30" width="44" height="32" rx="10" fill="#f2a9c8"></rect>
+                    <rect x="18" y="98" width="44" height="32" rx="10" fill="#fffdf7"></rect>
+                    <rect x="18" y="166" width="44" height="32" rx="10" fill="#27c780"></rect>
+                  </svg>
+                </div>
+              </article>
             </div>
 
             <div class="scope-stack-step" id="hvordan-steg-2" data-scope-step>
-            <article class="scope-stack-card scope-stack-card--analysis" data-scope-card>
-              <div class="scope-shot">
-                <header class="shot-head" aria-hidden="true">
-                  <span class="shot-dots"><i></i><i></i><i></i></span>
-                  <span class="shot-title">Scope · Analyse</span>
-                  <span class="shot-badge"><i></i>1 avvik funnet</span>
-                </header>
-                <div class="shot-body shot-body--analysis" aria-hidden="true">
-                  <div class="analysis-stats">
-                    <div class="analysis-stat"><small>Omsetning</small><b>142 800 kr</b><span>+12 %</span></div>
-                    <div class="analysis-stat"><small>Lønnsprosent</small><b>28,4 %</b><span>−2,1 pp</span></div>
-                    <div class="analysis-stat"><small>Bruttomargin</small><b>71,6 %</b><span>+3,2 pp</span></div>
-                  </div>
-                  <div class="analysis-chart">
-                    <div class="analysis-chart-head">
-                      <span>Omsetning per dag</span>
-                      <span class="analysis-legend"><i class="legend-history"></i>Historikk<i class="legend-forecast"></i>Prognose</span>
-                    </div>
-                    <div class="analysis-plot">
-                      <svg viewBox="0 0 560 190" preserveAspectRatio="none">
-                        <g class="plot-grid">
-                          <line x1="0" y1="12" x2="560" y2="12"></line>
-                          <line x1="0" y1="56" x2="560" y2="56"></line>
-                          <line x1="0" y1="100" x2="560" y2="100"></line>
-                          <line x1="0" y1="144" x2="560" y2="144"></line>
-                          <line x1="0" y1="188" x2="560" y2="188"></line>
-                        </g>
-                        <rect class="plot-band" x="352" y="0" width="42" height="190"></rect>
-                        <path class="plot-area" d="M0 148 C31 142 62 128 93 132 C124 136 156 112 187 108 C218 104 249 122 280 114 C311 106 342 74 373 56 L373 190 L0 190 Z"></path>
-                        <path class="plot-history" d="M0 148 C31 142 62 128 93 132 C124 136 156 112 187 108 C218 104 249 122 280 114 C311 106 342 74 373 56"></path>
-                        <path class="plot-forecast" d="M373 56 C404 44 435 78 467 86 C498 94 529 88 560 94"></path>
-                      </svg>
-                      <span class="plot-marker"><i></i></span>
-                      <div class="analysis-insight">
-                        <span class="analysis-insight-flag">
-                          <svg viewBox="0 0 24 24"><path d="M12 8v5"></path><path d="M12 16.2h.01"></path><circle cx="12" cy="12" r="9"></circle></svg>
-                          Avvik oppdaget
-                        </span>
-                        <strong>Fredag kl. 16–19</strong>
-                        <small>Gjestetrykk 24 % over normalt.</small>
-                        <small class="analysis-insight-why">Bemanningsplanen dekker ikke forventet rush.</small>
-                      </div>
-                    </div>
-                    <div class="analysis-xaxis"><span>Man</span><span>Tir</span><span>Ons</span><span>Tor</span><span>Fre</span><span>Lør</span><span>Søn</span></div>
-                  </div>
-                  <div class="analysis-chips">
-                    <span><i></i>Mønster<b>12</b></span>
-                    <span class="is-alert"><i></i>Avvik<b>1</b></span>
-                    <span><i></i>Innsikt<b>3</b></span>
-                  </div>
+              <article class="scope-panel scope-panel--analysis" data-scope-card>
+                <div class="scope-panel-copy">
+                  <span class="scope-panel-num">02</span>
+                  <h3 class="scope-panel-title">Analyser</h3>
+                  <p class="scope-panel-text">AI-en går gjennom alt, finner mønstre og avvik, og ser hva som faktisk påvirker resultatet ditt.</p>
+                  <ul class="scope-panel-tags">
+                    <li>Mønster</li>
+                    <li>Avvik</li>
+                    <li>Prognose</li>
+                  </ul>
                 </div>
-              </div>
-              <div class="scope-stack-copy">
-                <p class="scope-stack-statement">Vår AI analyserer all data og foreslår hva som kan gjøres bedre.</p>
-              </div>
-            </article>
+                <div class="scope-panel-art" aria-hidden="true">
+                  <svg viewBox="0 0 240 240" fill="none" stroke="#171715" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                    <rect x="30" y="126" width="42" height="72" rx="10" fill="#fffdf7"></rect>
+                    <rect x="88" y="82" width="42" height="116" rx="10" fill="#f4ce45"></rect>
+                    <rect x="146" y="150" width="42" height="48" rx="10" fill="#fffdf7"></rect>
+                    <path d="M22 202h196"></path>
+                    <path d="M188 122 214 150" stroke-width="15"></path>
+                    <circle cx="156" cy="90" r="46" fill="#ffffff" fill-opacity="0.42"></circle>
+                  </svg>
+                </div>
+              </article>
             </div>
 
             <div class="scope-stack-step" id="hvordan-steg-3" data-scope-step>
-            <article class="scope-stack-card scope-stack-card--review" data-scope-card>
-              <div class="scope-shot">
-                <header class="shot-head" aria-hidden="true">
-                  <span class="shot-dots"><i></i><i></i><i></i></span>
-                  <span class="shot-title">Scope · Kvalitetssikring</span>
-                  <span class="shot-badge"><i></i>4 av 4 kontroller</span>
-                </header>
-                <div class="shot-body shot-body--review" aria-hidden="true">
-                  <ol class="review-flow">
-                    <li class="review-step">
-                      <span class="review-step-marker">1</span>
-                      <span class="review-step-copy"><strong>Integrasjonene virker</strong><small>Datakildene er tilkoblet og oppdateres.</small></span>
-                      <span class="review-step-status"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg>Verifisert 06:05</span>
-                    </li>
-                    <li class="review-step">
-                      <span class="review-step-marker">2</span>
-                      <span class="review-step-copy"><strong>Tallene stemmer</strong><small>Dataene er kontrollert for feil og mangler.</small></span>
-                      <span class="review-step-status"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg>Verifisert 06:11</span>
-                    </li>
-                    <li class="review-step">
-                      <span class="review-step-marker">3</span>
-                      <span class="review-step-copy"><strong>Rådene passer</strong><small>Anbefalingen er relevant for restauranten og situasjonen.</small></span>
-                      <span class="review-step-status"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg>Verifisert 06:24</span>
-                    </li>
-                    <li class="review-step">
-                      <span class="review-step-marker">4</span>
-                      <span class="review-step-copy"><strong>Rådene gir effekt</strong><small>Tiltaket er realistisk, gjennomførbart og har forventet effekt.</small></span>
-                      <span class="review-step-status"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg>Verifisert 06:31</span>
-                    </li>
-                  </ol>
-                  <div class="review-complete">
-                    <span class="review-complete-icon"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg></span>
-                    <span class="review-complete-copy"><strong>Alle kontroller fullført</strong><small>Rådene er klare for Varm Burger AS.</small></span>
-                    <span class="review-complete-badge">4 av 4</span>
-                  </div>
+              <article class="scope-panel scope-panel--review" data-scope-card>
+                <div class="scope-panel-copy">
+                  <span class="scope-panel-num">03</span>
+                  <h3 class="scope-panel-title">Kvalitetssikre</h3>
+                  <p class="scope-panel-text">Folk som kan analyse og kjenner bransjen går gjennom funnene før de blir til råd du kan stole på.</p>
+                  <ul class="scope-panel-tags">
+                    <li>4 av 4 kontroller</li>
+                    <li>Menneskelig gjennomgang</li>
+                  </ul>
                 </div>
-              </div>
-              <div class="scope-stack-copy">
-                <p class="scope-stack-statement">Vi går gjennom analysene og kvalitetssikrer rådene sammen med folk som kan analyse og kjenner bransjen.</p>
-              </div>
-            </article>
+                <div class="scope-panel-art" aria-hidden="true">
+                  <svg viewBox="0 0 240 240" fill="none" stroke="#171715" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                    <path d="M120 26 196 56v56c0 46-38 72-76 88-38-16-76-42-76-88V56Z" fill="#fffdf7"></path>
+                    <path d="M88 116 110 140 154 88" stroke-width="13"></path>
+                    <path d="M212 42 218 58 234 64 218 70 212 86 206 70 190 64 206 58Z" fill="#f4ce45"></path>
+                    <path d="M28 150 33 163 46 168 33 173 28 186 23 173 10 168 23 163Z" fill="#f4ce45"></path>
+                  </svg>
+                </div>
+              </article>
             </div>
 
             <div class="scope-stack-step" id="hvordan-steg-4" data-scope-step>
-            <article class="scope-stack-card scope-stack-card--advice" data-scope-card>
-              <div class="scope-shot">
-                <header class="shot-head" aria-hidden="true">
-                  <span class="shot-dots"><i></i><i></i><i></i></span>
-                  <span class="shot-title">Scope · Råd</span>
-                  <span class="shot-badge"><i></i>3 råd klare</span>
-                </header>
-                <div class="shot-body shot-body--advice">
-                  <div class="advice-toolbar" aria-hidden="true">
-                    <span class="advice-toolbar-title"><strong>Dagens råd</strong><small>Fredag · Varm Burger AS</small></span>
-                    <span class="advice-toolbar-note">Prioritert etter effekt</span>
-                  </div>
-                  <div class="scope-advice-list">
-                    <article class="scope-advice-item is-priority-high">
-                      <div class="scope-advice-meta">
-                        <span class="scope-advice-priority">Høy prioritet</span>
-                        <span class="advice-time"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg>Fredag 16–19</span>
-                      </div>
-                      <div class="scope-advice-item-head">
-                        <h4>Sett inn én ekstra i servering fredag kl. 16–19</h4>
-                        <label class="scope-advice-done"><input type="checkbox" data-scope-advice-done><i aria-hidden="true"></i><span>Utført</span></label>
-                      </div>
-                      <p><strong>Forventet effekt:</strong> Kortere ventetid og bedre kapasitet.</p>
-                      <button type="button" data-scope-advice-why aria-expanded="false" aria-controls="scope-advice-why-1">Hvorfor?</button>
-                      <p class="scope-advice-why" id="scope-advice-why-1" hidden>Basert på gjestetrykket nå, reservasjonene og forventet rush mellom kl. 16 og 19.</p>
-                    </article>
-                    <article class="scope-advice-item">
-                      <div class="scope-advice-meta">
-                        <span class="scope-advice-priority">Middels prioritet</span>
-                        <span class="advice-time"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg>I dag 18–22</span>
-                      </div>
-                      <div class="scope-advice-item-head">
-                        <h4>Legg ut ledig vakt kl. 18–22</h4>
-                        <label class="scope-advice-done"><input type="checkbox" data-scope-advice-done><i aria-hidden="true"></i><span>Utført</span></label>
-                      </div>
-                      <p><strong>Forventet effekt:</strong> Bedre bemanning i forventet rush.</p>
-                      <button type="button" data-scope-advice-why aria-expanded="false" aria-controls="scope-advice-why-2">Hvorfor?</button>
-                      <p class="scope-advice-why" id="scope-advice-why-2" hidden>Estimatet viser økende belastning etter kl. 18, samtidig som bemanningen blir knappere.</p>
-                    </article>
-                    <article class="scope-advice-item">
-                      <div class="scope-advice-meta">
-                        <span class="scope-advice-priority">Middels prioritet</span>
-                        <span class="advice-time"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg>Ved fullt trykk · 45 min</span>
-                      </div>
-                      <div class="scope-advice-item-head">
-                        <h4>Pause Wolt i 45 minutter ved fullt trykk</h4>
-                        <label class="scope-advice-done"><input type="checkbox" data-scope-advice-done><i aria-hidden="true"></i><span>Utført</span></label>
-                      </div>
-                      <p><strong>Forventet effekt:</strong> Bedre flyt på kjøkkenet og færre forsinkelser.</p>
-                      <button type="button" data-scope-advice-why aria-expanded="false" aria-controls="scope-advice-why-3">Hvorfor?</button>
-                      <p class="scope-advice-why" id="scope-advice-why-3" hidden>Ordreinngangen fra Wolt skaper kø når kjøkkenet når full kapasitet.</p>
-                    </article>
-                  </div>
+              <article class="scope-panel scope-panel--advice" data-scope-card>
+                <div class="scope-panel-copy">
+                  <span class="scope-panel-num">04</span>
+                  <h3 class="scope-panel-title">Få råd</h3>
+                  <p class="scope-panel-text">Du får ett tydelig neste steg med forventet effekt – ikke en rapport du må tolke selv.</p>
+                  <ul class="scope-panel-tags">
+                    <li>Høy prioritet</li>
+                    <li>Forventet effekt</li>
+                    <li>Utført</li>
+                  </ul>
                 </div>
-              </div>
-              <div class="scope-stack-copy">
-                <p class="scope-stack-statement"><strong>Gjør noe som virker.</strong> Få ett tydelig neste steg med forventet effekt.</p>
-              </div>
-            </article>
+                <div class="scope-panel-art" aria-hidden="true">
+                  <svg viewBox="0 0 240 240" fill="none" stroke="#171715" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                    <path d="M120 22V6M188 46 200 34M52 46 40 34M204 104h16M20 104h16"></path>
+                    <circle cx="120" cy="106" r="54" fill="#fffdf7"></circle>
+                    <path d="M104 136c0-18 7-27 16-27s16 9 16 27" stroke-width="6"></path>
+                    <rect x="94" y="164" width="52" height="18" rx="9" fill="#1559f7"></rect>
+                    <rect x="102" y="192" width="36" height="18" rx="9" fill="#1559f7"></rect>
+                  </svg>
+                </div>
+              </article>
             </div>
 
-            </div>
           </div>
         </div>
       </section>
@@ -1359,6 +1215,6 @@
         <button type="button" data-cookie-consent="all">Godta alle</button>
       </div>
     </section>
-    <script src="script.js?v=20260714-how-scope-stack-v1"></script>
+    <script src="script.js?v=20260724-how-stacked-panels-v1"></script>
   </body>
 </html>
