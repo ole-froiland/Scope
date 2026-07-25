@@ -1118,77 +1118,6 @@ if (opensDemoDirectly && demoMockup) {
   expandButton?.remove();
 }
 
-const billingToggle = document.querySelector(".billing-toggle");
-
-function renderPriceHTML(amountText) {
-  let digitIndex = 0;
-
-  return Array.from(amountText)
-    .map((ch) => {
-      if (/\d/.test(ch)) {
-        const strip = "0123456789"
-          .split("")
-          .map((d) => `<span>${d}</span>`)
-          .join("");
-        const currentDigitIndex = digitIndex;
-        digitIndex += 1;
-        return `<span class="digit"><span class="digit-strip" style="--digit-index: ${currentDigitIndex}; transform: translateY(-${ch}em)">${strip}</span></span>`;
-      }
-      return `<span class="price-static">${ch === " " ? "&nbsp;" : ch}</span>`;
-    })
-    .join("");
-}
-
-function setPrice(priceEl, amountText, periodText) {
-  const numberSpan = priceEl.querySelector(".price-number");
-  const periodSpan = priceEl.querySelector(".price-period");
-
-  const existingDigits = numberSpan.querySelectorAll(".digit-strip");
-  const newChars = Array.from(amountText);
-  const newDigits = newChars.filter((c) => /\d/.test(c));
-  const newStatics = newChars.filter((c) => !/\d/.test(c));
-
-  if (existingDigits.length === newDigits.length) {
-    existingDigits.forEach((strip, i) => {
-      strip.style.transform = `translateY(-${newDigits[i]}em)`;
-    });
-    numberSpan.querySelectorAll(".price-static").forEach((el, idx) => {
-      if (newStatics[idx] !== undefined) {
-        el.innerHTML = newStatics[idx] === " " ? "&nbsp;" : newStatics[idx];
-      }
-    });
-  } else {
-    numberSpan.innerHTML = renderPriceHTML(amountText);
-  }
-
-  if (periodSpan) periodSpan.textContent = periodText;
-}
-
-if (billingToggle) {
-  document.querySelectorAll(".price-card .price").forEach((priceEl) => {
-    const monthly = priceEl.dataset.monthly;
-    if (!monthly) return;
-    const [amount, period] = monthly.split("|");
-    priceEl.innerHTML = `<span class="price-number">${renderPriceHTML(amount)}</span><span class="price-period">${period}</span>`;
-  });
-
-  billingToggle.addEventListener("click", (event) => {
-    const button = event.target.closest("button[data-billing]");
-    if (!button || button.classList.contains("is-active")) return;
-
-    billingToggle.querySelectorAll("button").forEach((b) => b.classList.remove("is-active"));
-    button.classList.add("is-active");
-
-    const mode = button.dataset.billing;
-    billingToggle.classList.toggle("is-yearly", mode === "yearly");
-    document.querySelectorAll(".price-card .price").forEach((priceEl) => {
-      const data = priceEl.dataset[mode];
-      if (!data) return;
-      const [targetAmount, targetPeriod] = data.split("|");
-      setPrice(priceEl, targetAmount, targetPeriod);
-    });
-  });
-}
 const reminderAddButton = document.querySelector(".reminder-add");
 const reminderList = document.querySelector(".reminder-list");
 
@@ -1213,7 +1142,7 @@ if (reminderAddButton && reminderList) {
 const revealPrefersReducedMotion = typeof window.matchMedia === "function"
   && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const revealTargets = document.querySelectorAll(".section-heading, .accounting-card, .price-card, .footer-cta");
+const revealTargets = document.querySelectorAll(".section-heading, .accounting-card, .tester-block, .footer-cta");
 
 if (!revealPrefersReducedMotion && "IntersectionObserver" in window && revealTargets.length > 0) {
   const revealObserver = new IntersectionObserver((entries, observer) => {
