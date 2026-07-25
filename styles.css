@@ -4940,7 +4940,7 @@ body.demo-expanded {
   padding-top: clamp(72px, 8vw, 130px);
   padding-bottom: clamp(72px, 8vw, 130px);
   color: #ffffff;
-  background: linear-gradient(145deg, #1a5276, #1a3a5c);
+  background: linear-gradient(145deg, #0a2c7b, #071e55);
 }
 
 .tester-block {
@@ -4956,7 +4956,7 @@ body.demo-expanded {
 
 .tester-kicker {
   margin: 0 0 clamp(22px, 2.4vw, 30px);
-  color: #f2cf78;
+  color: #9db8ff;
   font-size: 0.76rem;
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -5011,7 +5011,7 @@ body.demo-expanded {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: #3f7f4c;
+  background: #00a86b;
 }
 
 .tester-check svg {
@@ -5040,22 +5040,22 @@ body.demo-expanded {
   justify-content: center;
   margin-top: 32px;
   border-radius: 999px;
-  background: #f5f0e1;
-  color: #1a3a5c;
+  background: #f6f4ee;
+  color: #071e55;
   padding: 0 28px;
   font-size: 0.88rem;
   font-weight: 800;
   letter-spacing: 0.05em;
   line-height: 1;
   text-transform: uppercase;
-  box-shadow: 0 14px 28px rgba(4, 26, 63, 0.24);
+  box-shadow: 0 14px 28px rgba(4, 16, 60, 0.3);
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .tester-cta:hover,
 .tester-cta:focus-visible {
   background: #ffffff;
-  color: #1a3a5c;
+  color: #071e55;
   transform: translateY(-2px);
 }
 
