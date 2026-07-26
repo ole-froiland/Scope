@@ -263,33 +263,152 @@
 
           <div class="demo-stage">
             <div class="demo-stage-head">
-              <p class="demo-stage-label">Slik ser det ut i Scope</p>
-              <div class="demo-stage-tools">
-                <div class="device-toggle" aria-label="Velg visning">
-                  <button class="device-toggle-button device-pc is-active" type="button" aria-label="PC-visning" aria-pressed="true" data-device="pc">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <rect x="4" y="5" width="16" height="11" rx="2"></rect>
-                      <path d="M9 20h6"></path>
-                      <path d="M12 16v4"></path>
-                    </svg>
-                  </button>
-                  <button class="device-toggle-button device-mobile" type="button" aria-label="Mobilvisning" aria-pressed="false" data-device="mobile">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <rect x="8" y="3" width="8" height="18" rx="2"></rect>
-                      <path d="M11 18h2"></path>
-                    </svg>
-                  </button>
-                </div>
-                <a class="demo-launch-link" href="/enkel?demo=1" target="_blank" rel="noopener">
-                  <span>Åpne demoen</span>
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M7 17 17 7"></path>
-                    <path d="M10 7h7v7"></path>
-                    <path d="M6 5h-1a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1"></path>
-                  </svg>
-                </a>
-              </div>
+              <p class="demo-stage-label">Slik ser Scope ut på mobil</p>
+              <a class="demo-launch-link" href="/enkel?demo=1" target="_blank" rel="noopener">
+                <span>Åpne demoen</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 17 17 7"></path>
+                  <path d="M10 7h7v7"></path>
+                  <path d="M6 5h-1a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1"></path>
+                </svg>
+              </a>
             </div>
+
+            <div class="phone-tabs" role="tablist" aria-label="Velg skjerm" data-phone-tabs>
+              <button class="is-active" type="button" role="tab" aria-selected="true" aria-controls="phone-screen-advice" data-phone-tab="advice">Råd</button>
+              <button type="button" role="tab" aria-selected="false" aria-controls="phone-screen-home" data-phone-tab="home">Hjem</button>
+              <button type="button" role="tab" aria-selected="false" aria-controls="phone-screen-user" data-phone-tab="user">Bruker</button>
+            </div>
+
+            <div class="phone-track" data-phone-track>
+
+              <article class="phone" id="phone-screen-advice" role="tabpanel" aria-label="Råd" data-phone="advice">
+                <div class="phone-screen">
+                  <div class="phone-notch" aria-hidden="true"></div>
+                  <header class="phone-top">
+                    <span class="phone-brand"><i aria-hidden="true">S</i>Scope</span>
+                    <span class="phone-venue">Varm Burger AS</span>
+                  </header>
+                  <div class="phone-body">
+                    <div class="phone-title">
+                      <h4>Råd</h4>
+                      <span class="phone-pill">I dag · 3 nye</span>
+                    </div>
+                    <ul class="phone-advice">
+                      <li>
+                        <span class="phone-check" aria-hidden="true"></span>
+                        <span><strong>Sett inn én ekstra i servering</strong><small>Trykket passerer 8 gjester per servitør.</small></span>
+                      </li>
+                      <li class="is-done">
+                        <span class="phone-check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg></span>
+                        <span><strong>Legg ut ledig vakt kl. 18–22</strong><small>Estimatet viser fullt trøkk til kl. 21.</small></span>
+                      </li>
+                      <li>
+                        <span class="phone-check" aria-hidden="true"></span>
+                        <span><strong>Pause rabattkoder 18–20</strong><small>38 bookinger i kveld – salget går uten.</small></span>
+                      </li>
+                    </ul>
+                    <span class="phone-button">Utfør valgte</span>
+                    <div class="phone-ledger">
+                      <div class="phone-ledger-head"><strong>Tidligere råd</strong><small>Siste 30 dager</small></div>
+                      <div class="phone-ledger-row"><span>Redusert svinn på kjøkkenet</span><b>+6 400 kr</b></div>
+                      <div class="phone-ledger-row"><span>Tilpasset helgebemanning</span><b>+4 900 kr</b></div>
+                    </div>
+                  </div>
+                  <nav class="phone-nav" aria-hidden="true">
+                    <span class="is-on"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"></path><path d="M8.5 14.5a6 6 0 1 1 7 0c-1 .8-1.5 1.8-1.5 3.5h-4c0-1.7-.5-2.7-1.5-3.5Z"></path></svg>Råd</span>
+                    <span><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5"></path><path d="M6.5 10v10h11V10"></path></svg>Hjem</span>
+                    <span><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="3.4"></circle><path d="M5.5 20a6.5 6.5 0 0 1 13 0"></path></svg>Bruker</span>
+                  </nav>
+                </div>
+              </article>
+
+              <article class="phone" id="phone-screen-home" role="tabpanel" aria-label="Hjem" data-phone="home">
+                <div class="phone-screen">
+                  <div class="phone-notch" aria-hidden="true"></div>
+                  <header class="phone-top">
+                    <span class="phone-brand"><i aria-hidden="true">S</i>Scope</span>
+                    <span class="phone-venue">Varm Burger AS</span>
+                  </header>
+                  <div class="phone-body">
+                    <div class="phone-title">
+                      <h4>Hjem</h4>
+                      <span class="phone-pill">Onsdag 15. juli</span>
+                    </div>
+                    <div class="phone-kpis">
+                      <div class="is-lead">
+                        <small>Omsetning i dag</small>
+                        <b>67 512 kr</b>
+                        <em>↑ 12 %</em>
+                      </div>
+                      <div>
+                        <small>Gjester i dag</small>
+                        <b>84</b>
+                        <span>38 bookinger</span>
+                      </div>
+                      <div>
+                        <small>Gjester akkurat nå</small>
+                        <b>24</b>
+                        <span>Høyt trykk</span>
+                      </div>
+                      <div>
+                        <small>Ansatte på jobb</small>
+                        <b>12</b>
+                        <span>7 per servitør</span>
+                      </div>
+                    </div>
+                    <p class="phone-summary"><strong>AI-sammendrag:</strong> Dagen går bra – omsetningen er 12 % over normalen. Følg med på trykket fra kl. 17.</p>
+                    <p class="phone-updated"><i aria-hidden="true"></i>Sist oppdatert 14:32</p>
+                  </div>
+                  <nav class="phone-nav" aria-hidden="true">
+                    <span><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"></path><path d="M8.5 14.5a6 6 0 1 1 7 0c-1 .8-1.5 1.8-1.5 3.5h-4c0-1.7-.5-2.7-1.5-3.5Z"></path></svg>Råd</span>
+                    <span class="is-on"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5"></path><path d="M6.5 10v10h11V10"></path></svg>Hjem</span>
+                    <span><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="3.4"></circle><path d="M5.5 20a6.5 6.5 0 0 1 13 0"></path></svg>Bruker</span>
+                  </nav>
+                </div>
+              </article>
+
+              <article class="phone" id="phone-screen-user" role="tabpanel" aria-label="Bruker" data-phone="user">
+                <div class="phone-screen">
+                  <div class="phone-notch" aria-hidden="true"></div>
+                  <header class="phone-top">
+                    <span class="phone-brand"><i aria-hidden="true">S</i>Scope</span>
+                    <span class="phone-venue">Varm Burger AS</span>
+                  </header>
+                  <div class="phone-body">
+                    <div class="phone-title">
+                      <h4>Bruker</h4>
+                      <span class="phone-pill">Din restaurant</span>
+                    </div>
+                    <div class="phone-savings">
+                      <small>Anslått effekt</small>
+                      <b>61 400 kr</b>
+                      <span>Siste 30 dager i demoen</span>
+                    </div>
+                    <div class="phone-ledger-row is-plain"><span>Råd fulgt</span><b>34 av 41</b></div>
+                    <div class="phone-ledger-row is-plain"><span>Lønnsprosent</span><b class="is-gain">−2,1 pp</b></div>
+                    <div class="phone-systems">
+                      <div class="phone-ledger-head"><strong>Tilkoblede systemer</strong><small>4 aktive</small></div>
+                      <div class="phone-system"><i aria-hidden="true">L</i>Lightspeed<span class="phone-ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg></span></div>
+                      <div class="phone-system"><i aria-hidden="true">T</i>Tripletex<span class="phone-ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg></span></div>
+                      <div class="phone-system"><i aria-hidden="true">Ta</i>Tamigo<span class="phone-ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg></span></div>
+                      <div class="phone-system"><i aria-hidden="true">Y</i>Yr<span class="phone-ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg></span></div>
+                    </div>
+                  </div>
+                  <nav class="phone-nav" aria-hidden="true">
+                    <span><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"></path><path d="M8.5 14.5a6 6 0 1 1 7 0c-1 .8-1.5 1.8-1.5 3.5h-4c0-1.7-.5-2.7-1.5-3.5Z"></path></svg>Råd</span>
+                    <span><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5"></path><path d="M6.5 10v10h11V10"></path></svg>Hjem</span>
+                    <span class="is-on"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="3.4"></circle><path d="M5.5 20a6.5 6.5 0 0 1 13 0"></path></svg>Bruker</span>
+                  </nav>
+                </div>
+              </article>
+
+            </div>
+
+            <p class="phone-swipe-hint" aria-hidden="true">Sveip for å se mer</p>
+
+          </div>
+          <div class="demo-legacy-mockup" aria-hidden="true">
           <div class="laptop-frame">
           <div class="mockup-box is-demo-session">
             <div class="browser-bar" aria-hidden="true">

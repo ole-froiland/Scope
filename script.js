@@ -344,6 +344,75 @@ function requestScopeStackUpdate() {
   scopeStackFrame = window.requestAnimationFrame(updateScopeStack);
 }
 
+/* Mobilguiden: tre skjermer som kan velges med fanene eller sveipes.
+   Sveipingen er ren CSS scroll-snap - her holder vi bare fanene i takt. */
+const phoneTrack = document.querySelector("[data-phone-track]");
+const phoneTabButtons = Array.from(document.querySelectorAll("[data-phone-tab]"));
+const phoneCards = phoneTrack ? Array.from(phoneTrack.querySelectorAll("[data-phone]")) : [];
+
+if (phoneTrack && phoneCards.length > 0) {
+  let phoneFrame = 0;
+
+  const setActivePhone = (index) => {
+    phoneTabButtons.forEach((button, i) => {
+      const isActive = i === index;
+
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-selected", String(isActive));
+    });
+    phoneCards.forEach((card, i) => card.classList.toggle("is-active", i === index));
+  };
+
+  const syncActivePhone = () => {
+    phoneFrame = 0;
+
+    const trackLeft = phoneTrack.getBoundingClientRect().left;
+    let closestIndex = 0;
+    let closestDistance = Number.POSITIVE_INFINITY;
+
+    phoneCards.forEach((card, index) => {
+      const distance = Math.abs(card.getBoundingClientRect().left - trackLeft);
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    setActivePhone(closestIndex);
+  };
+
+  phoneTabButtons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      const card = phoneCards[index];
+
+      if (!card) {
+        return;
+      }
+
+      setActivePhone(index);
+
+      // Bare et faktisk sveipespor kan rulle; på desktop ligger alle tre synlig.
+      if (phoneTrack.scrollWidth > phoneTrack.clientWidth + 1) {
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        phoneTrack.scrollTo({
+          left: card.offsetLeft - phoneCards[0].offsetLeft,
+          behavior: prefersReducedMotion ? "auto" : "smooth",
+        });
+      }
+    });
+  });
+
+  phoneTrack.addEventListener("scroll", () => {
+    if (phoneFrame) {
+      return;
+    }
+
+    phoneFrame = window.requestAnimationFrame(syncActivePhone);
+  }, { passive: true });
+}
+
 if (scopeStackCards.length > 0) {
   updateScopeStack();
   window.addEventListener("scroll", requestScopeStackUpdate, { passive: true });
