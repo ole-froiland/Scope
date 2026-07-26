@@ -13226,6 +13226,8 @@ body.is-demo-session {
   --scope-yellow: #ffd84d;
   --scope-purple: #b9a7ff;
   --scope-pink: #ffbad2;
+  --scope-line: #e5e2d8;
+  --scope-lift: 0 8px 24px rgba(17, 17, 20, 0.06);
   background: var(--scope-cream);
 }
 
@@ -13361,8 +13363,8 @@ body.is-demo-session {
 
 .is-demo-session .manager-kpi,
 .is-demo-session .manager-overview .manager-panel {
-  border: 2px solid var(--scope-ink);
-  box-shadow: 5px 6px 0 var(--scope-ink);
+  border: 1px solid var(--scope-line);
+  box-shadow: var(--scope-lift);
 }
 
 .is-demo-session .manager-kpi {
@@ -13372,35 +13374,22 @@ body.is-demo-session {
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-.is-demo-session .manager-kpi[data-kpi="sales"] {
-  border-color: var(--scope-ink);
-  background: var(--scope-green);
-}
-
-.is-demo-session .manager-kpi[data-kpi="staff"] {
-  border-color: var(--scope-ink);
-  background: var(--scope-purple);
-}
-
-.is-demo-session .manager-kpi[data-kpi="guests"] {
-  border-color: var(--scope-ink);
-  background: var(--scope-yellow);
-}
-
+.is-demo-session .manager-kpi[data-kpi="sales"],
+.is-demo-session .manager-kpi[data-kpi="staff"],
+.is-demo-session .manager-kpi[data-kpi="guests"],
 .is-demo-session .manager-kpi[data-kpi="reservations"] {
-  border-color: var(--scope-ink);
-  background: var(--scope-red);
+  border-color: var(--scope-line);
+  background: var(--scope-paper);
 }
 
 .is-demo-session .manager-kpi:hover {
-  border-color: var(--scope-ink);
-  box-shadow: 2px 3px 0 var(--scope-ink);
-  transform: translate(3px, 3px);
+  border-color: #c9cfd8;
+  box-shadow: 0 10px 26px rgba(17, 17, 20, 0.1);
 }
 
 .is-demo-session .manager-kpi.is-active {
-  border-color: var(--scope-ink);
-  box-shadow: 5px 6px 0 var(--scope-blue);
+  border-color: var(--scope-blue);
+  box-shadow: 0 0 0 1px var(--scope-blue), var(--scope-lift);
 }
 
 .is-demo-session .manager-kpi .kpi-label,
@@ -13419,22 +13408,48 @@ body.is-demo-session {
   opacity: 0.74;
 }
 
-.is-demo-session .manager-kpi .kpi-status,
-.is-demo-session .manager-kpi .kpi-status.is-good,
-.is-demo-session .manager-kpi .kpi-status.is-ok,
-.is-demo-session .manager-kpi .kpi-status.is-warn,
+/* "Reservasjoner" er ett langt, ubrytelig ord og dyttet statusmerket
+   ut av kortet. Litt mindre skrift lar det stå på én linje; bryting er
+   bare et sikkerhetsnett for enda smalere kort. */
+.is-demo-session .manager-kpi .kpi-label {
+  min-width: 0;
+  font-size: 0.6rem;
+  overflow-wrap: anywhere;
+}
+
+.is-demo-session .manager-kpi .kpi-status {
+  flex: 0 0 auto;
+  border-color: transparent;
+  background: #eceef2;
+  color: #3f4654;
+}
+
+.is-demo-session .manager-kpi .kpi-status.is-good {
+  background: #d9f7ea;
+  color: #07694a;
+}
+
+.is-demo-session .manager-kpi .kpi-status.is-ok {
+  background: #e6ebff;
+  color: #2a3bb5;
+}
+
+.is-demo-session .manager-kpi .kpi-status.is-warn {
+  background: #fff2cc;
+  color: #8a5a00;
+}
+
 .is-demo-session .manager-kpi .kpi-status.is-bad {
-  border-color: var(--scope-ink);
-  background: var(--scope-paper);
-  color: var(--scope-ink);
+  background: #ffe3e0;
+  color: #a32b22;
 }
 
 .is-demo-session .manager-trend-panel {
-  border-color: var(--scope-ink);
+  border-color: var(--scope-line);
   border-radius: 13px;
   background: var(--scope-paper);
   padding: 18px 20px 15px;
-  box-shadow: 5px 6px 0 var(--scope-ink);
+  box-shadow: var(--scope-lift);
 }
 
 .is-demo-session .manager-panel-head h5 {
@@ -13493,29 +13508,18 @@ body.is-demo-session {
 }
 
 .is-demo-session .trend-tooltip {
-  border: 1.5px solid var(--scope-ink);
+  border: 1px solid var(--scope-line);
   background: var(--scope-paper);
-  box-shadow: 4px 4px 0 var(--scope-ink);
+  box-shadow: 0 8px 22px rgba(17, 17, 20, 0.12);
 }
 
 .is-demo-session .manager-tiltak-panel,
 .is-demo-session .manager-summary-panel,
 .is-demo-session .manager-score-panel {
-  border-color: var(--scope-ink);
+  border-color: var(--scope-line);
   border-radius: 13px;
-  box-shadow: 5px 6px 0 var(--scope-ink);
-}
-
-.is-demo-session .manager-tiltak-panel {
-  background: var(--scope-pink);
-}
-
-.is-demo-session .manager-summary-panel {
-  background: #ddf8ea;
-}
-
-.is-demo-session .manager-score-panel {
-  background: #c7bcff;
+  background: var(--scope-paper);
+  box-shadow: var(--scope-lift);
 }
 
 .is-demo-session .manager-tiltak-panel .manager-panel-head em {
@@ -13566,9 +13570,9 @@ body.is-demo-session {
 }
 
 .is-demo-session .score-die {
-  border: 1.5px solid var(--scope-ink);
+  border: 0;
   background: #07965a;
-  box-shadow: 4px 4px 0 var(--scope-ink);
+  box-shadow: 0 6px 16px rgba(7, 150, 90, 0.28);
 }
 
 .is-demo-session .score-value,
@@ -13594,7 +13598,7 @@ body.is-demo-session {
 
   .is-demo-session .manager-kpi,
   .is-demo-session .manager-overview .manager-panel {
-    box-shadow: 3px 4px 0 var(--scope-ink);
+    box-shadow: var(--scope-lift);
   }
 }
 
@@ -14862,17 +14866,18 @@ body.is-demo-session {
   display: grid;
   min-height: 132px;
   align-content: space-between;
-  border: 1.5px solid var(--mobile-ink);
+  border: 1px solid var(--mobile-line);
   border-radius: 17px;
   padding: 16px;
-  box-shadow: 4px 5px 0 var(--mobile-ink);
+  background: var(--mobile-card);
+  box-shadow: 0 8px 22px rgba(22, 22, 25, 0.06);
   scroll-snap-align: start;
 }
 
-.scope-mobile-kpis article.tone-green { background: #a7ead1; }
-.scope-mobile-kpis article.tone-yellow { background: #ffe995; }
-.scope-mobile-kpis article.tone-purple { background: #d3c8ff; }
-.scope-mobile-kpis article.tone-pink { background: #ffd1e1; }
+.scope-mobile-kpis article.tone-green,
+.scope-mobile-kpis article.tone-yellow,
+.scope-mobile-kpis article.tone-purple,
+.scope-mobile-kpis article.tone-pink { background: var(--mobile-card); }
 
 .scope-mobile-kpis article > span {
   font-size: 0.72rem;
@@ -14902,12 +14907,12 @@ body.is-demo-session {
 .scope-mobile-recommendation {
   display: grid;
   gap: 12px;
-  border: 1.5px solid var(--mobile-ink);
+  border: 1px solid var(--mobile-blue);
   border-radius: 19px;
   padding: 19px;
   color: #fff;
   background: var(--mobile-blue);
-  box-shadow: 4px 5px 0 var(--mobile-ink);
+  box-shadow: 0 10px 26px rgba(80, 103, 255, 0.28);
 }
 
 .scope-mobile-recommendation > span {
@@ -14995,11 +15000,11 @@ body.is-demo-session {
 
 .scope-mobile-card {
   min-width: 0;
-  border: 1.5px solid var(--mobile-ink);
+  border: 1px solid var(--mobile-line);
   border-radius: 17px;
   padding: 16px;
   background: var(--mobile-card);
-  box-shadow: 3px 4px 0 var(--mobile-ink);
+  box-shadow: 0 8px 22px rgba(22, 22, 25, 0.06);
 }
 
 .scope-mobile-card-head button {
@@ -15205,7 +15210,7 @@ body.is-demo-session {
   padding: 16px;
   text-align: left;
   background: var(--mobile-card);
-  box-shadow: 3px 4px 0 var(--mobile-ink);
+  box-shadow: 0 6px 18px rgba(22, 22, 25, 0.07);
 }
 
 .scope-mobile-report-card {
@@ -15362,7 +15367,7 @@ body.is-demo-session {
   padding: 20px;
   color: #fff;
   background: #126f50;
-  box-shadow: 4px 5px 0 var(--mobile-ink);
+  box-shadow: 0 8px 22px rgba(22, 22, 25, 0.08);
 }
 
 .scope-mobile-effect-hero span,
@@ -15501,7 +15506,7 @@ body.is-demo-session {
   padding: 0 14px 0 0;
   text-align: left;
   background: #d9d1ff;
-  box-shadow: 3px 4px 0 var(--mobile-ink);
+  box-shadow: 0 6px 18px rgba(22, 22, 25, 0.07);
 }
 
 .scope-mobile-featured-guide img {
@@ -15552,7 +15557,7 @@ body.is-demo-session {
   border-radius: 17px;
   padding: 16px;
   background: #d9d1ff;
-  box-shadow: 3px 4px 0 var(--mobile-ink);
+  box-shadow: 0 6px 18px rgba(22, 22, 25, 0.07);
 }
 
 .scope-mobile-profile-card img {
@@ -16042,7 +16047,7 @@ body.is-demo-session {
   padding: 12px 14px;
   color: #fff;
   background: #126f50;
-  box-shadow: 3px 4px 0 var(--mobile-ink);
+  box-shadow: 0 6px 18px rgba(22, 22, 25, 0.07);
   font-size: 0.78rem;
   font-weight: 800;
   text-align: center;
