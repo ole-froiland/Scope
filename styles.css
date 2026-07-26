@@ -6507,9 +6507,10 @@ body.has-cookie-consent .contact-widget {
 
   .mockup-box {
     position: static;
+    width: 100%;
     border: 1px solid #dddddd;
     border-radius: 8px;
-    height: 540px;
+    height: min(620px, 78svh);
     min-height: 420px;
   }
 
@@ -16059,6 +16060,33 @@ body.is-demo-session {
   .is-demo-session .scope-mobile-app {
     display: block;
     height: 100dvh;
+  }
+
+  /* Appen er laget for telefonbredde - ikke strekk den over et nettbrett. */
+  body:not(.is-demo-session) .mockup-box.is-demo-session {
+    max-width: 430px;
+    margin-inline: auto;
+  }
+
+  /* Innebygd i landingssiden: appen fyller kortet, ikke hele viewporten. */
+  body:not(.is-demo-session) .mockup-box.is-demo-session .scope-mobile-app {
+    height: 100%;
+  }
+
+  /* Ingen scroll inne i kortet - da stopper sidescrollen når fingeren
+     lander på det. Bunnmenyen er fortsatt trykkbar. */
+  body:not(.is-demo-session) .mockup-box.is-demo-session .scope-mobile-main {
+    overflow: hidden;
+  }
+
+  /* Falsk nettleserlinje gir ingen mening rundt en telefonapp. */
+  body:not(.is-demo-session) .mockup-box.is-demo-session .browser-bar {
+    display: none;
+  }
+
+  /* Du er allerede på telefon - da har PC/mobil-velgeren ingen jobb. */
+  #demo .device-toggle {
+    display: none;
   }
 
   .is-demo-session .contact-widget {
