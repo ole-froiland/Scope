@@ -860,7 +860,7 @@ img { display: block; max-width: 100%; }
   .product-copy h2 { font-size: clamp(3rem, 13vw, 4.2rem); }
   .product-copy > p:not(.section-label) { margin: 18px 0 24px; font-size: 17px; line-height: 1.55; }
   .product-points { display: none; }
-  .mobile-product-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 4px; gap: 4px; border: 2px solid var(--ink); border-radius: 12px; background: rgba(255,255,255,.55); box-shadow: 4px 4px 0 var(--ink); }
+  .mobile-product-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 4px; gap: 4px; border: 2px solid var(--ink); border-radius: 12px; background: rgba(255,255,255,.55); box-shadow: 4px 4px 0 var(--ink); }
   .mobile-product-tabs button { min-width: 0; min-height: 46px; padding: 7px 5px; border: 0; border-radius: 8px; color: var(--ink); background: transparent; font-size: 12px; font-weight: 800; line-height: 1.1; }
   .mobile-product-tabs button.is-active { background: var(--green); box-shadow: inset 0 0 0 1.5px var(--ink); }
   .product-demo-link { width: 100%; min-height: 52px; justify-content: space-between; margin-top: 22px; }
