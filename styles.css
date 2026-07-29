@@ -1965,17 +1965,19 @@ body:not(.is-demo-session) .demo-legacy-mockup {
   background: #f4f1ec;
 }
 
+/* Flaten bak heroen når videoen ikke spiller. Animert WebP, ikke et
+   stillbilde med panorering: animerte bilder er ikke medieelementer og
+   rammes derfor ikke av autospill-sperrene i iOS. De beveger seg også i
+   strømsparingsmodus, der <video> nekter å starte. */
 .hero-section::before {
   content: "";
   position: absolute;
   inset: -4%;
   z-index: 0;
-  background-image: url("assets/hero-restaurant.png");
+  background-image: url("assets/hero-restaurant.webp");
   background-position: center;
   background-size: cover;
   transform: scale(1.05);
-  animation: hero-live 18s ease-in-out infinite alternate;
-  will-change: transform;
   pointer-events: none;
 }
 
@@ -2019,24 +2021,6 @@ body:not(.is-demo-session) .demo-legacy-mockup {
     linear-gradient(rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.8));
   animation: hero-light 13s ease-in-out infinite alternate;
   pointer-events: none;
-}
-
-/* Stillbildet er det man ser når nettleseren nekter å autospille videoen.
-   Bevegelsen må være tydelig nok til å leses som bevegelse på en telefon —
-   den forrige varianten endret skalaen 0,35 % i sekundet og sto i praksis
-   stille. */
-@keyframes hero-live {
-  0% {
-    transform: scale(1.06) translate(1.8%, 1.1%);
-  }
-
-  50% {
-    transform: scale(1.14) translate(-1.9%, -1.3%);
-  }
-
-  100% {
-    transform: scale(1.22) translate(1.3%, -2.3%);
-  }
 }
 
 @keyframes hero-light {
@@ -11675,6 +11659,12 @@ body.has-onboarding {
   .hero-section::before,
   .hero-section::after {
     animation: none;
+  }
+
+  /* Et animert bilde kan ikke stoppes med CSS, så her byttes det ut med
+     stillbildet. */
+  .hero-section::before {
+    background-image: url("assets/hero-restaurant.png");
   }
 
   .hero-video {

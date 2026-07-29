@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, stat } from "node:fs/promises";
 import test from "node:test";
 
 const [javascript, css, html] = await Promise.all([
@@ -9,41 +9,55 @@ const [javascript, css, html] = await Promise.all([
 ]);
 
 const heroSetup = javascript.match(/if \(heroSection && heroVideo\) \{([\s\S]*?)\n\}/)?.[1] || "";
+const heroBefore = css.match(/\.hero-section::before \{([\s\S]*?)\n\}/)?.[1] || "";
 
 test("heroen bytter til video først når den faktisk spiller", () => {
   // «canplay» fyrer også når nettleseren nekter å autospille — strømsparings-
   // modus, Lite datamodus eller Auto-Play satt til Aldri på iOS. Brukes den
-  // som signal, skjules stillbildet bak en video som står på første frame.
+  // som signal, skjules reserveflaten bak en video som står på første frame.
   assert.match(heroSetup, /addEventListener\("playing", showHeroVideo/);
   assert.doesNotMatch(heroSetup, /addEventListener\("canplay"/);
-
-  // Snarveien må også sjekke at videoen ikke står stille.
   assert.match(heroSetup, /if \(!heroVideo\.paused && heroVideo\.readyState >= 3\)/);
 });
 
-test("avvist autospill lar det animerte stillbildet stå", () => {
+test("avvist autospill lar reserveflaten stå", () => {
   assert.match(heroSetup, /heroVideo\.play\(\)/);
   assert.match(heroSetup, /heroPlayAttempt\.catch\(/);
 
-  // Stillbildet skjules bare når .has-video er satt, og .has-video settes nå
+  // Reserveflaten skjules bare når .has-video er satt, og .has-video settes
   // bare fra «playing».
   assert.match(css, /\.hero-section\.has-video::before\s*\{[^}]*visibility: hidden/);
-  assert.match(css, /\.hero-section::before\s*\{[\s\S]*?animation: hero-live/);
 });
 
-test("stillbildet beveger seg nok til å leses som bevegelse", () => {
-  // Målt i headless Chromium på 390 px bredde: 26s med 1.05 → 1.14 ga
-  // 2,4 px/s og oppfattes som stillestående på en telefon. 18s med
-  // 1.06 → 1.22 gir 9,8 px/s.
-  assert.match(css, /animation: hero-live 18s ease-in-out infinite alternate/);
+test("reserveflaten er en animert WebP, ikke et stillbilde med panorering", async () => {
+  // Animerte bilder er ikke medieelementer og rammes ikke av autospill-
+  // sperrene i iOS. De beveger seg også i strømsparingsmodus, der <video>
+  // nekter å starte. En CSS-panorering på et stillbilde gjorde ikke det —
+  // og ville uansett konkurrert med bevegelsen i bildet.
+  assert.match(heroBefore, /background-image: url\("assets\/hero-restaurant\.webp"\)/);
+  assert.doesNotMatch(heroBefore, /animation:/);
+  assert.doesNotMatch(css, /@keyframes hero-live/);
 
-  const keyframes = css.match(/@keyframes hero-live \{([\s\S]*?)\n\}/)?.[1] || "";
-  const scales = [...keyframes.matchAll(/scale\(([\d.]+)\)/g)].map((m) => Number(m[1]));
+  const webp = await readFile(new URL("../assets/hero-restaurant.webp", import.meta.url));
+  assert.equal(webp.subarray(0, 4).toString("latin1"), "RIFF");
+  assert.equal(webp.subarray(8, 12).toString("latin1"), "WEBP");
+  // ANIM-blokken finnes bare i animerte WebP-filer.
+  assert.ok(webp.includes(Buffer.from("ANIM", "latin1")), "WebP-en er ikke animert");
 
-  assert.equal(scales.length, 3);
-  assert.ok(
-    Math.max(...scales) - Math.min(...scales) >= 0.14,
-    `skalaspennet er ${(Math.max(...scales) - Math.min(...scales)).toFixed(2)}, for lite til å synes`
+  // Den erstatter en PNG på 2,3 MB og skal ikke gjøre siden tyngre.
+  const [{ size: webpSize }, { size: pngSize }] = await Promise.all([
+    stat(new URL("../assets/hero-restaurant.webp", import.meta.url)),
+    stat(new URL("../assets/hero-restaurant.png", import.meta.url)),
+  ]);
+  assert.ok(webpSize < pngSize, `WebP ${webpSize} B er ikke mindre enn PNG ${pngSize} B`);
+});
+
+test("redusert bevegelse bytter tilbake til stillbildet", () => {
+  // Et animert bilde kan ikke pauses med CSS, så det må byttes ut.
+  const reduced = css.match(/@media \(prefers-reduced-motion: reduce\) \{([\s\S]*?)\n\}\n\n\/\*/g)?.join("") || css;
+  assert.match(
+    reduced,
+    /\.hero-section::before \{\s*background-image: url\("assets\/hero-restaurant\.png"\);\s*\}/
   );
 });
 
