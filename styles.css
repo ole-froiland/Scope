@@ -2000,6 +2000,15 @@ body:not(.is-demo-session) .demo-legacy-mockup {
   opacity: 1;
 }
 
+/* Videoen er ren dekor (aria-hidden). Nekter iOS å autospille, tegner Safari
+   sin egen start-knapp oppå elementet — den skal aldri vises her. */
+.hero-video::-webkit-media-controls,
+.hero-video::-webkit-media-controls-start-playback-button,
+.hero-video::-webkit-media-controls-panel {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
 .hero-section::after {
   content: "";
   position: absolute;

@@ -1259,10 +1259,21 @@ if (heroSection && heroVideo) {
       heroSection.classList.add("has-video");
     };
 
-    heroVideo.addEventListener("canplay", showHeroVideo, { once: true });
+    // Bare "playing" betyr at videoen faktisk beveger seg. "canplay" fyrer
+    // også når nettleseren nekter å autospille — strømsparingsmodus, Lite
+    // datamodus eller Auto-Play satt til Aldri på iOS. Da ble stillbildet
+    // skjult bak en video som sto stille på første frame.
+    heroVideo.addEventListener("playing", showHeroVideo, { once: true });
 
-    if (heroVideo.readyState >= 3) {
+    if (!heroVideo.paused && heroVideo.readyState >= 3) {
       showHeroVideo();
+    }
+
+    // Autospill kan bli avvist. Da beholder vi det animerte stillbildet.
+    const heroPlayAttempt = heroVideo.play();
+
+    if (heroPlayAttempt && typeof heroPlayAttempt.catch === "function") {
+      heroPlayAttempt.catch(() => {});
     }
   }
 }
