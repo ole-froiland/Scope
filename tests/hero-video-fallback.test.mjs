@@ -31,6 +31,22 @@ test("avvist autospill lar det animerte stillbildet stå", () => {
   assert.match(css, /\.hero-section::before\s*\{[\s\S]*?animation: hero-live/);
 });
 
+test("stillbildet beveger seg nok til å leses som bevegelse", () => {
+  // Målt i headless Chromium på 390 px bredde: 26s med 1.05 → 1.14 ga
+  // 2,4 px/s og oppfattes som stillestående på en telefon. 18s med
+  // 1.06 → 1.22 gir 9,8 px/s.
+  assert.match(css, /animation: hero-live 18s ease-in-out infinite alternate/);
+
+  const keyframes = css.match(/@keyframes hero-live \{([\s\S]*?)\n\}/)?.[1] || "";
+  const scales = [...keyframes.matchAll(/scale\(([\d.]+)\)/g)].map((m) => Number(m[1]));
+
+  assert.equal(scales.length, 3);
+  assert.ok(
+    Math.max(...scales) - Math.min(...scales) >= 0.14,
+    `skalaspennet er ${(Math.max(...scales) - Math.min(...scales)).toFixed(2)}, for lite til å synes`
+  );
+});
+
 test("den dekorative videoen viser aldri iOS sin start-knapp", () => {
   assert.match(html, /<video class="hero-video"[^>]*aria-hidden="true"/);
   assert.match(
