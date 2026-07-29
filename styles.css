@@ -16480,21 +16480,24 @@ body.is-demo-session {
   margin-right: 10px;
 }
 
+
 /* ========================================================================== */
 /* Undersider for /enkel: Kunder, Integrasjoner, Om oss og FAQ                */
-/* Samme rolige uttrykk som landing-enkel.html — hvitt papir, tynne linjer,   */
-/* myke skygger og blå aksent. Ingen tykke rammer eller pastellflater.        */
+/*                                                                            */
+/* Undersidene låner landingssidens egen signatur: de tonede flatene fra      */
+/* «Slik virker Scope» — pastellbunn, tynn ramme i samme tone, stor tittel i  */
+/* aksentfargen og en strektegning i samme hånd (stroke #171715, bredde 7).   */
+/* Fargene er de samme tre som stegene på /enkel: blå, rød og grønn.          */
 /* ========================================================================== */
 
 .enkel-page {
   --enkel-ink: #111111;
   --enkel-muted: #555555;
-  --enkel-body: #55524c;
+  --enkel-body: #45443f;
   --enkel-line: #eeeeee;
   --enkel-border: #e7e5df;
   --enkel-paper: #f6f4ee;
   --enkel-blue: #064dff;
-  --enkel-accent: #064dff;
   background: #ffffff;
   color: var(--enkel-ink);
 }
@@ -16511,7 +16514,7 @@ body.is-demo-session {
 }
 
 .enkel-section {
-  padding: clamp(60px, 7.5vw, 100px) 32px;
+  padding: clamp(56px, 7vw, 96px) 32px;
   border-bottom: 1px solid var(--enkel-line);
 }
 
@@ -16525,198 +16528,211 @@ body.is-demo-session {
   margin: 0 auto;
 }
 
-/* Hero */
+/* Hero — én overskrift, én linje under. Ingenting mer. */
 
 .enkel-hero {
-  padding-top: clamp(64px, 8vw, 108px);
-  padding-bottom: clamp(52px, 6.5vw, 84px);
+  padding-top: clamp(72px, 9vw, 132px);
+  padding-bottom: clamp(60px, 7.5vw, 104px);
 }
 
 .enkel-eyebrow {
-  margin: 0 0 18px;
-  color: #777777;
-  font-size: 0.78rem;
+  margin: 0 0 clamp(20px, 2.2vw, 28px);
+  color: #8b8880;
+  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 .enkel-hero h1 {
-  max-width: 900px;
-  font-size: clamp(2.6rem, 6.2vw, 4.5rem);
+  max-width: 19ch;
+  font-size: clamp(3rem, 7.4vw, 5.5rem);
   font-weight: 650;
-  letter-spacing: 0;
-  line-height: 1.02;
+  letter-spacing: -0.015em;
+  line-height: 0.99;
   text-wrap: balance;
 }
 
 .enkel-lead {
-  max-width: 660px;
-  margin: 24px 0 0;
+  max-width: 38ch;
+  margin: clamp(24px, 2.6vw, 34px) 0 0;
   color: var(--enkel-muted);
-  font-size: clamp(1.05rem, 1.5vw, 1.22rem);
-  line-height: 1.55;
+  font-size: clamp(1.18rem, 1.85vw, 1.5rem);
+  line-height: 1.45;
   text-wrap: pretty;
 }
 
-/* Seksjonshoder */
+/* Seksjonsoverskrift — brukes bare der innholdet er en ny idé, aldri for å
+   gjenta heroen. */
 
-.enkel-section-head {
-  max-width: 760px;
-}
-
-.enkel-section-head h2 {
-  font-size: clamp(1.95rem, 4.2vw, 3rem);
+.enkel-section-title {
+  max-width: 16ch;
+  margin: 0 0 clamp(30px, 3.6vw, 48px);
+  font-size: clamp(2.2rem, 4.6vw, 3.5rem);
   font-weight: 650;
-  letter-spacing: 0;
-  line-height: 1.06;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
   text-wrap: balance;
 }
 
-.enkel-section-head p {
-  margin: 18px 0 0;
+/* Stille sluttlinje under et rutenett — bærer et forbehold, ikke en seksjon. */
+
+.enkel-aside {
+  margin: clamp(30px, 3.4vw, 44px) 0 0;
   color: var(--enkel-muted);
-  font-size: 1.05rem;
-  line-height: 1.6;
+  font-size: clamp(1.02rem, 1.3vw, 1.15rem);
+  line-height: 1.5;
+}
+
+.enkel-aside a {
+  color: var(--enkel-blue);
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+/* Tonede flater — sidenes signatur, hentet fra .scope-panel på /enkel. */
+
+.enkel-panel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 2.2vw, 28px);
+}
+
+.enkel-panel,
+.enkel-step {
+  --panel-accent: #064dff;
+  --panel-tint: #dde6ff;
+  --panel-line: #c3d3ff;
+  min-width: 0;
+  border: 1px solid var(--panel-line);
+  border-radius: clamp(20px, 2.2vw, 28px);
+  background: var(--panel-tint);
+  color: #171715;
+  padding: clamp(26px, 3vw, 44px);
+  box-shadow: 0 18px 44px rgba(23, 23, 21, 0.08), 0 2px 8px rgba(23, 23, 21, 0.04);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.enkel-panel:hover,
+.enkel-step:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 62px rgba(23, 23, 21, 0.12), 0 3px 10px rgba(23, 23, 21, 0.05);
+}
+
+.enkel-panel--red,
+.enkel-step--red {
+  --panel-accent: #b02f27;
+  --panel-tint: #fbdfdb;
+  --panel-line: #f2c4bd;
+}
+
+.enkel-panel--green,
+.enkel-step--green {
+  --panel-accent: #006f45;
+  --panel-tint: #d6efe2;
+  --panel-line: #b6ddc9;
+}
+
+.enkel-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(16px, 2.4vw, 32px);
+  min-height: clamp(205px, 21vw, 255px);
+}
+
+.enkel-panel-copy {
+  min-width: 0;
+}
+
+.enkel-panel-title,
+.enkel-step-title {
+  margin: 0;
+  color: var(--panel-accent);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.96;
+}
+
+.enkel-panel-title {
+  font-size: clamp(2.1rem, 3.9vw, 3.25rem);
+}
+
+.enkel-panel-text,
+.enkel-step-text {
+  max-width: 26ch;
+  margin: clamp(12px, 1.5vw, 18px) 0 0;
+  color: var(--enkel-body);
+  font-size: clamp(1.02rem, 1.25vw, 1.14rem);
+  font-weight: 500;
+  line-height: 1.5;
   text-wrap: pretty;
 }
 
-/* Kort */
+.enkel-panel-art {
+  width: clamp(92px, 12.5vw, 170px);
+  flex: 0 0 auto;
+}
 
-.enkel-card-grid {
+.enkel-panel-art svg,
+.enkel-step-art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 10px 18px rgba(23, 23, 21, 0.12));
+}
+
+.enkel-panel-art .art-accent,
+.enkel-step-art .art-accent {
+  fill: var(--panel-accent);
+}
+
+.enkel-panel-art .art-accent-line,
+.enkel-step-art .art-accent-line {
+  stroke: var(--panel-accent);
+}
+
+/* Stegflater — nummerering er fortjent her, fordi rekkefølgen betyr noe. */
+
+.enkel-step-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
-  margin-top: clamp(32px, 4vw, 50px);
-}
-
-.enkel-card-grid.is-three {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2.2vw, 28px);
 }
 
-.enkel-card {
-  --enkel-accent: #064dff;
+.enkel-step-head {
   display: flex;
-  min-width: 0;
-  flex-direction: column;
-  border: 1px solid var(--enkel-border);
-  border-radius: 18px;
-  background: #ffffff;
-  padding: clamp(22px, 2.4vw, 30px);
-  box-shadow: 0 10px 28px rgba(17, 17, 17, 0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
 }
 
-.enkel-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 18px 40px rgba(17, 17, 17, 0.09);
-}
-
-.enkel-card--red { --enkel-accent: #d8332f; }
-.enkel-card--green { --enkel-accent: #00874f; }
-/* Nyansene er valgt for minst 4,5:1 mot hvit tekst i tallmerket. */
-.enkel-card--gold { --enkel-accent: #8a6500; }
-
-.enkel-card-num {
+.enkel-step-num {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  align-self: flex-start;
-  min-width: 44px;
-  height: 26px;
+  min-width: 50px;
+  height: 30px;
   border-radius: 999px;
-  background: var(--enkel-accent);
+  background: var(--panel-accent);
   color: #ffffff;
-  padding: 0 11px;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+  padding: 0 13px;
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.14em;
   line-height: 1;
 }
 
-.enkel-card h3 {
-  margin: clamp(20px, 2.2vw, 28px) 0 0;
-  font-size: clamp(1.3rem, 1.8vw, 1.55rem);
-  font-weight: 650;
-  line-height: 1.15;
+.enkel-step-art {
+  width: clamp(74px, 8vw, 104px);
+  flex: 0 0 auto;
 }
 
-.enkel-card p {
-  margin: 10px 0 0;
-  color: var(--enkel-body);
-  font-size: 1rem;
-  line-height: 1.55;
-  text-wrap: pretty;
-}
-
-/* Punktliste med haker */
-
-.enkel-checklist {
-  display: grid;
-  gap: 14px;
-  margin: clamp(30px, 3.6vw, 44px) 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.enkel-checklist li {
-  display: grid;
-  grid-template-columns: 24px minmax(0, 1fr);
-  align-items: start;
-  gap: 12px;
-  color: #2c2a26;
-  font-size: 1.05rem;
-  font-weight: 500;
-  line-height: 1.55;
-}
-
-.enkel-check {
-  width: 24px;
-  height: 24px;
-  margin-top: 2px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: #00a86b;
-}
-
-.enkel-check svg {
-  width: 13px;
-  height: 13px;
-  fill: none;
-  stroke: #ffffff;
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* Notat-/kontaktflate nederst i en seksjon */
-
-.enkel-note {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 24px;
-  margin-top: clamp(28px, 3.4vw, 42px);
-  border: 1px solid var(--enkel-border);
-  border-radius: 18px;
-  background: #ffffff;
-  padding: clamp(22px, 2.4vw, 28px);
-}
-
-.enkel-note h3 {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 650;
-}
-
-.enkel-note p {
-  margin: 8px 0 0;
-  max-width: 620px;
-  color: var(--enkel-body);
-  font-size: 1rem;
-  line-height: 1.55;
+.enkel-step-title {
+  margin-top: clamp(22px, 2.4vw, 32px);
+  font-size: clamp(1.6rem, 2.5vw, 2.1rem);
 }
 
 /* Teamet */
@@ -16724,18 +16740,32 @@ body.is-demo-session {
 .enkel-team-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-  margin-top: clamp(32px, 4vw, 50px);
+  gap: clamp(18px, 2.2vw, 28px);
 }
 
 .enkel-person {
+  --panel-accent: #064dff;
+  --panel-tint: #dde6ff;
+  --panel-line: #c3d3ff;
   min-width: 0;
   overflow: hidden;
-  border: 1px solid var(--enkel-border);
-  border-radius: 20px;
-  background: #ffffff;
-  box-shadow: 0 10px 28px rgba(17, 17, 17, 0.05);
-  scroll-margin-top: 104px;
+  border: 1px solid var(--panel-line);
+  border-radius: clamp(20px, 2.2vw, 28px);
+  background: var(--panel-tint);
+  box-shadow: 0 18px 44px rgba(23, 23, 21, 0.08), 0 2px 8px rgba(23, 23, 21, 0.04);
+  scroll-margin-top: 108px;
+}
+
+.enkel-person--red {
+  --panel-accent: #b02f27;
+  --panel-tint: #fbdfdb;
+  --panel-line: #f2c4bd;
+}
+
+.enkel-person--green {
+  --panel-accent: #006f45;
+  --panel-tint: #d6efe2;
+  --panel-line: #b6ddc9;
 }
 
 .enkel-person img {
@@ -16744,37 +16774,41 @@ body.is-demo-session {
   /* height: auto må stå her — width/height-attributtene på <img> blir
      presentasjonshint, og da ville aspect-ratio blitt ignorert. */
   height: auto;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: center top;
   background: var(--enkel-paper);
 }
 
 .enkel-person-copy {
-  padding: clamp(20px, 2.2vw, 26px);
+  padding: clamp(22px, 2.4vw, 30px);
 }
 
 .enkel-person-role {
   margin: 0;
-  color: var(--enkel-blue);
-  font-size: 0.74rem;
+  color: var(--panel-accent);
+  font-size: 0.76rem;
   font-weight: 800;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.enkel-person h3 {
-  margin: 12px 0 0;
-  font-size: 1.35rem;
-  font-weight: 650;
-  line-height: 1.15;
+.enkel-person h2 {
+  margin: clamp(12px, 1.4vw, 16px) 0 0;
+  color: var(--panel-accent);
+  font-size: clamp(1.5rem, 2.1vw, 1.95rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  text-wrap: balance;
 }
 
-.enkel-person p {
-  margin: 10px 0 0;
+.enkel-person p:not(.enkel-person-role) {
+  margin: clamp(10px, 1.2vw, 14px) 0 0;
   color: var(--enkel-body);
-  font-size: 0.98rem;
-  line-height: 1.55;
+  font-size: 1.02rem;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 /* Ofte stilte spørsmål */
@@ -16782,34 +16816,34 @@ body.is-demo-session {
 .enkel-faq-list {
   display: grid;
   gap: 12px;
-  max-width: 880px;
-  margin-top: clamp(30px, 3.6vw, 46px);
+  max-width: 900px;
 }
 
 .enkel-faq-list details {
   border: 1px solid var(--enkel-border);
-  border-radius: 14px;
+  border-radius: 16px;
   background: #ffffff;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  transition: border-color 0.18s ease, background 0.18s ease;
 }
 
 .enkel-faq-list details[open] {
   border-color: #c3d3ff;
-  box-shadow: 0 14px 32px rgba(6, 77, 255, 0.07);
+  background: #f3f7ff;
 }
 
 .enkel-faq-list summary {
-  min-height: 64px;
+  min-height: 76px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  padding: 16px 20px;
+  gap: 24px;
+  padding: 18px clamp(20px, 2.2vw, 28px);
   cursor: pointer;
   color: var(--enkel-ink);
-  font-size: 1.05rem;
+  font-size: clamp(1.12rem, 1.55vw, 1.38rem);
   font-weight: 650;
-  line-height: 1.35;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
   list-style: none;
 }
 
@@ -16819,8 +16853,8 @@ body.is-demo-session {
 
 .enkel-faq-icon {
   position: relative;
-  width: 26px;
-  height: 26px;
+  width: 30px;
+  height: 30px;
   flex: 0 0 auto;
   border: 1px solid #d9d6cf;
   border-radius: 50%;
@@ -16833,7 +16867,7 @@ body.is-demo-session {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 11px;
+  width: 13px;
   height: 1.5px;
   border-radius: 999px;
   background: #111111;
@@ -16846,22 +16880,24 @@ body.is-demo-session {
 }
 
 .enkel-faq-list details[open] .enkel-faq-icon {
-  border-color: #c3d3ff;
+  border-color: var(--enkel-blue);
+  background: var(--enkel-blue);
+}
+
+.enkel-faq-list details[open] .enkel-faq-icon::before,
+.enkel-faq-list details[open] .enkel-faq-icon::after {
+  background: #ffffff;
 }
 
 .enkel-faq-list details[open] .enkel-faq-icon::after {
   transform: translate(-50%, -50%);
 }
 
-.enkel-faq-list + .enkel-note {
-  max-width: 880px;
-}
-
 .enkel-faq-list details > p {
   margin: 0;
-  padding: 0 56px 20px 20px;
+  padding: 0 clamp(60px, 7vw, 84px) 24px clamp(20px, 2.2vw, 28px);
   color: var(--enkel-body);
-  font-size: 1rem;
+  font-size: clamp(1.02rem, 1.25vw, 1.14rem);
   line-height: 1.6;
   text-wrap: pretty;
 }
@@ -16869,7 +16905,7 @@ body.is-demo-session {
 /* Avsluttende invitasjon — samme flate som testkunde-seksjonen på /enkel */
 
 .enkel-cta {
-  padding: clamp(60px, 7.5vw, 100px) 32px;
+  padding: clamp(64px, 8vw, 108px) 32px;
   color: #ffffff;
   background: linear-gradient(145deg, #0a2c7b, #071e55);
 }
@@ -16886,30 +16922,30 @@ body.is-demo-session {
 
 .enkel-cta-copy {
   min-width: 0;
-  max-width: 640px;
+  max-width: 620px;
 }
 
 .enkel-cta h2 {
   margin: 0;
   color: #ffffff;
-  font-size: clamp(2rem, 4.4vw, 3.2rem);
+  font-size: clamp(2.3rem, 5vw, 3.9rem);
   font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.05;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
   text-wrap: balance;
 }
 
 .enkel-cta p {
-  margin: 16px 0 0;
+  margin: 18px 0 0;
   color: rgba(255, 255, 255, 0.82);
-  font-size: 1.05rem;
-  line-height: 1.6;
+  font-size: clamp(1.05rem, 1.35vw, 1.18rem);
+  line-height: 1.55;
   text-wrap: pretty;
 }
 
 .enkel-cta-button {
   min-width: 220px;
-  min-height: 58px;
+  min-height: 60px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -16917,8 +16953,8 @@ body.is-demo-session {
   border-radius: 999px;
   background: #f6f4ee;
   color: #071e55;
-  padding: 0 28px;
-  font-size: 0.88rem;
+  padding: 0 30px;
+  font-size: 0.9rem;
   font-weight: 800;
   letter-spacing: 0.05em;
   line-height: 1;
@@ -16934,17 +16970,22 @@ body.is-demo-session {
 }
 
 /* Landingssiden får luft over footeren fra .footer-arrow. Undersidene dropper
-   pilen, så de trenger toppluften direkte på footeren. */
+   pilen, så de trenger toppluften direkte på footeren — og footeren legges på
+   samme 1120px-rutenett som seksjonene, slik at venstrekanten stemmer. */
 
 .enkel-page + .site-footer {
   padding-top: clamp(46px, 5.5vw, 72px);
+}
+
+.enkel-page + .site-footer .footer-inner {
+  max-width: 1120px;
 }
 
 /* Integrasjonskatalogen arver de rolige basisstilene (ingen .compact-wrapper).
    Statusmerket flyttes opp i hjørnet så «Koble til»-lenken får plass under. */
 
 .enkel-page .integration-buttons {
-  margin-top: clamp(30px, 3.6vw, 44px);
+  margin-top: 0;
 }
 
 .enkel-page .accounting-grid {
@@ -16954,6 +16995,7 @@ body.is-demo-session {
 .enkel-page .accounting-card {
   height: 148px;
   min-height: 148px;
+  border-radius: 16px;
   padding: 36px 20px 34px;
 }
 
@@ -16979,36 +17021,58 @@ body.is-demo-session {
   background: #003ad1;
 }
 
-@media (max-width: 1040px) {
-  .enkel-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 1000px) {
+  .enkel-step-grid { grid-template-columns: 1fr; }
+  .enkel-step { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 28px; }
+  .enkel-step-head { display: contents; }
+  /* Nummerpillen er et rutenettbarn her og må ikke strekkes til full bredde. */
+  .enkel-step-num { justify-self: start; }
+  .enkel-step-art { grid-column: 2; grid-row: 1 / 4; width: clamp(88px, 14vw, 120px); }
+  .enkel-step-title { margin-top: clamp(16px, 2vw, 22px); }
 }
 
 @media (max-width: 900px) {
-  .enkel-card-grid.is-three,
-  .enkel-team-grid { grid-template-columns: 1fr; }
-  .enkel-team-grid { max-width: 460px; }
+  .enkel-team-grid { grid-template-columns: 1fr; max-width: 460px; }
   .enkel-cta-inner { align-items: flex-start; flex-direction: column; }
+}
+
+@media (max-width: 760px) {
+  .enkel-panel-grid { grid-template-columns: 1fr; }
+
+  /* Tegningen over teksten, så tittelen får hele bredden og slipper å brekke
+     midt i et ord. */
+  .enkel-panel {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: start;
+    min-height: 0;
+  }
+
+  .enkel-panel-art { grid-row: 1; width: clamp(96px, 26vw, 124px); }
+  .enkel-panel-copy { grid-row: 2; }
+  .enkel-panel-title { font-size: clamp(2.1rem, 9vw, 2.9rem); }
+  .enkel-panel-text { max-width: none; }
 }
 
 @media (max-width: 720px) {
   .enkel-section,
   .enkel-cta { padding-left: 20px; padding-right: 20px; }
-  .enkel-card-grid { grid-template-columns: 1fr; }
+  .enkel-hero h1 { max-width: none; }
+  .enkel-lead { max-width: none; }
   .enkel-page .integration-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .enkel-page .integration-buttons button { width: 100%; padding-inline: 12px; }
-  .enkel-note { align-items: flex-start; flex-direction: column; }
-  .enkel-cta-button { width: 100%; }
-  .enkel-faq-list summary { font-size: 1rem; padding: 15px 16px; }
-  .enkel-faq-list details > p { padding: 0 46px 18px 16px; }
+  .enkel-faq-list summary { padding: 16px 18px; gap: 16px; }
+  .enkel-faq-list details > p { padding: 0 52px 20px 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .enkel-card,
+  .enkel-panel,
+  .enkel-step,
   .enkel-cta-button {
     transition: none;
   }
 
-  .enkel-card:hover,
+  .enkel-panel:hover,
+  .enkel-step:hover,
   .enkel-cta-button:hover {
     transform: none;
   }

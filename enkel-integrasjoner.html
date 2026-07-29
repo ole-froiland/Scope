@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Integrasjoner | Scope</title>
-    <meta name="description" content="Scope kobler sammen tall fra regnskap, kasse, bemanning og andre sentrale systemer.">
+    <meta name="description" content="Scope kobles til regnskap, kasse og bemanning. Dere beholder systemene dere har.">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='20' r='18' fill='%23064dff'/%3E%3Ccircle cx='44' cy='40' r='18' fill='%23ff3c38'/%3E%3Ccircle cx='20' cy='40' r='18' fill='%2300bd7b'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260729-enkel-subpages-v1">
+    <link rel="stylesheet" href="styles.css?v=20260729-enkel-panels-v2">
   </head>
   <body>
     <header class="site-header">
@@ -56,17 +56,12 @@
         <div class="enkel-inner">
           <p class="enkel-eyebrow">Integrasjoner</p>
           <h1 id="integrasjoner-title">Systemene du allerede bruker</h1>
-          <p class="enkel-lead">Scope kobler sammen tall fra regnskap, kasse, bemanning og andre sentrale systemer. Dere beholder systemene dere har – vi henter tallene.</p>
+          <p class="enkel-lead">Scope kobles til regnskap, kasse og bemanning. Dere beholder systemene dere har.</p>
         </div>
       </section>
 
-      <section class="enkel-section" aria-labelledby="integrasjoner-katalog-title">
+      <section class="enkel-section" aria-label="Systemer Scope kobles til">
         <div class="enkel-inner">
-          <div class="enkel-section-head">
-            <h2 id="integrasjoner-katalog-title">Velg kategori</h2>
-            <p>Her ser du hvilke systemer Scope kobles til i dag, og hva som er på vei.</p>
-          </div>
-
           <div class="integration-buttons" aria-label="Integrasjonskategorier">
             <button class="is-active" type="button" data-category="accounting">Regnskap</button>
             <button type="button" data-color="blue" data-category="pos">Kasse</button>
@@ -118,38 +113,62 @@
             <article class="accounting-card"><img class="logo-et" src="assets/logos/et-gradient.svg" alt="ET"><span class="coming-soon">Kommer snart</span></article>
           </div>
 
-          <div class="enkel-note">
-            <div>
-              <h3>Savner du systemet ditt?</h3>
-              <p>Si fra hvilket system dere bruker, så ser vi på hva som skal til for å koble det til.</p>
-            </div>
-            <a class="button primary" href="mailto:post@scopeanalytics.no?subject=Integrasjon%20jeg%20savner">Send oss en e-post</a>
-          </div>
+          <p class="enkel-aside">Savner du systemet ditt? <a href="mailto:post@scopeanalytics.no?subject=Integrasjon%20jeg%20savner">Si fra, så ser vi på det.</a></p>
         </div>
       </section>
 
       <section class="enkel-section is-paper" aria-labelledby="integrasjoner-slik-title">
         <div class="enkel-inner">
-          <div class="enkel-section-head">
-            <h2 id="integrasjoner-slik-title">Slik kobler vi oss på</h2>
-            <p>Oppsettet gjøres én gang. Etterpå går alt av seg selv.</p>
-          </div>
+          <h2 class="enkel-section-title" id="integrasjoner-slik-title">Slik kobler vi oss på</h2>
 
-          <div class="enkel-card-grid is-three">
-            <article class="enkel-card">
-              <span class="enkel-card-num">01</span>
-              <h3>Du gir tilgang</h3>
-              <p>Du godkjenner tilkoblingen til systemene dere allerede bruker. Ingen installasjon.</p>
+          <div class="enkel-step-grid">
+            <article class="enkel-step">
+              <div class="enkel-step-head">
+                <span class="enkel-step-num">01</span>
+                <span class="enkel-step-art" aria-hidden="true">
+                  <svg viewBox="0 0 240 240" fill="none" stroke="#171715" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                    <circle cx="78" cy="120" r="48" fill="#ffffff"></circle>
+                    <circle class="art-accent" cx="78" cy="120" r="18"></circle>
+                    <path d="M126 120h92"></path>
+                    <path d="M188 120v34M156 120v24"></path>
+                  </svg>
+                </span>
+              </div>
+              <h3 class="enkel-step-title">Du gir tilgang</h3>
+              <p class="enkel-step-text">Du godkjenner tilkoblingen. Ingen installasjon.</p>
             </article>
-            <article class="enkel-card enkel-card--green">
-              <span class="enkel-card-num">02</span>
-              <h3>Vi henter tallene</h3>
-              <p>Scope henter data hver natt, så tallene i oversikten alltid er ferske.</p>
+
+            <article class="enkel-step enkel-step--green">
+              <div class="enkel-step-head">
+                <span class="enkel-step-num">02</span>
+                <span class="enkel-step-art" aria-hidden="true">
+                  <svg viewBox="0 0 240 240" fill="none" stroke="#171715" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                    <path d="M62 26v58M120 26v58M178 26v58"></path>
+                    <path d="m40 66 22 22 22-22M98 66l22 22 22-22M156 66l22 22 22-22"></path>
+                    <path d="M24 118h192v66a20 20 0 0 1-20 20H44a20 20 0 0 1-20-20Z" fill="#ffffff"></path>
+                    <path class="art-accent" d="M48 144h144v40a10 10 0 0 1-10 10H58a10 10 0 0 1-10-10Z"></path>
+                  </svg>
+                </span>
+              </div>
+              <h3 class="enkel-step-title">Vi henter tallene</h3>
+              <p class="enkel-step-text">Hver natt, så oversikten er fersk når du åpner den.</p>
             </article>
-            <article class="enkel-card enkel-card--red">
-              <span class="enkel-card-num">03</span>
-              <h3>Du får rådene</h3>
-              <p>Tallene settes sammen på tvers av systemene og blir til konkrete neste steg.</p>
+
+            <article class="enkel-step enkel-step--red">
+              <div class="enkel-step-head">
+                <span class="enkel-step-num">03</span>
+                <span class="enkel-step-art" aria-hidden="true">
+                  <svg viewBox="0 0 240 240" fill="none" stroke="#171715" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                    <path d="M120 22V6M188 46 200 34M52 46 40 34M204 104h16M20 104h16"></path>
+                    <circle cx="120" cy="106" r="54" fill="#ffffff"></circle>
+                    <path d="M104 136c0-18 7-27 16-27s16 9 16 27" stroke-width="6"></path>
+                    <rect class="art-accent" x="94" y="164" width="52" height="18" rx="9"></rect>
+                    <rect class="art-accent" x="102" y="192" width="36" height="18" rx="9"></rect>
+                  </svg>
+                </span>
+              </div>
+              <h3 class="enkel-step-title">Du får rådene</h3>
+              <p class="enkel-step-text">Tallene settes sammen og blir til ett tydelig neste steg.</p>
             </article>
           </div>
         </div>
@@ -159,7 +178,7 @@
         <div class="enkel-cta-inner">
           <div class="enkel-cta-copy">
             <h2 id="integrasjoner-testkunder-title">Vi søker testkunder</h2>
-            <p>Prøv Scope gratis med dine egne tall. Tett oppfølging underveis, ingen forpliktelse eller binding.</p>
+            <p>Prøv Scope gratis med dine egne tall. Ingen binding.</p>
           </div>
           <a class="enkel-cta-button" href="/enkel#onboarding">Bli testkunde</a>
         </div>

@@ -21,7 +21,7 @@ test("alle sider laster den kompakte mobilfooteren uten cachekollisjon", async (
 
   assert.match(landing, /landing\.css\?v=20260716-contact-data-v1/);
   for (const [index, page] of pages.entries()) {
-    assert.match(page, /styles\.css\?v=20260729-enkel-subpages-v1/, sharedPages[index]);
+    assert.match(page, /styles\.css\?v=20260729-enkel-panels-v2/, sharedPages[index]);
   }
 
   for (const css of [landingCss, sharedCss]) {
