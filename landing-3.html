@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="landing-3.css?v=20260718-phone-footer-v1">
+    <link rel="stylesheet" href="landing-3.css?v=20260718-dashboard-v2">
     <link rel="stylesheet" href="cookie-consent.css?v=20260718-v1">
   </head>
   <body>
@@ -70,7 +70,7 @@
 
       <section class="landing-section how-section" id="slik-virker-scope">
         <div class="section-shell">
-          <h2>Slik virker Scope</h2>
+          <h2>Slik virker det</h2>
 
           <div class="scope-carousel" data-scope-carousel>
             <ol class="scope-carousel-track" data-carousel-track tabindex="0" aria-label="Fem steg som forklarer hvordan Scope virker">
@@ -116,6 +116,7 @@
 
       <section class="landing-section demo-section" id="demo">
         <div class="section-shell demo-layout">
+          <h2 class="demo-heading">Scope, din AI-rådgiver</h2>
           <div class="demo-phones" aria-label="Tre eksempelvisninger fra Scope-appen">
             <article class="phone-mockup" aria-label="Scope Råd">
               <div class="phone-screen">
@@ -173,12 +174,37 @@
                     <h3>Nåtid</h3>
                   </div>
                   <div class="now-metric-grid">
-                    <article class="now-revenue-card"><span>Omsetning i dag</span><strong>84 600 kr</strong><b>↑ 12 %</b></article>
-                    <article><span>Gjester i dag</span><strong>46</strong><small>8 nye bookinger</small></article>
-                    <article><span>Gjester akkurat nå</span><strong>24</strong><small>Rolig flyt</small></article>
-                    <article><span>Ansatte på jobb</span><strong>5</strong><small>2 kommer før kveldstoppen</small></article>
+                    <article class="now-revenue-card">
+                      <span class="metric-label">Omsetning i dag</span>
+                      <strong class="metric-value">84 600 kr</strong>
+                      <span class="metric-status is-positive">↑ 12 % mot normalt</span>
+                      <small class="metric-details">128 ordre · 661 kr i snitt</small>
+                    </article>
+                    <article>
+                      <span class="metric-label">Gjester</span>
+                      <strong class="metric-value">24 nå</strong>
+                      <span class="metric-status">46 totalt i dag</span>
+                      <small class="metric-details">8 nye bookinger</small>
+                    </article>
+                    <article>
+                      <span class="metric-label">Bemanning</span>
+                      <strong class="metric-value">5 ansatte</strong>
+                      <span class="metric-status is-positive">God bemanning</span>
+                      <small class="metric-details">4,8 gjester per ansatt · 38 timer</small>
+                    </article>
+                    <article>
+                      <span class="metric-label">Personalkost</span>
+                      <strong class="metric-value">23 %</strong>
+                      <span class="metric-status is-positive">Innenfor mål</span>
+                      <small class="metric-details">18 900 kr · mål under 25 %</small>
+                    </article>
                   </div>
-                  <p class="ai-summary"><span aria-hidden="true">🤖</span><strong>AI-sammendrag:</strong> Dagen går bra – omsetningen er 12 % over normalen. Bookingen er jevn, men vær obs på kveldstoppen.</p>
+                  <div class="weather-card">
+                    <img src="assets/icons/heroicons-cloud.svg" alt="">
+                    <span><strong>12 °C · Overskyet</strong><small>Lav terrasseaktivitet forventet</small></span>
+                    <b>Oslo</b>
+                  </div>
+                  <p class="ai-summary"><strong>AI-sammendrag:</strong> Dagen går bra. Omsetningen er 12 % over normalen, bemanningen er god og personalkosten er innenfor mål.</p>
                   <p class="phone-updated"><span aria-hidden="true"></span>Sist oppdatert 14:32</p>
                 </div>
                 <nav class="phone-nav" aria-label="Navigasjon i Scope">
@@ -201,22 +227,26 @@
                     <span>Din restaurant</span>
                     <h3>Bistro Nord</h3>
                   </div>
+                  <div class="user-top-actions">
+                    <a href="/landing-3-test-gratis.html">Legg til restaurant</a>
+                    <a href="/landing-3-book-et-mote.html">Gi tilbakemelding</a>
+                  </div>
                   <div class="savings-card">
                     <span>Total sparing</span>
                     <strong>82 400 kr</strong>
                     <small>Siden du startet med Scope</small>
                   </div>
                   <div class="savings-breakdown">
-                    <div><span class="savings-icon" aria-hidden="true">−</span><span>Systemkostnad</span><strong>9 900 kr</strong></div>
-                    <div><span class="savings-icon" aria-hidden="true">+</span><span>Netto besparelse</span><strong>72 500 kr</strong></div>
+                    <div><span>Systemkostnad</span><strong>−9 900 kr</strong></div>
+                    <div class="net-gain"><span>Netto økonomisk gevinst</span><strong>72 500 kr</strong></div>
                   </div>
                   <div class="connected-systems">
-                    <div class="phone-subheading"><strong>Tilkoblede systemer</strong><span>4 aktive</span></div>
-                    <div><span class="system-logo">L</span><span>Lightspeed</span><b>✓</b></div>
-                    <div><span class="system-logo">T</span><span>Tripletex</span><b>✓</b></div>
-                    <div><span class="system-logo">Ta</span><span>Tamigo</span><b>✓</b></div>
-                    <div><span class="system-logo">Y</span><span>Yr</span><b>✓</b></div>
+                    <div class="phone-subheading"><strong>Dine integrasjoner</strong><span>3 aktive</span></div>
+                    <div><span class="integration-logo"><img src="assets/logos/lightspeed.svg" alt=""></span><span>Lightspeed</span><b class="integration-status">Aktiv</b></div>
+                    <div><span class="integration-logo"><img src="assets/logos/tripletex.svg" alt=""></span><span>Tripletex</span><b class="integration-status">Aktiv</b></div>
+                    <div><span class="integration-logo"><img src="assets/logos/tamigo.svg" alt=""></span><span>Tamigo</span><b class="integration-status">Aktiv</b></div>
                   </div>
+                  <a class="add-integration" href="/landing-3-integrasjoner.html">Legg til integrasjon</a>
                   <a class="cancel-link" href="/landing-3-logg-inn.html">Si opp abonnement</a>
                 </div>
                 <nav class="phone-nav" aria-label="Navigasjon i Scope">
