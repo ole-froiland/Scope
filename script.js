@@ -1211,7 +1211,7 @@ if (reminderAddButton && reminderList) {
 const revealPrefersReducedMotion = typeof window.matchMedia === "function"
   && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const revealTargets = document.querySelectorAll(".section-heading, .accounting-card, .tester-block, .footer-cta");
+const revealTargets = document.querySelectorAll(".section-heading, .accounting-card, .tester-block, .footer-cta, .enkel-section-head, .enkel-card, .enkel-person, .enkel-cta-copy");
 
 if (!revealPrefersReducedMotion && "IntersectionObserver" in window && revealTargets.length > 0) {
   const revealObserver = new IntersectionObserver((entries, observer) => {
