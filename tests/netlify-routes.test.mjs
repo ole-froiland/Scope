@@ -9,6 +9,7 @@ test("Netlify serverer de samme korte landingsadressene som devserveren", () => 
     ["clean", "landing-3.html"],
     ["leken", "landing.html"],
     ["enkel", "landing-enkel.html"],
+    ["vakt", "landing-vakt.html"],
   ];
 
   routes.forEach(([route, file]) => {

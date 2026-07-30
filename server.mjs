@@ -686,7 +686,7 @@ export async function createScopeServer(options = {}) {
         return sendPublicFile(response, "/intro.html");
       }
 
-      if (["/clean/", "/leken/", "/enkel/"].includes(pathname) && request.method === "GET") {
+      if (["/clean/", "/leken/", "/enkel/", "/vakt/"].includes(pathname) && request.method === "GET") {
         return redirect(response, pathname.slice(0, -1));
       }
 
@@ -694,6 +694,7 @@ export async function createScopeServer(options = {}) {
         "/clean": "/landing-3.html",
         "/leken": "/landing.html",
         "/enkel": "/landing-enkel.html",
+        "/vakt": "/landing-vakt.html",
       };
       if (landingPageAliases[pathname] && request.method === "GET") {
         return sendPublicFile(response, landingPageAliases[pathname]);

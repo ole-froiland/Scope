@@ -233,6 +233,21 @@ h1 {
   color: #064dff;
 }
 
+.page-option-vakt .option-preview {
+  border-radius: 10px;
+  background: #0c2b30;
+  box-shadow: 10px 10px 0 #d7ded3;
+}
+
+.page-option-vakt .option-preview i {
+  font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  font-style: normal;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #f4b12a;
+}
+
 @media (max-width: 760px) {
   .page-shell {
     width: min(100% - 28px, 540px);

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Integrasjoner | Scope</title>
+    <meta name="description" content="Scope kobles til kassa, regnskapet, bemanningen og leveringstjenestene du allerede bruker.">
+    <meta name="theme-color" content="#0c2b30">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='20' r='18' fill='%23064dff'/%3E%3Ccircle cx='44' cy='40' r='18' fill='%23ff3c38'/%3E%3Ccircle cx='20' cy='40' r='18' fill='%2300bd7b'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400..700;1,400..700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Instrument+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="vakt.css?v=20260730-v1">
+  </head>
+  <body>
+    <a class="visually-hidden" href="#hovedinnhold">Hopp til innholdet</a>
+
+    <header class="vakt-header">
+      <a class="vakt-brand" href="/vakt" aria-label="Scope, til forsiden">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        scope
+      </a>
+
+      <nav class="vakt-nav" aria-label="Hovedmeny">
+        <a href="/vakt-kunder.html">Kunder</a>
+        <a href="/vakt-integrasjoner.html" aria-current="page">Integrasjoner</a>
+        <a href="/vakt-om-oss.html">Om oss</a>
+        <a href="/vakt-faq.html">Spørsmål</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="header-login" href="/vakt-logg-inn.html">Logg inn</a>
+        <a class="button button-amber" href="/vakt-kontakt.html">Bli testkunde</a>
+        <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-label="Åpne meny" aria-controls="vakt-meny">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="mobile-panel" id="vakt-meny" data-menu-panel data-open="false">
+      <a href="/vakt-kunder.html">Kunder</a>
+      <a href="/vakt-integrasjoner.html">Integrasjoner</a>
+      <a href="/vakt-om-oss.html">Om oss</a>
+      <a href="/vakt-faq.html">Spørsmål</a>
+      <a href="/vakt-logg-inn.html">Logg inn</a>
+      <a class="button button-amber" href="/vakt-kontakt.html">Bli testkunde</a>
+    </div>
+
+    <main id="hovedinnhold">
+      <section class="page-hero">
+        <div class="page-hero-inner">
+          <p class="stamp">Datakildene</p>
+          <h1>Vi kobler oss på det du allerede bruker.</h1>
+        <p class="lead">Ingen ny kasse, ingen ny vaktplan, ingen ny regnskapsfører. Scope leser fra systemene som allerede står der.</p>
+        </div>
+      </section>
+
+      <section class="page-body">
+        <div class="page-body-inner">
+          <div class="filter-row" role="group" aria-label="Filtrer systemer">
+            <button class="filter-chip" type="button" data-filter="all" aria-pressed="true">Alle</button>
+            <button class="filter-chip" type="button" data-filter="pos" aria-pressed="false">Kasse</button>
+            <button class="filter-chip" type="button" data-filter="accounting" aria-pressed="false">Regnskap</button>
+            <button class="filter-chip" type="button" data-filter="staff" aria-pressed="false">Bemanning</button>
+            <button class="filter-chip" type="button" data-filter="other" aria-pressed="false">Levering og annet</button>
+          </div>
+
+          <p class="mono" style="color: rgba(236,239,233,.5); margin-bottom: 22px;" data-filter-count aria-live="polite">32 systemer</p>
+
+          <div class="system-grid">
+            <div class="system" data-category="pos"><img src="assets/logos/lightspeed.svg" alt="Lightspeed" loading="lazy"></div>
+            <div class="system" data-category="pos"><img src="assets/logos/munu.svg" alt="Munu" loading="lazy"></div>
+            <div class="system" data-category="pos"><img src="assets/logos/favrit.svg" alt="Favrit" loading="lazy"></div>
+            <div class="system" data-category="pos"><img src="assets/logos/restolution-new.png" alt="Restolution" loading="lazy"></div>
+            <div class="system" data-category="pos"><img src="assets/logos/pckasse.svg" alt="PCKasse" loading="lazy"></div>
+            <div class="system" data-category="pos"><img src="assets/logos/orderx.png" alt="Order X" loading="lazy"></div>
+            <div class="system" data-category="pos"><img src="assets/logos/baemingo.svg" alt="Baemingo" loading="lazy"></div>
+            <div class="system" data-category="pos"><img src="assets/logos/amendo.png" alt="Amendo" loading="lazy"></div>
+            <div class="system" data-category="accounting"><img src="assets/logos/tripletex.svg" alt="Tripletex" loading="lazy"></div>
+            <div class="system" data-category="accounting"><img src="assets/logos/poweroffice-farge01.png" alt="PowerOffice Go" loading="lazy"></div>
+            <div class="system" data-category="accounting"><img src="assets/logos/fiken-icon.svg" alt="Fiken" loading="lazy"></div>
+            <div class="system" data-category="accounting"><img src="assets/logos/xledger.svg" alt="Xledger" loading="lazy"></div>
+            <div class="system" data-category="accounting"><img src="assets/logos/dynamics365.svg" alt="Microsoft Dynamics 365" loading="lazy"></div>
+            <div class="system" data-category="accounting"><img src="assets/logos/business-nxt.webp" alt="Business NXT by Visma" loading="lazy"></div>
+            <div class="system" data-category="accounting"><img src="assets/logos/conta.svg" alt="Conta" loading="lazy"></div>
+            <div class="system" data-category="staff"><img src="assets/logos/tamigo.svg" alt="Tamigo" loading="lazy"></div>
+            <div class="system" data-category="staff"><img src="assets/logos/planday.png" alt="Planday" loading="lazy"></div>
+            <div class="system" data-category="staff"><img src="assets/logos/quinyx.svg" alt="Quinyx" loading="lazy"></div>
+            <div class="system" data-category="staff"><img src="assets/logos/tidsbanken.webp" alt="Tidsbanken" loading="lazy"></div>
+            <div class="system" data-category="staff"><img src="assets/logos/timegrip.png" alt="Timegrip" loading="lazy"></div>
+            <div class="system" data-category="staff"><img src="assets/logos/easyatwork.png" alt="Easy@work" loading="lazy"></div>
+            <div class="system" data-category="staff"><img src="assets/logos/connecteam.webp" alt="Connecteam" loading="lazy"></div>
+            <div class="system" data-category="staff"><img src="assets/logos/samesystem.webp" alt="SameSystem" loading="lazy"></div>
+            <div class="system" data-category="staff"><img src="assets/logos/staff-logo.svg" alt="Staff" loading="lazy"></div>
+            <div class="system" data-category="other"><img src="assets/logos/foodora.png" alt="Foodora" loading="lazy"></div>
+            <div class="system" data-category="other"><img src="assets/logos/wolt.jpg" alt="Wolt" loading="lazy"></div>
+            <div class="system" data-category="other"><img src="assets/logos/vipps.png" alt="Vipps" loading="lazy"></div>
+            <div class="system" data-category="other"><img src="assets/logos/stockifi.jpg" alt="Stockifi" loading="lazy"></div>
+            <div class="system" data-category="other"><img src="assets/logos/gastroplanner.jpeg" alt="GastroPlanner" loading="lazy"></div>
+            <div class="system" data-category="other"><img src="assets/logos/google-reviews.png" alt="Google Reviews" loading="lazy"></div>
+            <div class="system" data-category="other"><img src="assets/logos/tripadvisor.png" alt="Tripadvisor" loading="lazy"></div>
+            <div class="system" data-category="other"><img src="assets/logos/et-gradient.svg" alt="ET" loading="lazy"></div>
+          </div>
+
+          <div class="prose" style="margin-top: clamp(48px, 6vw, 76px);">
+            <h2>Slik kobles det opp</h2>
+            <p>Du gir Scope lesetilgang til systemene du allerede bruker. Vi setter opp forbindelsene sammen med deg — det tar som regel en halvtime på et videomøte, og du trenger ikke gjøre noe teknisk selv.</p>
+            <p>Tilgangen er begrenset til lesing. Scope endrer aldri noe i kassa, regnskapet eller vaktplanen din. Nøklene ligger på serveren vår, aldri i nettleseren.</p>
+
+            <h2>Mangler systemet ditt?</h2>
+            <p>Lista over er de vi har jobbet med så langt. Bruker du noe annet, si fra — de fleste systemer i denne bransjen har et API, og en ny tilkobling tar oss vanligvis et par uker.</p>
+            <p><a class="text-link" href="mailto:post@scopeanalytics.no?subject=Integrasjon">Si fra hva du bruker <span aria-hidden="true">→</span></a></p>
+
+            <h2>Hva vi henter</h2>
+            <ul>
+              <li><strong>Fra kassa:</strong> salg per time, produkt, bord og betalingsmåte</li>
+              <li><strong>Fra regnskapet:</strong> varekost, lønn, leverandørbilag og bankposter</li>
+              <li><strong>Fra bemanningen:</strong> vaktplan, stemplede timer og lønnskostnad</li>
+              <li><strong>Fra levering:</strong> ordrer, provisjon og leveringstid</li>
+              <li><strong>Fra Yr:</strong> temperatur og nedbør for adressen din</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <footer class="vakt-footer">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div>
+            <h2>Driver du et sted som burde tjene mer?</h2>
+            <p>Vi tar en prat på tjue minutter og ser på tallene sammen med deg.</p>
+          </div>
+          <a class="button button-amber" href="/vakt-kontakt.html">Bli testkunde</a>
+        </div>
+
+        <div class="footer-cols">
+          <div class="footer-about">
+            <a class="vakt-brand" href="/vakt" aria-label="Scope">
+              <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+              scope
+            </a>
+            <p>Programvare og rådgivning til serveringsbransjen. Vi leser tallene om natta, så du slipper.</p>
+          </div>
+
+          <div>
+            <h3>Siden</h3>
+            <nav aria-label="Sidelenker">
+              <a href="/vakt">Forsiden</a>
+              <a href="/vakt-kunder.html">Kunder</a>
+              <a href="/vakt-integrasjoner.html">Integrasjoner</a>
+              <a href="/vakt-om-oss.html">Om oss</a>
+              <a href="/vakt-faq.html">Spørsmål</a>
+            </nav>
+          </div>
+
+          <div>
+            <h3>Kontakt</h3>
+            <nav aria-label="Kontakt og vilkår">
+              <a href="/vakt-kontakt.html">Bli testkunde</a>
+              <a href="mailto:post@scopeanalytics.no">post@scopeanalytics.no</a>
+              <a href="/vakt-personvern.html">Personvern</a>
+              <a href="/vakt-vilkar.html">Vilkår</a>
+              <a href="/vakt-logg-inn.html">Logg inn</a>
+            </nav>
+          </div>
+        </div>
+
+        <p class="footer-legal">
+          <span>SCOPE ANALYTICS AS · 936 372 295 · post@scopeanalytics.no</span>
+          <span>Døgnet, time for time</span>
+        </p>
+      </div>
+    </footer>
+
+    <script src="vakt.js?v=20260730-v1" defer></script>
+  </body>
+</html>

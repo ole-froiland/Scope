@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bli testkunde | Scope</title>
+    <meta name="description" content="Prøv Scope gratis med dine egne tall. Ingen binding, ingen oppsigelsestid.">
+    <meta name="theme-color" content="#0c2b30">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='20' r='18' fill='%23064dff'/%3E%3Ccircle cx='44' cy='40' r='18' fill='%23ff3c38'/%3E%3Ccircle cx='20' cy='40' r='18' fill='%2300bd7b'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:ital,wght@0,400..700;1,400..700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=Instrument+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="vakt.css?v=20260730-v1">
+  </head>
+  <body>
+    <a class="visually-hidden" href="#hovedinnhold">Hopp til innholdet</a>
+
+    <header class="vakt-header">
+      <a class="vakt-brand" href="/vakt" aria-label="Scope, til forsiden">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        scope
+      </a>
+
+      <nav class="vakt-nav" aria-label="Hovedmeny">
+        <a href="/vakt-kunder.html">Kunder</a>
+        <a href="/vakt-integrasjoner.html">Integrasjoner</a>
+        <a href="/vakt-om-oss.html">Om oss</a>
+        <a href="/vakt-faq.html">Spørsmål</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="header-login" href="/vakt-logg-inn.html">Logg inn</a>
+        <a class="button button-amber" href="/vakt-kontakt.html">Bli testkunde</a>
+        <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-label="Åpne meny" aria-controls="vakt-meny">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="mobile-panel" id="vakt-meny" data-menu-panel data-open="false">
+      <a href="/vakt-kunder.html">Kunder</a>
+      <a href="/vakt-integrasjoner.html">Integrasjoner</a>
+      <a href="/vakt-om-oss.html">Om oss</a>
+      <a href="/vakt-faq.html">Spørsmål</a>
+      <a href="/vakt-logg-inn.html">Logg inn</a>
+      <a class="button button-amber" href="/vakt-kontakt.html">Bli testkunde</a>
+    </div>
+
+    <main id="hovedinnhold">
+      <section class="page-hero">
+        <div class="page-hero-inner">
+          <p class="stamp">Bli testkunde</p>
+          <h1>Prøv Scope på dine egne tall.</h1>
+        <p class="lead">Gratis mens vi bygger. Ingen binding. Fyll ut det du har, så tar vi kontakt innen én virkedag.</p>
+        </div>
+      </section>
+
+      <section class="page-body">
+        <div class="page-body-inner">
+          <div class="contact-grid">
+            <form data-contact-form novalidate>
+              <label class="form-field">
+                <span>Navn</span>
+                <input type="text" name="name" autocomplete="name" required>
+              </label>
+
+              <label class="form-field">
+                <span>Stedet ditt</span>
+                <input type="text" name="company" autocomplete="organization" placeholder="Restaurant, bar eller kafé" required>
+              </label>
+
+              <label class="form-field">
+                <span>E-post</span>
+                <input type="email" name="email" autocomplete="email" required>
+              </label>
+
+              <label class="form-field">
+                <span>Telefon <em>valgfritt</em></span>
+                <input type="tel" name="phone" autocomplete="tel">
+              </label>
+
+              <label class="form-field">
+                <span>Hva vil du vite?</span>
+                <textarea name="message" placeholder="For eksempel hvilke systemer dere bruker, eller hva du lurer mest på."></textarea>
+              </label>
+
+              <button class="button button-amber" type="submit">Send</button>
+
+              <p class="form-status" data-form-status hidden role="status"></p>
+
+              <p class="form-note">Vi bruker opplysningene til å svare deg og forberede oppsettet. Ikke noe annet. Du kan be oss slette dem når som helst.</p>
+            </form>
+
+            <aside class="contact-aside">
+              <h2 style="font-size: 1.5rem; margin-bottom: 18px;">Eller ta direkte kontakt</h2>
+              <dl>
+                <div>
+                  <dt>E-post</dt>
+                  <dd><a href="mailto:post@scopeanalytics.no">post@scopeanalytics.no</a></dd>
+                </div>
+                <div>
+                  <dt>Selskap</dt>
+                  <dd>Scope Analytics AS</dd>
+                </div>
+                <div>
+                  <dt>Organisasjonsnummer</dt>
+                  <dd>936 372 295</dd>
+                </div>
+                <div>
+                  <dt>Svartid</dt>
+                  <dd>Én virkedag, som regel raskere</dd>
+                </div>
+              </dl>
+
+              <div class="human-check" style="margin-top: 30px;">
+                <h3>Hva skjer etterpå?</h3>
+                <p>En av oss tre ringer eller skriver, og vi tar tjue minutter på video. Der ser vi på hvilke systemer du har, og om Scope faktisk har noe å tilby deg ennå. Får du nei, sier vi det.</p>
+              </div>
+            </aside>
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <footer class="vakt-footer">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div>
+            <h2>Driver du et sted som burde tjene mer?</h2>
+            <p>Vi tar en prat på tjue minutter og ser på tallene sammen med deg.</p>
+          </div>
+          <a class="button button-amber" href="/vakt-kontakt.html">Bli testkunde</a>
+        </div>
+
+        <div class="footer-cols">
+          <div class="footer-about">
+            <a class="vakt-brand" href="/vakt" aria-label="Scope">
+              <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+              scope
+            </a>
+            <p>Programvare og rådgivning til serveringsbransjen. Vi leser tallene om natta, så du slipper.</p>
+          </div>
+
+          <div>
+            <h3>Siden</h3>
+            <nav aria-label="Sidelenker">
+              <a href="/vakt">Forsiden</a>
+              <a href="/vakt-kunder.html">Kunder</a>
+              <a href="/vakt-integrasjoner.html">Integrasjoner</a>
+              <a href="/vakt-om-oss.html">Om oss</a>
+              <a href="/vakt-faq.html">Spørsmål</a>
+            </nav>
+          </div>
+
+          <div>
+            <h3>Kontakt</h3>
+            <nav aria-label="Kontakt og vilkår">
+              <a href="/vakt-kontakt.html">Bli testkunde</a>
+              <a href="mailto:post@scopeanalytics.no">post@scopeanalytics.no</a>
+              <a href="/vakt-personvern.html">Personvern</a>
+              <a href="/vakt-vilkar.html">Vilkår</a>
+              <a href="/vakt-logg-inn.html">Logg inn</a>
+            </nav>
+          </div>
+        </div>
+
+        <p class="footer-legal">
+          <span>SCOPE ANALYTICS AS · 936 372 295 · post@scopeanalytics.no</span>
+          <span>Døgnet, time for time</span>
+        </p>
+      </div>
+    </footer>
+
+    <script src="vakt.js?v=20260730-v1" defer></script>
+  </body>
+</html>
