@@ -37,12 +37,12 @@ test("/vakt er rutet både i devserveren og på Netlify", async () => {
   assert.match(redirects, /^\/vakt\s+\/landing-vakt\.html\s+200!$/m);
   assert.match(redirects, /^\/vakt\/\s+\/landing-vakt\.html\s+200!$/m);
   assert.match(server, /"\/vakt": "\/landing-vakt\.html"/);
-  assert.match(server, /"\/clean\/", "\/leken\/", "\/enkel\/", "\/vakt\/"/);
+  assert.match(server, /"\/clean\/", "\/leken\/", "\/enkel\/", "\/vakt\/", "\/brutal\/"/);
 });
 
-test("velgersiden tilbyr Vakt som fjerde retning", () => {
+test("velgersiden beholder Vakt som fjerde retning", () => {
   [velger, index].forEach((html) => {
-    assert.match(html, /Fire designretninger/);
+    assert.match(html, /Seks designretninger/);
     assert.match(html, /class="page-option page-option-vakt" href="\/vakt"/);
     assert.match(html, /<strong>Vakt<\/strong>/);
   });
