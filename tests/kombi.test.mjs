@@ -73,6 +73,11 @@ test("Kombi er en selvstendig, responsiv og interaktiv landingsside", async () =
   assert.match(css, /\.hero-word\[data-word="kultur"\]\s*\{[^}]*color:\s*#a8c5a3/s);
   assert.match(css, /\.hero-word\[data-word="kaffe"\]\s*\{[^}]*color:\s*#d2a064/s);
   assert.match(css, /\.hero-actions \.button\s*\{[^}]*border-radius:\s*8px/s);
+  assert.match(css, /--cream:\s*#fff7e6/);
+  assert.match(css, /\.site-header\s*\{[^}]*background:\s*var\(--cream\)/s);
+  assert.match(css, /\.brand-link\s*\{[^}]*background:\s*var\(--cream\)/s);
+  assert.match(css, /\.simple-cookie-consent\[data-cookie-theme="playful"\]\s*\{[^}]*--cookie-background:\s*var\(--cream\)[^}]*box-shadow:\s*6px 6px 0 var\(--ink\)/s);
+  assert.match(css, /\.simple-cookie-primary\s*\{[^}]*color:\s*var\(--ink\)[^}]*background:\s*var\(--yellow\)/s);
   assert.match(css, /\.process\s*\{[^}]*box-shadow:\s*0 0 0 100vmax var\(--yellow\)/s);
   assert.match(css, /\.process ol\s*\{[^}]*display:\s*flex/s);
   assert.match(css, /\.process-card\s*\{[^}]*border-radius:\s*12px/s);

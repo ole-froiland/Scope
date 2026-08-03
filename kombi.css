@@ -3,6 +3,7 @@
   --ink: #123f2a;
   --ink-deep: #0a2d1d;
   --paper: #ffffff;
+  --cream: #fff7e6;
   --soft: #f4f7f2;
   --yellow: #f5bc3d;
   --yellow-soft: #fff3c6;
@@ -100,7 +101,7 @@ h2,
   gap: 34px;
   padding: 10px var(--gutter);
   border-bottom: 1px solid rgba(18, 63, 42, 0.08);
-  background: rgba(255, 255, 255, 0.97);
+  background: var(--cream);
   backdrop-filter: blur(14px);
   transition: transform 240ms ease;
   will-change: transform;
@@ -115,6 +116,10 @@ h2,
   display: inline-flex;
   overflow: hidden;
   background: #fff;
+}
+
+.brand-link {
+  background: var(--cream);
 }
 
 .brand-link {
@@ -242,6 +247,25 @@ input:focus-visible {
 
 .mobile-menu .button {
   margin-top: 18px;
+}
+
+.simple-cookie-consent[data-cookie-theme="playful"] {
+  --cookie-accent: var(--ink);
+  --cookie-background: var(--cream);
+  --cookie-border: var(--ink);
+  --cookie-ink: var(--ink);
+  border-radius: 12px;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.simple-cookie-consent[data-cookie-theme="playful"] .simple-cookie-actions button {
+  border-radius: 8px;
+}
+
+.simple-cookie-consent[data-cookie-theme="playful"] .simple-cookie-actions .simple-cookie-primary {
+  border-color: var(--ink);
+  color: var(--ink);
+  background: var(--yellow);
 }
 
 .eyebrow {
