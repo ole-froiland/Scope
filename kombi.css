@@ -183,6 +183,10 @@ h2,
   font-size: 0.78rem;
 }
 
+.header-cta {
+  border-radius: 8px;
+}
+
 .button-dark {
   color: #fff;
   background: var(--ink);
@@ -289,8 +293,8 @@ input:focus-visible {
   inset: 0;
   z-index: 1;
   background:
-    radial-gradient(circle at 50% 44%, rgba(10, 45, 29, 0.12), rgba(10, 45, 29, 0.64) 76%),
-    linear-gradient(180deg, rgba(8, 35, 23, 0.3), rgba(8, 35, 23, 0.58));
+    radial-gradient(circle at 50% 44%, rgba(10, 45, 29, 0.08), rgba(10, 45, 29, 0.58) 76%),
+    linear-gradient(180deg, rgba(8, 35, 23, 0.24), rgba(8, 35, 23, 0.52));
   content: "";
   pointer-events: none;
 }
@@ -329,7 +333,7 @@ input:focus-visible {
   font-family: "DM Sans", system-ui, sans-serif;
   font-size: clamp(4.4rem, 8.3vw, 8rem);
   font-weight: 650;
-  line-height: 0.87;
+  line-height: 0.95;
   letter-spacing: -0.065em;
   text-shadow: 0 4px 32px rgba(0, 0, 0, 0.34);
 }

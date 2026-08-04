@@ -73,6 +73,10 @@ test("Kombi er en selvstendig, responsiv og interaktiv landingsside", async () =
   assert.match(css, /\.hero-word\[data-word="kultur"\]\s*\{[^}]*color:\s*#a8c5a3/s);
   assert.match(css, /\.hero-word\[data-word="kaffe"\]\s*\{[^}]*color:\s*#d2a064/s);
   assert.match(css, /\.hero-actions \.button\s*\{[^}]*border-radius:\s*8px/s);
+  assert.match(css, /\.header-cta\s*\{[^}]*border-radius:\s*8px/s);
+  assert.match(css, /\.hero h1\s*\{[^}]*line-height:\s*0\.95/s);
+  assert.match(css, /radial-gradient\(circle at 50% 44%, rgba\(10, 45, 29, 0\.08\), rgba\(10, 45, 29, 0\.58\) 76%\)/);
+  assert.match(css, /linear-gradient\(180deg, rgba\(8, 35, 23, 0\.24\), rgba\(8, 35, 23, 0\.52\)\)/);
   assert.match(css, /--cream:\s*#fff7e6/);
   assert.match(css, /\.site-header\s*\{[^}]*background:\s*var\(--cream\)/s);
   assert.match(css, /\.brand-link\s*\{[^}]*background:\s*var\(--cream\)/s);
