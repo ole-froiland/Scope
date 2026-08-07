@@ -2,10 +2,11 @@ import assert from "node:assert/strict";
 import { readFile, stat } from "node:fs/promises";
 import test from "node:test";
 
-const [javascript, css, html] = await Promise.all([
+const [javascript, css, html, showcaseCss] = await Promise.all([
   readFile(new URL("../script.js", import.meta.url), "utf8"),
   readFile(new URL("../styles.css", import.meta.url), "utf8"),
   readFile(new URL("../landing-enkel.html", import.meta.url), "utf8"),
+  readFile(new URL("../enkel-showcase.css", import.meta.url), "utf8"),
 ]);
 
 const heroSetup = javascript.match(/if \(heroSection && heroVideo\) \{([\s\S]*?)\n\}/)?.[1] || "";
@@ -50,6 +51,17 @@ test("reserveflaten er en animert WebP, ikke et stillbilde med panorering", asyn
     stat(new URL("../assets/hero-restaurant.png", import.meta.url)),
   ]);
   assert.ok(webpSize < pngSize, `WebP ${webpSize} B er ikke mindre enn PNG ${pngSize} B`);
+});
+
+test("Enkel bruker ren hero-video og ren reserveflate", async () => {
+  assert.match(showcaseCss, /\.hero-section::before\s*\{[^}]*background-image:\s*url\("assets\/hero-restaurant\.png"\)/s);
+  assert.match(html, /<source src="assets\/hero-restaurant-clean\.mp4" type="video\/mp4">/);
+
+  const [{ size: videoSize }, { size: sourceSize }] = await Promise.all([
+    stat(new URL("../assets/hero-restaurant-clean.mp4", import.meta.url)),
+    stat(new URL("../assets/hero-restaurant.mp4", import.meta.url)),
+  ]);
+  assert.ok(videoSize > 0 && videoSize <= sourceSize, "Den rene videoen mangler eller er unødvendig stor");
 });
 
 test("redusert bevegelse bytter tilbake til stillbildet", () => {

@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Boldonse&amp;family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=20260729-enkel-panels-v2">
+    <link rel="stylesheet" href="enkel-showcase.css?v=20260806-v55">
   </head>
   <body>
     <div class="login-intro" aria-hidden="true">
@@ -32,7 +33,7 @@
       </div>
     </div>
 
-    <header class="site-header">
+    <header class="site-header" data-scroll-hide>
       <a class="brand" href="/enkel" aria-label="Scope hjem">
         <span class="brand-mark" aria-hidden="true">
           <span class="mark-circle mark-blue"></span>
@@ -92,7 +93,7 @@
     <main>
       <section class="slide hero-section" aria-labelledby="hero-title">
         <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1">
-          <source src="assets/hero-restaurant.mp4" type="video/mp4">
+          <source src="assets/hero-restaurant-clean.mp4" type="video/mp4">
         </video>
         <div class="section-inner hero-content">
           <h1 id="hero-title">
@@ -107,92 +108,154 @@
         </div>
       </section>
 
+      <section class="advice-showcase" aria-labelledby="advice-showcase-title">
+        <div class="advice-showcase-inner">
+          <div class="advice-window">
+            <div class="advice-browser-bar" aria-hidden="true">
+              <span class="advice-browser-controls">
+                <i class="is-red"></i>
+                <i class="is-yellow"></i>
+                <i class="is-green"></i>
+              </span>
+              <span class="advice-browser-address">scope.app / bistro-kvartalet</span>
+            </div>
+            <div class="advice-showcase-grid">
+              <div class="advice-preview-menu">
+                <div class="advice-preview-list" aria-label="Velg råd">
+                  <button class="advice-preview-item is-active" type="button" aria-pressed="true" aria-controls="advice-showcase-detail" data-showcase-advice data-advice-tone="blue" data-advice-label="Bemanning · torsdag" data-advice-title="To for mange på jobb mellom 14 og 16" data-advice-description="Salget faller 61 % etter lunsj, men bemanningen står stille. Flytt én vakt til fredag kveld." data-advice-source="Planday + PC-Kasse" data-advice-metric-label="Anslått effekt" data-advice-metric="≈ 4 800 kr / uke">
+                    <span class="advice-item-number">1</span>
+                    <span class="advice-item-copy"><span>Bemanning · torsdag</span><strong>To for mange på jobb mellom 14 og 16</strong></span>
+                    <img class="advice-item-arrow" src="assets/icons/heroicons-chevron-right.svg" alt="">
+                  </button>
+                  <button class="advice-preview-item" type="button" aria-pressed="false" aria-controls="advice-showcase-detail" data-showcase-advice data-advice-tone="orange" data-advice-label="Meny · siste 90 dager" data-advice-title="Burratasalaten spiser opp marginen" data-advice-description="Råvareprisen har økt uten at menyprisen har fulgt etter. En liten prisjustering gir rom for samme kvalitet og bedre margin." data-advice-source="Lightspeed + Tripletex" data-advice-metric-label="Anslått effekt" data-advice-metric="≈ 3 200 kr / måned">
+                    <span class="advice-item-number">2</span>
+                    <span class="advice-item-copy"><span>Meny · siste 90 dager</span><strong>Burratasalaten spiser opp marginen</strong></span>
+                    <img class="advice-item-arrow" src="assets/icons/heroicons-chevron-right.svg" alt="">
+                  </button>
+                  <button class="advice-preview-item" type="button" aria-pressed="false" aria-controls="advice-showcase-detail" data-showcase-advice data-advice-tone="green" data-advice-label="Omtaler · helgen" data-advice-title="Fire gjester nevnte lang ventetid — alle lørdag kveld" data-advice-description="Alle fire spiste 19:30–20:15, kvelden kjøkkenet gikk med én kokk mindre. Dette er bemanning, ikke service." data-advice-source="Google Reviews + Quinyx" data-advice-metric-label="Snitt siste 30 dager" data-advice-metric="3,9 av 5">
+                    <span class="advice-item-number">3</span>
+                    <span class="advice-item-copy"><span>Omtaler · helgen</span><strong>Fire gjester nevnte lang ventetid</strong></span>
+                    <img class="advice-item-arrow" src="assets/icons/heroicons-chevron-right.svg" alt="">
+                  </button>
+                  <button class="advice-preview-item" type="button" aria-pressed="false" aria-controls="advice-showcase-detail" data-showcase-advice data-advice-tone="red" data-advice-label="Innkjøp · denne måneden" data-advice-title="12 kg avokado går i søpla hver måned" data-advice-description="Bestillingene følger fjorårets volum, mens salget har falt. Reduser neste bestilling og behold en trygg buffer til helgen." data-advice-source="Tripletex + lager" data-advice-metric-label="Anslått effekt" data-advice-metric="≈ 2 600 kr / måned">
+                    <span class="advice-item-number">4</span>
+                    <span class="advice-item-copy"><span>Innkjøp · denne måneden</span><strong>12 kg avokado går i søpla hver måned</strong></span>
+                    <img class="advice-item-arrow" src="assets/icons/heroicons-chevron-right.svg" alt="">
+                  </button>
+                </div>
+              </div>
+
+              <article class="advice-preview-detail" id="advice-showcase-detail" data-advice-tone="blue">
+                <header class="advice-detail-head">
+                  <span class="advice-detail-label" data-advice-label>Bemanning · torsdag</span>
+                  <div class="advice-preview-badges">
+                    <span class="advice-quality-badge">Kvalitetssikret</span>
+                    <span class="advice-source-badge" data-advice-source>Planday + PC-Kasse</span>
+                  </div>
+                </header>
+                <div class="advice-preview-copy" aria-live="polite">
+                  <div class="advice-preview-copy-text">
+                    <h2 id="advice-showcase-title" data-advice-title>To for mange på jobb mellom 14 og 16</h2>
+                    <p data-advice-description>Salget faller 61 % etter lunsj, men bemanningen står stille. Flytt én vakt til fredag kveld.</p>
+                  </div>
+                  <div class="advice-detail-graphic" aria-hidden="true">
+                    <img class="advice-chart-icon" src="assets/icons/heroicons-chart-bar-square.svg" alt="">
+                  </div>
+                </div>
+                <div class="advice-preview-lower">
+                  <footer class="advice-preview-footer">
+                    <div>
+                      <span data-advice-metric-label>Anslått effekt</span>
+                      <strong data-advice-metric>≈ 4 800 kr / uke</strong>
+                    </div>
+                    <a class="advice-preview-cta" href="#onboarding" data-onboarding-open>
+                      <span>Sett i gang</span>
+                      <img src="assets/icons/heroicons-chevron-right.svg" alt="">
+                    </a>
+                  </footer>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="slide" id="how" aria-label="Slik virker Scope">
         <div class="section-inner">
-          <header class="scope-steps-head">
-            <h2 class="scope-steps-title">Slik virker Scope</h2>
-          </header>
-
           <div class="scope-stack" aria-label="Slik virker Scope steg for steg">
 
             <div class="scope-stack-step" id="hvordan-steg-1" data-scope-step>
-              <article class="scope-panel scope-panel--data is-active" data-scope-card>
-                <div class="scope-panel-copy">
-                  <span class="scope-panel-num">01</span>
-                  <h3 class="scope-panel-title">Hent data</h3>
-                  <p class="scope-panel-text">Vi kobler oss på kassa, regnskapet og bemanningen, og henter inn alle tallene dine – hver eneste natt.</p>
+              <article class="scope-panel scope-panel--connect is-active" data-scope-card tabindex="0">
+                <div class="scope-panel-media">
+                  <img src="assets/scope-how/hent-data.jpg?v=20260804-2" alt="Restaurantmedarbeider arbeider med et tilkoblet kassasystem på nettbrett" loading="lazy" decoding="async">
                 </div>
-                <div class="scope-panel-art" aria-hidden="true">
-                  <svg viewBox="0 0 240 240" fill="none" stroke="#171715" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
-                    <path d="M62 46C82 46 78 96 96 100M62 114H96M62 182C82 182 78 136 96 130"></path>
-                    <path d="M97 68V170a58 22 0 0 0 116 0V68Z" fill="#ffffff"></path>
-                    <path d="M97 116a58 22 0 0 0 116 0"></path>
-                    <ellipse class="art-accent" cx="155" cy="68" rx="58" ry="22"></ellipse>
-                    <rect x="18" y="30" width="44" height="32" rx="10" fill="#ffffff"></rect>
-                    <rect x="18" y="98" width="44" height="32" rx="10" fill="#ffffff"></rect>
-                    <rect x="18" y="166" width="44" height="32" rx="10" fill="#ffffff"></rect>
-                  </svg>
+                <div class="scope-panel-copy">
+                  <span class="scope-panel-num">1</span>
+                  <h3 class="scope-panel-title">Koble opp systemene dine</h3>
+                  <p class="scope-panel-text">Kasse, regnskap og bemanning kobles opp på under 30 minutter.</p>
                 </div>
               </article>
             </div>
 
             <div class="scope-stack-step" id="hvordan-steg-2" data-scope-step>
-              <article class="scope-panel scope-panel--analysis" data-scope-card>
-                <div class="scope-panel-copy">
-                  <span class="scope-panel-num">02</span>
-                  <h3 class="scope-panel-title">Analyser</h3>
-                  <p class="scope-panel-text">AI-en går gjennom alt, finner mønstre og avvik, og ser hva som faktisk påvirker resultatet ditt.</p>
+              <article class="scope-panel scope-panel--data" data-scope-card tabindex="0">
+                <div class="scope-panel-media">
+                  <img src="assets/kombi-server-plate.jpg" alt="Restaurantmedarbeider serverer en rett mens Scope samler inn driftsdata" loading="lazy" decoding="async">
                 </div>
-                <div class="scope-panel-art" aria-hidden="true">
-                  <svg viewBox="0 0 240 240" fill="none" stroke="#171715" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
-                    <rect x="30" y="126" width="42" height="72" rx="10" fill="#ffffff"></rect>
-                    <rect class="art-accent" x="88" y="82" width="42" height="116" rx="10"></rect>
-                    <rect x="146" y="150" width="42" height="48" rx="10" fill="#ffffff"></rect>
-                    <path d="M22 202h196"></path>
-                    <path d="M188 122 214 150" stroke-width="15"></path>
-                    <circle cx="156" cy="90" r="46" fill="#ffffff" fill-opacity="0.55"></circle>
-                  </svg>
+                <div class="scope-panel-copy">
+                  <span class="scope-panel-num">2</span>
+                  <h3 class="scope-panel-title">Hent data</h3>
+                  <p class="scope-panel-text">Scope henter inn tallene fra driften automatisk – hver eneste natt.</p>
                 </div>
               </article>
             </div>
 
             <div class="scope-stack-step" id="hvordan-steg-3" data-scope-step>
-              <article class="scope-panel scope-panel--review" data-scope-card>
-                <div class="scope-panel-copy">
-                  <span class="scope-panel-num">03</span>
-                  <h3 class="scope-panel-title">Kvalitetssikre</h3>
-                  <p class="scope-panel-text">Folk som kan analyse og kjenner bransjen går gjennom funnene før de blir til råd du kan stole på.</p>
+              <article class="scope-panel scope-panel--analysis" data-scope-card tabindex="0">
+                <div class="scope-panel-media">
+                  <img src="assets/scope-how/analyser.jpg?v=20260804-2" alt="Kokker arbeider sammen på et travelt restaurantkjøkken" loading="lazy" decoding="async">
                 </div>
-                <div class="scope-panel-art" aria-hidden="true">
-                  <svg viewBox="0 0 240 240" fill="none" stroke="#171715" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
-                    <path d="M120 26 196 56v56c0 46-38 72-76 88-38-16-76-42-76-88V56Z" fill="#ffffff"></path>
-                    <path class="art-accent-line" d="M88 116 110 140 154 88" stroke-width="13"></path>
-                    <path class="art-accent" d="M212 42 218 58 234 64 218 70 212 86 206 70 190 64 206 58Z"></path>
-                    <path class="art-accent" d="M28 150 33 163 46 168 33 173 28 186 23 173 10 168 23 163Z"></path>
-                  </svg>
+                <div class="scope-panel-copy">
+                  <span class="scope-panel-num">3</span>
+                  <h3 class="scope-panel-title">Analyser</h3>
+                  <p class="scope-panel-text">AI-en finner mønstre og avvik, og ser hva som faktisk påvirker resultatet ditt.</p>
                 </div>
               </article>
             </div>
 
             <div class="scope-stack-step" id="hvordan-steg-4" data-scope-step>
-              <article class="scope-panel scope-panel--advice" data-scope-card>
-                <div class="scope-panel-copy">
-                  <span class="scope-panel-num">04</span>
-                  <h3 class="scope-panel-title">Få råd</h3>
-                  <p class="scope-panel-text">Du får ett tydelig neste steg med forventet effekt – ikke en rapport du må tolke selv.</p>
+              <article class="scope-panel scope-panel--review" data-scope-card tabindex="0">
+                <div class="scope-panel-media">
+                  <img src="assets/scope-how/kvalitetssikre.jpg?v=20260804-2" alt="Et levende restaurantlokale med gjester og ansatte" loading="lazy" decoding="async">
                 </div>
-                <div class="scope-panel-art" aria-hidden="true">
-                  <svg viewBox="0 0 240 240" fill="none" stroke="#171715" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
-                    <path d="M120 22V6M188 46 200 34M52 46 40 34M204 104h16M20 104h16"></path>
-                    <circle cx="120" cy="106" r="54" fill="#ffffff"></circle>
-                    <path d="M104 136c0-18 7-27 16-27s16 9 16 27" stroke-width="6"></path>
-                    <rect class="art-accent" x="94" y="164" width="52" height="18" rx="9"></rect>
-                    <rect class="art-accent" x="102" y="192" width="36" height="18" rx="9"></rect>
-                  </svg>
+                <div class="scope-panel-copy">
+                  <span class="scope-panel-num">4</span>
+                  <h3 class="scope-panel-title">Kvalitetssikre</h3>
+                  <p class="scope-panel-text">Bransjefolk går gjennom funnene før de blir til råd du kan stole på.</p>
                 </div>
               </article>
             </div>
 
+            <div class="scope-stack-step" id="hvordan-steg-5" data-scope-step>
+              <article class="scope-panel scope-panel--advice" data-scope-card tabindex="0">
+                <div class="scope-panel-media">
+                  <img src="assets/scope-how/fa-rad.jpg" alt="Restaurantsjef mottar et tydelig råd mens teamet forbereder serveringen" loading="lazy" decoding="async">
+                </div>
+                <div class="scope-panel-copy">
+                  <span class="scope-panel-num">5</span>
+                  <h3 class="scope-panel-title">Få råd</h3>
+                  <p class="scope-panel-text">Du får ett tydelig neste steg med forventet effekt – ikke en rapport du må tolke selv.</p>
+                </div>
+              </article>
+            </div>
+
+          </div>
+          <div class="scope-carousel-progress" aria-label="Velg steg">
+            <button class="is-active" type="button" data-scope-dot="0" aria-label="Vis steg 1" aria-current="step"></button>
+            <button type="button" data-scope-dot="1" aria-label="Vis steg 2"></button>
+            <button type="button" data-scope-dot="2" aria-label="Vis steg 3"></button>
+            <button type="button" data-scope-dot="3" aria-label="Vis steg 4"></button>
+            <button type="button" data-scope-dot="4" aria-label="Vis steg 5"></button>
           </div>
         </div>
       </section>
@@ -200,27 +263,42 @@
       <section class="slide" id="demo" aria-labelledby="demo-title">
         <div class="section-inner">
           <div class="demo-stage">
-            <div class="demo-stage-head">
-              <h2 class="demo-stage-label" id="demo-title">Slik ser Scope ut på mobil</h2>
-              <a class="demo-launch-link" href="/enkel?demo=1" target="_blank" rel="noopener">
-                <span>Åpne demoen</span>
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M7 17 17 7"></path>
-                  <path d="M10 7h7v7"></path>
-                  <path d="M6 5h-1a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1"></path>
-                </svg>
-              </a>
-            </div>
+            <div class="demo-product-layout">
+              <div class="demo-stage-copy">
+                <span class="demo-stage-kicker">Scope for restauranter</span>
+                <h2 class="demo-stage-label" id="demo-title">Hele driften.<br>Ett klart neste steg.</h2>
+                <p>Anbefalinger som gir mer overskudd.<br>Innsikt som gjør hverdagen enklere.</p>
 
-            <div class="phone-tabs" role="tablist" aria-label="Velg skjerm" data-phone-tabs>
-              <button class="is-active" type="button" role="tab" aria-selected="true" aria-controls="phone-screen-advice" data-phone-tab="advice">Råd</button>
-              <button type="button" role="tab" aria-selected="false" aria-controls="phone-screen-home" data-phone-tab="home">Hjem</button>
-              <button type="button" role="tab" aria-selected="false" aria-controls="phone-screen-user" data-phone-tab="user">Bruker</button>
-            </div>
+                <div class="phone-tabs" role="tablist" aria-label="Velg skjerm" data-phone-tabs>
+                  <button class="is-active" type="button" role="tab" aria-selected="true" aria-controls="phone-screen-advice" data-phone-tab="advice">
+                    <img src="assets/icons/heroicons-light-bulb.svg" alt="">
+                    <span>Råd</span>
+                  </button>
+                  <button type="button" role="tab" aria-selected="false" aria-controls="phone-screen-home" data-phone-tab="home">
+                    <img src="assets/icons/heroicons-chart-bar-square.svg" alt="">
+                    <span>Hjem</span>
+                  </button>
+                  <button type="button" role="tab" aria-selected="false" aria-controls="phone-screen-user" data-phone-tab="user">
+                    <img src="assets/icons/heroicons-user-circle.svg" alt="">
+                    <span>Bruker</span>
+                  </button>
+                </div>
 
-            <div class="phone-track" data-phone-track>
+                <a class="demo-launch-link" href="/enkel?demo=1" target="_blank" rel="noopener">
+                  <span>Åpne demoen</span>
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 17 17 7"></path>
+                    <path d="M10 7h7v7"></path>
+                    <path d="M6 5h-1a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1"></path>
+                  </svg>
+                </a>
+              </div>
 
-              <article class="phone" id="phone-screen-advice" role="tabpanel" aria-label="Råd" data-phone="advice">
+              <div class="demo-product-visual">
+                <span class="demo-product-color" aria-hidden="true"></span>
+                <div class="phone-track" data-phone-track data-phone-showcase-all>
+
+              <article class="phone is-active" id="phone-screen-advice" role="tabpanel" aria-label="Råd" data-phone="advice">
                 <div class="phone-screen">
                   <div class="phone-notch" aria-hidden="true"></div>
                   <header class="phone-top">
@@ -341,6 +419,8 @@
                 </div>
               </article>
 
+                </div>
+              </div>
             </div>
 
             <p class="phone-swipe-hint" aria-hidden="true">Sveip for å se mer</p>
@@ -1297,6 +1377,7 @@
         <button type="button" data-cookie-consent="all">Godta alle</button>
       </div>
     </section>
-    <script src="script.js?v=20260724-how-stacked-panels-v1"></script>
+    <script src="enkel-showcase.js?v=20260804-v5"></script>
+    <script src="script.js?v=20260806-scroll-header-v8"></script>
   </body>
 </html>

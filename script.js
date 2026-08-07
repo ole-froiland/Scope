@@ -263,18 +263,86 @@ async function runTypewriter() {
 runTypewriter();
 
 const scopeStackCards = Array.from(document.querySelectorAll("[data-scope-card]"));
+const scopeStackTrack = document.querySelector("#how .scope-stack");
+const scopeStackProgressButtons = Array.from(document.querySelectorAll("[data-scope-dot]"));
 let scopeStackActiveIndex = -1;
 let scopeStackFrame = 0;
+let scopeStackAutoTimer = 0;
+let scopeStackScrollFrame = 0;
+let scopeStackProgrammaticScrollTimer = 0;
+let scopeStackAutoDirection = 1;
 
-function setScopeStackActiveIndex(activeIndex) {
+function setScopeStackActiveIndex(activeIndex, syncCarousel = true) {
   if (activeIndex === scopeStackActiveIndex || activeIndex < 0) {
     return;
   }
 
   scopeStackActiveIndex = activeIndex;
   scopeStackCards.forEach((card, index) => {
-    card.classList.toggle("is-active", index === activeIndex);
+    const isActive = index === activeIndex;
+    card.classList.toggle("is-active", isActive);
+    card.setAttribute("aria-current", isActive ? "step" : "false");
   });
+
+  scopeStackProgressButtons.forEach((button, index) => {
+    const isCurrent = index === activeIndex;
+    button.classList.toggle("is-active", isCurrent);
+    if (isCurrent) {
+      button.setAttribute("aria-current", "step");
+    } else {
+      button.removeAttribute("aria-current");
+    }
+  });
+
+  if (syncCarousel && scopeStackTrack && scopeStackTrack.scrollWidth > scopeStackTrack.clientWidth) {
+    const activeCard = scopeStackCards[activeIndex];
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const activeStep = activeCard.closest("[data-scope-step]");
+    const targetLeft = (activeStep?.offsetLeft || activeCard.offsetLeft)
+      - (scopeStackTrack.clientWidth - activeCard.clientWidth) / 2;
+
+    window.clearTimeout(scopeStackProgrammaticScrollTimer);
+    scopeStackTrack.dataset.programmaticScroll = "true";
+    scopeStackTrack.scrollTo({
+      left: Math.max(targetLeft, 0),
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
+    scopeStackProgrammaticScrollTimer = window.setTimeout(() => {
+      delete scopeStackTrack.dataset.programmaticScroll;
+    }, prefersReducedMotion ? 0 : 1800);
+  }
+}
+
+function usesStickyScopeStack() {
+  return scopeStackCards.length > 0
+    && window.getComputedStyle(scopeStackCards[0]).position === "sticky";
+}
+
+function restartScopeStackAutoPlay() {
+  window.clearInterval(scopeStackAutoTimer);
+
+  if (scopeStackCards.length < 2 || usesStickyScopeStack()
+    || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+
+  scopeStackAutoTimer = window.setInterval(() => {
+    if (document.hidden || usesStickyScopeStack()) {
+      return;
+    }
+
+    let nextIndex = Math.max(scopeStackActiveIndex, 0) + scopeStackAutoDirection;
+
+    if (nextIndex >= scopeStackCards.length) {
+      scopeStackAutoDirection = -1;
+      nextIndex = scopeStackCards.length - 2;
+    } else if (nextIndex < 0) {
+      scopeStackAutoDirection = 1;
+      nextIndex = 1;
+    }
+
+    setScopeStackActiveIndex(nextIndex);
+  }, 4200);
 }
 
 function clampScopeStackValue(value, minimum, maximum) {
@@ -294,6 +362,21 @@ function updateScopeStack() {
   const viewportCenter = window.innerHeight / 2;
   let activeIndex = 0;
   let closestDistance = Number.POSITIVE_INFINITY;
+
+  if (!usesStickyStack) {
+    scopeStackCards.forEach((card) => {
+      card.style.removeProperty("--stack-scale");
+      card.style.removeProperty("--stack-lift");
+      card.style.removeProperty("--stack-brightness");
+      card.classList.remove("is-covered");
+      card.inert = false;
+    });
+
+    if (scopeStackActiveIndex < 0) {
+      setScopeStackActiveIndex(0);
+    }
+    return;
+  }
 
   scopeStackCards.forEach((card, index) => {
     const cardRect = card.getBoundingClientRect();
@@ -350,7 +433,7 @@ const phoneTrack = document.querySelector("[data-phone-track]");
 const phoneTabButtons = Array.from(document.querySelectorAll("[data-phone-tab]"));
 const phoneCards = phoneTrack ? Array.from(phoneTrack.querySelectorAll("[data-phone]")) : [];
 
-if (phoneTrack && phoneCards.length > 0) {
+if (phoneTrack && phoneCards.length > 0 && !phoneTrack.hasAttribute("data-phone-showcase-all")) {
   let phoneFrame = 0;
 
   const setActivePhone = (index) => {
@@ -360,7 +443,13 @@ if (phoneTrack && phoneCards.length > 0) {
       button.classList.toggle("is-active", isActive);
       button.setAttribute("aria-selected", String(isActive));
     });
-    phoneCards.forEach((card, i) => card.classList.toggle("is-active", i === index));
+    phoneCards.forEach((card, i) => {
+      const isActive = i === index;
+
+      card.classList.toggle("is-active", isActive);
+      card.hidden = !isActive;
+      card.setAttribute("aria-hidden", String(!isActive));
+    });
   };
 
   const syncActivePhone = () => {
@@ -414,9 +503,62 @@ if (phoneTrack && phoneCards.length > 0) {
 }
 
 if (scopeStackCards.length > 0) {
+  scopeStackCards.forEach((card, index) => {
+    const activateCard = () => {
+      if (usesStickyScopeStack()) {
+        return;
+      }
+
+      setScopeStackActiveIndex(index);
+      restartScopeStackAutoPlay();
+    };
+
+    card.addEventListener("mouseenter", activateCard);
+    card.addEventListener("focusin", activateCard);
+    card.addEventListener("click", activateCard);
+  });
+
   updateScopeStack();
+  restartScopeStackAutoPlay();
+
+  scopeStackProgressButtons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      scopeStackAutoDirection = index >= scopeStackActiveIndex ? 1 : -1;
+      setScopeStackActiveIndex(index);
+      restartScopeStackAutoPlay();
+    });
+  });
+
+  scopeStackTrack?.addEventListener("scroll", () => {
+    if (scopeStackScrollFrame || scopeStackTrack.dataset.programmaticScroll === "true") {
+      return;
+    }
+
+    scopeStackScrollFrame = window.requestAnimationFrame(() => {
+      scopeStackScrollFrame = 0;
+      const trackCenter = scopeStackTrack.scrollLeft + scopeStackTrack.clientWidth / 2;
+      let closestIndex = 0;
+      let closestDistance = Number.POSITIVE_INFINITY;
+
+      scopeStackCards.forEach((card, index) => {
+        const step = card.closest("[data-scope-step]");
+        const cardCenter = (step?.offsetLeft || card.offsetLeft) + card.clientWidth / 2;
+        const distance = Math.abs(cardCenter - trackCenter);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      setScopeStackActiveIndex(closestIndex, false);
+    });
+  }, { passive: true });
   window.addEventListener("scroll", requestScopeStackUpdate, { passive: true });
-  window.addEventListener("resize", requestScopeStackUpdate);
+  window.addEventListener("resize", () => {
+    requestScopeStackUpdate();
+    restartScopeStackAutoPlay();
+  });
   window.addEventListener("load", requestScopeStackUpdate, { once: true });
 }
 
@@ -588,9 +730,40 @@ function setMobileMenuOpen(isOpen) {
   }
 
   siteHeader.classList.toggle("is-menu-open", isOpen);
+  if (isOpen) {
+    siteHeader.classList.remove("is-scroll-hidden");
+  }
   mobileMenu.classList.toggle("is-open", isOpen);
   mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
   mobileMenuButton.setAttribute("aria-label", isOpen ? "Lukk meny" : "Åpne meny");
+}
+
+if (siteHeader?.matches("[data-scroll-hide]")) {
+  let previousHeaderScrollY = Math.max(window.scrollY, 0);
+  let headerScrollFrame = 0;
+
+  const updateHeaderVisibility = () => {
+    headerScrollFrame = 0;
+    const currentScrollY = Math.max(window.scrollY, 0);
+    const scrollDelta = currentScrollY - previousHeaderScrollY;
+    const menuIsOpen = siteHeader.classList.contains("is-menu-open");
+
+    if (currentScrollY <= 48 || menuIsOpen || scrollDelta < -4) {
+      siteHeader.classList.remove("is-scroll-hidden");
+    } else if (currentScrollY > 120 && scrollDelta > 4) {
+      siteHeader.classList.add("is-scroll-hidden");
+    }
+
+    previousHeaderScrollY = currentScrollY;
+  };
+
+  window.addEventListener("scroll", () => {
+    if (headerScrollFrame) {
+      return;
+    }
+
+    headerScrollFrame = window.requestAnimationFrame(updateHeaderVisibility);
+  }, { passive: true });
 }
 
 if (siteHeader && mobileMenu && mobileMenuButton) {
