@@ -683,7 +683,7 @@ body {
 .advice-chart-line polyline {
   fill: none;
   stroke: #ff6b64;
-  stroke-width: 2.5;
+  stroke-width: 4;
   stroke-linecap: round;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
@@ -1285,6 +1285,12 @@ body {
 
   .advice-chart-ticks {
     font-size: 0.55rem;
+  }
+
+  /* Streken skalerer ikke med grafen, så den må tynnes ut for ikke å dominere
+     et kort som er under en tredel så bredt. */
+  .advice-chart-line polyline {
+    stroke-width: 3;
   }
 
   .advice-chart-ticks.is-y {
