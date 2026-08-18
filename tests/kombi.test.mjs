@@ -18,7 +18,7 @@ test("velgersidene tilbyr Kombi som sjette designretning", async () => {
   const pages = await Promise.all([read("landing-velger.html"), read("index.html")]);
 
   pages.forEach((html) => {
-    assert.match(html, /Seks designretninger/);
+    assert.match(html, /Sju designretninger/);
     assert.match(html, /class="page-option page-option-kombi" href="\/kombi"/);
     assert.match(html, /<span class="option-number">06<\/span>/);
     assert.match(html, /assets\/scope-kombi-logo\.png/);

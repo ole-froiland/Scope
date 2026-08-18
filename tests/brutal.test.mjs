@@ -18,7 +18,7 @@ test("velgersiden beholder Brutal som femte av seks designretninger", async () =
   const pages = await Promise.all([read("landing-velger.html"), read("index.html")]);
 
   pages.forEach((html) => {
-    assert.match(html, /Seks designretninger/);
+    assert.match(html, /Sju designretninger/);
     assert.match(html, /class="page-option page-option-brutal" href="\/brutal"/);
     assert.match(html, /<span class="option-number">05<\/span>/);
     assert.match(html, /<strong>Brutal<\/strong>/);

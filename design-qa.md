@@ -157,7 +157,6 @@ No actionable P0, P1 or P2 findings remain.
 - Swap in an official transparent Scope wordmark if one becomes available.
 
 final result: passed
-
 ### Iteration 25 — three phones on white passed
 
 - Source visual truth: the earlier three-phone product direction in `/var/folders/bx/x598dj4x52163bx0hbhdrw3c0000gn/T/codex-clipboard-11501f4a-f205-4fec-a826-1922ffce4953.png` (`2940 × 1912 px`) plus the user's explicit final constraint: only three phones, no decorative background.
@@ -592,5 +591,66 @@ final result: passed
 - Copy and content: no text, list item, CTA or link target was removed or rewritten.
 - Interaction and responsiveness: the CTA remains present, mobile has zero document-level horizontal overflow, and browser console warnings/errors are empty.
 - Automated verification: all 86 tests pass; JavaScript syntax and diff whitespace checks pass.
+
+final result: passed
+
+---
+
+# QA update — clean three-phone gallery (2026-08-11)
+
+**Comparison target**
+
+- Source visual truth: `/var/folders/bx/x598dj4x52163bx0hbhdrw3c0000gn/T/codex-clipboard-e2373d9f-0be4-41e5-83a1-95f099ec35a3.png`
+- Implementation screenshot: `/tmp/scope-three-phone-v63-desktop.png`
+- Responsive evidence: `/tmp/scope-three-phone-v63-mobile.png`
+- Route and state: `http://127.0.0.1:4173/enkel?qa=63b#demo`, default three-screen gallery
+- Desktop viewport: 1280 × 720 CSS px at 1× density
+- Source pixels: 1960 × 1269; implementation pixels: 1280 × 720
+- Normalization: compared the shared white three-phone product region rather than browser chrome. The implementation intentionally adds a compact heading and CTA above the three phones, per the current landing-page context.
+
+**Full-view comparison evidence**
+
+- The source and implementation both show three equal, aligned Scope phone screens on a clean white surface.
+- The implementation reduces device width, bezel weight, shadows, and surrounding visual noise while preserving the source content and screen order.
+- At 390 × 844, the gallery has no page-level horizontal overflow; each phone is 278 px wide and the next phone remains partially visible as a clear scrolling cue.
+
+**Focused region comparison evidence**
+
+- A separate close crop was not needed: phone typography, controls, cards, navigation, and brand marks are readable in the source and desktop capture and reuse the same production markup and assets.
+
+**Required fidelity surfaces**
+
+- Fonts and typography: the phone UI hierarchy and weights are preserved; the section heading remains consistent with the existing Enkel typography.
+- Spacing and layout rhythm: phones use equal widths, equal top alignment, consistent gaps, 5 px frames, 33 px inner radii, and restrained shadows.
+- Colors and visual tokens: white background, Scope blue highlights, neutral gray borders, and green positive values match the source and existing page tokens.
+- Image and asset fidelity: no source image assets were replaced; existing icon and logo assets are retained.
+- Copy and content: all three app screens retain their original labels, values, advice, and navigation.
+
+**Findings**
+
+- No actionable P0, P1, or P2 findings.
+
+**Open Questions**
+
+- None blocking. The smaller devices and compact intro are intentional departures requested to make the section cleaner and easier to scan.
+
+**Implementation Checklist**
+
+- [x] Three screens visible and equally weighted on desktop.
+- [x] Thin frames and restrained elevation.
+- [x] Mobile horizontal gallery with a visible next-card cue.
+- [x] No page-level horizontal overflow at 390 px.
+- [x] Existing phone content and Scope visual tokens preserved.
+
+**Comparison history**
+
+- Initial selected source: three large phones with no explanatory intro.
+- Earlier implementation: one-phone guided tour; rejected by the user in favor of the three-phone composition.
+- Current fix: restored all three phones, reduced their size and chrome, removed the interactive tab cards and colored container, and simplified the section background and CTA.
+- Post-fix evidence: desktop and mobile browser captures listed above. No P0/P1/P2 issues remain.
+
+**Follow-up Polish**
+
+- P3: the complete phone height still requires normal vertical page scrolling on short desktop viewports; shortening it further would make the app text less legible.
 
 final result: passed

@@ -23,7 +23,8 @@ function selectShowcaseAdvice(selectedItem) {
 
   adviceShowcaseTitle.textContent = selectedItem.dataset.adviceTitle;
   adviceShowcaseDescription.textContent = selectedItem.dataset.adviceDescription;
-  adviceShowcaseLabel.textContent = selectedItem.dataset.adviceLabel;
+  // Netflix-varianten viser ingen kategorietikett, så den er valgfri.
+  if (adviceShowcaseLabel) adviceShowcaseLabel.textContent = selectedItem.dataset.adviceLabel;
   adviceShowcaseSource.textContent = selectedItem.dataset.adviceSource;
   adviceShowcaseMetricLabel.textContent = selectedItem.dataset.adviceMetricLabel;
   adviceShowcaseMetric.textContent = selectedItem.dataset.adviceMetric;
@@ -67,7 +68,6 @@ if (
   adviceShowcaseItems.length > 0
   && adviceShowcaseTitle
   && adviceShowcaseDescription
-  && adviceShowcaseLabel
   && adviceShowcaseSource
   && adviceShowcaseMetricLabel
   && adviceShowcaseMetric

@@ -1420,6 +1420,65 @@ if (!revealPrefersReducedMotion && "IntersectionObserver" in window && revealTar
   });
 }
 
+const scopeLandingRevealGroups = [
+  {
+    trigger: document.querySelector(".advice-showcase"),
+    targets: document.querySelectorAll(".advice-window"),
+    staggerStep: 0,
+  },
+  {
+    trigger: document.querySelector("#how"),
+    targets: document.querySelectorAll("#how .scope-stack-step, #how .scope-carousel-progress"),
+    staggerStep: 90,
+  },
+  {
+    trigger: document.querySelector("#demo"),
+    targets: document.querySelectorAll("#demo .demo-stage-copy, #demo .phone"),
+    staggerStep: 110,
+  },
+  {
+    trigger: document.querySelector("#testkunder"),
+    targets: document.querySelectorAll("#testkunder .tester-copy, #testkunder .tester-detail"),
+    staggerStep: 110,
+  },
+].filter((group) => group.trigger && group.targets.length > 0);
+
+const scopeLandingRevealTargets = scopeLandingRevealGroups.flatMap((group) => [...group.targets]);
+
+if (!revealPrefersReducedMotion && "IntersectionObserver" in window && scopeLandingRevealTargets.length > 0) {
+  const scopeLandingRevealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) {
+        return;
+      }
+
+      const revealGroup = scopeLandingRevealGroups.find((group) => group.trigger === entry.target);
+
+      revealGroup?.targets.forEach((element) => {
+        const delay = parseFloat(element.style.getPropertyValue("--scope-reveal-delay")) || 0;
+
+        element.classList.add("is-scope-reveal-visible");
+        window.setTimeout(() => {
+          element.classList.remove("scope-scroll-reveal", "is-scope-reveal-visible");
+          element.style.removeProperty("--scope-reveal-delay");
+        }, delay + 1000);
+      });
+      observer.unobserve(entry.target);
+    });
+  }, {
+    rootMargin: "0px 0px -7% 0px",
+    threshold: 0.08,
+  });
+
+  scopeLandingRevealGroups.forEach((group) => {
+    group.targets.forEach((element, staggerIndex) => {
+      element.style.setProperty("--scope-reveal-delay", `${staggerIndex * group.staggerStep}ms`);
+      element.classList.add("scope-scroll-reveal");
+    });
+    scopeLandingRevealObserver.observe(group.trigger);
+  });
+}
+
 const heroSection = document.querySelector(".hero-section");
 const heroVideo = document.querySelector(".hero-video");
 

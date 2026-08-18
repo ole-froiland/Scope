@@ -23,7 +23,7 @@ test("Enkel viser en interaktiv rådsboks rett under heroen", () => {
   assert.match(html, /id="advice-showcase-detail"/);
   assert.match(html, /class="advice-preview-copy" aria-live="polite"/);
   assert.match(html, /class="advice-preview-cta" href="#onboarding" data-onboarding-open>[\s\S]*?<span>Sett i gang<\/span>/);
-  assert.match(html, /href="enkel-showcase\.css\?v=20260806-v55"/);
+  assert.match(html, /href="enkel-showcase\.css\?v=20260811-v68"/);
   assert.equal((showcase.match(/class="advice-item-number"/g) || []).length, 4);
   assert.equal((showcase.match(/data-advice-tone="(?:blue|orange|green|red)"/g) || []).length, 5);
   assert.doesNotMatch(showcase, /Se alle innsikter|advice-all-link/);
@@ -39,6 +39,12 @@ test("Enkel viser en interaktiv rådsboks rett under heroen", () => {
   assert.doesNotMatch(showcase, /class="advice-preview-visual"/);
   assert.match(html, /src="assets\/hero-restaurant-clean\.mp4"/);
   assert.match(html, /src="enkel-showcase\.js\?v=20260804-v5"/);
+});
+
+test("heroen bruker Vanguard med Athelas på den kursiverte kontrasten", () => {
+  assert.match(css, /\.hero-section \.hero-content h1\s*\{[^}]*font-family:\s*"Vanguard CF", Vanguard,/s);
+  assert.match(css, /\.hero-section \.hero-content h1 em\s*\{[^}]*font-family:\s*Athelas,/s);
+  assert.match(html, /<span>Vi kan <em>tall\.<\/em><\/span>/);
 });
 
 test("rådsboksen følger Enkel-stilen og stabler innholdet på små skjermer", () => {
@@ -90,6 +96,8 @@ test("rådsboksen følger Enkel-stilen og stabler innholdet på små skjermer", 
   assert.match(css, /\/\* Compact animated advice workspace \*\/[\s\S]*?\.advice-window\s*\{[^}]*border-radius:\s*24px 24px 0 0/s);
   assert.match(css, /\/\* Compact animated advice workspace \*\/[\s\S]*?height:\s*470px;[^}]*min-height:\s*470px/s);
   assert.match(css, /@keyframes advice-graphic-float/);
+  assert.match(css, /@keyframes advice-detail-enter\s*\{\s*from\s*\{\s*opacity:\s*0\.62;\s*\}\s*to\s*\{\s*opacity:\s*1;\s*\}\s*\}/s);
+  assert.match(css, /\.advice-detail-head,[\s\S]*?\.advice-preview-copy\s*\{[^}]*transition:\s*background-color 0\.28s ease/s);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.advice-detail-graphic \.advice-chart-icon,[\s\S]*?animation:\s*none/s);
 });
 
@@ -106,19 +114,42 @@ test("valg av råd oppdaterer detaljene og pressed-tilstanden", () => {
   assert.match(javascript, /adviceShowcaseMotionQuery\.matches/);
 });
 
-test("mobilpresentasjonen viser tre telefoner samtidig uten dekorativ bakgrunn", () => {
+test("produktvisningen viser tre rene og responsive mobilskjermer", () => {
   const demoStart = html.indexOf('<section class="slide" id="demo"');
   const demoEnd = html.indexOf('<div class="demo-legacy-mockup"', demoStart);
   const demo = html.slice(demoStart, demoEnd);
 
-  assert.match(demo, /data-phone-track data-phone-showcase-all/);
+  assert.match(demo, /data-phone-track data-phone-showcase-all aria-label="Tre skjermer fra Scope">/);
   assert.equal((demo.match(/data-phone-tab=/g) || []).length, 3);
   assert.equal((demo.match(/class="phone is-active"/g) || []).length, 1);
   assert.equal((demo.match(/data-phone="(?:advice|home|user)"/g) || []).length, 3);
-  assert.doesNotMatch(demo, /data-phone="(?:home|user)" hidden/);
+  assert.doesNotMatch(demo, /demo-launch-link|Åpne demoen/);
+  assert.doesNotMatch(demo, /data-phone="(?:home|user)"[^>]*hidden/);
+  assert.doesNotMatch(demo, /role="tabpanel"/);
   assert.match(mainJavascript, /!phoneTrack\.hasAttribute\("data-phone-showcase-all"\)/);
-  assert.match(css, /\/\* Three-phone mobile showcase \*\/[\s\S]*?\.demo-product-color\s*\{[^}]*display:\s*none/s);
-  assert.match(css, /\/\* Three-phone mobile showcase \*\/[\s\S]*?grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/s);
+  assert.doesNotMatch(mainJavascript, /setActivePhone\(0\)/);
+  assert.match(css, /\/\* Clean three-phone product gallery \*\/[\s\S]*?\.phone-tabs\s*\{[^}]*display:\s*none/s);
+  assert.match(css, /body:not\(\.is-demo-session\) #how\s*\{[^}]*border-bottom:\s*0/s);
+  assert.match(css, /body:not\(\.is-demo-session\) #how\s*\{[^}]*min-height:\s*0[^}]*padding-bottom:\s*clamp\(24px, 3vw, 40px\)/s);
+  assert.match(css, /\/\* Clean three-phone product gallery \*\/[\s\S]*?grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/s);
+  assert.match(css, /@media \(max-width: 900px\)[\s\S]*?\.phone-track\s*\{[^}]*display:\s*flex[^}]*overflow-x:\s*auto/s);
+  assert.match(css, /@media \(max-width: 700px\)[\s\S]*?\.phone-swipe-hint\s*\{[^}]*display:\s*block/s);
+});
+
+test("landingssiden viser innholdet rolig og trinnvis ved scrolling", () => {
+  assert.match(html, /src="script\.js\?v=20260811-scroll-reveal-v11"/);
+  assert.match(html, /<h2 class="demo-stage-label" id="demo-title">Ett klart neste steg\.<\/h2>/);
+  assert.match(html, /<p>Råd som gir mer overskudd\.<\/p>/);
+  assert.doesNotMatch(html, /Hele driften\.|Innsikt som gjør hverdagen enklere\./);
+  assert.match(mainJavascript, /const scopeLandingRevealGroups = \[/);
+  assert.match(mainJavascript, /targets: document\.querySelectorAll\("#how \.scope-stack-step, #how \.scope-carousel-progress"\),\s*staggerStep: 90/);
+  assert.match(mainJavascript, /targets: document\.querySelectorAll\("#demo \.demo-stage-copy, #demo \.phone"\),\s*staggerStep: 110/);
+  assert.match(mainJavascript, /targets: document\.querySelectorAll\("#testkunder \.tester-copy, #testkunder \.tester-detail"\),\s*staggerStep: 110/);
+  assert.match(mainJavascript, /const scopeLandingRevealTargets = scopeLandingRevealGroups\.flatMap/);
+  assert.match(mainJavascript, /scopeLandingRevealObserver\.observe\(group\.trigger\)/);
+  assert.match(css, /\.scope-scroll-reveal\s*\{[^}]*opacity:\s*0[^}]*translate:\s*0 18px[^}]*0\.72s/s);
+  assert.match(css, /\.scope-scroll-reveal\.is-scope-reveal-visible\s*\{[^}]*opacity:\s*1[^}]*translate:\s*0 0/s);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.scope-scroll-reveal\s*\{[^}]*opacity:\s*1[^}]*transition:\s*none/s);
 });
 
 test("Slik virker Scope bruker fem store fotokort i en automatisk karusell", () => {
@@ -143,8 +174,9 @@ test("Slik virker Scope bruker fem store fotokort i en automatisk karusell", () 
   assert.match(css, /#how \.scope-panel\.is-active\s*\{[^}]*transform:\s*translateY\(-6px\) scale\(1\.02\)[^}]*border:\s*0[^}]*box-shadow:\s*none/s);
   assert.match(css, /#how \.scope-panel,[\s\S]*?#how \.scope-panel\.is-active\s*\{[^}]*border-radius:\s*0/s);
   assert.match(css, /@media \(min-width: 1100px\)[\s\S]*?#how \.scope-panel,[\s\S]*?aspect-ratio:\s*1 \/ 1\.35/s);
-  assert.match(css, /\/\* Flowing five-step restaurant carousel \*\/[\s\S]*?#how \.scope-stack\s*\{[^}]*display:\s*flex[^}]*gap:\s*clamp\(22px, 2\.2vw, 34px\)[^}]*overflow-x:\s*auto/s);
-  assert.match(css, /#how \.scope-stack-step\s*\{[^}]*flex:\s*0 0 clamp\(360px, 34vw, 480px\)[^}]*scroll-snap-align:\s*center/s);
+  assert.match(css, /\/\* Flowing five-step restaurant carousel \*\/[\s\S]*?#how \.scope-stack\s*\{[^}]*display:\s*flex[^}]*gap:\s*clamp\(16px, 1\.8vw, 26px\)[^}]*overflow-x:\s*auto/s);
+  assert.match(css, /#how \.scope-stack-step\s*\{[^}]*flex:\s*0 0 clamp\(320px, 29vw, 410px\)[^}]*scroll-snap-align:\s*center/s);
+  assert.match(css, /#how \.scope-panel-title\s*\{[^}]*font-size:\s*clamp\(2\.1rem, 3\.2vw, 3\.5rem\)/s);
   assert.match(css, /#how \.scope-carousel-progress\s*\{[^}]*justify-content:\s*center/s);
   assert.match(mainJavascript, /restartScopeStackAutoPlay/);
   assert.match(mainJavascript, /window\.setInterval\(\(\) => \{/);
@@ -157,12 +189,12 @@ test("Slik virker Scope bruker fem store fotokort i en automatisk karusell", () 
   assert.match(mainJavascript, /card\.addEventListener\("focusin", activateCard\)/);
 });
 
-test("toppmenyen skjules ved nedrulling og testkunde-seksjonen bruker Scope-blå", () => {
+test("toppmenyen skjules ved nedrulling og testkunde-seksjonen bruker dyp blå", () => {
   assert.match(html, /<header class="site-header" data-scroll-hide>/);
-  assert.match(html, /src="script\.js\?v=20260806-scroll-header-v8"/);
+  assert.match(html, /src="script\.js\?v=20260811-scroll-reveal-v11"/);
   assert.match(css, /\.site-header\[data-scroll-hide\]\.is-scroll-hidden\s*\{[^}]*transform:\s*translateY\(-105%\)/s);
   assert.match(css, /body\.page-enter \.site-header\[data-scroll-hide\]\.is-scroll-hidden\s*\{[^}]*animation:\s*none[^}]*transform:\s*translateY\(-105%\)/s);
-  assert.match(css, /#testkunder\s*\{[^}]*margin-top:\s*clamp\(48px, 5vw, 84px\)[^}]*background:\s*#064dff/s);
+  assert.match(css, /#testkunder\s*\{[^}]*margin-top:\s*clamp\(48px, 5vw, 84px\)[^}]*background:\s*#123a8c/s);
   assert.match(css, /#testkunder\s*\{[^}]*padding-top:\s*clamp\(54px, 5vw, 76px\)[^}]*padding-bottom:\s*clamp\(54px, 5vw, 76px\)/s);
   assert.match(mainJavascript, /siteHeader\?\.matches\("\[data-scroll-hide\]"\)/);
   assert.match(mainJavascript, /currentScrollY > 120 && scrollDelta > 4/);

@@ -42,7 +42,7 @@ test("/vakt er rutet både i devserveren og på Netlify", async () => {
 
 test("velgersiden beholder Vakt som fjerde retning", () => {
   [velger, index].forEach((html) => {
-    assert.match(html, /Seks designretninger/);
+    assert.match(html, /Sju designretninger/);
     assert.match(html, /class="page-option page-option-vakt" href="\/vakt"/);
     assert.match(html, /<strong>Vakt<\/strong>/);
   });
