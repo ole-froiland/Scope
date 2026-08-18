@@ -102,21 +102,32 @@
                     <!-- Timer. -->
                     <span class="advice-chart-axis is-x"></span>
 
-                    <!-- Omsetning per time: rolig start, topp rundt 12, ned,
-                         ny topp 17–18, så ned mot kvelden. --i styrer i hvilken
-                         rekkefølge de vokser opp. -->
+                    <!-- Tallene leses ovenfra og ned, så rekkefølgen her er
+                         toppverdi først. Skalaen er lineær, slik at --v: 1
+                         treffer den øverste verdien. -->
+                    <span class="advice-chart-ticks is-y">
+                      <span>12k</span><span>9k</span><span>6k</span><span>3k</span><span>0</span>
+                    </span>
+                    <span class="advice-chart-ticks is-z">
+                      <span>8</span><span>6</span><span>4</span><span>2</span><span>0</span>
+                    </span>
+
+                    <!-- Omsetning per time: rolig start, lunsjtopp på 13, ned
+                         mot 16, kveldstopp på 19, så ned mot stengetid. Ingen
+                         time går i null – stedet er åpent hele veien.
+                         --i styrer i hvilken rekkefølge de vokser opp. -->
                     <div class="advice-chart-bars">
-                      <span style="--v: 0.26; --i: 0"></span>
-                      <span style="--v: 0.78; --i: 1"></span>
-                      <span style="--v: 0.55; --i: 2"></span>
-                      <span style="--v: 0.30; --i: 3"></span>
-                      <span style="--v: 0.24; --i: 4"></span>
-                      <span style="--v: 0.44; --i: 5"></span>
-                      <span style="--v: 0.92; --i: 6"></span>
-                      <span style="--v: 0.86; --i: 7"></span>
-                      <span style="--v: 0.60; --i: 8"></span>
-                      <span style="--v: 0.38; --i: 9"></span>
-                      <span style="--v: 0.18; --i: 10"></span>
+                      <span style="--v: 0.30; --i: 0"></span>
+                      <span style="--v: 0.46; --i: 1"></span>
+                      <span style="--v: 0.70; --i: 2"></span>
+                      <span style="--v: 0.60; --i: 3"></span>
+                      <span style="--v: 0.48; --i: 4"></span>
+                      <span style="--v: 0.40; --i: 5"></span>
+                      <span style="--v: 0.58; --i: 6"></span>
+                      <span style="--v: 0.78; --i: 7"></span>
+                      <span style="--v: 0.94; --i: 8"></span>
+                      <span style="--v: 0.68; --i: 9"></span>
+                      <span style="--v: 0.42; --i: 10"></span>
                     </div>
                   </div>
 

@@ -507,12 +507,12 @@ body {
   display: flex;
 }
 
-/* Marginen gir plass til de stående aksetitlene utenfor linjene. */
+/* Marginen gir plass til tallene og de stående aksetitlene utenfor linjene. */
 .advice-chart-frame {
   position: relative;
   flex: 1;
   min-height: 0;
-  margin: 0 30px;
+  margin: 0 58px;
 }
 
 .advice-chart-axis {
@@ -552,7 +552,7 @@ body {
    y leses nedenfra og opp, i samme retning som pila. */
 .advice-chart-axis.is-y b {
   top: 50%;
-  left: -21px;
+  left: -50px;
   writing-mode: vertical-rl;
   transform: translateY(-50%) rotate(180deg);
 }
@@ -577,7 +577,7 @@ body {
 
 .advice-chart-axis.is-z b {
   top: 50%;
-  right: -21px;
+  right: -50px;
   writing-mode: vertical-rl;
   transform: translateY(-50%) rotate(180deg);
 }
@@ -590,14 +590,68 @@ body {
   border-bottom: 2px solid rgba(255, 255, 255, 0.9);
 }
 
-.advice-chart-hours {
+/* Tallene på de to stående aksene. Boksen strekkes en halv tekstlinje utenfor
+   rammen i hver ende, slik at midten av «12k» og «0» treffer topp og bunn av
+   aksen – ikke over- og underkant av teksten. */
+.advice-chart-ticks {
+  position: absolute;
+  top: -7px;
+  bottom: -7px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  margin: 8px 30px 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.62rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 14px;
+}
+
+/* right: 100% legger høyre kant av tallene på venstre kant av rammen. */
+.advice-chart-ticks.is-y {
+  right: 100%;
+  align-items: flex-end;
+  margin-right: 9px;
+}
+
+.advice-chart-ticks.is-z {
+  left: 100%;
+  align-items: flex-start;
+  margin-left: 9px;
+}
+
+/* Omsetning per time. --v er andelen av full høyde, så 1 treffer øverste
+   tall på y-aksen. Samme 11-kolonners grid som timene under, slik at hver
+   stolpe står midt over sin egen time. */
+.advice-chart-bars {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  align-items: end;
+  height: 100%;
+}
+
+.advice-chart-bars span {
+  justify-self: center;
+  width: 62%;
+  max-width: 26px;
+  height: calc(var(--v) * 100%);
+  border-radius: 3px 3px 0 0;
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.advice-chart-hours {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  margin: 8px 58px 0;
   color: rgba(255, 255, 255, 0.68);
   font-size: 0.66rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
+  text-align: center;
 }
 
 .advice-preview-badges {
@@ -1145,6 +1199,45 @@ body {
 
   .advice-preview-lower {
     padding: 20px 22px 24px;
+  }
+
+  /* Grafen får smalere ramme her, ellers spiser aksetallene og de stående
+     titlene opp plassen stolpene trenger på et telefonkort. */
+  .advice-chart {
+    padding: 20px 12px 12px;
+  }
+
+  .advice-chart-frame {
+    margin: 0 42px;
+  }
+
+  .advice-chart-hours {
+    margin: 6px 42px 0;
+    font-size: 0.58rem;
+  }
+
+  .advice-chart-ticks {
+    font-size: 0.55rem;
+  }
+
+  .advice-chart-ticks.is-y {
+    margin-right: 6px;
+  }
+
+  .advice-chart-ticks.is-z {
+    margin-left: 6px;
+  }
+
+  .advice-chart-axis b {
+    font-size: 0.56rem;
+  }
+
+  .advice-chart-axis.is-y b {
+    left: -38px;
+  }
+
+  .advice-chart-axis.is-z b {
+    right: -38px;
   }
 
   .advice-preview-footer {
