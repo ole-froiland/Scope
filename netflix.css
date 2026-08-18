@@ -1,0 +1,1769 @@
+:root {
+  color-scheme: dark;
+  --ink: #0b0d10;
+  --paper: #f6f7f8;
+  --muted: rgba(246, 247, 248, 0.82);
+  /* Hentet rett fra neon-wordmarket: cyan i S-en, grønn i E-en. */
+  --neon: #00d5fc;
+  --line: rgba(0, 213, 252, 0.5);
+  /* Hvor mye rådvinduet legger seg oppå heroen — samme mål som Enkel. */
+  --overlap: clamp(120px, 12vw, 176px);
+  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  min-width: 320px;
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  position: relative;
+  /* Heroen er høyere enn skjermen, slik Enkel har det: bildet fyller hele
+     folden, og rådvinduet så vidt titter fram nederst i stedet for å skyve
+     seg opp i bildet. */
+  min-height: calc(100svh + var(--overlap) - 24px);
+  display: grid;
+  /* Siste rad er sonen rådvinduet legger seg over. Da spenner 1fr-raden bare
+     over det synlige feltet, og teksten sentreres der — ikke i hele heroen. */
+  grid-template-rows: auto 1fr calc(var(--overlap) - 24px);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% center;
+}
+
+/* Two scrims: one for overall depth, one anchoring the copy bottom-left. */
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 78% 62% at 50% 56%, rgba(6, 8, 11, 0.58) 0%, rgba(6, 8, 11, 0.3) 52%, rgba(6, 8, 11, 0.04) 100%),
+    linear-gradient(to bottom, rgba(6, 8, 11, 0.5) 0%, rgba(6, 8, 11, 0.06) 26%, rgba(6, 8, 11, 0.08) 62%, rgba(6, 8, 11, 0.46) 100%);
+}
+
+/* ---------- Topplinje ---------- */
+
+.hero-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: min(1280px, 100% - clamp(32px, 7vw, 96px));
+  margin: 0 auto;
+  padding: clamp(20px, 3.5vw, 34px) 0;
+}
+
+.hero-logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.hero-logo img {
+  display: block;
+  width: auto;
+  height: clamp(30px, 4.6vw, 50px);
+}
+
+/* Samme fylte neon-pille som CTA-en, bare i mindre format. */
+.login {
+  display: inline-flex;
+  align-items: center;
+  padding: 11px 24px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--neon);
+  color: #04222b;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  box-shadow: 0 8px 26px rgba(0, 213, 252, 0.24);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.login:hover {
+  box-shadow: 0 12px 34px rgba(0, 213, 252, 0.4);
+  transform: translateY(-2px);
+}
+
+.login:focus-visible,
+.cta:focus-visible {
+  outline: 2px solid var(--neon);
+  outline-offset: 3px;
+}
+
+/* ---------- Innhold ---------- */
+
+.hero-copy {
+  align-self: center;
+  width: min(1280px, 100% - clamp(32px, 7vw, 96px));
+  margin: 0 auto;
+  /* Veier opp for topplinja over, så teksten står optisk midt i folden. */
+  padding-bottom: clamp(60px, 8vh, 120px);
+  text-align: center;
+  /* Bildet er lyst nok til at folkene synes, så teksten trenger sin egen kontrast. */
+  text-shadow: 0 1px 3px rgba(4, 6, 9, 0.5), 0 6px 30px rgba(4, 6, 9, 0.55);
+}
+
+.hero-copy h1 {
+  max-width: 18ch;
+  margin: 0 auto;
+  font-family: "Manrope", "DM Sans", system-ui, sans-serif;
+  font-size: clamp(2.6rem, 7.4vw, 6.4rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+/* Skjermleseren får hele setningen; linjene under er ren dekorasjon. */
+.hero-title-accessible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.hero-title-line {
+  display: block;
+}
+
+.hero-word {
+  display: inline-block;
+  /* Samme reserve som Enkel bruker, så ordet ikke kollapser til null bredde
+     mellom slettingen og neste ord. */
+  min-width: 3ch;
+  color: var(--neon);
+  text-align: left;
+}
+
+/* Enkels fargekoder, løftet i lyshet så de holder mot den mørke nattfasaden.
+   Samme kulør og rekkefølge — bare lyse nok til å lese på foto. */
+.hero-word.is-red { color: #ff6b64; }
+.hero-word.is-blue { color: #6ea2ff; }
+.hero-word.is-green { color: #23d99a; }
+.hero-word.is-brown { color: #d9a06a; }
+.hero-word.is-orange { color: #ff9c4a; }
+.hero-word.is-gold { color: #ecc255; }
+
+.hero-word::after {
+  display: inline-block;
+  width: 0.045em;
+  height: 0.72em;
+  margin-left: 0.06em;
+  background: currentColor;
+  content: "";
+  animation: hero-cursor 0.9s steps(1) infinite;
+  vertical-align: -0.01em;
+}
+
+@keyframes hero-cursor {
+  50% {
+    opacity: 0;
+  }
+}
+
+.hero-title-line em {
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+/* Kicker over taglinen: sier hva Scope er, uten å stjele vekt fra tittelen. */
+.tagline-kicker {
+  margin: clamp(20px, 2.6vw, 30px) auto 0;
+  color: var(--neon);
+  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.tagline {
+  max-width: 34ch;
+  margin: clamp(8px, 1vw, 12px) auto 0;
+  color: #fff;
+  font-size: clamp(1.05rem, 1.9vw, 1.4rem);
+  line-height: 1.45;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: clamp(28px, 3.6vw, 42px);
+  padding: 17px 32px;
+  border-radius: 999px;
+  background: var(--neon);
+  color: #04222b;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  text-decoration: none;
+  box-shadow: 0 10px 34px rgba(0, 213, 252, 0.28);
+  text-shadow: none;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.cta span {
+  transition: transform 180ms ease;
+}
+
+.cta:hover {
+  box-shadow: 0 16px 44px rgba(0, 213, 252, 0.42);
+  transform: translateY(-2px);
+}
+
+.cta:hover span {
+  transform: translateX(3px);
+}
+
+/* ---------- Rådvindu ----------
+   Samme mål, radier og toner som Enkel-siden. Flaten under vinduet er hvit,
+   så seksjonen går rett over i «Slik virker Scope» uten skjøt. */
+
+.advice-showcase {
+  position: relative;
+  z-index: 5;
+  margin-top: calc(-1 * var(--overlap));
+  padding: 0 32px clamp(64px, 7vw, 88px);
+  background: linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent var(--overlap),
+    #ffffff var(--overlap),
+    #ffffff 100%
+  );
+}
+
+.advice-showcase-inner {
+  position: relative;
+  z-index: 1;
+  /* 1280 i stedet for 1320: ca. 3 % smalere, og da flukter vinduet med
+     logoen og Logg inn-knappen i heroen, som har samme maksbredde. */
+  width: min(1280px, 100%);
+  margin: 0 auto;
+}
+
+.advice-window {
+  overflow: visible;
+  border: 1px solid #dfe3ea;
+  /* Skarpe hjørner hele veien rundt — vinduet skal lese som et rektangel. */
+  border-radius: 0;
+  background: #ffffff;
+  /* Dempet skygge — på hvit flate blir en mørk skygge grumsete. */
+  box-shadow: 0 20px 58px rgba(25, 43, 78, 0.12);
+}
+
+.advice-browser-bar {
+  min-height: 54px;
+  display: grid;
+  grid-template-columns: 100px minmax(0, 1fr) 100px;
+  align-items: center;
+  padding: 0 22px;
+  border-bottom: 1px solid #e7e9ee;
+  background: #f6f7f9;
+}
+
+.advice-browser-controls {
+  display: inline-flex;
+  gap: 7px;
+}
+
+.advice-browser-controls i {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.advice-browser-controls .is-red { background: #ff5f57; }
+.advice-browser-controls .is-yellow { background: #febc2e; }
+.advice-browser-controls .is-green { background: #28c840; }
+
+.advice-browser-address {
+  color: #5c6270;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.advice-showcase-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.66fr) minmax(0, 1.34fr);
+  gap: 24px;
+  /* Smal luft ut mot vindusrammen — kortene skal fylle vinduet, ikke flyte i
+     det. */
+  padding: 18px 18px 20px;
+  background: #ffffff;
+}
+
+.advice-preview-menu {
+  display: flex;
+  min-width: 0;
+}
+
+/* Ingen align-content: start — radene skal strekke seg og fylle høyden,
+   slik Enkel gjør det (4 like rader à 113px). */
+.advice-preview-list {
+  flex: 1;
+  display: grid;
+  gap: 9px;
+  min-width: 0;
+  height: 100%;
+}
+
+/* Tonene Enkel bruker per råd. */
+.advice-preview-item[data-advice-tone="blue"],
+.advice-preview-detail[data-advice-tone="blue"] {
+  --advice-accent: #064dff;
+  --advice-soft: #f2f6ff;
+  --advice-surface: #0b43d1;
+}
+
+.advice-preview-item[data-advice-tone="orange"],
+.advice-preview-detail[data-advice-tone="orange"] {
+  --advice-accent: #e87924;
+  --advice-soft: #fff5ec;
+  --advice-surface: #b94e0a;
+}
+
+.advice-preview-item[data-advice-tone="green"],
+.advice-preview-detail[data-advice-tone="green"] {
+  --advice-accent: #07966a;
+  --advice-soft: #edf9f5;
+  --advice-surface: #087253;
+}
+
+.advice-preview-item[data-advice-tone="red"],
+.advice-preview-detail[data-advice-tone="red"] {
+  --advice-accent: #dc4c64;
+  --advice-soft: #fff1f4;
+  --advice-surface: #b92f4a;
+}
+
+.advice-preview-item {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 18px;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 15px;
+  border: 1px solid #dfe3ea;
+  border-radius: 3px;
+  background: #ffffff;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.advice-preview-item:hover {
+  border-color: color-mix(in srgb, var(--advice-accent) 34%, #dfe3ea);
+}
+
+.advice-preview-item:focus-visible {
+  outline: 2px solid var(--advice-accent);
+  outline-offset: 2px;
+}
+
+.advice-preview-item.is-active {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--advice-accent) 82%, #111827);
+  box-shadow: 0 18px 38px color-mix(in srgb, var(--advice-accent) 22%, transparent);
+  transform: scale(1.022);
+}
+
+.advice-item-number {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  border-radius: 2px;
+  place-items: center;
+  background: var(--advice-soft);
+  color: var(--advice-accent);
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.advice-preview-item.is-active .advice-item-number {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+.advice-item-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.advice-item-copy > span {
+  color: color-mix(in srgb, var(--advice-accent) 84%, #111827);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.advice-item-copy strong {
+  color: #111827;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: -0.016em;
+  line-height: 1.18;
+}
+
+.advice-preview-item.is-active .advice-item-copy > span {
+  color: #ffffff;
+  opacity: 0.78;
+}
+
+.advice-preview-item.is-active .advice-item-copy strong {
+  color: #ffffff;
+}
+
+.advice-item-arrow {
+  width: 18px;
+  height: 18px;
+  opacity: 0.4;
+}
+
+.advice-preview-item.is-active .advice-item-arrow {
+  opacity: 1;
+  filter: brightness(0) invert(1);
+}
+
+/* Kortet er tre vannrette bånd: hvit topp, blå midte, hvit bunn. Båndene går
+   helt ut i kanten, så hvert av dem eier sin egen padding — kortet har ingen. */
+.advice-preview-detail {
+  --advice-surface: #0b43d1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #dfe3ea;
+  border-radius: 4px;
+  background: #ffffff;
+  box-shadow: 0 18px 48px rgba(15, 29, 55, 0.09);
+}
+
+.advice-detail-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 10px 28px 14px;
+  background: #ffffff;
+}
+
+/* Det blå feltet bærer grafen. min-height trengs der kortet ikke har fast
+   høyde (under 901px). */
+.advice-detail-canvas {
+  min-height: 220px;
+  background: var(--advice-surface);
+  transition: background-color 0.28s ease;
+}
+
+/* ---------- Aksene på det blå feltet ----------
+   Bare rammen: y til venstre (omsetning), z til høyre (antall på jobb) og x
+   langs bunnen (timer 11–21). Begge de stående aksene vokser oppover. Ingen
+   data. Pilene er CSS-trekanter, så det trengs ingen SVG. */
+
+/* Aksene hører til bemanningsrådet, der timer mot omsetning gir mening. De
+   tre andre rådene handler om noe helt annet, så feltet er tomt der. */
+.advice-chart {
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  padding: 26px 30px 16px;
+}
+
+.advice-preview-detail[data-advice-tone="blue"] .advice-chart {
+  display: flex;
+}
+
+/* Marginen gir plass til de stående aksetitlene utenfor linjene. */
+.advice-chart-frame {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin: 0 30px;
+}
+
+.advice-chart-axis {
+  position: absolute;
+}
+
+.advice-chart-axis b {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* y — omsetning, pil opp. */
+.advice-chart-axis.is-y {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  border-left: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+.advice-chart-axis.is-y::after {
+  position: absolute;
+  top: -7px;
+  left: -6px;
+  border-right: 5px solid transparent;
+  border-bottom: 8px solid rgba(255, 255, 255, 0.9);
+  border-left: 5px solid transparent;
+  content: "";
+}
+
+/* writing-mode i stedet for rotate + transform-origin: da stemmer boksens egen
+   størrelse med den stående teksten, og etiketten blir ikke klippet.
+   y leses nedenfra og opp, i samme retning som pila. */
+.advice-chart-axis.is-y b {
+  top: 50%;
+  left: -21px;
+  writing-mode: vertical-rl;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* z — antall på jobb, pil opp som y. Svakere strek, så y leser som hovedaksen. */
+.advice-chart-axis.is-z {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-right: 2px solid rgba(255, 255, 255, 0.55);
+}
+
+.advice-chart-axis.is-z::after {
+  position: absolute;
+  top: -7px;
+  right: -6px;
+  border-right: 5px solid transparent;
+  border-bottom: 8px solid rgba(255, 255, 255, 0.55);
+  border-left: 5px solid transparent;
+  content: "";
+}
+
+.advice-chart-axis.is-z b {
+  top: 50%;
+  right: -21px;
+  writing-mode: vertical-rl;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* x — timer. */
+.advice-chart-axis.is-x {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+.advice-chart-hours {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 30px 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.66rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.advice-preview-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.advice-source-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 13px;
+  border: 1px solid #dfe3ea;
+  border-radius: 999px;
+  background: #f6f7f9;
+  color: #4b5566;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Teksten bor i det hvite toppbåndet og må holde seg innenfor 25 % av
+   korthøyden. Korthøyden er satt etter dette — se @media (min-width: 901px). */
+.advice-preview-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.advice-preview-copy h2 {
+  max-width: 24ch;
+  margin: 0;
+  color: #111827;
+  font-size: clamp(1.1rem, 1.75vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.038em;
+  line-height: 1.06;
+}
+
+.advice-preview-copy p {
+  max-width: 58ch;
+  margin: 6px 0 0;
+  color: #4b5566;
+  /* Skalerer med bredden: på smale skjermer blir tekstkolonnen kort, og da må
+     brødteksten ned i størrelse for å holde seg innenfor de 25 %. */
+  font-size: clamp(0.8rem, 1.02vw, 0.9rem);
+  line-height: 1.4;
+}
+
+.advice-preview-lower {
+  display: flex;
+  align-items: center;
+  padding: 22px 36px 26px;
+  background: #ffffff;
+}
+
+.advice-preview-footer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.advice-preview-footer div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.advice-preview-footer span {
+  color: #717887;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.advice-preview-footer strong {
+  color: #111827;
+  font-size: clamp(1.9rem, 2.8vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.advice-preview-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 20px;
+  border-radius: 4px;
+  background: #111827;
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 12px 26px rgba(17, 24, 39, 0.16);
+  transition: background-color 180ms ease;
+}
+
+.advice-preview-cta:hover,
+.advice-preview-cta:focus-visible {
+  background: var(--advice-surface);
+}
+
+.advice-preview-cta img {
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) invert(1);
+}
+
+@media (min-width: 901px) {
+  /* Høyden er bundet av toppbåndet: 20 % må romme det lengste rådets tittel
+     og brødtekst. 580px gir 116px der, som er akkurat nok. */
+  .advice-preview-menu,
+  .advice-preview-detail {
+    height: 580px;
+    min-height: 580px;
+  }
+
+  /* Låst 20 / 60 / 20 av korthøyden. Bare her — under 901px har kortet ingen
+     fast høyde, og da må båndene følge innholdet i stedet.
+     min-height: 0 på de hvite båndene: uten det nekter de å krympe under
+     innholdet sitt, og da spiser de av det blå feltet i midten. */
+  .advice-detail-head {
+    flex: 0 0 20%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .advice-detail-canvas {
+    flex: 0 0 60%;
+  }
+
+  .advice-preview-lower {
+    flex: 0 0 20%;
+    min-height: 0;
+  }
+}
+
+/* ---------- Kontaktboble ----------
+   Samme oppbygning som de andre landingssidene, men i sidens eget språk:
+   neon boble som CTA-en, hvitt panel med svart knapp som i rådvinduet. */
+
+.contact-widget {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 40;
+}
+
+.contact-bubble {
+  width: 54px;
+  height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--neon);
+  color: #04222b;
+  cursor: pointer;
+  box-shadow: 0 12px 34px rgba(0, 213, 252, 0.32);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.contact-bubble:hover {
+  box-shadow: 0 16px 44px rgba(0, 213, 252, 0.46);
+  transform: translateY(-2px);
+}
+
+.contact-bubble:focus-visible,
+.contact-panel :focus-visible {
+  outline: 2px solid var(--neon);
+  outline-offset: 3px;
+}
+
+.contact-bubble svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.contact-panel {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  width: min(300px, calc(100vw - 44px));
+  padding: 16px;
+  border: 1px solid #dfe3ea;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #111827;
+  box-shadow: 0 24px 68px rgba(0, 0, 0, 0.45);
+}
+
+.contact-panel[hidden],
+.contact-form[hidden],
+.contact-company-field[hidden] {
+  display: none;
+}
+
+.contact-panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.contact-panel h2 {
+  margin: 0;
+  color: #111827;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.contact-panel p {
+  margin: 5px 0 0;
+  color: #5c6270;
+  font-size: 0.86rem;
+}
+
+.contact-close {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 50%;
+  background: #f1f2f5;
+  color: #111827;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.contact-close:hover {
+  background: #e5e7ec;
+}
+
+.contact-choice {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.contact-choice button,
+.contact-submit {
+  min-height: 38px;
+  border: 1px solid #dfe3ea;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111827;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+.contact-choice button:hover {
+  border-color: #b9bfca;
+}
+
+.contact-choice button.is-active,
+.contact-submit {
+  border-color: #111827;
+  background: #111827;
+  color: #ffffff;
+}
+
+.contact-form {
+  display: grid;
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.contact-form label {
+  display: grid;
+  gap: 6px;
+  color: #3b4250;
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #dfe3ea;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111827;
+  font: inherit;
+  font-size: 0.86rem;
+}
+
+.contact-form textarea {
+  min-height: 62px;
+  resize: vertical;
+}
+
+.contact-status {
+  min-height: 1.1em;
+  margin: -2px 0 0 !important;
+  color: #dc4c64 !important;
+  font-size: 0.78rem !important;
+  font-weight: 700;
+}
+
+/* ---------- Logg inn ----------
+   Samme natt, samme neon som forsiden — bare ett kort midt på flaten. */
+
+.auth-body {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.auth-media {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+}
+
+.auth-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% center;
+}
+
+/* Kraftigere slør enn på forsiden: her skal kortet lese, ikke bildet. */
+.auth-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 62% 58% at 50% 52%, rgba(6, 8, 11, 0.72) 0%, rgba(6, 8, 11, 0.5) 60%, rgba(6, 8, 11, 0.34) 100%),
+    linear-gradient(to bottom, rgba(6, 8, 11, 0.6) 0%, rgba(6, 8, 11, 0.3) 42%, rgba(6, 8, 11, 0.62) 100%);
+}
+
+.auth-bar {
+  width: min(1280px, 100% - clamp(32px, 7vw, 96px));
+  margin: 0 auto;
+  padding: clamp(20px, 3.5vw, 34px) 0;
+}
+
+.auth-main {
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 4vw, 48px) clamp(16px, 5vw, 32px) clamp(48px, 8vw, 88px);
+}
+
+.auth-card {
+  width: min(420px, 100%);
+  padding: clamp(28px, 4vw, 40px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  background: rgba(11, 13, 16, 0.72);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+  text-align: center;
+}
+
+.auth-card h1 {
+  margin: 0;
+  font-family: "Manrope", "DM Sans", system-ui, sans-serif;
+  font-size: clamp(2rem, 4.4vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.auth-intro {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.auth-form {
+  display: grid;
+  gap: 14px;
+  margin-top: clamp(24px, 3.4vw, 32px);
+  text-align: left;
+}
+
+.auth-form label {
+  display: grid;
+  gap: 7px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: rgba(246, 247, 248, 0.78);
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--paper);
+  font: inherit;
+  font-size: 1rem;
+  transition: border-color 180ms ease, background-color 180ms ease;
+}
+
+.auth-form input::placeholder {
+  color: rgba(246, 247, 248, 0.38);
+}
+
+.auth-form input:focus {
+  border-color: var(--neon);
+  background: rgba(255, 255, 255, 0.09);
+  outline: none;
+}
+
+.auth-status {
+  min-height: 1.2em;
+  margin: -4px 0 0;
+  color: #ff8f88;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.auth-status.is-info {
+  color: var(--neon);
+}
+
+/* Samme pille som CTA-en, bare i full bredde. */
+.auth-submit {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 4px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--neon);
+  color: #04222b;
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  box-shadow: 0 10px 34px rgba(0, 213, 252, 0.28);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.auth-submit:hover {
+  box-shadow: 0 16px 44px rgba(0, 213, 252, 0.42);
+  transform: translateY(-2px);
+}
+
+.auth-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--neon);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+.auth-alt {
+  margin: 22px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(246, 247, 248, 0.6);
+  font-size: 0.9rem;
+}
+
+.auth-alt a {
+  color: var(--paper);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth-alt a:hover {
+  text-decoration: underline;
+}
+
+.auth-submit:focus-visible,
+.auth-link:focus-visible,
+.auth-alt a:focus-visible,
+.auth-bar .hero-logo:focus-visible {
+  outline: 2px solid var(--neon);
+  outline-offset: 3px;
+}
+
+/* ---------- Mobil ---------- */
+
+@media (max-width: 760px) {
+  .hero-media img {
+    object-position: 70% center;
+  }
+
+  .hero-media::after {
+    background:
+      radial-gradient(ellipse 135% 40% at 50% 46%, rgba(6, 8, 11, 0.8) 0%, rgba(6, 8, 11, 0.46) 58%, rgba(6, 8, 11, 0.05) 100%),
+      linear-gradient(to bottom, rgba(6, 8, 11, 0.5) 0%, rgba(6, 8, 11, 0.1) 22%, rgba(6, 8, 11, 0.14) 70%, rgba(6, 8, 11, 0.42) 100%);
+  }
+
+  .hero-copy h1 {
+    max-width: 12ch;
+  }
+
+  .tagline {
+    max-width: 30ch;
+  }
+
+  .cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .advice-showcase {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .advice-showcase-grid {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 16px;
+  }
+
+  .advice-detail-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 22px 22px 24px;
+  }
+
+  .advice-preview-lower {
+    padding: 20px 22px 24px;
+  }
+
+  .advice-preview-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .advice-preview-cta {
+    justify-content: center;
+  }
+
+  .contact-widget {
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .contact-bubble {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (max-width: 420px) {
+  .login {
+    padding: 9px 18px;
+    font-size: 0.88rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login,
+  .cta,
+  .cta span,
+  .advice-preview-item,
+  .advice-detail-canvas,
+  .advice-preview-cta,
+  .contact-bubble,
+  .auth-submit {
+    transition: none;
+  }
+
+  .cta:hover,
+  .login:hover,
+  .contact-bubble:hover,
+  .auth-submit:hover {
+    transform: none;
+  }
+}
+
+/* ---------- Seksjonene under rådvinduet ----------
+   Samme bredde og gutter som .advice-showcase, så alt står på én linje
+   med det hvite vinduet over. */
+
+.section-inner {
+  /* Må matche .advice-showcase-inner, ellers flukter ikke seksjonene med
+     rådvinduet over. */
+  width: min(1280px, 100%);
+  margin: 0 auto;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--neon);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.how h2,
+.faq h2,
+.testers h2 {
+  margin: 14px 0 0;
+  font-family: "Manrope", "DM Sans", system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.04;
+  /* Uten dette blir siste ord stående alene på egen linje. */
+  text-wrap: balance;
+}
+
+/* ---------- Slik virker det ---------- */
+
+.how {
+  padding: clamp(40px, 6vw, 80px) 32px clamp(72px, 8vw, 110px);
+  background: #ffffff;
+  color: var(--ink);
+}
+
+/* Ingen eyebrow over tittelen her, så den skal ligge helt i toppen. */
+.how h2 {
+  max-width: 20ch;
+  margin-top: 0;
+  color: var(--ink);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 2.4vw, 34px);
+  margin: clamp(40px, 5vw, 64px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.how-steps li {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.how-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: #e8ebee;
+}
+
+.how-media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  /* På hvitt trenger bildene ingen demping — bare et snev mindre metning så de
+     ikke skriker mot den rolige flaten. */
+  filter: saturate(0.9);
+  transition: transform 0.65s cubic-bezier(0.2, 0.72, 0.25, 1), filter 0.55s ease;
+}
+
+.how-steps li:hover .how-media img {
+  filter: saturate(1);
+  transform: scale(1.05);
+}
+
+/* Hult tall — nikk til Netflix' nummererte rader. Konturen er mørk her, siden
+   neonen ikke bærer mot hvitt. */
+.how-number {
+  font-family: "Manrope", "DM Sans", system-ui, sans-serif;
+  font-size: clamp(3rem, 5vw, 4.4rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.8;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ink);
+}
+
+/* Uten text-stroke ville tallet blitt usynlig. */
+@supports not (-webkit-text-stroke: 1px currentColor) {
+  .how-number {
+    color: var(--ink);
+  }
+}
+
+.how-steps p {
+  margin: 0;
+  color: rgba(11, 13, 16, 0.72);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+/* ---------- Ofte stilte spørsmål ---------- */
+
+.faq {
+  padding: clamp(56px, 7vw, 96px) 32px clamp(72px, 8vw, 110px);
+  border-top: 1px solid rgba(246, 247, 248, 0.1);
+}
+
+/* Tittel over, stolper under — samme oppbygging som Netflix' egen FAQ. */
+.faq-layout {
+  display: block;
+}
+
+/* Ingen eyebrow over tittelen her, så den skal ligge helt i toppen av seksjonen. */
+.faq h2 {
+  max-width: 20ch;
+  margin-top: 0;
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  /* Svart luft mellom stolpene, ikke hårstreker. */
+  gap: 8px;
+  margin-top: clamp(32px, 4vw, 52px);
+}
+
+.faq-list details {
+  background: #2b2e33;
+}
+
+.faq-list summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(18px, 2vw, 26px) clamp(20px, 2.4vw, 36px);
+  /* Ligger her alltid, slik at åpning ikke flytter teksten en piksel. */
+  border-bottom: 1px solid transparent;
+  color: var(--paper);
+  font-size: clamp(1.05rem, 1.7vw, 1.5rem);
+  font-weight: 600;
+  /* Mindre negativ sperring enn ellers på siden: halvfeit tekst i denne
+     størrelsen trenger luft mellom bokstavene for å leses raskt. */
+  letter-spacing: -0.005em;
+  list-style: none;
+  cursor: pointer;
+  transition: background 180ms ease;
+}
+
+/* Skillelinjen er sidens bakgrunn, ikke en lys strek — og går helt ut i kanten. */
+.faq-list details[open] summary {
+  border-bottom-color: var(--ink);
+}
+
+.faq-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-list summary:hover {
+  background: #383c42;
+}
+
+.faq-list summary:focus-visible {
+  outline: 2px solid var(--neon);
+  outline-offset: -2px;
+}
+
+.faq-icon {
+  position: relative;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  transition: transform 220ms ease;
+}
+
+.faq-icon::before,
+.faq-icon::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--paper);
+  content: "";
+  transform: translate(-50%, -50%);
+}
+
+.faq-icon::before {
+  width: 26px;
+  height: 2px;
+}
+
+.faq-icon::after {
+  width: 2px;
+  height: 26px;
+}
+
+/* Hele krysset roterer: pluss blir ×, slik Netflix gjør det. */
+.faq-list details[open] .faq-icon {
+  transform: rotate(45deg);
+}
+
+.faq-list details p {
+  /* Kortere linjer enn 72ch: øyet finner neste linje raskere. */
+  max-width: 62ch;
+  margin: 0;
+  padding: clamp(18px, 2vw, 26px) clamp(20px, 2.4vw, 36px);
+  /* Lysere enn --muted, siden svaret står på grått og ikke på sidebakgrunnen. */
+  color: rgba(246, 247, 248, 0.92);
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
+  line-height: 1.65;
+}
+
+/* ---------- Vi søker testkunder ---------- */
+
+/* Samme oppsett som Enkel: et gjennomgående felt i full bredde, med
+   overskriften og knappen til venstre og hele invitasjonen i høyre spalte.
+   Feltet er svart som resten av siden: ingen skjøt mot FAQ-en over, bare
+   luften mellom seksjonene. */
+.testers {
+  padding: clamp(48px, 5vw, 76px) 32px clamp(52px, 5vw, 80px);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.testers-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.95fr);
+  align-items: start;
+  gap: clamp(36px, 6vw, 88px);
+}
+
+.testers-copy {
+  min-width: 0;
+}
+
+.testers h2 {
+  max-width: 9ch;
+  color: var(--paper);
+  font-size: clamp(2.3rem, 4.6vw, 3.9rem);
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+
+.testers-detail {
+  min-width: 0;
+  /* Bare nok til at første linje står optisk i flukt med overskriften. */
+  padding-top: clamp(4px, 0.8vw, 10px);
+}
+
+.testers-lead {
+  margin: 0;
+  color: var(--paper);
+  font-size: clamp(1.2rem, 1.9vw, 1.45rem);
+  font-weight: 700;
+}
+
+.testers-list {
+  display: grid;
+  gap: 14px;
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.testers-list li {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+  color: var(--paper);
+  font-size: clamp(1.05rem, 1.4vw, 1.15rem);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.testers-check {
+  width: 24px;
+  height: 24px;
+  margin-top: 1px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  /* Svart hake forsvinner i det svarte feltet — neonen bærer den nå. */
+  background: var(--neon);
+}
+
+.testers-check svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: #04222b;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.testers-note {
+  max-width: 58ch;
+  margin: 26px 0 0;
+  color: rgba(246, 247, 248, 0.72);
+  font-size: clamp(1rem, 1.35vw, 1.12rem);
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* .cta har egen toppmarg fra heroen — her står knappen rett under tittelen.
+   Fargene beholdes fra heroen: neonpilla leses klart på det svarte feltet. */
+.testers-cta {
+  margin-top: clamp(24px, 2.6vw, 32px);
+}
+
+/* ---------- Har du spørsmål? ---------- */
+
+/* Kontaktinvitasjonen står på samme hvite flate som footeren, slik at bunnen
+   av siden leses som én blokk — pila peker ned i den, og streken under
+   knappen skiller invitasjonen fra selve footeren. */
+.questions {
+  padding: clamp(38px, 4.4vw, 60px) 32px 0;
+  background: #ffffff;
+  color: var(--ink);
+}
+
+/* Pila står ikke midt på siden, men over overskriften: én av tre spalter
+   sentrerer den på en sjettedel av bredden, samme mål som på Enkel. */
+.questions-arrow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: clamp(34px, 3.8vw, 54px);
+}
+
+.questions-arrow svg {
+  justify-self: center;
+  width: 44px;
+  height: 44px;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: questions-arrow-bounce 1.8s ease-in-out infinite;
+}
+
+@keyframes questions-arrow-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+.questions-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 48px);
+  padding-bottom: clamp(34px, 3.8vw, 54px);
+  border-bottom: 1px solid rgba(11, 13, 16, 0.12);
+}
+
+.questions-cta h2 {
+  margin: 0;
+  font-size: clamp(2.1rem, 4.4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.questions-cta p {
+  max-width: 48ch;
+  margin: 14px 0 0;
+  color: rgba(11, 13, 16, 0.62);
+  font-size: clamp(0.98rem, 1.25vw, 1.05rem);
+}
+
+/* Neonpilla forsvinner mot hvitt — knappen er mørk, som på testkundefeltet. */
+.questions-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 17px 40px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+  text-decoration: none;
+  box-shadow: 0 10px 26px rgba(11, 13, 16, 0.18);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.questions-button:hover {
+  box-shadow: 0 16px 36px rgba(11, 13, 16, 0.26);
+  transform: translateY(-2px);
+}
+
+.questions-button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* ---------- Footer ---------- */
+
+/* Hvit footer under det mørke turkisfeltet — sidens eneste lyse flate. */
+.site-foot {
+  padding: clamp(32px, 4vw, 44px) 32px clamp(36px, 4vw, 48px);
+  background: #ffffff;
+  color: var(--ink);
+}
+
+.foot-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(20px, 3vw, 40px);
+}
+
+.foot-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Samme wordmark som i heroen. Det er laget for mørk flate, så på den hvite
+   footeren dempes lysstyrken litt for at cyanen skal holde seg lesbar. */
+.foot-brand .foot-logo {
+  display: block;
+  width: auto;
+  height: 26px;
+  filter: brightness(0.78) saturate(1.2);
+}
+
+.foot-brand p {
+  margin: 0;
+  color: rgba(11, 13, 16, 0.62);
+  font-size: 0.88rem;
+}
+
+.foot-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+}
+
+.foot-links a,
+.foot-meta a {
+  color: rgba(11, 13, 16, 0.74);
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.foot-links a:hover,
+.foot-meta a:hover {
+  color: var(--ink);
+}
+
+.foot-links a:focus-visible,
+.foot-meta a:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.foot-meta {
+  width: 100%;
+  margin: 0;
+  padding-top: clamp(18px, 2.4vw, 26px);
+  border-top: 1px solid rgba(11, 13, 16, 0.12);
+  color: rgba(11, 13, 16, 0.55);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 1040px) {
+  /* Tre steg deler seg dårlig i to spalter — behold raden til den ikke får plass. */
+  .how-steps {
+    gap: clamp(16px, 2vw, 24px);
+  }
+}
+
+@media (max-width: 760px) {
+  .how,
+  .faq,
+  .testers,
+  .questions,
+  .site-foot {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .how-steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .testers-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 26px;
+  }
+
+  .testers h2 {
+    max-width: none;
+    font-size: clamp(2.1rem, 9vw, 2.9rem);
+  }
+
+  .testers-detail {
+    padding-top: 0;
+  }
+
+  .testers-cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Overskrift og knapp får ikke plass side om side — knappen legger seg under
+     og tar full bredde, slik at treffflaten holder seg stor på mobil. */
+  .questions-arrow {
+    display: flex;
+    justify-content: center;
+  }
+
+  .questions-cta {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 26px;
+  }
+
+  .questions-button {
+    width: 100%;
+    min-height: 52px;
+  }
+
+  .foot-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-list summary,
+  .faq-icon,
+  .foot-links a,
+  .foot-meta a,
+  .questions-button,
+  .how-media img {
+    transition: none;
+  }
+
+  .questions-arrow svg {
+    animation: none;
+  }
+
+  .how-steps li:hover .how-media img {
+    transform: none;
+  }
+}
+
+/* Footerlenkene peker til seksjonene over. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

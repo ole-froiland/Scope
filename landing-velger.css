@@ -293,6 +293,43 @@ h1 {
   background: #4056ff;
 }
 
+.page-option-netflix {
+  border-color: rgba(17, 19, 26, 0.2);
+  background: #11111a;
+  box-shadow: 0 16px 45px rgba(17, 17, 26, 0.28);
+}
+
+.page-option-netflix .option-number {
+  color: #8b8d97;
+}
+
+.page-option-netflix .option-copy strong {
+  color: #f5f5f7;
+}
+
+.page-option-netflix .option-copy > span {
+  color: #a4a6b0;
+}
+
+.page-option-netflix .option-preview {
+  width: 116px;
+  height: 78px;
+  border-radius: 8px;
+  background: #000;
+}
+
+.page-option-netflix .option-preview i {
+  font-style: normal;
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #e50914;
+}
+
+.page-option-netflix .option-arrow {
+  background: #e50914;
+}
+
 @media (max-width: 760px) {
   .page-shell {
     width: min(100% - 28px, 540px);
