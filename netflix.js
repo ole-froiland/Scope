@@ -181,6 +181,34 @@ function initLoginForm() {
   });
 }
 
+// Stolpene i bemanningsgrafen skal vokse opp først når grafen er på skjermen,
+// ellers er showet over før noen ser det. is-armed skjuler dem, så den settes
+// bare herfra – da står grafen ferdig tegnet om skriptet aldri kjører.
+function initAdviceChart() {
+  const chart = document.querySelector(".advice-chart");
+  if (!chart || reducedMotion.matches) return;
+
+  chart.classList.add("is-armed");
+
+  const play = () => chart.classList.add("is-live");
+
+  if (!("IntersectionObserver" in window)) {
+    play();
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      play();
+      observer.disconnect();
+    });
+  }, { threshold: 0.35 });
+
+  observer.observe(chart);
+}
+
 initHeroWord();
 initContactWidget();
 initLoginForm();
+initAdviceChart();

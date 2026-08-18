@@ -643,6 +643,30 @@ body {
   background: rgba(255, 255, 255, 0.88);
 }
 
+/* Stolpene vokser opp én etter én når grafen kommer til syne. is-armed settes
+   fra JS, så stolpene står fremme som vanlig om skriptet ikke kjører – ellers
+   ville en tom graf blitt stående igjen. --i gir hver stolpe sin forsinkelse,
+   slik at raden ruller fra 11 mot 21. */
+.advice-chart.is-armed .advice-chart-bars span {
+  transform: scaleY(0);
+  transform-origin: bottom;
+}
+
+.advice-chart.is-armed.is-live .advice-chart-bars span {
+  animation: advice-bar-grow 0.34s cubic-bezier(0.22, 0.8, 0.3, 1) both;
+  animation-delay: calc(var(--i) * 45ms);
+}
+
+@keyframes advice-bar-grow {
+  from {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
 .advice-chart-hours {
   display: grid;
   grid-template-columns: repeat(11, 1fr);
@@ -1284,6 +1308,16 @@ body {
   .contact-bubble:hover,
   .auth-submit:hover {
     transform: none;
+  }
+
+  /* JS setter ikke is-armed når bevegelse er skrudd av, men om innstillingen
+     endres etter innlasting må stolpene stå fremme uansett. Begge selektorene
+     trengs: den med is-live må matche spesifisiteten til animasjonsregelen,
+     ellers vinner den over denne. */
+  .advice-chart.is-armed .advice-chart-bars span,
+  .advice-chart.is-armed.is-live .advice-chart-bars span {
+    transform: none;
+    animation: none;
   }
 }
 
