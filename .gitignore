@@ -3,6 +3,8 @@
 .scope-admin-data/
 .playwright-cli/
 output/
+dist/
+.netlify/
 .env
 .env.*
 !.env.example
