@@ -85,7 +85,7 @@ body {
 .hero-logo img {
   display: block;
   width: auto;
-  height: clamp(42px, 5.8vw, 64px);
+  height: clamp(58px, 7vw, 88px);
 }
 
 /* Samme fylte neon-pille som CTA-en, bare i mindre format. */
@@ -195,15 +195,6 @@ body {
   font-style: italic;
   font-weight: 700;
   letter-spacing: -0.03em;
-}
-
-/* Kicker over taglinen: sier hva Scope er, uten å stjele vekt fra tittelen. */
-.tagline-kicker {
-  margin: clamp(20px, 2.6vw, 30px) auto 0;
-  color: var(--neon);
-  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
-  font-weight: 800;
-  letter-spacing: -0.01em;
 }
 
 .tagline {

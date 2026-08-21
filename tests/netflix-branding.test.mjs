@@ -15,8 +15,11 @@ test("Netflix bruker den grønne Scope-logoen og matchende handlingsknapper", as
   [landing, login].forEach((html) => {
     assert.match(html, /src="assets\/scope-green-logo\.png"/);
     assert.doesNotMatch(html, /scope-neon-wordmark\.png/);
-    assert.match(html, /netflix\.css\?v=20260821-green-brand-v1/);
+    assert.match(html, /netflix\.css\?v=20260821-green-brand-v2/);
   });
+
+  assert.doesNotMatch(landing, /<p class="tagline-kicker">/);
+  assert.match(css, /\.hero-logo img\s*\{[^}]*height:\s*clamp\(58px, 7vw, 88px\)/s);
 
   assert.match(css, /--brand-green:\s*#285f2a/);
   ["login", "cta", "contact-bubble", "auth-submit"].forEach((className) => {
