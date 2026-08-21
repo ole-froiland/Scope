@@ -1119,6 +1119,26 @@ a {
   min-width: 0;
 }
 
+.enkel-site {
+  --scope-brand-green: #285f2a;
+  --scope-brand-green-dark: #1c461f;
+}
+
+.scope-brand-logo {
+  display: block;
+  width: auto;
+  height: 50px;
+  object-fit: contain;
+}
+
+.scope-brand-logo-small {
+  height: 38px;
+}
+
+.scope-brand-logo-intro {
+  height: clamp(104px, 18vw, 148px);
+}
+
 .brand-mark {
   position: relative;
   display: block;
@@ -1323,6 +1343,20 @@ a {
 .header-button.solid:focus-visible {
   background: #003ad1;
   border-color: #003ad1;
+}
+
+.enkel-site .header-button.ghost:hover,
+.enkel-site .header-button.ghost:focus-visible,
+.enkel-site .header-button.solid {
+  border-color: var(--scope-brand-green);
+  background: var(--scope-brand-green);
+  color: #ffffff;
+}
+
+.enkel-site .header-button.solid:hover,
+.enkel-site .header-button.solid:focus-visible {
+  border-color: var(--scope-brand-green-dark);
+  background: var(--scope-brand-green-dark);
 }
 
 .mobile-menu-button {
@@ -2208,6 +2242,12 @@ h3 {
   border-color: #064dff;
 }
 
+.enkel-site .button.secondary:hover,
+.enkel-site .button.secondary:focus-visible {
+  border-color: var(--scope-brand-green);
+  background: var(--scope-brand-green);
+}
+
 .section-heading {
   max-width: 760px;
   margin-bottom: 56px;
@@ -2234,6 +2274,12 @@ h3 {
 .demo-launch-link:focus-visible {
   border-color: #064dff;
   color: #064dff;
+}
+
+.enkel-site .demo-launch-link:hover,
+.enkel-site .demo-launch-link:focus-visible {
+  border-color: var(--scope-brand-green);
+  color: var(--scope-brand-green);
 }
 
 .demo-launch-link svg {
@@ -3322,6 +3368,11 @@ h3 {
   background: #064dff;
 }
 
+.enkel-site .integration-buttons button.is-active[data-color="blue"] {
+  border-color: var(--scope-brand-green-dark);
+  background: var(--scope-brand-green);
+}
+
 .integration-buttons button.is-active[data-color="red"] {
   border-color: #e51f1b;
   background: #ff3c38;
@@ -4384,6 +4435,13 @@ body.demo-expanded {
   border-color: #064dff;
   color: #064dff;
   background: #f4f7ff;
+}
+
+.enkel-site .integration-add-card:hover,
+.enkel-site .integration-add-card:focus-visible {
+  border-color: var(--scope-brand-green);
+  color: var(--scope-brand-green);
+  background: #f3f8f3;
 }
 
 .integration-plus {
@@ -5609,6 +5667,11 @@ main .slide:last-of-type {
   color: #ffffff;
 }
 
+.enkel-site .cookie-actions .cookie-save {
+  border-color: var(--scope-brand-green);
+  background: var(--scope-brand-green);
+}
+
 .cookie-status {
   min-height: 1.2em;
   margin: 0 !important;
@@ -5837,6 +5900,11 @@ body.has-cookie-consent .contact-widget {
   transform: translateY(-1px);
 }
 
+.enkel-site .footer-button:hover,
+.enkel-site .footer-button:focus-visible {
+  background: var(--scope-brand-green);
+}
+
 .footer-meta {
   display: flex;
   justify-content: space-between;
@@ -5907,6 +5975,17 @@ body.has-cookie-consent .contact-widget {
   background: #003ad1;
   transform: translateY(-2px);
   box-shadow: 0 20px 52px rgba(6, 77, 255, 0.18);
+}
+
+.enkel-site .contact-bubble {
+  background: var(--scope-brand-green);
+  box-shadow: 0 16px 44px rgba(40, 95, 42, 0.24);
+}
+
+.enkel-site .contact-bubble:hover,
+.enkel-site .contact-bubble:focus-visible {
+  background: var(--scope-brand-green-dark);
+  box-shadow: 0 20px 52px rgba(40, 95, 42, 0.2);
 }
 
 .contact-bubble svg {
@@ -5995,6 +6074,12 @@ body.has-cookie-consent .contact-widget {
   border-color: #064dff;
   background: #064dff;
   color: #ffffff;
+}
+
+.enkel-site .contact-choice button.is-active,
+.enkel-site .contact-submit {
+  border-color: var(--scope-brand-green);
+  background: var(--scope-brand-green);
 }
 
 .contact-form {
@@ -6340,6 +6425,14 @@ body.has-cookie-consent .contact-widget {
 
   .brand-name {
     font-size: 1.55rem;
+  }
+
+  .scope-brand-logo {
+    height: 40px;
+  }
+
+  .scope-brand-logo-small {
+    height: 34px;
   }
 
   .slide {
@@ -11302,6 +11395,10 @@ body.has-onboarding {
   background: #064dff;
 }
 
+.enkel-site .onboarding-integration.is-selected button {
+  background: var(--scope-brand-green);
+}
+
 .tripletex-note {
   display: grid;
   grid-template-columns: 34px 1fr;
@@ -11386,6 +11483,10 @@ body.has-onboarding {
   justify-self: end;
   background: #064dff;
   color: #ffffff;
+}
+
+.enkel-site .onboarding-next {
+  background: var(--scope-brand-green);
 }
 
 .onboarding-next span {
@@ -17022,6 +17123,17 @@ body.is-demo-session {
 .enkel-page .integration-connect-link:focus-visible {
   border-color: #003ad1;
   background: #003ad1;
+}
+
+.enkel-site .enkel-page .integration-connect-link {
+  border-color: var(--scope-brand-green);
+  background: var(--scope-brand-green);
+}
+
+.enkel-site .enkel-page .integration-connect-link:hover,
+.enkel-site .enkel-page .integration-connect-link:focus-visible {
+  border-color: var(--scope-brand-green-dark);
+  background: var(--scope-brand-green-dark);
 }
 
 @media (max-width: 1000px) {

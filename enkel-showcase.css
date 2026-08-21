@@ -538,15 +538,28 @@
   outline-offset: 3px;
 }
 
+.enkel-site .advice-preview-cta {
+  background: var(--scope-brand-green);
+}
+
+.enkel-site .advice-preview-cta:hover,
+.enkel-site .advice-preview-cta:focus-visible {
+  background: var(--scope-brand-green-dark);
+}
+
+.enkel-site .advice-preview-cta:focus-visible {
+  outline-color: rgba(40, 95, 42, 0.28);
+}
+
 .header-button.solid {
-  border-color: #064dff;
-  background: #064dff;
+  border-color: var(--scope-brand-green);
+  background: var(--scope-brand-green);
 }
 
 .header-button.solid:hover,
 .header-button.solid:focus-visible {
-  border-color: #003ad1;
-  background: #003ad1;
+  border-color: var(--scope-brand-green-dark);
+  background: var(--scope-brand-green-dark);
 }
 
 .button.primary {
@@ -561,8 +574,8 @@
 }
 
 .contact-bubble {
-  background: #00bd7b;
-  box-shadow: 0 16px 44px rgba(0, 189, 123, 0.26);
+  background: var(--scope-brand-green);
+  box-shadow: 0 16px 44px rgba(40, 95, 42, 0.26);
 }
 
 .contact-bubble:hover,
@@ -1139,6 +1152,11 @@ body:not(.is-demo-session) .phone-advice li.is-done .phone-check,
 body:not(.is-demo-session) .phone-ok {
   border-color: #064dff;
   background: #064dff;
+}
+
+.enkel-site:not(.is-demo-session) .phone-button {
+  border-color: var(--scope-brand-green);
+  background: var(--scope-brand-green);
 }
 
 body:not(.is-demo-session) .phone-pill {
@@ -3102,4 +3120,15 @@ body.page-enter .site-header[data-scroll-hide].is-scroll-hidden {
     margin: 0 -22px;
     padding: 22px 22px 28px;
   }
+}
+
+/* Keep public action buttons aligned with the green Scope wordmark. */
+.enkel-site .advice-preview-cta {
+  background: var(--scope-brand-green);
+  box-shadow: 0 12px 26px rgba(40, 95, 42, 0.2);
+}
+
+.enkel-site .advice-preview-cta:hover,
+.enkel-site .advice-preview-cta:focus-visible {
+  background: var(--scope-brand-green-dark);
 }

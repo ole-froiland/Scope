@@ -23,7 +23,7 @@ test("Enkel viser en interaktiv rådsboks rett under heroen", () => {
   assert.match(html, /id="advice-showcase-detail"/);
   assert.match(html, /class="advice-preview-copy" aria-live="polite"/);
   assert.match(html, /class="advice-preview-cta" href="#onboarding" data-onboarding-open>[\s\S]*?<span>Sett i gang<\/span>/);
-  assert.match(html, /href="enkel-showcase\.css\?v=20260811-v68"/);
+  assert.match(html, /href="enkel-showcase\.css\?v=20260821-green-logo-v2"/);
   assert.equal((showcase.match(/class="advice-item-number"/g) || []).length, 4);
   assert.equal((showcase.match(/data-advice-tone="(?:blue|orange|green|red)"/g) || []).length, 5);
   assert.doesNotMatch(showcase, /Se alle innsikter|advice-all-link/);
@@ -66,10 +66,11 @@ test("rådsboksen følger Enkel-stilen og stabler innholdet på små skjermer", 
   assert.match(css, /\.advice-showcase-grid\s*\{[^}]*grid-template-columns:\s*minmax\(0, 0\.94fr\) minmax\(0, 1\.06fr\)/s);
   assert.match(css, /\.advice-item-number\s*\{[^}]*font-size:\s*1\.65rem/s);
   assert.match(css, /\.advice-preview-cta\s*\{[^}]*background:\s*var\(--advice-accent\)/s);
+  assert.match(css, /\.enkel-site \.advice-preview-cta\s*\{[^}]*background:\s*var\(--scope-brand-green\)/s);
   assert.match(css, /\.advice-preview-cta span\s*\{[^}]*color:\s*#ffffff/s);
-  assert.match(css, /\.header-button\.solid\s*\{[^}]*background:\s*#064dff/s);
+  assert.match(css, /\.header-button\.solid\s*\{[^}]*background:\s*var\(--scope-brand-green\)/s);
   assert.match(css, /\.button\.primary\s*\{[^}]*background:\s*#ff3c38/s);
-  assert.match(css, /\.contact-bubble\s*\{[^}]*background:\s*#00bd7b/s);
+  assert.match(css, /\.contact-bubble\s*\{[^}]*background:\s*var\(--scope-brand-green\)/s);
   assert.match(css, /@media \(min-width: 861px\)[\s\S]*?\.scope-stack\s*\{[^}]*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/s);
   assert.match(css, /@media \(min-width: 1100px\)[\s\S]*?\.scope-stack\s*\{[^}]*grid-template-columns:\s*repeat\(4, minmax\(0, 1fr\)\)/s);
   assert.match(css, /@media \(min-width: 901px\)[\s\S]*?\.advice-window-chrome\s*\{[^}]*min-height:\s*34px[\s\S]*?\.advice-preview-detail\s*\{[^}]*height:\s*420px[^}]*min-height:\s*420px/s);

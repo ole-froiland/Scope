@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
 const subpages = {
@@ -54,8 +54,23 @@ test("undersidene deler toppmeny, aktiv side og handlinger med /enkel", () => {
     assert.match(html, /class="header-button ghost" href="\/enkel\?login=1"/, name);
     assert.match(html, /class="header-button solid" href="\/enkel#onboarding"/, name);
     assert.match(html, /class="enkel-cta-button" href="\/enkel#onboarding"/, name);
-    assert.match(html, /styles\.css\?v=20260729-enkel-panels-v2/, name);
+    assert.match(html, /styles\.css\?v=20260821-green-logo-v1/, name);
   });
+});
+
+test("Enkel bruker den grønne Scope-logoen og matchende handlingsknapper", async () => {
+  await access(new URL("../assets/scope-green-logo.png", import.meta.url));
+
+  [landingEnkel, ...pages].forEach((html) => {
+    assert.match(html, /<body class="enkel-site">/);
+    assert.match(html, /class="scope-brand-logo" src="assets\/scope-green-logo\.png"/);
+  });
+
+  assert.match(css, /--scope-brand-green:\s*#285f2a/);
+  assert.match(css, /\.enkel-site \.header-button\.solid\s*\{[^}]*background:\s*var\(--scope-brand-green\)/s);
+  assert.match(css, /\.enkel-site \.contact-submit\s*\{[^}]*background:\s*var\(--scope-brand-green\)/s);
+  assert.match(css, /\.enkel-site \.onboarding-next\s*\{[^}]*background:\s*var\(--scope-brand-green\)/s);
+  assert.match(css, /\.enkel-site \.integration-buttons button\.is-active\[data-color="blue"\]\s*\{[^}]*background:\s*var\(--scope-brand-green\)/s);
 });
 
 test("hver underside har sitt eget innhold", () => {
