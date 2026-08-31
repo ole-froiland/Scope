@@ -1,0 +1,738 @@
+/* ==========================================================================
+   Kvittering — landingsside som én lang kvitteringsstrimmel.
+   Alt henger på én smal papirkolonne, så siden er like riktig på telefon
+   som på skjerm: papiret er bare bredere, aldri annerledes.
+   ========================================================================== */
+
+.kvittering-site {
+  --paper: #fffdf7;
+  --paper-edge: #f4f0e4;
+  --desk: #e6e3da;
+  --ink: #12110e;
+  --ink-soft: #5d5a51;
+  --ink-faint: #a5a196;
+  --green: #1f6b3a;
+  --green-soft: #eaf3ec;
+
+  margin: 0;
+  background: var(--desk);
+  color: var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.kvittering-site *,
+.kvittering-site *::before,
+.kvittering-site *::after {
+  box-sizing: border-box;
+}
+
+:where(.kvittering-site) a {
+  color: inherit;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: var(--paper);
+  z-index: 20;
+}
+
+.skip-link:focus {
+  left: 12px;
+  top: 12px;
+}
+
+.kvittering-site :focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+
+/* --- Topplinje ----------------------------------------------------------- */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px clamp(14px, 4vw, 32px);
+  background: rgba(230, 227, 218, 0.86);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 200ms ease;
+}
+
+.topbar.is-stuck {
+  border-bottom-color: rgba(18, 17, 14, 0.12);
+}
+
+.topbar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-right: auto;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+
+.brand-mark {
+  position: relative;
+  width: 26px;
+  height: 22px;
+  flex: none;
+}
+
+.brand-mark i {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+}
+
+.brand-mark i:nth-child(1) { top: 0; left: 6px; background: var(--green); }
+.brand-mark i:nth-child(2) { right: 0; bottom: 0; background: var(--ink); }
+.brand-mark i:nth-child(3) { bottom: 0; left: 0; background: #c9c4b6; }
+
+.topbar-nav {
+  display: none;
+  gap: 22px;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+}
+
+.topbar-nav a {
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  text-decoration: none;
+  color: var(--ink-soft);
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.topbar-nav a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+/* --- Knapper ------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 22px;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 140ms ease, background-color 140ms ease, color 140ms ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-small {
+  min-height: 38px;
+  padding: 0 14px;
+  font-size: 0.72rem;
+}
+
+.btn-ink {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn-ink:hover {
+  background: #2c2a24;
+}
+
+.btn-green {
+  border-color: var(--green);
+  background: var(--green);
+  color: #fff;
+}
+
+.btn-green:hover {
+  background: #185630;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn-ghost:hover {
+  background: rgba(18, 17, 14, 0.06);
+}
+
+/* --- Papiret ------------------------------------------------------------- */
+
+.paper-stage {
+  position: relative;
+  padding: clamp(18px, 4vw, 46px) clamp(12px, 4vw, 32px) clamp(40px, 8vw, 90px);
+}
+
+.tape {
+  position: relative;
+  width: min(620px, 100%);
+  margin: 0 auto;
+  filter: drop-shadow(0 18px 34px rgba(28, 25, 16, 0.14));
+}
+
+/* Sagtennene er to diagonale gradienter som møtes; papiret kan da være
+   vilkårlig langt uten at kanten røper hvor den slutter. */
+.tape-edge {
+  height: 11px;
+  background-image:
+    linear-gradient(45deg, var(--paper) 50%, transparent 50%),
+    linear-gradient(-45deg, var(--paper) 50%, transparent 50%);
+  background-size: 18px 11px;
+  background-repeat: repeat-x;
+}
+
+.tape-edge-top {
+  transform: scaleY(-1);
+}
+
+.tape-body {
+  padding: clamp(26px, 6vw, 44px) clamp(20px, 5vw, 46px) clamp(30px, 6vw, 48px);
+  background:
+    linear-gradient(180deg, var(--paper-edge), var(--paper) 90px),
+    var(--paper);
+}
+
+/* --- Byggeklosser -------------------------------------------------------- */
+
+.block {
+  padding: clamp(26px, 5vw, 38px) 0;
+}
+
+.block-head {
+  padding-top: 4px;
+  text-align: center;
+}
+
+.rule {
+  height: 1px;
+  background: rgba(18, 17, 14, 0.28);
+}
+
+.rule-double {
+  height: 4px;
+  background:
+    linear-gradient(var(--ink), var(--ink)) top/100% 1px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) bottom/100% 1px no-repeat;
+}
+
+.rule-dotted {
+  height: 0;
+  border-top: 1px dashed rgba(18, 17, 14, 0.4);
+  background: none;
+}
+
+.stamp-line {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
+}
+
+.meta-line {
+  margin: 4px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+}
+
+.block-head .rule-double {
+  margin: 18px 0 22px;
+}
+
+.kicker {
+  margin: 0 0 18px;
+  color: var(--green);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.kvittering-site h1 {
+  margin: 0;
+  font-size: clamp(2.1rem, 8.4vw, 3.15rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+}
+
+.ink-green {
+  color: var(--green);
+}
+
+.lead {
+  max-width: 42ch;
+  margin: 18px auto 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.block-cta .lead {
+  margin-left: 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 26px;
+}
+
+.block-cta .actions {
+  justify-content: flex-start;
+}
+
+.fine {
+  margin: 16px 0 0;
+  color: var(--ink-faint);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+.section-tag {
+  margin: 0 0 10px;
+  color: var(--ink-faint);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.kvittering-site h2 {
+  margin: 0 0 24px;
+  font-size: clamp(1.25rem, 4.6vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+/* --- Regnskapslinjene ---------------------------------------------------- */
+
+.ledger {
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+}
+
+.ledger li,
+.sum-line {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0;
+  padding: 5px 0;
+  font-size: 0.9rem;
+}
+
+.lbl {
+  flex: none;
+  max-width: 60%;
+}
+
+.dots {
+  flex: 1;
+  min-width: 18px;
+  align-self: center;
+  border-bottom: 1px dotted rgba(18, 17, 14, 0.42);
+  transform: translateY(-3px);
+}
+
+.val {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+.sum-line {
+  margin-top: 12px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.advice-ledger {
+  margin-top: 30px;
+  padding: 20px 18px 16px;
+  border: 1px solid rgba(31, 107, 58, 0.35);
+  border-radius: 3px;
+  background: var(--green-soft);
+}
+
+.ledger-head {
+  margin: 0 0 10px;
+  color: var(--green);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.ledger-green .val {
+  color: var(--green);
+}
+
+.sum-total {
+  color: var(--green);
+}
+
+.advice-ledger .rule-dotted {
+  border-top-color: rgba(31, 107, 58, 0.45);
+}
+
+/* --- Stegene ------------------------------------------------------------- */
+
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.steps li {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 4px 12px;
+  padding: 16px 0;
+  border-top: 1px dashed rgba(18, 17, 14, 0.22);
+}
+
+.steps li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.step-no {
+  color: var(--green);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.step-copy {
+  display: grid;
+  gap: 5px;
+}
+
+.step-copy strong {
+  font-size: 0.98rem;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.step-copy span {
+  color: var(--ink-soft);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.quality-stamp {
+  width: max-content;
+  margin: 26px 0 0 auto;
+  padding: 7px 16px;
+  border: 2px solid rgba(31, 107, 58, 0.5);
+  border-radius: 3px;
+  color: rgba(31, 107, 58, 0.72);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transform: rotate(-6deg);
+}
+
+/* --- Rådene -------------------------------------------------------------- */
+
+.advice-item {
+  border-top: 1px dashed rgba(18, 17, 14, 0.22);
+}
+
+.advice-item:first-child {
+  border-top: 0;
+}
+
+.advice-toggle {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 22px;
+  align-items: start;
+  gap: 12px;
+  padding: 16px 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.advice-no {
+  color: var(--ink-faint);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.advice-text {
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.advice-sign {
+  justify-self: end;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(18, 17, 14, 0.3);
+  border-radius: 2px;
+  color: var(--green);
+  font-size: 0.9rem;
+  line-height: 1;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.advice-toggle[aria-expanded="true"] .advice-sign {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+  transform: rotate(45deg);
+}
+
+.advice-why {
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border-left: 2px solid var(--green);
+  background: var(--green-soft);
+  color: var(--ink-soft);
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
+.advice-why[hidden] {
+  display: none;
+}
+
+/* --- Kilder -------------------------------------------------------------- */
+
+.sources {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sources li {
+  padding: 16px 10px;
+  border: 1px dashed rgba(18, 17, 14, 0.34);
+  border-radius: 3px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.sources-note {
+  margin: 20px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.logo-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 26px;
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px dashed rgba(18, 17, 14, 0.22);
+}
+
+.logo-strip img {
+  height: 20px;
+  width: auto;
+  max-width: 96px;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.55;
+}
+
+/* --- Avslutning ---------------------------------------------------------- */
+
+.perks {
+  display: grid;
+  gap: 6px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.perks li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.perks li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: 700;
+}
+
+.block-foot {
+  padding-bottom: 6px;
+  text-align: center;
+}
+
+.thanks {
+  margin: 0 0 18px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  text-transform: uppercase;
+}
+
+/* Strekkoden er rene striper – ingen bildefil å laste. */
+.barcode {
+  height: 46px;
+  margin: 0 auto 18px;
+  width: min(260px, 80%);
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--ink) 0 2px,
+    transparent 2px 4px,
+    var(--ink) 4px 5px,
+    transparent 5px 9px,
+    var(--ink) 9px 12px,
+    transparent 12px 14px
+  );
+}
+
+.block-foot .meta-line a {
+  text-decoration-color: rgba(18, 17, 14, 0.3);
+  text-underline-offset: 3px;
+}
+
+/* --- Margnotater --------------------------------------------------------- */
+
+.margin-note {
+  display: none;
+  position: absolute;
+  width: 172px;
+  margin: 0;
+  color: var(--green);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.margin-note::before {
+  content: "";
+  position: absolute;
+  top: 0.62em;
+  width: 26px;
+  border-top: 1px dashed rgba(31, 107, 58, 0.55);
+}
+
+/* Notatene henger utenfor papiret, aldri oppå det: de måles fra midten
+   slik at avstanden til strimmelen er den samme uansett skjermbredde. */
+.margin-note-1 {
+  top: 232px;
+  right: calc(50% + 350px);
+  text-align: right;
+  transform: rotate(-2deg);
+}
+
+.margin-note-1::before {
+  right: -34px;
+}
+
+.margin-note-2 {
+  top: 560px;
+  left: calc(50% + 350px);
+  transform: rotate(2deg);
+}
+
+.margin-note-2::before {
+  left: -34px;
+}
+
+/* --- Utskriftseffekten --------------------------------------------------- */
+
+.print-line {
+  opacity: 0;
+  transform: translateY(7px);
+}
+
+.print-line.is-printed {
+  opacity: 1;
+  transform: none;
+  transition: opacity 420ms ease calc(var(--i, 0) * 70ms), transform 420ms ease calc(var(--i, 0) * 70ms);
+}
+
+/* --- Større skjermer ----------------------------------------------------- */
+
+@media (min-width: 700px) {
+  .topbar-nav {
+    display: flex;
+  }
+
+  .sources {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .kvittering-site {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .margin-note {
+    display: block;
+  }
+}
+
+/* --- Uten animasjon ------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .kvittering-site * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .print-line {
+    opacity: 1;
+    transform: none;
+  }
+}

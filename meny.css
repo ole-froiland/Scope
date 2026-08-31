@@ -1,0 +1,614 @@
+/* ==========================================================================
+   Menykortet — rolig, klassisk landingsside satt som et menykort.
+   Én sentrert kolonne, hårfine streker og få farger. Telefonen får samme
+   kort, bare smalere: ingen egen mobilversjon å holde i live.
+   ========================================================================== */
+
+.meny-site {
+  --cream: #f6f1e6;
+  --cream-deep: #efe8d9;
+  --ink: #23201a;
+  --ink-soft: #6a6459;
+  --ink-faint: #9c958a;
+  --green: #1f5133;
+  --hairline: rgba(35, 32, 26, 0.22);
+
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.meny-site *,
+.meny-site *::before,
+.meny-site *::after {
+  box-sizing: border-box;
+}
+
+:where(.meny-site) a {
+  color: inherit;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: var(--cream);
+  z-index: 20;
+}
+
+.skip-link:focus {
+  left: 12px;
+  top: 12px;
+}
+
+.meny-site :focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 4px;
+}
+
+/* --- Topplinje ----------------------------------------------------------- */
+
+.menu-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px clamp(16px, 5vw, 44px);
+  background: rgba(246, 241, 230, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 220ms ease;
+}
+
+.menu-header.is-stuck {
+  border-bottom-color: var(--hairline);
+}
+
+.wordmark {
+  margin-right: auto;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.header-nav {
+  display: none;
+  gap: 26px;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.header-nav a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 1px solid transparent;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.header-nav a:hover {
+  color: var(--ink);
+  border-bottom-color: var(--green);
+}
+
+.link-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--green);
+}
+
+.link-cta span {
+  transition: transform 200ms ease;
+}
+
+.link-cta:hover span {
+  transform: translateX(4px);
+}
+
+/* --- Kortene ------------------------------------------------------------- */
+
+.card {
+  width: min(680px, 100%);
+  margin: 0 auto;
+  padding: clamp(52px, 10vw, 96px) clamp(20px, 6vw, 40px);
+  text-align: center;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.card:last-of-type {
+  border-bottom: 0;
+}
+
+.card-hero {
+  padding-top: clamp(46px, 9vw, 82px);
+}
+
+.card-feature {
+  background: var(--cream-deep);
+  width: 100%;
+  border-top: 1px solid var(--hairline);
+}
+
+.card-feature > * {
+  width: min(680px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.overline {
+  margin: 0 0 14px;
+  color: var(--ink-faint);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  text-transform: uppercase;
+}
+
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 0 auto 26px;
+  width: min(220px, 60%);
+  color: var(--green);
+}
+
+.ornament span {
+  flex: 1;
+  height: 1px;
+  background: var(--hairline);
+}
+
+.ornament b {
+  font-size: 0.6rem;
+  line-height: 1;
+}
+
+.ornament-close {
+  margin: 40px auto 0;
+}
+
+.meny-site h1 {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: clamp(2.9rem, 11vw, 4.9rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.meny-site h1 em {
+  font-style: italic;
+  color: var(--green);
+}
+
+.meny-site h2 {
+  margin: 0 0 34px;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.85rem, 6vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.hero-lead {
+  max-width: 40ch;
+  margin: 26px auto 0;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.hero-fine {
+  margin: 22px 0 0;
+  color: var(--ink-faint);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* --- Knapper ------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 0 30px;
+  border: 1px solid var(--green);
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 200ms ease, color 200ms ease, transform 160ms ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-solid {
+  background: var(--green);
+  color: var(--cream);
+}
+
+.btn-solid:hover {
+  background: #17422a;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--green);
+}
+
+.btn-outline:hover {
+  background: rgba(31, 81, 51, 0.08);
+}
+
+/* --- Rettene ------------------------------------------------------------- */
+
+.courses {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.course {
+  padding: 22px 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.course:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.course-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0;
+}
+
+.course-name {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.25rem, 4.6vw, 1.5rem);
+  letter-spacing: 0.01em;
+}
+
+.course-leader {
+  flex: 1;
+  min-width: 16px;
+  align-self: center;
+  border-bottom: 1px dotted var(--hairline);
+  transform: translateY(-2px);
+}
+
+.course-time {
+  flex: none;
+  color: var(--green);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+.course-note {
+  max-width: 52ch;
+  margin: 8px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.93rem;
+  line-height: 1.7;
+}
+
+/* --- Dagens anbefaling --------------------------------------------------- */
+
+.recommend {
+  padding: clamp(26px, 6vw, 42px) clamp(20px, 5vw, 40px);
+  border: 1px solid var(--hairline);
+  background: var(--cream);
+}
+
+.recommend-body {
+  margin: 0;
+}
+
+.recommend-text {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.5rem, 5.6vw, 2.15rem);
+  font-style: italic;
+  line-height: 1.3;
+}
+
+.recommend-why {
+  max-width: 46ch;
+  margin: 18px auto 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.recommend-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.round-btn {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--hairline);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+
+.round-btn:hover {
+  border-color: var(--green);
+  background: var(--green);
+  color: var(--cream);
+}
+
+.recommend-count {
+  margin: 0;
+  min-width: 62px;
+  color: var(--ink-faint);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  font-variant-numeric: tabular-nums;
+}
+
+.recommend-text.is-swapping {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.recommend-text,
+.recommend-why {
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+.recommend-why.is-swapping {
+  opacity: 0;
+}
+
+/* --- Råvarene ------------------------------------------------------------ */
+
+.pantry {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.pantry li {
+  display: grid;
+  gap: 4px;
+  padding: 18px 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.pantry li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.pantry strong {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.pantry span {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.pantry-note {
+  max-width: 48ch;
+  margin: 30px auto 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.logo-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 18px 28px;
+  margin-top: 26px;
+}
+
+.logo-row img {
+  height: 19px;
+  width: auto;
+  max-width: 92px;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.45;
+}
+
+/* --- Husets løfte -------------------------------------------------------- */
+
+.promises {
+  display: grid;
+  gap: 30px;
+  text-align: left;
+}
+
+.promise {
+  padding-top: 20px;
+  border-top: 1px solid var(--hairline);
+}
+
+.promise-no {
+  margin: 0 0 8px;
+  color: var(--green);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.15rem;
+  letter-spacing: 0.14em;
+}
+
+.promise-title {
+  margin: 0 0 6px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.promise-note {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+/* --- Bord til deg -------------------------------------------------------- */
+
+.card-reserve {
+  padding-bottom: clamp(60px, 11vw, 110px);
+}
+
+.reserve-lead {
+  max-width: 44ch;
+  margin: 0 auto;
+  color: var(--ink-soft);
+}
+
+/* --- Bunnen -------------------------------------------------------------- */
+
+.menu-footer {
+  padding: clamp(40px, 8vw, 64px) 24px clamp(46px, 8vw, 70px);
+  border-top: 1px solid var(--hairline);
+  text-align: center;
+}
+
+.wordmark-footer {
+  margin: 0 0 20px;
+  font-size: 1.15rem;
+  color: var(--green);
+}
+
+.footer-line {
+  margin: 5px 0;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+}
+
+.footer-line a {
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 3px;
+}
+
+.footer-fine {
+  margin-top: 18px;
+  color: var(--ink-faint);
+  font-size: 0.74rem;
+}
+
+/* --- Innsig -------------------------------------------------------------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity 700ms ease, transform 700ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* --- Større skjermer ----------------------------------------------------- */
+
+@media (min-width: 760px) {
+  .header-nav {
+    display: flex;
+  }
+
+  .promises {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 26px;
+  }
+
+  .pantry {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 40px;
+  }
+
+  .pantry li:nth-child(2) {
+    border-top: 0;
+    padding-top: 0;
+  }
+}
+
+@media (min-width: 1100px) {
+  .card {
+    width: min(760px, 100%);
+  }
+
+  .card-feature > * {
+    width: min(760px, 100%);
+  }
+}
+
+/* --- Uten animasjon ------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  .meny-site * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

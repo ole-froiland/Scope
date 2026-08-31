@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scope — kveldens meny for driften din</title>
+    <meta name="description" content="Scope serverer tallene dine som et menykort: fire retter fra rådata til ett tydelig råd, hver morgen, for restauranter og kafeer.">
+    <meta name="theme-color" content="#f6f1e6">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23f6f1e6'/%3E%3Crect x='14' y='14' width='36' height='36' fill='none' stroke='%231f5133' stroke-width='2'/%3E%3Cpath d='M32 25 L36 32 L32 39 L28 32 Z' fill='%231f5133'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cookie-consent.css?v=20260718-v1">
+    <link rel="stylesheet" href="meny.css?v=20260831-meny-v1">
+  </head>
+  <body class="meny-site">
+    <a class="skip-link" href="#hovedinnhold">Hopp til innholdet</a>
+
+    <header class="menu-header" data-header>
+      <a class="wordmark" href="/meny" aria-label="Scope, til toppen">Scope</a>
+      <nav class="header-nav" aria-label="Hovedmeny">
+        <a href="#menyen">Menyen</a>
+        <a href="#anbefaling">Dagens</a>
+        <a href="#ravarene">Råvarene</a>
+        <a href="#bord">Bord</a>
+      </nav>
+      <a class="link-cta" href="#bord">Be om bord<span aria-hidden="true">→</span></a>
+    </header>
+
+    <main id="hovedinnhold">
+      <!-- Menykortet: alt står i én smal, sentrert kolonne med god luft,
+           slik et ordentlig menykort gjør. Kortet blir bredere på skjerm,
+           aldri annerledes. -->
+      <section class="card card-hero" aria-labelledby="hero-tittel">
+        <p class="overline reveal">Etablert for serveringsbransjen</p>
+        <div class="ornament reveal" aria-hidden="true"><span></span><b>&#9670;</b><span></span></div>
+        <h1 id="hero-tittel" class="reveal">
+          Du kan mat.<br><em>Vi kan tall.</em>
+        </h1>
+        <p class="hero-lead reveal">
+          Hver natt leser vi kassa, regnskapet, bemanninga og været.
+          Hver morgen serverer vi ett tydelig neste steg.
+        </p>
+        <div class="hero-actions reveal">
+          <a class="btn btn-solid" href="#bord">Test Scope gratis</a>
+          <a class="btn btn-outline" href="#menyen">Se menyen</a>
+        </div>
+        <p class="hero-fine reveal">Klar på 1–2–3 &middot; Ingen bindingstid</p>
+        <div class="ornament ornament-close reveal" aria-hidden="true"><span></span><b>&#9670;</b><span></span></div>
+      </section>
+
+      <section class="card" id="menyen" aria-labelledby="menyen-tittel">
+        <p class="overline reveal">Menyen</p>
+        <h2 id="menyen-tittel" class="reveal">Fire retter, fra rådata til råd</h2>
+        <ol class="courses">
+          <li class="course reveal">
+            <p class="course-head">
+              <span class="course-name">Første rett &middot; Hent data</span>
+              <span class="course-leader" aria-hidden="true"></span>
+              <span class="course-time">kl. 03</span>
+            </p>
+            <p class="course-note">Vi kobler oss på kassa, regnskapet og bemanninga, og henter hele natta i ett jafs.</p>
+          </li>
+          <li class="course reveal">
+            <p class="course-head">
+              <span class="course-name">Andre rett &middot; Analyser</span>
+              <span class="course-leader" aria-hidden="true"></span>
+              <span class="course-time">kl. 04</span>
+            </p>
+            <p class="course-note">AI-en finner mønstre og avvik, og ser hva som faktisk flytter resultatet ditt.</p>
+          </li>
+          <li class="course reveal">
+            <p class="course-head">
+              <span class="course-name">Tredje rett &middot; Kvalitetssikre</span>
+              <span class="course-leader" aria-hidden="true"></span>
+              <span class="course-time">kl. 07</span>
+            </p>
+            <p class="course-note">Folk som kan analyse og kjenner bransjen smaker på funnene før de går ut.</p>
+          </li>
+          <li class="course reveal">
+            <p class="course-head">
+              <span class="course-name">Til slutt &middot; Rådet</span>
+              <span class="course-leader" aria-hidden="true"></span>
+              <span class="course-time">kl. 08</span>
+            </p>
+            <p class="course-note">Ett tydelig neste steg med forventet effekt – ikke en rapport du må tolke selv.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="card card-feature" id="anbefaling" aria-labelledby="anbefaling-tittel">
+        <p class="overline reveal">Dagens anbefaling</p>
+        <h2 id="anbefaling-tittel" class="reveal">Vi anbefaler i dag</h2>
+
+        <div class="recommend reveal" data-recommend>
+          <blockquote class="recommend-body">
+            <p class="recommend-text" data-recommend-text aria-live="polite">Sett inn én ekstra på gulvet fra 18:30 på fredag.</p>
+            <footer class="recommend-why" data-recommend-why>
+              Fredagene fylles raskt etter klokken 18. Én ekstra person gir roligere
+              service og høyere snittbong. Forventet effekt: 3 800 kr i uken.
+            </footer>
+          </blockquote>
+          <div class="recommend-controls">
+            <button class="round-btn" type="button" data-recommend-prev aria-label="Forrige anbefaling">&#8592;</button>
+            <p class="recommend-count"><span data-recommend-index>1</span> av 3</p>
+            <button class="round-btn" type="button" data-recommend-next aria-label="Neste anbefaling">&#8594;</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="ravarene" aria-labelledby="ravarene-tittel">
+        <p class="overline reveal">Råvarene</p>
+        <h2 id="ravarene-tittel" class="reveal">Fire kilder, ett kjøkken</h2>
+        <ul class="pantry">
+          <li class="reveal"><strong>Kassa</strong><span>Hver bong, hver time, hvert bord.</span></li>
+          <li class="reveal"><strong>Regnskapet</strong><span>Varekost, lønn og faste kostnader.</span></li>
+          <li class="reveal"><strong>Bemanninga</strong><span>Vaktene dine, satt opp mot trykket.</span></li>
+          <li class="reveal"><strong>Været</strong><span>Regn på lørdag flytter mer enn du tror.</span></li>
+        </ul>
+        <p class="pantry-note reveal">
+          Vi kobler oss på Tripletex, Lightspeed, Tamigo, PowerOffice, Planday og flere.
+          Oppsettet gjør vi for deg.
+        </p>
+        <div class="logo-row reveal" aria-hidden="true">
+          <img src="assets/logos/tripletex.svg" alt="" loading="lazy">
+          <img src="assets/logos/lightspeed.svg" alt="" loading="lazy">
+          <img src="assets/logos/tamigo.svg" alt="" loading="lazy">
+          <img src="assets/logos/poweroffice.png" alt="" loading="lazy">
+          <img src="assets/logos/planday.png" alt="" loading="lazy">
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="lofte-tittel">
+        <p class="overline reveal">Husets løfte</p>
+        <h2 id="lofte-tittel" class="reveal">Tre ting vi holder</h2>
+        <div class="promises">
+          <div class="promise reveal">
+            <p class="promise-no">I</p>
+            <p class="promise-title">Ett råd om gangen</p>
+            <p class="promise-note">Du får det viktigste først, ikke tolv grafer du må tolke selv.</p>
+          </div>
+          <div class="promise reveal">
+            <p class="promise-no">II</p>
+            <p class="promise-title">Et menneske ser på det</p>
+            <p class="promise-note">Ingen råd går ut uten at noen som kjenner bransjen har lest det.</p>
+          </div>
+          <div class="promise reveal">
+            <p class="promise-no">III</p>
+            <p class="promise-title">Ingen bindingstid</p>
+            <p class="promise-note">Du blir så lenge Scope er verdt det. Ikke lenger.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card card-reserve" id="bord" aria-labelledby="bord-tittel">
+        <div class="ornament reveal" aria-hidden="true"><span></span><b>&#9670;</b><span></span></div>
+        <p class="overline reveal">Bord til deg</p>
+        <h2 id="bord-tittel" class="reveal">Vi tar imot testkunder</h2>
+        <p class="reserve-lead reveal">
+          Du får Scope gratis i testperioden, personlig oppsett og en reell mulighet
+          til å forme produktet. Send oss en linje, så tar vi kontakt.
+        </p>
+        <div class="hero-actions reveal">
+          <a class="btn btn-solid" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20teste%20Scope">Jeg vil teste Scope</a>
+          <a class="btn btn-outline" href="tel:+4793637295">Ring 936 37 295</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="menu-footer">
+      <p class="wordmark wordmark-footer">Scope</p>
+      <p class="footer-line">Scope Analytics AS &middot; Org.nr. 936 372 295</p>
+      <p class="footer-line">
+        <a href="mailto:post@scopeanalytics.no">post@scopeanalytics.no</a>
+        &middot;
+        <a href="tel:+4793637295">936 37 295</a>
+      </p>
+      <p class="footer-line"><a href="/cookies.html">Personvern og informasjonskapsler</a></p>
+      <p class="footer-line footer-fine">&copy; 2026 Scope Analytics AS</p>
+    </footer>
+
+    <aside class="simple-cookie-consent" data-simple-cookie-consent hidden aria-label="Informasjon om informasjonskapsler">
+      <div class="simple-cookie-copy">
+        <strong>Vi bruker informasjonskapsler</strong>
+        <p>Nødvendige kapsler holder siden trygg. Du velger selv om vi også kan bruke valgfrie kapsler.</p>
+        <a href="/cookies.html">Les mer</a>
+      </div>
+      <div class="simple-cookie-actions">
+        <button type="button" data-cookie-choice="necessary">Kun nødvendige</button>
+        <button class="simple-cookie-primary" type="button" data-cookie-choice="all">Godta alle</button>
+      </div>
+    </aside>
+
+    <script src="cookie-consent.js?v=20260718-v1" defer></script>
+    <script src="meny.js?v=20260831-meny-v1" defer></script>
+  </body>
+</html>

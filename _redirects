@@ -4,6 +4,8 @@
 /leken/  /landing.html        200!
 /enkel   /landing-enkel.html  200!
 /enkel/  /landing-enkel.html  200!
+/enkel-2  /landing-enkel-2.html 200!
+/enkel-2/ /landing-enkel-2.html 200!
 /vakt    /landing-vakt.html   200!
 /vakt/   /landing-vakt.html   200!
 /brutal  /landing-brutal.html 200!
@@ -12,3 +14,11 @@
 /kombi/  /landing-kombi.html  200!
 /netflix  /landing-netflix.html 200!
 /netflix/ /landing-netflix.html 200!
+/kvittering  /landing-kvittering.html 200!
+/kvittering/ /landing-kvittering.html 200!
+/meny     /landing-meny.html    200!
+/meny/    /landing-meny.html    200!
+/for-etter  /landing-for-etter.html 200!
+/for-etter/ /landing-for-etter.html 200!
+/sesong   /landing-sesong.html  200!
+/sesong/  /landing-sesong.html  200!

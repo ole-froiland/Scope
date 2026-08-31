@@ -330,6 +330,19 @@ h1 {
   background: #e50914;
 }
 
+.page-option-enkel2 .option-preview {
+  border: 1px dashed #b9b9b9;
+  background: #ffffff;
+}
+
+.page-option-enkel2 .option-preview i {
+  font-style: normal;
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  color: #00bd7b;
+}
+
 @media (max-width: 760px) {
   .page-shell {
     width: min(100% - 28px, 540px);
@@ -354,4 +367,117 @@ h1 {
   .option-arrow {
     transition: none;
   }
+}
+
+/* Kvittering: en liten bong med utskrevne linjer. */
+.page-option-kvittering .option-preview {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 6px;
+  width: 92px;
+  height: 78px;
+  padding: 12px 10px;
+  border: 1px solid rgba(17, 19, 26, 0.2);
+  background: #fffdf7;
+  box-shadow: 6px 6px 0 rgba(17, 19, 26, 0.08);
+}
+
+.page-option-kvittering .option-preview i {
+  height: 4px;
+  border-radius: 2px;
+  background: #12110e;
+}
+
+.page-option-kvittering .option-preview i:nth-child(2) { width: 70%; }
+.page-option-kvittering .option-preview i:nth-child(3) { width: 84%; }
+
+.page-option-kvittering .option-preview i:last-child {
+  width: 46%;
+  background: #1f6b3a;
+}
+
+.page-option-kvittering .option-arrow {
+  background: #1f6b3a;
+}
+
+/* Menykortet: ramme og en liten rombe, som på et menykort. */
+.page-option-meny {
+  background: #f6f1e6;
+}
+
+.page-option-meny .option-preview {
+  width: 96px;
+  height: 78px;
+  border: 1px solid #1f5133;
+  outline: 3px solid #f6f1e6;
+  outline-offset: -6px;
+  box-shadow: inset 0 0 0 5px #f6f1e6, inset 0 0 0 6px rgba(31, 81, 51, 0.45);
+}
+
+.page-option-meny .option-preview i {
+  font-style: normal;
+  font-size: 1rem;
+  color: #1f5133;
+}
+
+.page-option-meny .option-arrow {
+  background: #1f5133;
+}
+
+/* Før / Etter: to halvdeler med et tydelig skille imellom. */
+.page-option-foretter .option-preview {
+  gap: 0;
+  width: 104px;
+  height: 78px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.page-option-foretter .option-preview i {
+  width: 50%;
+  height: 100%;
+}
+
+.page-option-foretter .option-preview i:first-child {
+  background: repeating-linear-gradient(
+    0deg,
+    #d9d9d4 0 4px,
+    #cdcdc8 4px 8px
+  );
+  border-right: 3px solid #0f1112;
+}
+
+.page-option-foretter .option-preview i:last-child {
+  background: #00875a;
+}
+
+.page-option-foretter .option-arrow {
+  background: #00875a;
+}
+
+/* Sesong: årshjulet som en liten skive. */
+.page-option-sesong .option-preview i {
+  position: relative;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background: conic-gradient(
+    #064dff 0 18%,
+    #c3cbdc 18% 46%,
+    #064dff 46% 58%,
+    #c3cbdc 58% 100%
+  );
+}
+
+.page-option-sesong .option-preview i::after {
+  content: "";
+  position: absolute;
+  inset: 15px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.page-option-sesong .option-arrow {
+  background: #064dff;
 }

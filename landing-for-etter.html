@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scope — dra og se forskjellen</title>
+    <meta name="description" content="Fire systemer og tolv faner på den ene siden. Ett tydelig råd klokka åtte på den andre. Dra i skillet og se hva Scope gjør med driftsdagen din.">
+    <meta name="theme-color" content="#f3f3f1">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='32' height='64' fill='%23c9c9c4'/%3E%3Crect x='32' width='32' height='64' fill='%2300a86b'/%3E%3Crect x='30' width='4' height='64' fill='%230f1112'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cookie-consent.css?v=20260718-v1">
+    <link rel="stylesheet" href="for-etter.css?v=20260831-foretter-v1">
+  </head>
+  <body class="foretter-site">
+    <a class="skip-link" href="#hovedinnhold">Hopp til innholdet</a>
+
+    <header class="bar" data-bar>
+      <a class="bar-brand" href="/for-etter" aria-label="Scope, til toppen">
+        <span class="bar-dot" aria-hidden="true"></span>
+        <span>scope</span>
+      </a>
+      <nav class="bar-nav" aria-label="Hovedmeny">
+        <a href="#dra">Dra i skillet</a>
+        <a href="#mellom">Slik virker det</a>
+        <a href="#listen">Før og etter</a>
+      </nav>
+      <a class="btn btn-green btn-sm" href="#test">Test gratis</a>
+    </header>
+
+    <main id="hovedinnhold">
+      <section class="hero" id="dra" aria-labelledby="hero-tittel">
+        <div class="hero-copy">
+          <p class="eyebrow">AI-rådgivning for serveringsbransjen</p>
+          <h1 id="hero-tittel">Samme dag.<br>To helt ulike <span class="green">morgener.</span></h1>
+          <p class="hero-lead">
+            Tallene dine finnes allerede. Forskjellen er om noen har lest dem for deg.
+            Dra i skillet og se selv.
+          </p>
+        </div>
+
+        <!-- Sammenligningen: to like store lag oppå hverandre. Skyveren er en
+             ekte range-kontroll, så drag, touch og piltaster virker uten
+             ekstra kode – og skjermlesere får noe å holde i. -->
+        <figure class="compare" data-compare style="--split:50">
+          <figcaption class="sr-only">Dra for å sammenligne en driftsmorgen uten Scope med en morgen med Scope.</figcaption>
+
+          <div class="pane pane-before">
+            <p class="pane-tag">Uten Scope</p>
+            <div class="clutter" aria-hidden="true">
+              <article class="mini"><header>Kasse<i></i></header><b>412 800</b><span></span><span></span></article>
+              <article class="mini"><header>Regnskap<i></i></header><b>−138 100</b><span></span><span></span></article>
+              <article class="mini mini-warn"><header>Bemanning<i></i></header><b>151 400</b><span></span><span></span></article>
+              <article class="mini"><header>Vaktplan<i></i></header><b>18 vakter</b><span></span><span></span></article>
+              <article class="mini"><header>Svinn<i></i></header><b>9 240</b><span></span><span></span></article>
+              <article class="mini"><header>Vær<i></i></header><b>12 °C</b><span></span><span></span></article>
+            </div>
+            <p class="pane-line">Fire systemer. Tolv faner. Null svar.</p>
+          </div>
+
+          <div class="pane pane-after">
+            <p class="pane-tag pane-tag-green">Med Scope</p>
+            <div class="calm">
+              <article class="advice-card">
+                <p class="advice-when">I dag &middot; kl. 08:00</p>
+                <p class="advice-what">Sett inn én ekstra på gulvet fra 18:30 på fredag.</p>
+                <p class="advice-why">Fredagene fylles raskt etter 18. Roligere service, kortere kø, høyere snittbong.</p>
+                <p class="advice-effect"><span>Forventet effekt</span><strong>+3 800 kr</strong></p>
+              </article>
+            </div>
+            <p class="pane-line">Ett tydelig neste steg, hver morgen.</p>
+          </div>
+
+          <input
+            class="compare-range"
+            type="range"
+            min="0"
+            max="100"
+            value="50"
+            step="1"
+            data-compare-range
+            aria-label="Hvor mye av «Med Scope» som vises, i prosent">
+
+          <div class="divider" aria-hidden="true">
+            <span class="divider-grip">&#8596;</span>
+          </div>
+        </figure>
+
+        <p class="compare-hint">Dra &middot; sveip &middot; eller bruk piltastene</p>
+      </section>
+
+      <section class="section" id="mellom" aria-labelledby="mellom-tittel">
+        <p class="eyebrow reveal">Slik virker det</p>
+        <h2 id="mellom-tittel" class="reveal">Det som skjer mens du sover</h2>
+        <ol class="rail">
+          <li class="reveal">
+            <span class="rail-no">01</span>
+            <h3>Hent data</h3>
+            <p>Vi kobler oss på kassa, regnskapet og bemanninga, og henter tallene dine hver eneste natt.</p>
+          </li>
+          <li class="reveal">
+            <span class="rail-no">02</span>
+            <h3>Analyser</h3>
+            <p>AI-en går gjennom alt, finner mønstre og avvik, og ser hva som faktisk flytter resultatet.</p>
+          </li>
+          <li class="reveal">
+            <span class="rail-no">03</span>
+            <h3>Kvalitetssikre</h3>
+            <p>Folk som kan analyse og kjenner bransjen går gjennom funnene før de blir til råd.</p>
+          </li>
+          <li class="reveal">
+            <span class="rail-no">04</span>
+            <h3>Få råd</h3>
+            <p>Du får ett tydelig neste steg med forventet effekt – ikke en rapport du må tolke selv.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section section-list" id="listen" aria-labelledby="listen-tittel">
+        <p class="eyebrow reveal">Før og etter</p>
+        <h2 id="listen-tittel" class="reveal">Fire ting som bytter plass</h2>
+        <ul class="swap-list">
+          <li class="reveal">
+            <span class="swap-before">Fire systemer å sjekke før lunsj</span>
+            <span class="swap-arrow" aria-hidden="true">→</span>
+            <span class="swap-after">Én melding klokka åtte</span>
+          </li>
+          <li class="reveal">
+            <span class="swap-before">Bemanning på magefølelse</span>
+            <span class="swap-arrow" aria-hidden="true">→</span>
+            <span class="swap-after">Vakter satt mot faktisk trykk</span>
+          </li>
+          <li class="reveal">
+            <span class="swap-before">Svinn du oppdager på fredag</span>
+            <span class="swap-arrow" aria-hidden="true">→</span>
+            <span class="swap-after">Bestilling justert på tirsdag</span>
+          </li>
+          <li class="reveal">
+            <span class="swap-before">Rapporter ingen rekker å lese</span>
+            <span class="swap-arrow" aria-hidden="true">→</span>
+            <span class="swap-after">Ett neste steg med forventet effekt</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="section section-stats" aria-labelledby="tall-tittel">
+        <h2 id="tall-tittel" class="sr-only">Scope i tall</h2>
+        <dl class="stats">
+          <div class="reveal">
+            <dt>Systemer koblet sammen</dt>
+            <dd><span data-count="4">4</span></dd>
+          </div>
+          <div class="reveal">
+            <dt>Råd hver morgen</dt>
+            <dd><span data-count="1">1</span></dd>
+          </div>
+          <div class="reveal">
+            <dt>Integrasjoner</dt>
+            <dd><span data-count="30">30</span>+</dd>
+          </div>
+          <div class="reveal">
+            <dt>Kroner i testperioden</dt>
+            <dd><span data-count="0">0</span></dd>
+          </div>
+        </dl>
+        <div class="logo-row reveal" aria-hidden="true">
+          <img src="assets/logos/tripletex.svg" alt="" loading="lazy">
+          <img src="assets/logos/lightspeed.svg" alt="" loading="lazy">
+          <img src="assets/logos/tamigo.svg" alt="" loading="lazy">
+          <img src="assets/logos/poweroffice.png" alt="" loading="lazy">
+          <img src="assets/logos/planday.png" alt="" loading="lazy">
+          <img src="assets/logos/quinyx.svg" alt="" loading="lazy">
+        </div>
+      </section>
+
+      <section class="section section-cta" id="test" aria-labelledby="cta-tittel">
+        <div class="cta-box reveal">
+          <p class="eyebrow">Bli med tidlig</p>
+          <h2 id="cta-tittel">Vi søker testkunder</h2>
+          <p>Gratis i testperioden, personlig oppsett og ingen bindingstid. Du er med på å forme produktet.</p>
+          <div class="cta-actions">
+            <a class="btn btn-green" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20teste%20Scope">Jeg vil teste Scope</a>
+            <a class="btn btn-line" href="tel:+4793637295">Ring 936 37 295</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="foot-inner">
+        <a class="bar-brand" href="/for-etter" aria-label="Scope, til toppen">
+          <span class="bar-dot" aria-hidden="true"></span>
+          <span>scope</span>
+        </a>
+        <p>Scope Analytics AS &middot; Org.nr. 936 372 295</p>
+        <nav aria-label="Bunnlenker">
+          <a href="mailto:post@scopeanalytics.no">post@scopeanalytics.no</a>
+          <a href="tel:+4793637295">936 37 295</a>
+          <a href="/cookies.html">Personvern</a>
+        </nav>
+      </div>
+      <p class="foot-fine">&copy; 2026 Scope Analytics AS</p>
+    </footer>
+
+    <aside class="simple-cookie-consent" data-simple-cookie-consent hidden aria-label="Informasjon om informasjonskapsler">
+      <div class="simple-cookie-copy">
+        <strong>Vi bruker informasjonskapsler</strong>
+        <p>Nødvendige kapsler holder siden trygg. Du velger selv om vi også kan bruke valgfrie kapsler.</p>
+        <a href="/cookies.html">Les mer</a>
+      </div>
+      <div class="simple-cookie-actions">
+        <button type="button" data-cookie-choice="necessary">Kun nødvendige</button>
+        <button class="simple-cookie-primary" type="button" data-cookie-choice="all">Godta alle</button>
+      </div>
+    </aside>
+
+    <script src="cookie-consent.js?v=20260718-v1" defer></script>
+    <script src="for-etter.js?v=20260831-foretter-v1" defer></script>
+  </body>
+</html>

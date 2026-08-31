@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scope — året ditt, måned for måned</title>
+    <meta name="description" content="Restaurantåret svinger. Scope leser kassa, regnskapet, bemanninga og været, og gir deg ett tydelig råd for måneden du står i.">
+    <meta name="theme-color" content="#fbfbfc">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23fbfbfc'/%3E%3Ccircle cx='32' cy='32' r='16' fill='none' stroke='%23101a2b' stroke-width='3'/%3E%3Cpath d='M32 16 L32 6' stroke='%23064dff' stroke-width='5' stroke-linecap='round'/%3E%3Cpath d='M46 40 L54 45' stroke='%23064dff' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cookie-consent.css?v=20260718-v1">
+    <link rel="stylesheet" href="sesong.css?v=20260831-sesong-v1">
+  </head>
+  <body class="sesong-site">
+    <a class="skip-link" href="#hovedinnhold">Hopp til innholdet</a>
+
+    <header class="nav" data-nav>
+      <a class="nav-brand" href="/sesong" aria-label="Scope, til toppen">
+        <span class="nav-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>scope</span>
+      </a>
+      <nav class="nav-links" aria-label="Hovedmeny">
+        <a href="#aret">Året ditt</a>
+        <a href="#slik">Slik virker det</a>
+        <a href="#sesongene">Sesongene</a>
+      </nav>
+      <a class="btn btn-blue btn-sm" href="#test">Test gratis</a>
+    </header>
+
+    <main id="hovedinnhold">
+      <section class="hero" id="aret" aria-labelledby="hero-tittel">
+        <div class="hero-copy">
+          <p class="eyebrow">AI-rådgivning for serveringsbransjen</p>
+          <h1 id="hero-tittel">Året ditt svinger.<br><span class="blue">Rådene bør gjøre det også.</span></h1>
+          <p class="hero-lead">
+            Januar ligner ikke på juli, og juli ligner ikke på desember.
+            Scope leser kassa, regnskapet, bemanninga og været – og gir deg
+            ett tydelig grep for måneden du faktisk står i.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-blue" href="#test">Test Scope gratis</a>
+            <a class="btn btn-line" href="#slik">Se hvordan det virker</a>
+          </div>
+          <p class="hero-fine">Klar på 1–2–3 &middot; Ingen bindingstid</p>
+        </div>
+
+        <div class="dial-wrap">
+          <!-- Årshjulet: tolv stolper som viser hvordan omsetningen svinger
+               gjennom året. Geometrien ligger fast i markupen, så hjulet er
+               riktig også før JavaScript har kjørt. -->
+          <svg class="dial" viewBox="0 0 440 440" role="img" aria-label="Årshjul som viser hvordan omsetningen svinger fra januar til desember" data-dial>
+            <g class="dial-rings" aria-hidden="true">
+              <circle cx="220" cy="220" r="100"></circle>
+              <circle cx="220" cy="220" r="140"></circle>
+              <circle cx="220" cy="220" r="180"></circle>
+            </g>
+            <g class="dial-months">
+          <g class="month" data-month="jan" data-index="0">
+            <line class="month-hit" x1="220" y1="120" x2="220" y2="34"></line>
+            <line class="month-bar" x1="220" y1="120" x2="220" y2="81.56"></line>
+            <text class="month-label" x="220" y="27">Jan</text>
+          </g>
+          <g class="month" data-month="feb" data-index="1">
+            <line class="month-hit" x1="270" y1="133.4" x2="313" y2="58.92"></line>
+            <line class="month-bar" x1="270" y1="133.4" x2="291.08" y2="96.89"></line>
+            <text class="month-label" x="318.5" y="53.39">Feb</text>
+          </g>
+          <g class="month" data-month="mar" data-index="2">
+            <line class="month-hit" x1="306.6" y1="170" x2="381.08" y2="127"></line>
+            <line class="month-bar" x1="306.6" y1="170" x2="346.34" y2="147.06"></line>
+            <text class="month-label" x="390.61" y="125.5">Mar</text>
+          </g>
+          <g class="month" data-month="apr" data-index="3">
+            <line class="month-hit" x1="320" y1="220" x2="406" y2="220"></line>
+            <line class="month-bar" x1="320" y1="220" x2="372.08" y2="220"></line>
+            <text class="month-label" x="417" y="224">Apr</text>
+          </g>
+          <g class="month" data-month="mai" data-index="4">
+            <line class="month-hit" x1="306.6" y1="270" x2="381.08" y2="313"></line>
+            <line class="month-bar" x1="306.6" y1="270" x2="358.69" y2="300.07"></line>
+            <text class="month-label" x="390.61" y="322.5">Mai</text>
+          </g>
+          <g class="month" data-month="jun" data-index="5">
+            <line class="month-hit" x1="270" y1="306.6" x2="313" y2="381.08"></line>
+            <line class="month-bar" x1="270" y1="306.6" x2="302.24" y2="362.44"></line>
+            <text class="month-label" x="318.5" y="394.61">Jun</text>
+          </g>
+          <g class="month" data-month="jul" data-index="6">
+            <line class="month-hit" x1="220" y1="320" x2="220" y2="406"></line>
+            <line class="month-bar" x1="220" y1="320" x2="220" y2="389.44"></line>
+            <text class="month-label" x="220" y="421">Jul</text>
+          </g>
+          <g class="month" data-month="aug" data-index="7">
+            <line class="month-hit" x1="170" y1="306.6" x2="127" y2="381.08"></line>
+            <line class="month-bar" x1="170" y1="306.6" x2="137.14" y2="363.52"></line>
+            <text class="month-label" x="121.5" y="394.61">Aug</text>
+          </g>
+          <g class="month" data-month="sep" data-index="8">
+            <line class="month-hit" x1="133.4" y1="270" x2="58.92" y2="313"></line>
+            <line class="month-bar" x1="133.4" y1="270" x2="82.93" y2="299.14"></line>
+            <text class="month-label" x="49.39" y="322.5">Sep</text>
+          </g>
+          <g class="month" data-month="okt" data-index="9">
+            <line class="month-hit" x1="120" y1="220" x2="34" y2="220"></line>
+            <line class="month-bar" x1="120" y1="220" x2="65.44" y2="220"></line>
+            <text class="month-label" x="23" y="224">Okt</text>
+          </g>
+          <g class="month" data-month="nov" data-index="10">
+            <line class="month-hit" x1="133.4" y1="170" x2="58.92" y2="127"></line>
+            <line class="month-bar" x1="133.4" y1="170" x2="81.85" y2="140.24"></line>
+            <text class="month-label" x="49.39" y="125.5">Nov</text>
+          </g>
+          <g class="month" data-month="des" data-index="11">
+            <line class="month-hit" x1="170" y1="133.4" x2="127" y2="58.92"></line>
+            <line class="month-bar" x1="170" y1="133.4" x2="130.32" y2="64.67"></line>
+            <text class="month-label" x="121.5" y="53.39">Des</text>
+          </g>
+            </g>
+            <g class="dial-center" aria-hidden="true">
+              <circle cx="220" cy="220" r="86"></circle>
+              <text class="center-month" x="220" y="208" data-dial-month>Januar</text>
+              <text class="center-value" x="220" y="240" data-dial-value>Indeks 62</text>
+            </g>
+          </svg>
+
+          <div class="chips" role="group" aria-label="Velg måned">
+            <button class="chip is-active" type="button" data-month-button="jan" aria-pressed="true">Jan</button>
+            <button class="chip" type="button" data-month-button="feb" aria-pressed="false">Feb</button>
+            <button class="chip" type="button" data-month-button="mar" aria-pressed="false">Mar</button>
+            <button class="chip" type="button" data-month-button="apr" aria-pressed="false">Apr</button>
+            <button class="chip" type="button" data-month-button="mai" aria-pressed="false">Mai</button>
+            <button class="chip" type="button" data-month-button="jun" aria-pressed="false">Jun</button>
+            <button class="chip" type="button" data-month-button="jul" aria-pressed="false">Jul</button>
+            <button class="chip" type="button" data-month-button="aug" aria-pressed="false">Aug</button>
+            <button class="chip" type="button" data-month-button="sep" aria-pressed="false">Sep</button>
+            <button class="chip" type="button" data-month-button="okt" aria-pressed="false">Okt</button>
+            <button class="chip" type="button" data-month-button="nov" aria-pressed="false">Nov</button>
+            <button class="chip" type="button" data-month-button="des" aria-pressed="false">Des</button>
+          </div>
+
+          <article class="insight" aria-live="polite">
+            <p class="insight-tag">Rådet for <span data-insight-month>januar</span></p>
+            <p class="insight-advice" data-insight-advice>Kutt én vakt på mandag og tirsdag ut måneden.</p>
+            <p class="insight-why" data-insight-why>Januar starter rolig etter jul: de to første ukedagene ligger 38 % under snittet ditt. Bemanninga har ikke fulgt etter.</p>
+            <p class="insight-effect"><span>Forventet effekt</span><strong data-insight-effect>+6 400 kr i måneden</strong></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="slik" aria-labelledby="slik-tittel">
+        <p class="eyebrow reveal">Slik virker det</p>
+        <h2 id="slik-tittel" class="reveal">Fire steg, hver eneste natt</h2>
+        <ol class="steps">
+          <li class="reveal">
+            <span class="step-no">01</span>
+            <h3>Hent data</h3>
+            <p>Vi kobler oss på kassa, regnskapet og bemanninga, og henter tallene dine hver eneste natt.</p>
+          </li>
+          <li class="reveal">
+            <span class="step-no">02</span>
+            <h3>Analyser</h3>
+            <p>AI-en går gjennom alt, finner mønstre og avvik, og ser hva som faktisk flytter resultatet.</p>
+          </li>
+          <li class="reveal">
+            <span class="step-no">03</span>
+            <h3>Kvalitetssikre</h3>
+            <p>Folk som kan analyse og kjenner bransjen går gjennom funnene før de blir til råd.</p>
+          </li>
+          <li class="reveal">
+            <span class="step-no">04</span>
+            <h3>Få råd</h3>
+            <p>Du får ett tydelig neste steg med forventet effekt – ikke en rapport du må tolke selv.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section section-sources" aria-labelledby="kilder-tittel">
+        <p class="eyebrow reveal">Kildene</p>
+        <h2 id="kilder-tittel" class="reveal">Fire strømmer inn, én linje ut</h2>
+        <ul class="sources">
+          <li class="reveal">
+            <img src="assets/icons/heroicons-chart-bar-square.svg" alt="" aria-hidden="true">
+            <strong>Kassa</strong>
+            <span>Hver bong, hver time, hvert bord.</span>
+          </li>
+          <li class="reveal">
+            <img src="assets/icons/heroicons-light-bulb.svg" alt="" aria-hidden="true">
+            <strong>Regnskapet</strong>
+            <span>Varekost, lønn og faste kostnader.</span>
+          </li>
+          <li class="reveal">
+            <img src="assets/icons/heroicons-user-circle.svg" alt="" aria-hidden="true">
+            <strong>Bemanninga</strong>
+            <span>Vaktene dine, satt opp mot trykket.</span>
+          </li>
+          <li class="reveal">
+            <img src="assets/icons/heroicons-cloud.svg" alt="" aria-hidden="true">
+            <strong>Været</strong>
+            <span>Regn på lørdag flytter mer enn du tror.</span>
+          </li>
+        </ul>
+        <div class="logo-row reveal" aria-hidden="true">
+          <img src="assets/logos/tripletex.svg" alt="" loading="lazy">
+          <img src="assets/logos/lightspeed.svg" alt="" loading="lazy">
+          <img src="assets/logos/tamigo.svg" alt="" loading="lazy">
+          <img src="assets/logos/poweroffice.png" alt="" loading="lazy">
+          <img src="assets/logos/planday.png" alt="" loading="lazy">
+          <img src="assets/logos/quinyx.svg" alt="" loading="lazy">
+        </div>
+      </section>
+
+      <section class="section section-seasons" id="sesongene" aria-labelledby="sesong-tittel">
+        <p class="eyebrow reveal">Sesongene</p>
+        <h2 id="sesong-tittel" class="reveal">Fire årstider, fire helt ulike feller</h2>
+        <div class="seasons">
+          <article class="season reveal">
+            <p class="season-name">Vinter</p>
+            <p class="season-trap">Bemanning satt for desember, brukt i januar.</p>
+            <p class="season-fix">Scope ser fallet med én gang og foreslår hvor timene skal tas ut.</p>
+          </article>
+          <article class="season reveal">
+            <p class="season-name">Vår</p>
+            <p class="season-trap">Første solhelg tømmer lageret uten forvarsel.</p>
+            <p class="season-fix">Værmeldingen kobles på bestillingen før helgen, ikke etter.</p>
+          </article>
+          <article class="season reveal">
+            <p class="season-name">Sommer</p>
+            <p class="season-trap">Full uteservering, men feil folk på feil vakt.</p>
+            <p class="season-fix">Vaktene flyttes dit trykket faktisk ligger, time for time.</p>
+          </article>
+          <article class="season reveal">
+            <p class="season-name">Høst</p>
+            <p class="season-trap">Julebordene bookes, marginene forsvinner i svinn.</p>
+            <p class="season-fix">Scope følger varekosten per gjest og varsler før den løper.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section-cta" id="test" aria-labelledby="cta-tittel">
+        <div class="cta-box reveal">
+          <p class="eyebrow">Bli med tidlig</p>
+          <h2 id="cta-tittel">Vi søker testkunder</h2>
+          <p>Gratis i testperioden, personlig oppsett og ingen bindingstid. Du er med på å forme produktet.</p>
+          <div class="hero-actions">
+            <a class="btn btn-white" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20teste%20Scope">Jeg vil teste Scope</a>
+            <a class="btn btn-line-light" href="tel:+4793637295">Ring 936 37 295</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="foot-inner">
+        <a class="nav-brand" href="/sesong" aria-label="Scope, til toppen">
+          <span class="nav-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>scope</span>
+        </a>
+        <p>Scope Analytics AS &middot; Org.nr. 936 372 295</p>
+        <nav aria-label="Bunnlenker">
+          <a href="mailto:post@scopeanalytics.no">post@scopeanalytics.no</a>
+          <a href="tel:+4793637295">936 37 295</a>
+          <a href="/cookies.html">Personvern</a>
+        </nav>
+      </div>
+      <p class="foot-fine">&copy; 2026 Scope Analytics AS &middot; Tallene i årshjulet er eksempeltall.</p>
+    </footer>
+
+    <aside class="simple-cookie-consent" data-simple-cookie-consent hidden aria-label="Informasjon om informasjonskapsler">
+      <div class="simple-cookie-copy">
+        <strong>Vi bruker informasjonskapsler</strong>
+        <p>Nødvendige kapsler holder siden trygg. Du velger selv om vi også kan bruke valgfrie kapsler.</p>
+        <a href="/cookies.html">Les mer</a>
+      </div>
+      <div class="simple-cookie-actions">
+        <button type="button" data-cookie-choice="necessary">Kun nødvendige</button>
+        <button class="simple-cookie-primary" type="button" data-cookie-choice="all">Godta alle</button>
+      </div>
+    </aside>
+
+    <script src="cookie-consent.js?v=20260718-v1" defer></script>
+    <script src="sesong.js?v=20260831-sesong-v1" defer></script>
+  </body>
+</html>

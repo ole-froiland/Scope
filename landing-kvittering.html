@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scope — kvitteringen på en bedre uke</title>
+    <meta name="description" content="Scope leser kassa, regnskapet, bemanninga og været, og skriver ut ett tydelig neste steg for restauranten din – hver morgen.">
+    <meta name="theme-color" content="#e6e3da">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23fffdf7'/%3E%3Crect x='16' y='14' width='32' height='4' fill='%2312110e'/%3E%3Crect x='16' y='24' width='32' height='4' fill='%2312110e'/%3E%3Crect x='16' y='34' width='20' height='4' fill='%2312110e'/%3E%3Crect x='16' y='44' width='32' height='4' fill='%231f6b3a'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="cookie-consent.css?v=20260718-v1">
+    <link rel="stylesheet" href="kvittering.css?v=20260831-kvittering-v1">
+  </head>
+  <body class="kvittering-site">
+    <a class="skip-link" href="#hovedinnhold">Hopp til innholdet</a>
+
+    <header class="topbar" data-topbar>
+      <a class="topbar-brand" href="/kvittering" aria-label="Scope, til toppen">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>scope</span>
+      </a>
+      <nav class="topbar-nav" aria-label="Hovedmeny">
+        <a href="#uken">Uken din</a>
+        <a href="#slik">Slik virker det</a>
+        <a href="#radene">Rådene</a>
+      </nav>
+      <a class="btn btn-ink btn-small" href="#testkunde">Test gratis</a>
+    </header>
+
+    <main id="hovedinnhold" class="paper-stage">
+      <!-- Hele siden er én kvitteringsstrimmel. Taggene i topp og bunn er
+           rene CSS-sagtenner, så strimmelen kan bli så lang den vil. -->
+      <div class="tape">
+        <div class="tape-edge tape-edge-top" aria-hidden="true"></div>
+
+        <div class="tape-body">
+          <section class="block block-head" aria-labelledby="hero-tittel">
+            <p class="stamp-line print-line" style="--i:0">SCOPE ANALYTICS AS</p>
+            <p class="meta-line print-line" style="--i:1">ORG. 936 372 295 &middot; OSLO</p>
+            <div class="rule rule-double print-line" style="--i:2" aria-hidden="true"></div>
+            <p class="kicker print-line" style="--i:3">AI-rådgivning for serveringsbransjen</p>
+            <h1 id="hero-tittel" class="print-line" style="--i:4">Du kan mat.<br>Vi kan <span class="ink-green">tall.</span></h1>
+            <p class="lead print-line" style="--i:5">
+              Vi leser kassa, regnskapet, bemanninga og været i natt – og skriver ut
+              ett tydelig neste steg til deg i morgen tidlig.
+            </p>
+            <div class="actions print-line" style="--i:6">
+              <a class="btn btn-green" href="#testkunde">Test Scope gratis</a>
+              <a class="btn btn-ghost" href="#slik">Se hvordan det virker</a>
+            </div>
+            <p class="fine print-line" style="--i:7">Klar på 1–2–3. Ingen bindingstid.</p>
+          </section>
+
+          <div class="rule" aria-hidden="true"></div>
+
+          <section class="block" id="uken" aria-labelledby="uken-tittel">
+            <p class="section-tag">Kvittering</p>
+            <h2 id="uken-tittel">Uken din, linje for linje</h2>
+
+            <ul class="ledger" aria-label="Uken slik den ser ut i dag">
+              <li class="print-line" style="--i:0"><span class="lbl">Omsetning</span><span class="dots" aria-hidden="true"></span><span class="val" data-count="412800">412 800</span></li>
+              <li class="print-line" style="--i:1"><span class="lbl">Varekost</span><span class="dots" aria-hidden="true"></span><span class="val">−138 100</span></li>
+              <li class="print-line" style="--i:2"><span class="lbl">Lønn</span><span class="dots" aria-hidden="true"></span><span class="val">−151 400</span></li>
+              <li class="print-line" style="--i:3"><span class="lbl">Svinn og retur</span><span class="dots" aria-hidden="true"></span><span class="val">−9 240</span></li>
+              <li class="print-line" style="--i:4"><span class="lbl">Faste kostnader</span><span class="dots" aria-hidden="true"></span><span class="val">−71 760</span></li>
+            </ul>
+
+            <div class="rule rule-dotted" aria-hidden="true"></div>
+
+            <p class="sum-line"><span class="lbl">Resultat</span><span class="dots" aria-hidden="true"></span><span class="val" data-count="42300">42 300</span></p>
+
+            <div class="advice-ledger">
+              <p class="ledger-head">Med Scope på laget</p>
+              <ul class="ledger ledger-green" aria-label="Endringer Scope foreslo">
+                <li class="print-line" style="--i:0"><span class="lbl">Flyttet 6 vakter til trykket</span><span class="dots" aria-hidden="true"></span><span class="val">+11 400</span></li>
+                <li class="print-line" style="--i:1"><span class="lbl">Mindre bestilling på tirsdag</span><span class="dots" aria-hidden="true"></span><span class="val">+3 950</span></li>
+                <li class="print-line" style="--i:2"><span class="lbl">Ny pris på tre retter</span><span class="dots" aria-hidden="true"></span><span class="val">+2 800</span></li>
+              </ul>
+              <div class="rule rule-dotted" aria-hidden="true"></div>
+              <p class="sum-line sum-total"><span class="lbl">Nytt resultat</span><span class="dots" aria-hidden="true"></span><span class="val" data-count="60450">60 450</span></p>
+            </div>
+
+            <p class="fine">Eksempeltall for én uke. Vi regner på ditt sted før vi lover noe.</p>
+          </section>
+
+          <div class="rule" aria-hidden="true"></div>
+
+          <section class="block" id="slik" aria-labelledby="slik-tittel">
+            <p class="section-tag">Slik virker det</p>
+            <h2 id="slik-tittel">Fra tall til neste trekk</h2>
+            <ol class="steps">
+              <li class="print-line" style="--i:0">
+                <span class="step-no">01</span>
+                <span class="step-copy">
+                  <strong>Hent data</strong>
+                  <span>Vi kobler oss på kassa, regnskapet og bemanninga, og henter tallene dine hver eneste natt.</span>
+                </span>
+              </li>
+              <li class="print-line" style="--i:1">
+                <span class="step-no">02</span>
+                <span class="step-copy">
+                  <strong>Analyser</strong>
+                  <span>AI-en går gjennom alt, finner mønstre og avvik, og ser hva som faktisk flytter resultatet.</span>
+                </span>
+              </li>
+              <li class="print-line" style="--i:2">
+                <span class="step-no">03</span>
+                <span class="step-copy">
+                  <strong>Kvalitetssikre</strong>
+                  <span>Folk som kan analyse og kjenner bransjen går gjennom funnene før de blir til råd.</span>
+                </span>
+              </li>
+              <li class="print-line" style="--i:3">
+                <span class="step-no">04</span>
+                <span class="step-copy">
+                  <strong>Få råd</strong>
+                  <span>Du får ett tydelig neste steg med forventet effekt – ikke en rapport du må tolke selv.</span>
+                </span>
+              </li>
+            </ol>
+            <p class="quality-stamp" aria-hidden="true">Kvalitetssikret</p>
+          </section>
+
+          <div class="rule" aria-hidden="true"></div>
+
+          <section class="block" id="radene" aria-labelledby="radene-tittel">
+            <p class="section-tag">Rådene</p>
+            <h2 id="radene-tittel">Tre linjer fra i går</h2>
+            <div class="advice-list">
+              <div class="advice-item">
+                <button class="advice-toggle" type="button" aria-expanded="false" aria-controls="rad-1">
+                  <span class="advice-no">01</span>
+                  <span class="advice-text">Sett inn én ekstra på gulvet fra 18:30 på fredag.</span>
+                  <span class="advice-sign" aria-hidden="true">+</span>
+                </button>
+                <p class="advice-why" id="rad-1" hidden>Fredagene fylles raskt etter klokken 18. Én ekstra person gir roligere service, kortere ventetid og høyere snittbong. Forventet effekt: 3 800 kr i uken.</p>
+              </div>
+              <div class="advice-item">
+                <button class="advice-toggle" type="button" aria-expanded="false" aria-controls="rad-2">
+                  <span class="advice-no">02</span>
+                  <span class="advice-text">Flytt åpningsvakta én time senere på tirsdag.</span>
+                  <span class="advice-sign" aria-hidden="true">+</span>
+                </button>
+                <p class="advice-why" id="rad-2" hidden>Salget starter først 12:40 i snitt, men vakta starter 11:00. Timen koster mer enn den henter inn. Forventet effekt: 2 100 kr i uken.</p>
+              </div>
+              <div class="advice-item">
+                <button class="advice-toggle" type="button" aria-expanded="false" aria-controls="rad-3">
+                  <span class="advice-no">03</span>
+                  <span class="advice-text">Bestill 20 % mindre ferskvare før regnhelgen.</span>
+                  <span class="advice-sign" aria-hidden="true">+</span>
+                </button>
+                <p class="advice-why" id="rad-3" hidden>Meldingen om regn lørdag treffer uteserveringen din hardt: historisk faller salget 24 % på slike dager. Mindre inn gir mindre svinn. Forventet effekt: 1 900 kr.</p>
+              </div>
+            </div>
+          </section>
+
+          <div class="rule" aria-hidden="true"></div>
+
+          <section class="block" aria-labelledby="kilder-tittel">
+            <p class="section-tag">Kilder</p>
+            <h2 id="kilder-tittel">Fire systemer, én linje</h2>
+            <ul class="sources" aria-label="Datakilder Scope kobler sammen">
+              <li class="print-line" style="--i:0">Kasse</li>
+              <li class="print-line" style="--i:1">Regnskap</li>
+              <li class="print-line" style="--i:2">Bemanning</li>
+              <li class="print-line" style="--i:3">Vær</li>
+            </ul>
+            <p class="sources-note">Vi kobler oss på Tripletex, Lightspeed, Tamigo, PowerOffice, Planday og flere. Oppsettet gjør vi for deg.</p>
+            <div class="logo-strip" aria-hidden="true">
+              <img src="assets/logos/tripletex.svg" alt="" loading="lazy">
+              <img src="assets/logos/lightspeed.svg" alt="" loading="lazy">
+              <img src="assets/logos/tamigo.svg" alt="" loading="lazy">
+              <img src="assets/logos/poweroffice.png" alt="" loading="lazy">
+              <img src="assets/logos/planday.png" alt="" loading="lazy">
+            </div>
+          </section>
+
+          <div class="rule" aria-hidden="true"></div>
+
+          <section class="block block-cta" id="testkunde" aria-labelledby="testkunde-tittel">
+            <p class="section-tag">Til slutt</p>
+            <h2 id="testkunde-tittel">Vi søker testkunder</h2>
+            <p class="lead">Du får Scope gratis i testperioden, og er med på å forme produktet.</p>
+            <ul class="perks">
+              <li>Gratis testperiode</li>
+              <li>Personlig oppsett</li>
+              <li>Ingen bindingstid</li>
+            </ul>
+            <div class="actions">
+              <a class="btn btn-green" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20teste%20Scope">Jeg vil teste Scope</a>
+              <a class="btn btn-ghost" href="tel:+4793637295">Ring 936 37 295</a>
+            </div>
+          </section>
+
+          <div class="rule rule-double" aria-hidden="true"></div>
+
+          <footer class="block block-foot">
+            <p class="thanks">Takk for besøket</p>
+            <div class="barcode" aria-hidden="true"></div>
+            <p class="meta-line">SCOPE ANALYTICS AS &middot; ORG. 936 372 295</p>
+            <p class="meta-line"><a href="mailto:post@scopeanalytics.no">post@scopeanalytics.no</a> &middot; <a href="tel:+4793637295">936 37 295</a></p>
+            <p class="meta-line"><a href="/cookies.html">Personvern og informasjonskapsler</a></p>
+            <p class="meta-line">&copy; 2026 &middot; Kunden beholder kvitteringen</p>
+          </footer>
+        </div>
+
+        <div class="tape-edge tape-edge-bottom" aria-hidden="true"></div>
+      </div>
+
+      <!-- Margnotatene henger utenfor strimmelen og vises bare når det er
+           plass til dem ved siden av papiret. -->
+      <p class="margin-note margin-note-1" aria-hidden="true">Hver natt, mens du sover</p>
+      <p class="margin-note margin-note-2" aria-hidden="true">Ett råd. Ikke en rapport.</p>
+    </main>
+
+    <aside class="simple-cookie-consent" data-simple-cookie-consent hidden aria-label="Informasjon om informasjonskapsler">
+      <div class="simple-cookie-copy">
+        <strong>Vi bruker informasjonskapsler</strong>
+        <p>Nødvendige kapsler holder siden trygg. Du velger selv om vi også kan bruke valgfrie kapsler.</p>
+        <a href="/cookies.html">Les mer</a>
+      </div>
+      <div class="simple-cookie-actions">
+        <button type="button" data-cookie-choice="necessary">Kun nødvendige</button>
+        <button class="simple-cookie-primary" type="button" data-cookie-choice="all">Godta alle</button>
+      </div>
+    </aside>
+
+    <script src="cookie-consent.js?v=20260718-v1" defer></script>
+    <script src="kvittering.js?v=20260831-kvittering-v1" defer></script>
+  </body>
+</html>
