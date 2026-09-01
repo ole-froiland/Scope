@@ -3,148 +3,61 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Scope — bedre drift, ett råd av gangen</title>
-    <meta name="description" content="Scope samler tallene fra restaurantdriften og gir deg ett konkret, kvalitetssikret råd om gangen.">
-    <meta name="theme-color" content="#f7f7f2">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23146b46'/%3E%3Cpath d='M17 42V30M32 42V22M47 42V14' stroke='white' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+    <title>Scope — se dagen før den skjer</title>
+    <meta name="description" content="Scope leser restaurantdriften gjennom døgnet og gir deg ett konkret råd når det betyr mest.">
+    <meta name="theme-color" content="#f4f0e7">
+    <link rel="icon" href="assets/scope-kombi-logo.png">
     <link rel="stylesheet" href="cookie-consent.css?v=20260718-v1">
-    <link rel="stylesheet" href="proff.css?v=20260901-v1">
+    <link rel="stylesheet" href="drift.css?v=20260901-v2">
   </head>
-  <body data-theme="drift">
+  <body class="drift-site">
     <a class="skip-link" href="#hovedinnhold">Hopp til innholdet</a>
-
-    <header class="site-nav" data-nav>
-      <a class="brand" href="/drift" aria-label="Scope, til toppen">
-        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span>scope</span>
-      </a>
-      <nav class="nav-links" aria-label="Hovedmeny">
-        <a href="#hvorfor">Hvorfor Scope</a>
-        <a href="#slik">Slik fungerer det</a>
-        <a href="#eksempel">Se et råd</a>
-      </nav>
-      <a class="button button-small" href="#testkunder">Bli testkunde</a>
+    <header class="drift-nav">
+      <a class="drift-logo" href="/drift" aria-label="Scope, til toppen"><img src="assets/scope-kombi-logo.png" alt=""><strong>scope</strong><small>analytics</small></a>
+      <nav aria-label="Hovedmeny"><a href="#dognkart">Døgnkartet</a><a href="#slik">Slik fungerer det</a><a href="#testkunder">Testkunde</a></nav>
+      <a class="nav-cta" href="#testkunder">Bli testkunde</a>
     </header>
 
     <main id="hovedinnhold">
-      <section class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Driftsråd for serveringsbransjen</p>
-          <h1>Se hva tallene prøver å fortelle deg.</h1>
-          <p class="hero-lead">Scope kobler sammen kassa, regnskapet, bemanningen og været. Du får ett tydelig råd om gangen – kvalitetssikret av folk som kjenner bransjen.</p>
-          <div class="hero-actions">
-            <a class="button" href="#testkunder">Test Scope gratis</a>
-            <a class="button button-ghost" href="#eksempel">Se et eksempel</a>
+      <section class="drift-hero" id="dognkart" aria-labelledby="drift-title">
+        <p class="overline">AI-drevet beslutningsstøtte for restauranter</p>
+        <h1 id="drift-title">Se dagen før den skjer.</h1>
+        <p class="lead">Rett bemanning, smartere innkjøp og bedre lønnsomhet – time for time.</p>
+        <div class="day-map" aria-label="Velg et tidspunkt i restaurantdagen">
+          <div class="hour-scale" aria-hidden="true"><span>06</span><span>09</span><span>12</span><span>15</span><span>18</span><span>21</span><span>24</span></div>
+          <div class="day-track" role="group" aria-label="Restaurantens døgn">
+            <button type="button" data-shift="prep" aria-pressed="false"><b>07:00</b><span>Forberedelse</span></button>
+            <button type="button" data-shift="lunch" aria-pressed="false"><b>11:30</b><span>Lunsj</span></button>
+            <button type="button" data-shift="dinner" aria-pressed="true"><b>18:00</b><span>Middag</span></button>
+            <button type="button" data-shift="close" aria-pressed="false"><b>23:00</b><span>Stenging</span></button>
           </div>
-          <p class="fine-print">Personlig oppsett · Ingen bindingstid · Gratis i testperioden</p>
-        </div>
-        <div class="hero-visual">
-          <img class="hero-photo" src="assets/kombi-server-plate.jpg" alt="Kokk som anretter en rett på et profesjonelt kjøkken">
-          <article class="floating-card" aria-label="Eksempel på råd fra Scope">
-            <span>I morgen, kl. 18–21</span>
-            <strong>Flytt én person fra kjøkken til servering.</strong>
-            <b>Forventet effekt: +2 100 kr</b>
+          <article class="dispatch" aria-live="polite">
+            <p><span data-dispatch-time>Råd kl. 17:30</span><em data-dispatch-effect>+9 400 kr i omsetning</em></p>
+            <h2 data-dispatch-title>Øk bemanningen med én person på kjøkkenet kl. 17:45–20:15.</h2>
+            <p data-dispatch-why>Reservasjonene og værmeldingen peker mot høyere trykk enn normalt. Kjøkkenet blir flaskehalsen først.</p>
           </article>
         </div>
+        <figure class="day-photo"><img src="assets/drift-restaurant-day.png" alt="Restaurantdagen fra kjøkkenforberedelser til en travel kveld i salen"><figcaption>Fra første forberedelse til siste bord – Scope følger hele driften.</figcaption></figure>
       </section>
 
-      <p class="trust-strip"><strong>Bygget for restauranter som vil bruke mindre tid på rapporter</strong> – og mer tid på gode beslutninger.</p>
-
-      <section class="section" id="hvorfor" aria-labelledby="hvorfor-tittel">
-        <div class="section-head reveal">
-          <div>
-            <p class="eyebrow">Hvorfor Scope</p>
-            <h2 id="hvorfor-tittel">Fra mange systemer til ett godt neste steg.</h2>
-          </div>
-          <p class="section-intro">Tallene finnes allerede. Scope setter dem sammen, finner det som betyr noe og gjør funnet enkelt å handle på.</p>
-        </div>
-        <div class="proof-grid">
-          <article class="proof-card reveal">
-            <span class="proof-number">01</span>
-            <h3>Alt samlet</h3>
-            <p>Kasse, regnskap, vaktplan og vær ses i sammenheng – automatisk.</p>
-          </article>
-          <article class="proof-card proof-card-accent reveal">
-            <span class="proof-number">1 råd</span>
-            <h3>Ingen rapportstøy</h3>
-            <p>Du får det viktigste grepet først, med forklaring og forventet effekt.</p>
-          </article>
-          <article class="proof-card reveal">
-            <span class="proof-number">2×</span>
-            <h3>Kvalitetssikret</h3>
-            <p>AI finner mønsteret. Et menneske går gjennom rådet før det møter deg.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" id="eksempel" aria-labelledby="eksempel-tittel">
-        <div class="section-head reveal">
-          <div>
-            <p class="eyebrow">Et Scope-råd</p>
-            <h2 id="eksempel-tittel">Konkret nok til å bruke i dag.</h2>
-          </div>
-          <p class="section-intro">Trykk på et område og se hvordan et råd kan se ut. Tallene er illustrative, men formatet er det samme.</p>
-        </div>
-        <div class="demo-shell reveal">
-          <div class="demo-tabs" role="group" aria-label="Velg eksempelområde">
-            <button class="demo-tab" type="button" data-advice-button="bemanning" aria-pressed="true">Bemanning</button>
-            <button class="demo-tab" type="button" data-advice-button="varekost" aria-pressed="false">Varekost</button>
-            <button class="demo-tab" type="button" data-advice-button="meny" aria-pressed="false">Meny</button>
-          </div>
-          <article class="demo-content" aria-live="polite">
-            <div>
-              <p class="demo-kicker" data-advice-label>Bemanning</p>
-              <h3 data-advice-title>Flytt én vakt fra tirsdag til fredag.</h3>
-              <p class="demo-why" data-advice-why>Fredag mellom 18 og 21 har 31 % høyere trykk enn tirsdag, mens bemanningen er lik. Scope foreslår en konkret flytting før neste vaktplan låses.</p>
-            </div>
-            <p class="demo-effect"><span>Forventet effekt</span><strong data-advice-effect>+8 400 kr per måned</strong></p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" id="slik" aria-labelledby="slik-tittel">
-        <div class="section-head reveal">
-          <div>
-            <p class="eyebrow">Slik fungerer det</p>
-            <h2 id="slik-tittel">Klart på tre enkle steg.</h2>
-          </div>
-          <p class="section-intro">Vi hjelper deg med oppsettet. Når kildene er koblet til, skjer resten i bakgrunnen.</p>
-        </div>
-        <ol class="steps reveal">
-          <li><h3>Koble til</h3><p>Vi kobler kasse, regnskap og bemanning trygt til Scope.</p></li>
-          <li><h3>Scope analyserer</h3><p>Data hentes og analyseres automatisk. Avvik og muligheter prioriteres.</p></li>
-          <li><h3>Du får rådet</h3><p>Ett tydelig tiltak, hvorfor det virker og hva effekten kan bli.</p></li>
+      <section class="drift-process" id="slik" aria-labelledby="process-title">
+        <header><p>Slik fungerer det</p><h2 id="process-title">Tre stopp. Ett bedre valg.</h2></header>
+        <ol>
+          <li><span>01</span><div><h3>Koble til</h3><p>Kasse, regnskap og bemanning kobles trygt til Scope.</p></div></li>
+          <li><span>02</span><div><h3>Scope analyserer</h3><p>Data, vær og historikk leses i sammenheng – automatisk.</p></div></li>
+          <li><span>03</span><div><h3>Du får rådet</h3><p>Ett konkret tiltak når det betyr mest, med forklaring og effekt.</p></div></li>
         </ol>
       </section>
 
-      <section class="photo-break" style="--photo: url('assets/kombi-outdoor-dining.jpg')" aria-label="Restaurantgjester på uteservering">
-        <div class="photo-break-inner reveal">
-          <blockquote>«God drift skal merkes i restauranten, ikke i enda et regneark.»</blockquote>
-          <p>Scope gjør innsikten kort nok til å brukes mellom lunsj og middag.</p>
-        </div>
-      </section>
-
-      <section class="cta reveal" id="testkunder" aria-labelledby="test-tittel">
-        <p class="eyebrow">Bli med tidlig</p>
-        <h2 id="test-tittel">Vi søker testkunder.</h2>
-        <p>Har du en restaurant og vil ta bedre beslutninger med tallene du allerede har? Test Scope gratis, få personlig oppsett og vær med på å forme produktet. Ingen bindingstid.</p>
-        <div class="hero-actions">
-          <a class="button button-light" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20bli%20testkunde%20hos%20Scope">Jeg vil bli testkunde</a>
-          <a class="button button-ghost" href="tel:+4793637295">Ring 936 37 295</a>
-        </div>
+      <section class="shift-notice" id="testkunder" aria-labelledby="test-title">
+        <p class="tape">Åpent for søknader</p>
+        <div><p class="overline">Bli med og form fremtidens restaurantdrift</p><h2 id="test-title">Vi søker testkunder.</h2><p>Gratis i testperioden, personlig oppsett og ingen bindingstid. Vi har et begrenset antall plasser.</p></div>
+        <aside><span>Teststart</span><strong>Høst<br>2026</strong><a href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20bli%20testkunde%20hos%20Scope">Meld interesse i dag</a></aside>
       </section>
     </main>
 
-    <footer class="footer">
-      <p>Scope Analytics AS · Org.nr. 936 372 295 · <a href="mailto:post@scopeanalytics.no">post@scopeanalytics.no</a></p>
-      <nav class="footer-links" aria-label="Bunnmeny"><a href="/cookies.html">Informasjonskapsler</a><a href="/about.html">Om oss</a><a href="/integrations.html">Integrasjoner</a></nav>
-    </footer>
-
-    <aside class="cookie-consent" data-simple-cookie-consent hidden aria-label="Valg for informasjonskapsler">
-      <p><strong>Informasjonskapsler</strong><br>Vi bruker nødvendige informasjonskapsler for at siden skal fungere. Med samtykke kan vi også forbedre opplevelsen.</p>
-      <div><button type="button" data-cookie-choice="necessary">Kun nødvendige</button><button type="button" data-cookie-choice="all">Godta alle</button></div>
-    </aside>
-    <script src="proff.js?v=20260901-v1"></script>
-    <script src="cookie-consent.js?v=20260718-v1"></script>
+    <footer class="drift-footer"><p>Scope Analytics AS · Org.nr. 936 372 295</p><p><a href="mailto:post@scopeanalytics.no">post@scopeanalytics.no</a> · <a href="tel:+4793637295">936 37 295</a> · <a href="/cookies.html">Informasjonskapsler</a></p></footer>
+    <aside class="cookie-consent" data-simple-cookie-consent hidden aria-label="Valg for informasjonskapsler"><p><strong>Informasjonskapsler</strong><br>Vi bruker nødvendige informasjonskapsler for at siden skal fungere. Med samtykke kan vi også forbedre opplevelsen.</p><div><button type="button" data-cookie-choice="necessary">Kun nødvendige</button><button type="button" data-cookie-choice="all">Godta alle</button></div></aside>
+    <script src="drift.js?v=20260901-v2"></script><script src="cookie-consent.js?v=20260718-v1"></script>
   </body>
 </html>

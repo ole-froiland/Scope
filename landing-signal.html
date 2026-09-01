@@ -3,76 +3,57 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Scope — signalet i driften</title>
-    <meta name="description" content="Scope finner signalet i restaurantdataene og gjør det om til et konkret, kvalitetssikret råd.">
-    <meta name="theme-color" content="#f3f5f2">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230c2e21'/%3E%3Cpath d='M17 42V30M32 42V22M47 42V14' stroke='%23b8ff62' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E">
+    <title>Scope — fire datastrømmer, ett klart signal</title>
+    <meta name="description" content="Scope samler kasse, regnskap, bemanning og vær til ett konkret råd for restaurantdriften.">
+    <meta name="theme-color" content="#031b13">
+    <link rel="icon" href="assets/scope-kombi-logo.png">
     <link rel="stylesheet" href="cookie-consent.css?v=20260718-v1">
-    <link rel="stylesheet" href="proff.css?v=20260901-v1">
+    <link rel="stylesheet" href="signal.css?v=20260901-v2">
   </head>
-  <body data-theme="signal">
+  <body class="signal-site">
     <a class="skip-link" href="#hovedinnhold">Hopp til innholdet</a>
-    <header class="site-nav" data-nav>
-      <a class="brand" href="/signal" aria-label="Scope, til toppen"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>scope</span></a>
-      <nav class="nav-links" aria-label="Hovedmeny"><a href="#hvorfor">Gevinsten</a><a href="#eksempel">Eksempel</a><a href="#slik">Slik virker det</a></nav>
-      <a class="button button-small" href="#testkunder">Test Scope</a>
+    <header class="signal-nav">
+      <a class="signal-brand" href="/signal" aria-label="Scope, til toppen"><img src="assets/scope-kombi-logo.png" alt=""><strong>scope</strong><span>analytics</span></a>
+      <nav aria-label="Hovedmeny"><a href="#eksempel">Signalet</a><a href="#hvorfor">Resultater</a><a href="#slik">Slik virker det</a></nav>
+      <a href="#testkunder">Test Scope</a>
     </header>
 
     <main id="hovedinnhold">
-      <section class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Beslutningsstøtte for restaurantdrift</p>
-          <h1>Mindre støy. Bedre signal.</h1>
-          <p class="hero-lead">Scope analyserer driften hver natt og løfter frem det ene grepet som kan gjøre størst forskjell i morgen.</p>
-          <div class="hero-actions"><a class="button" href="#testkunder">Bli testkunde</a><a class="button button-ghost" href="#eksempel">Utforsk et råd</a></div>
-          <p class="fine-print">Kobles til systemene du allerede bruker · Ingen bindingstid</p>
+      <section class="signal-hero" id="eksempel" aria-labelledby="signal-title">
+        <header class="signal-intro"><p>Beslutningsstøtte · live</p><h1 id="signal-title">Fire datastrømmer.<br>Ett klart signal.</h1><p>Scope samler kasse, regnskap, bemanning og vær – og gir deg én konkret anbefaling du kan handle på.</p><a href="#slik">Se hvordan det virker <span aria-hidden="true">→</span></a></header>
+
+        <div class="sources" role="group" aria-label="Velg datakilde">
+          <button type="button" data-source="kasse" aria-pressed="true"><span>01</span><strong>Kasse</strong><small>Live · 12 842 kr nå</small><i>48 % av signalet</i></button>
+          <button type="button" data-source="regnskap" aria-pressed="false"><span>02</span><strong>Regnskap</strong><small>Varekost · 28,6 %</small><i>26 % av signalet</i></button>
+          <button type="button" data-source="bemanning" aria-pressed="false"><span>03</span><strong>Bemanning</strong><small>132 planlagte timer</small><i>16 % av signalet</i></button>
+          <button type="button" data-source="vaer" aria-pressed="false"><span>04</span><strong>Vær</strong><small>18° · lett regn</small><i>10 % av signalet</i></button>
         </div>
-        <div class="hero-visual signal-board" aria-label="Eksempel på driftsoversikt i Scope">
-          <div class="signal-head"><span>Scope signal · denne uken</span><i class="status-dot" aria-hidden="true"></i></div>
-          <p class="signal-number">+8,4k</p>
-          <p class="signal-caption">mulig månedlig effekt</p>
-          <div class="signal-chart" aria-hidden="true"><i style="--h:38%"></i><i style="--h:52%"></i><i style="--h:45%"></i><i style="--h:61%"></i><i style="--h:56%"></i><i style="--h:82%"></i><i style="--h:94%"></i></div>
-          <p class="signal-note"><strong>01</strong><span>Flytt én vakt fra tirsdag til fredag.</span></p>
-        </div>
+
+        <figure class="signal-photo"><img src="assets/netflix-hero-restaurant.jpg" alt="Restaurant i drift mens Scope analyserer datakildene"><figcaption>Driften, lest i sanntid.</figcaption></figure>
+
+        <article class="recommendation" aria-live="polite">
+          <p>Anbefaling for tirsdag</p>
+          <h2 data-signal-title>Flytt kampanjen for dagens rett til kl. 16.</h2>
+          <p data-signal-why>Kassesalget viser at gjestene bestemmer seg tidligere enn vanlig. Det er her kilden påvirker rådet mest.</p>
+          <strong data-signal-effect>Forventet effekt · +6 800 kr</strong>
+        </article>
       </section>
 
-      <p class="trust-strip"><strong>Én prioritet. Én forklaring. Én forventet effekt.</strong> Det er alt du trenger å ta stilling til.</p>
-
-      <section class="section" id="hvorfor" aria-labelledby="hvorfor-tittel">
-        <div class="section-head reveal"><div><p class="eyebrow">Hvorfor velge Scope</p><h2 id="hvorfor-tittel">Et styringsverktøy som prioriterer for deg.</h2></div><p class="section-intro">Dashbord viser alt som har skjedd. Scope peker på hva du bør gjøre med det.</p></div>
-        <div class="proof-grid">
-          <article class="proof-card reveal"><span class="proof-number">4→1</span><h3>Systemer blir til handling</h3><p>Kasse, regnskap, vaktplan og vær leses som én historie.</p></article>
-          <article class="proof-card proof-card-accent reveal"><span class="proof-number">24 t</span><h3>Alltid oppdatert</h3><p>Nye tall analyseres hver natt, slik at rådet følger den faktiske driften.</p></article>
-          <article class="proof-card reveal"><span class="proof-number">100%</span><h3>Forklart</h3><p>Du ser grunnlaget, usikkerheten og den mulige effekten bak hvert råd.</p></article>
-        </div>
+      <section class="signal-proof" id="hvorfor" aria-labelledby="proof-title">
+        <header><p>Siste 30 dager</p><h2 id="proof-title">Målbar forskjell. Uten flere rapporter.</h2></header>
+        <dl><div><dt>Beslutninger tatt</dt><dd>28</dd></div><div><dt>Omsetningsløft</dt><dd>+8,4%</dd></div><div><dt>Svinn redusert</dt><dd>−3,7%</dd></div><div><dt>Timer spart</dt><dd>16 t</dd></div></dl>
       </section>
 
-      <section class="section" id="eksempel" aria-labelledby="eksempel-tittel">
-        <div class="section-head reveal"><div><p class="eyebrow">Prøv formatet</p><h2 id="eksempel-tittel">Tre områder. Ett råd av gangen.</h2></div><p class="section-intro">Velg et område. Scope gjør analysen forståelig før du bestemmer deg.</p></div>
-        <div class="demo-shell reveal">
-          <div class="demo-tabs" role="group" aria-label="Velg eksempelområde"><button class="demo-tab" type="button" data-advice-button="bemanning" aria-pressed="true">Bemanning</button><button class="demo-tab" type="button" data-advice-button="varekost" aria-pressed="false">Varekost</button><button class="demo-tab" type="button" data-advice-button="meny" aria-pressed="false">Meny</button></div>
-          <article class="demo-content" aria-live="polite"><div><p class="demo-kicker" data-advice-label>Bemanning</p><h3 data-advice-title>Flytt én vakt fra tirsdag til fredag.</h3><p class="demo-why" data-advice-why>Fredag mellom 18 og 21 har 31 % høyere trykk enn tirsdag, mens bemanningen er lik. Scope foreslår en konkret flytting før neste vaktplan låses.</p></div><p class="demo-effect"><span>Forventet effekt</span><strong data-advice-effect>+8 400 kr per måned</strong></p></article>
-        </div>
+      <section class="signal-how" id="slik" aria-labelledby="how-title">
+        <p>Fra støy til signal</p><h2 id="how-title">Koble på. La Scope lese. Ta valget.</h2>
+        <ol><li><span>01</span><h3>Hent data</h3><p>Systemene du allerede bruker kobles trygt til Scope.</p></li><li><span>02</span><h3>Finn mønsteret</h3><p>AI analyserer, og fagfolk kvalitetssikrer det viktigste funnet.</p></li><li><span>03</span><h3>Send signalet</h3><p>Du får ett råd, én begrunnelse og forventet effekt.</p></li></ol>
       </section>
 
-      <section class="section" id="slik" aria-labelledby="slik-tittel">
-        <div class="section-head reveal"><div><p class="eyebrow">Slik fungerer det</p><h2 id="slik-tittel">Fra rådata til råd på tre steg.</h2></div><p class="section-intro">Oppsettet gjør vi sammen. Derfra jobber Scope automatisk.</p></div>
-        <ol class="steps reveal"><li><h3>Hent data</h3><p>Scope kobles trygt til kasse, regnskap og bemanning.</p></li><li><h3>Analyser og kvalitetssikre</h3><p>AI finner mønstre. En fagperson vurderer funnet og anbefalingen.</p></li><li><h3>Handle</h3><p>Du får ett prioritert råd med begrunnelse og forventet effekt.</p></li></ol>
-      </section>
-
-      <section class="photo-break" style="--photo: url('assets/netflix-hero-restaurant.jpg')" aria-label="Restaurant i full drift på kveldstid">
-        <div class="photo-break-inner reveal"><blockquote>Se det som betyr noe, før det blir synlig i månedsrapporten.</blockquote><p>Scope følger driften mens du driver.</p></div>
-      </section>
-
-      <section class="cta reveal" id="testkunder" aria-labelledby="test-tittel">
-        <p class="eyebrow">Nå åpner vi døren</p><h2 id="test-tittel">Vi søker testkunder.</h2>
-        <p>Vi ser etter restauranter som vil teste Scope i sin egen drift. Testperioden er gratis, oppsettet er personlig og det er ingen bindingstid.</p>
-        <div class="hero-actions"><a class="button button-light" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20teste%20Scope">Søk om testplass</a><a class="button button-ghost" href="tel:+4793637295">Ring 936 37 295</a></div>
-      </section>
+      <section class="signal-cta" id="testkunder" aria-labelledby="cta-title"><p>Vi søker testkunder · ingen bindingstid</p><h2 id="cta-title">Koble på din drift.<br>Test Scope.</h2><div><a href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20teste%20Scope">Søk om testplass</a><a href="tel:+4793637295">Ring 936 37 295</a></div></section>
     </main>
 
-    <footer class="footer"><p>Scope Analytics AS · Org.nr. 936 372 295 · <a href="mailto:post@scopeanalytics.no">post@scopeanalytics.no</a></p><nav class="footer-links" aria-label="Bunnmeny"><a href="/cookies.html">Informasjonskapsler</a><a href="/about.html">Om oss</a><a href="/integrations.html">Integrasjoner</a></nav></footer>
+    <footer class="signal-footer"><p>Scope Analytics AS · Org.nr. 936 372 295</p><p><a href="mailto:post@scopeanalytics.no">post@scopeanalytics.no</a> · <a href="/cookies.html">Informasjonskapsler</a></p></footer>
     <aside class="cookie-consent" data-simple-cookie-consent hidden aria-label="Valg for informasjonskapsler"><p><strong>Informasjonskapsler</strong><br>Vi bruker nødvendige informasjonskapsler for at siden skal fungere. Med samtykke kan vi også forbedre opplevelsen.</p><div><button type="button" data-cookie-choice="necessary">Kun nødvendige</button><button type="button" data-cookie-choice="all">Godta alle</button></div></aside>
-    <script src="proff.js?v=20260901-v1"></script><script src="cookie-consent.js?v=20260718-v1"></script>
+    <script src="signal.js?v=20260901-v2"></script><script src="cookie-consent.js?v=20260718-v1"></script>
   </body>
 </html>
