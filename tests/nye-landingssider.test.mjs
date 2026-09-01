@@ -24,11 +24,11 @@ test("de fire nye retningene har korte URL-er både i devserveren og på Netlify
   }
 });
 
-test("velgersidene viser tolv retninger, med de fire nye til slutt", async () => {
+test("velgersidene beholder de fire tidligere retningene som nummer 9–12", async () => {
   const pages = await Promise.all([read("landing-velger.html"), read("index.html")]);
 
   pages.forEach((html) => {
-    assert.match(html, /Tolv designretninger/);
+    assert.match(html, /Femten designretninger/);
 
     for (const { route, number, name } of variants) {
       assert.match(html, new RegExp(`href="/${route}"`), route);

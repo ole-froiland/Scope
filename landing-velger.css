@@ -481,3 +481,28 @@ h1 {
 .page-option-sesong .option-arrow {
   background: #064dff;
 }
+
+/* Drift: et varmt rådskort med Scope-stolpene. */
+.page-option-drift { background: #f7f7f2; }
+.page-option-drift .option-preview { align-items: end; gap: 6px; width: 104px; height: 78px; padding: 18px; background: #fff; border: 1px solid rgba(23,34,27,.14); }
+.page-option-drift .option-preview i { width: 13px; border-radius: 8px 8px 2px 2px; background: #146b46; }
+.page-option-drift .option-preview i:nth-child(1) { height: 22px; }
+.page-option-drift .option-preview i:nth-child(2) { height: 35px; }
+.page-option-drift .option-preview i:nth-child(3) { height: 48px; }
+.page-option-drift .option-arrow { background: #146b46; }
+
+/* Signal: mørkt analysepanel med én grønn prioritet. */
+.page-option-signal { background: #e9ece8; }
+.page-option-signal .option-preview { align-items: end; gap: 7px; width: 104px; height: 78px; padding: 15px; background: #0c2e21; border-radius: 10px; }
+.page-option-signal .option-preview i { flex: 1; background: rgba(255,255,255,.24); }
+.page-option-signal .option-preview i:nth-child(1) { height: 26%; }
+.page-option-signal .option-preview i:nth-child(2) { height: 46%; }
+.page-option-signal .option-preview i:nth-child(3) { height: 66%; background: #b8ff62; }
+.page-option-signal .option-preview i:nth-child(4) { height: 92%; background: #b8ff62; }
+.page-option-signal .option-arrow { background: #0c2e21; }
+
+/* Vertskap: en rolig, redaksjonell initial. */
+.page-option-vertskap { background: #f5efe6; }
+.page-option-vertskap .option-preview { width: 104px; height: 78px; background: #1c6548; border-radius: 18px; }
+.page-option-vertskap .option-preview i { color: #f1c76a; font-family: Georgia, serif; font-size: 2.5rem; font-style: italic; }
+.page-option-vertskap .option-arrow { background: #1c6548; }

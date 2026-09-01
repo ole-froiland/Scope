@@ -14,11 +14,11 @@ test("/brutal er tilgjengelig i devserveren og på Netlify", async () => {
   assert.match(redirects, /^\/brutal\/\s+\/landing-brutal\.html\s+200!$/m);
 });
 
-test("velgersiden beholder Brutal som femte av seks designretninger", async () => {
+test("velgersiden beholder Brutal som femte designretning", async () => {
   const pages = await Promise.all([read("landing-velger.html"), read("index.html")]);
 
   pages.forEach((html) => {
-    assert.match(html, /Tolv designretninger/);
+    assert.match(html, /Femten designretninger/);
     assert.match(html, /class="page-option page-option-brutal" href="\/brutal"/);
     assert.match(html, /<span class="option-number">05<\/span>/);
     assert.match(html, /<strong>Brutal<\/strong>/);
