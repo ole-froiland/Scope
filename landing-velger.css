@@ -506,3 +506,11 @@ h1 {
 .page-option-vertskap .option-preview { width: 104px; height: 78px; background: #1c6548; border-radius: 18px; }
 .page-option-vertskap .option-preview i { color: #f1c76a; font-family: Georgia, serif; font-size: 2.5rem; font-style: italic; }
 .page-option-vertskap .option-arrow { background: #1c6548; }
+
+/* Test: appflate med sidemeny til venstre. */
+.page-option-test { background: #f2f1ee; }
+.page-option-test .option-preview { width: 104px; height: 78px; background: #fff; border: 1px solid rgba(23,23,21,.16); border-radius: 10px; overflow: hidden; }
+.page-option-test .option-preview i { height: 100%; }
+.page-option-test .option-preview i:nth-child(1) { width: 32px; background: #ebe8e2; border-right: 1px solid rgba(23,23,21,.14); }
+.page-option-test .option-preview i:nth-child(2) { flex: 1; background: #fff; }
+.page-option-test .option-arrow { background: #171715; }

@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test | Scope</title>
+    <meta name="description" content="Testflate for Scope: venstremeny, stedsvelger og spørreboks.">
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='20' r='18' fill='%23064dff'/%3E%3Ccircle cx='44' cy='40' r='18' fill='%23ff3c38'/%3E%3Ccircle cx='20' cy='40' r='18' fill='%2300bd7b'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="test.css?v=overview-folder-1b">
+  </head>
+  <body class="app">
+    <!-- Lastes her, ikke i <head>, slik at lagret menytilstand settes før første tegning. -->
+    <script src="test.js?v=overview-folder-1b"></script>
+
+    <aside class="sidebar" id="sidebar" aria-label="Sidemeny">
+      <div class="sidebar-top">
+        <a class="brand" href="/test" aria-label="Scope hjem">
+          <span class="brand-mark" aria-hidden="true">
+            <span class="mark-circle mark-blue"></span>
+            <span class="mark-circle mark-red"></span>
+            <span class="mark-circle mark-green"></span>
+          </span>
+          <span class="brand-name">scope</span>
+        </a>
+
+        <button class="icon-button sidebar-toggle" type="button" id="sidebar-toggle" aria-controls="sidebar" aria-expanded="true" aria-label="Lukk meny" title="Lukk meny">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="16" rx="2.5"></rect>
+            <path d="M9.5 4v16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <p class="rail-heading rail-heading-top">Restaurant</p>
+      <div class="place">
+        <button class="place-button" type="button" id="place-button" aria-expanded="false" aria-controls="place-list" data-tooltip="Heim Jessheim">
+          <span class="place-initial" id="place-initial" aria-hidden="true">J</span>
+          <svg class="place-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.6 9.5 6.2 5h11.6l1.6 4.5"></path><path d="M5.6 9.5V19h12.8V9.5"></path><path d="M10 19v-4.6h4V19"></path></svg>
+          <span class="place-name" id="place-name">Heim Jessheim</span>
+          <svg class="place-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m8 10 4 4 4-4"></path>
+          </svg>
+        </button>
+
+        <div class="place-list" id="place-list" role="group" aria-label="Velg restauranter" hidden>
+          <div class="place-list-top">
+            <span class="place-list-heading">Velg én eller flere</span>
+            <button class="place-all" type="button" id="place-all" aria-pressed="false">Alle</button>
+          </div>
+          <button class="place-option" type="button" role="checkbox" aria-checked="true" data-place="Heim Jessheim" data-initial="J"><span class="place-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg></span><span class="place-option-name">Jessheim</span></button>
+          <button class="place-option" type="button" role="checkbox" aria-checked="false" data-place="Heim Gjøvik" data-initial="G"><span class="place-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg></span><span class="place-option-name">Gjøvik</span></button>
+          <button class="place-option" type="button" role="checkbox" aria-checked="false" data-place="Heim St. Hanshaugen" data-initial="S"><span class="place-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg></span><span class="place-option-name">St. Hanshaugen</span></button>
+          <button class="place-option" type="button" role="checkbox" aria-checked="false" data-place="Heim Fredrikstad" data-initial="F"><span class="place-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg></span><span class="place-option-name">Fredrikstad</span></button>
+          <button class="place-option" type="button" role="checkbox" aria-checked="false" data-place="Heim Hamar" data-initial="H"><span class="place-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg></span><span class="place-option-name">Hamar</span></button>
+          <div class="place-divider"></div>
+          <button class="place-option" type="button" role="checkbox" aria-checked="false" data-place="Heim Gruppen" data-initial="Gr"><span class="place-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"></path></svg></span><span class="place-option-name">Gruppen</span><span class="place-option-note">egen avdeling</span></button>
+          <p class="place-note" id="place-note" hidden>Minst ett sted må være valgt.</p>
+        </div>
+      </div>
+
+      <button class="rail-button rail-new" type="button" id="new-chat" data-tooltip="Ny samtale">
+        <svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <path d="M12 5v14M5 12h14"></path>
+        </svg>
+        <span class="rail-label">Ny samtale</span>
+      </button>
+
+      <nav class="rail-nav" aria-label="Hovedmeny">
+        <div class="overview-folder" id="overview-folder">
+          <button class="rail-link overview-folder-toggle" type="button" id="overview-folder-toggle" aria-expanded="true" aria-controls="overview-subnav" data-tooltip="Oversikt"><svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6.8" height="6.8" rx="1.6"></rect><rect x="13.2" y="4" width="6.8" height="6.8" rx="1.6"></rect><rect x="4" y="13.2" width="6.8" height="6.8" rx="1.6"></rect><rect x="13.2" y="13.2" width="6.8" height="6.8" rx="1.6"></rect></svg><span class="rail-label" id="overview-folder-label">Oversikt</span><span class="overview-folder-chevron" aria-hidden="true">⌄</span></button>
+          <div class="overview-subnav" id="overview-subnav">
+        <a class="rail-link" href="#oversikt" data-view="oversikt" aria-current="page" data-tooltip="Nå">
+          <svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6.8" height="6.8" rx="1.6"></rect><rect x="13.2" y="4" width="6.8" height="6.8" rx="1.6"></rect><rect x="4" y="13.2" width="6.8" height="6.8" rx="1.6"></rect><rect x="13.2" y="13.2" width="6.8" height="6.8" rx="1.6"></rect></svg>
+          <span class="rail-label">Nå</span>
+        </a>
+
+<a class="rail-link" href="#tiltak" data-view="tiltak" data-tooltip="Tiltak"><svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6h14M5 12h14M5 18h9"/></svg><span class="rail-label">Tiltak</span></a>
+<a class="rail-link" href="#effekt" data-view="effekt" data-tooltip="Effekt"><svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 17 6-6 4 3 6-9M15 5h5v5"/></svg><span class="rail-label">Effekt</span></a>
+          </div>
+        </div>
+<a class="rail-link" href="#rapporter" data-view="rapporter" data-tooltip="Rapporter"><svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7zM10 11h5M10 15h5"/></svg><span class="rail-label">Rapporter</span></a>
+        <a class="rail-link" href="#salg" data-view="salg" data-tooltip="Salg">
+          <svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 17.5v-4M12 17.5v-9M17.5 17.5v-6" stroke-width="1.9"></path></svg>
+          <span class="rail-label">Salg</span>
+        </a>
+
+        <a class="rail-link" href="#varekost" data-view="varekost" data-tooltip="Varekost">
+          <svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 9.5h15l-1.3 7.8a2 2 0 0 1-2 1.7H7.8a2 2 0 0 1-2-1.7Z"></path><path d="M8.6 9.5a3.4 3.4 0 0 1 6.8 0"></path><path d="M10.2 13v3M13.8 13v3"></path></svg>
+          <span class="rail-label">Varekost</span>
+        </a>
+
+        <a class="rail-link" href="#bemanning" data-view="bemanning" data-tooltip="Bemanning">
+          <svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="9" r="2.8"></circle><path d="M4 18.8a5.5 5.5 0 0 1 11 0"></path><circle cx="17" cy="10.2" r="2"></circle><path d="M16.4 14.8a4.3 4.3 0 0 1 3.6 4"></path></svg>
+          <span class="rail-label">Bemanning</span>
+        </a>
+
+        <a class="rail-link" href="#resultat" data-view="resultat" data-tooltip="Resultat">
+          <svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16.5 9.5 11l3 3 6.5-6.5"></path><path d="M14.5 7.5h5v5"></path></svg>
+          <span class="rail-label">Resultat</span>
+        </a>
+      </nav>
+
+      <div class="conversations">
+        <p class="rail-heading">Tidligere samtaler</p>
+        <div class="conv-list" id="conv-list"></div>
+      </div>
+
+      <nav class="rail-nav rail-secondary" aria-label="System">
+        <a class="rail-link" href="#koblinger" data-view="koblinger" data-tooltip="Koblinger">
+          <svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.6 13.4a3.6 3.6 0 0 0 5.1 0l2.6-2.6a3.6 3.6 0 0 0-5.1-5.1l-1.5 1.5"></path><path d="M13.4 10.6a3.6 3.6 0 0 0-5.1 0l-2.6 2.6a3.6 3.6 0 0 0 5.1 5.1l1.5-1.5"></path></svg>
+          <span class="rail-label">Koblinger</span>
+        </a>
+
+        <a class="rail-link" href="#innstillinger" data-view="innstillinger" data-tooltip="Innstillinger">
+          <svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8.5h6M14 8.5h6M4 15.5h10M18 15.5h2"></path><circle cx="12" cy="8.5" r="2"></circle><circle cx="16" cy="15.5" r="2"></circle></svg>
+          <span class="rail-label">Innstillinger</span>
+        </a>
+      </nav>
+
+      <div class="rail-bottom">
+        <button class="rail-user" type="button" id="user-button" aria-haspopup="true" aria-expanded="false" aria-controls="user-menu" data-tooltip="Ole">
+          <span class="avatar" id="user-initial" aria-hidden="true">O</span>
+          <span class="rail-label" id="user-short">Ole</span>
+          <svg class="user-dots" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <circle cx="6" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="18" cy="12" r="1.5"></circle>
+          </svg>
+        </button>
+
+        <div class="user-menu" id="user-menu" hidden>
+          <div class="user-menu-head">
+            <span class="avatar" id="menu-avatar" aria-hidden="true">O</span>
+            <span class="user-menu-who">
+              <span class="user-menu-name" id="menu-name">Ole Frøiland</span>
+              <span class="user-menu-mail" id="menu-mail">ole@heim.no</span>
+            </span>
+          </div>
+
+          <div class="menu-sep"></div>
+
+          <div class="menu-modus">
+            <p class="modus-topp">
+              <span class="modus-tittel" id="modus-tittel">Visning</span>
+              <span class="modus-verdi" id="modus-verdi">Vanlig</span>
+            </p>
+            <p class="modus-ender" aria-hidden="true">
+              <span id="modus-ende-venstre">Raskere</span>
+              <span id="modus-ende-hoyre">Mer detaljer</span>
+            </p>
+            <div class="modus-slider" id="modus-slider" role="radiogroup" aria-labelledby="modus-tittel">
+              <span class="modus-spor" aria-hidden="true"><span class="modus-fyll"></span></span>
+              <span class="modus-thumb-lag" aria-hidden="true"><span class="modus-thumb"></span></span>
+              <button class="modus-valg" type="button" role="radio" aria-checked="false" tabindex="-1" data-modus="rask"><span class="modus-prikk" aria-hidden="true"></span><span class="visually-hidden modus-tekst">Rask</span></button>
+              <button class="modus-valg" type="button" role="radio" aria-checked="true" tabindex="0" data-modus="vanlig"><span class="modus-prikk" aria-hidden="true"></span><span class="visually-hidden modus-tekst">Vanlig</span></button>
+              <button class="modus-valg" type="button" role="radio" aria-checked="false" tabindex="-1" data-modus="avansert"><span class="modus-prikk" aria-hidden="true"></span><span class="visually-hidden modus-tekst">Avansert</span></button>
+            </div>
+            <p class="modus-note" id="modus-note">Hele oversikten, slik den er i dag.</p>
+          </div>
+
+          <div class="menu-sep"></div>
+
+          <button class="menu-item" type="button" data-goto="innstillinger" data-anker="brukere">
+            <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="9" r="2.8"></circle><path d="M4 18.8a5.5 5.5 0 0 1 11 0"></path><circle cx="17" cy="10.2" r="2"></circle><path d="M16.4 14.8a4.3 4.3 0 0 1 3.6 4"></path></svg>
+            <span>Brukere og tilganger</span>
+          </button>
+
+          <div class="menu-sep"></div>
+
+          <button class="menu-item" type="button" data-demo="Hjelp og support er ikke koblet på i demoen.">
+            <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><path d="M9.8 9.6a2.3 2.3 0 1 1 2.9 2.5c-.5.2-.7.6-.7 1.1v.4"></path><path d="M12 16.6h.01"></path></svg>
+            <span>Hjelp og support</span>
+          </button>
+
+          <button class="menu-item" type="button" id="scope-logout">
+            <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 8.5V6.8a1.8 1.8 0 0 0-1.8-1.8H6.8A1.8 1.8 0 0 0 5 6.8v10.4A1.8 1.8 0 0 0 6.8 19h5.9a1.8 1.8 0 0 0 1.8-1.8V15.5"></path><path d="M10.5 12H20M17.2 9l3 3-3 3"></path></svg>
+            <span>Logg ut</span>
+          </button>
+
+          <p class="menu-note" id="menu-note" hidden></p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="scrim" id="scrim"></div>
+
+    <main class="content">
+      <header class="content-header">
+        <div class="header-leading">
+        <button class="icon-button menu-button" type="button" id="menu-button" aria-controls="sidebar" aria-expanded="false" aria-label="Åpne meny" title="Åpne meny">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"></path>
+          </svg>
+        </button>
+        <span class="content-view" id="content-view">Oversikt</span></div>
+        <h1 class="content-title" id="content-title">Heim Jessheim</h1>
+        <div class="workspace-tabbar"><div id="workspace-tabs" role="tablist" aria-label="Arbeidsfaner"></div><button type="button" id="workspace-add" class="workspace-add" aria-label="Åpne ny fane" title="Ny fane">+</button></div>
+        <div class="header-actions">
+          <button type="button" class="header-control" id="theme-toggle" aria-label="Slå på mørk modus" aria-pressed="false" title="Mørk modus"><svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 14a8.5 8.5 0 0 1-10-10A8.5 8.5 0 1 0 20 14Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button>
+          <div class="header-language"><button type="button" class="header-control" id="language-toggle" aria-expanded="false" aria-controls="language-options" aria-label="Menyspråk" title="Menyspråk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg><span id="language-label">NO</span></button><div id="language-options" class="header-language-options" hidden><p id="language-heading">Menyspråk</p><button type="button" data-language="nb" aria-pressed="true">Norsk <span lang="nb">NO</span></button><button type="button" data-language="en" aria-pressed="false">English <span lang="en">EN</span></button><small id="language-note">Gjelder navigasjonen. Rapportene er på norsk.</small></div></div>
+        </div>
+      </header>
+
+      <div class="content-body" id="content-body">
+        <section class="view" data-view="oversikt">
+          <p class="visually-hidden" id="dash-status" role="status" aria-live="polite"></p>
+          <div class="dash" id="dash"></div>
+        </section>
+        <section class="view" data-view="salg" hidden>
+          <div class="sales" id="sales">
+            <p id="sales-date" hidden></p>
+            <div class="sales-toolbar"><div class="sales-segment" role="group" aria-label="Salgsperiode" id="sales-periods"></div><button class="sales-summary-open" id="sales-summary-open" type="button"><span aria-hidden="true">✦</span> Oppsummert <span aria-hidden="true">↗</span></button></div>
+            <div class="sales-metrics" id="sales-metrics" aria-live="polite" aria-atomic="true"></div>
+            <section class="sales-panel sales-trend"><div class="sales-panel-head"><div><h3 id="sales-chart-title">Salgsutvikling</h3><p class="sales-muted" id="sales-chart-subtitle">Klikk en søyle for detaljer</p></div><label class="sales-check"><input type="checkbox" id="sales-compare" checked> Vis forrige periode</label></div><div class="sales-chart" id="sales-chart"></div><div class="sales-chart-footer"><span class="sales-legend"><i></i> Valgt periode <span id="sales-prior-legend"><i></i> Forrige periode</span></span><output id="sales-point" aria-live="polite">Velg et punkt for detaljer</output></div></section>
+            <section class="sales-details"><div class="sales-detail-tabs" role="group" aria-label="Utforsk salget"><button type="button" data-sales-detail="mix" aria-pressed="true">Fordeling</button><button type="button" data-sales-detail="guests" aria-pressed="false">Gjester</button><button type="button" data-sales-detail="products" aria-pressed="false">Mest solgte</button></div><section class="sales-panel sales-products" id="sales-detail-products" hidden><div class="sales-panel-head"><div><h3>Det gjestene kjøper</h3><p class="sales-muted">Produkter rangert etter omsetning</p></div><label class="sales-select-label">Avdeling<select id="sales-category"><option value="Alle">Alle avdelinger</option><option>Mat</option><option>Drikke</option><option>Mineralvann</option><option>Øl</option><option>Vin</option><option>Sprit</option><option>Kaffe</option></select></label></div><div class="sales-product-tools"><label class="sales-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><input id="sales-search" type="search" placeholder="Finn et produkt" aria-label="Søk i produkter"></label><span class="sales-muted" id="sales-count" role="status"></span></div><div class="sales-table-wrap"><table class="sales-table"><thead><tr><th scope="col">Produkt</th><th scope="col">Andel</th><th scope="col">Omsetning</th></tr></thead><tbody id="sales-rows"></tbody></table></div><p class="sales-empty" id="sales-empty" hidden>Ingen produkter matcher søket. Prøv et annet navn eller en annen avdeling.</p></section>
+            <section class="sales-panel sales-mix" id="sales-detail-mix"><div class="sales-panel-head"><div><h3>Fordeling</h3><p class="sales-muted">Av total omsetning</p></div></div><div id="sales-mix"></div><div class="sales-shifts" id="sales-shifts" aria-label="Salg per vakt"></div></section><section class="sales-panel sales-guests" id="sales-detail-guests" hidden><div class="sales-panel-head"><div><h3>Gjestene gjennom dagen</h3><p class="sales-muted">Fordelt på vakt i valgt periode</p></div></div><div id="sales-guest-data"></div></section></section>
+            <dialog id="sales-wrap" class="sales-wrap" aria-labelledby="sales-wrap-title"><div class="sales-wrap-top"><span>scope / oppsummert</span><button id="sales-wrap-close" type="button" aria-label="Lukk oppsummering">×</button></div><p id="sales-wrap-context" class="sales-wrap-context"></p><div id="sales-wrap-progress" class="sales-wrap-progress" aria-label="Velg del av oppsummeringen"></div><div id="sales-wrap-slide" class="sales-wrap-slide" aria-live="polite" aria-atomic="true"></div><div class="sales-wrap-nav"><button id="sales-wrap-prev" type="button">← Tilbake</button><span id="sales-wrap-count"></span><button id="sales-wrap-next" type="button">Neste →</button></div><p class="sales-wrap-disclaimer">Demodata · basert på valgt restaurant og periode</p></dialog>
+            <dialog id="sales-dialog" class="sales-dialog" aria-labelledby="sales-dialog-title"><div class="sales-dialog-top"><span class="sales-demo">Demodata</span><button type="button" id="sales-dialog-close" aria-label="Lukk detaljer">×</button></div><p class="sales-eyebrow" id="sales-dialog-context"></p><h2 id="sales-dialog-title"></h2><div id="sales-dialog-body"></div><p class="sales-footnote">Illustrerte tall, ikke hentet fra kassasystemet.</p></dialog>
+          </div>
+        </section>
+<section class="view" data-view="tiltak" hidden><div class="hub" id="hub-tiltak"></div></section>
+<section class="view" data-view="effekt" hidden><div class="hub" id="hub-effekt"></div></section>
+<section class="view" data-view="rapporter" hidden><div class="hub" id="hub-rapporter"></div></section>
+        <section class="view" data-view="varekost" hidden>
+          <div class="ops" id="ops-varekost"></div>
+        </section>
+        <section class="view" data-view="bemanning" hidden>
+          <div class="ops" id="ops-bemanning"></div>
+        </section>
+        <section class="view" data-view="resultat" hidden>
+          <div class="ops" id="ops-resultat"></div>
+        </section>
+        <section class="view" data-view="koblinger" hidden>
+          <div class="integrations" id="integrations"></div>
+
+          <dialog class="add-dialog" id="add-dialog" aria-labelledby="add-title">
+            <div class="dialog-head">
+              <h2 class="dialog-title" id="add-title">Legg til kobling</h2>
+              <button class="icon-button" type="button" id="add-close" aria-label="Lukk">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+              </button>
+            </div>
+
+            <div class="dialog-search">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path>
+              </svg>
+              <input class="search-input" type="search" id="add-search" placeholder="Søk etter system …" autocomplete="off" aria-describedby="add-count">
+            </div>
+
+            <div class="dialog-filters" id="add-filters" role="group" aria-label="Filtrer på type"></div>
+
+            <p class="dialog-count" id="add-count" aria-live="polite"></p>
+            <ul class="dialog-list" id="add-list"></ul>
+            <p class="dialog-note">Demo — ingen ekte kobling settes opp ennå.</p>
+          </dialog>
+        </section>
+        <section class="view" data-view="innstillinger" hidden>
+          <div class="settings">
+            <section class="card" id="set-profil">
+              <h2 class="card-title">Profil</h2>
+              <div class="profile">
+                <span class="avatar avatar-lg" id="profile-avatar" aria-hidden="true">O</span>
+                <div class="field-grid">
+                  <label class="field">
+                    <span class="field-label">Navn</span>
+                    <input class="field-input" type="text" id="set-navn" value="Ole Frøiland" autocomplete="name">
+                  </label>
+                  <label class="field">
+                    <span class="field-label">E-post</span>
+                    <input class="field-input" type="email" id="set-epost" value="ole@heim.no" autocomplete="email">
+                  </label>
+                  <label class="field">
+                    <span class="field-label">Telefon</span>
+                    <input class="field-input" type="tel" id="set-telefon" value="+47 900 12 345" autocomplete="tel">
+                  </label>
+                  <label class="field">
+                    <span class="field-label">Rolle</span>
+                    <input class="field-input" type="text" value="Eier" readonly>
+                  </label>
+                </div>
+              </div>
+              <p class="card-note">Endringene lagres mens du skriver.</p>
+            </section>
+
+            <section class="card">
+              <h2 class="card-title">Varsler</h2>
+              <ul class="switch-list">
+            <li class="switch-row">
+              <span class="switch-text">
+                <span class="switch-title">Daglig sammendrag</span>
+                <span class="switch-desc">Én oppsummering hver morgen kl. 09:00.</span>
+              </span>
+              <button class="switch" type="button" role="switch" aria-checked="true" data-varsel="sammendrag" aria-label="Daglig sammendrag">
+                <span class="switch-knob" aria-hidden="true"></span>
+              </button>
+            </li>
+            <li class="switch-row">
+              <span class="switch-text">
+                <span class="switch-title">Varekost over grensen</span>
+                <span class="switch-desc">Varsle når varekosten passerer 32 % av salget.</span>
+              </span>
+              <button class="switch" type="button" role="switch" aria-checked="true" data-varsel="varekost" aria-label="Varekost over grensen">
+                <span class="switch-knob" aria-hidden="true"></span>
+              </button>
+            </li>
+            <li class="switch-row">
+              <span class="switch-text">
+                <span class="switch-title">Lønnsprosent over grensen</span>
+                <span class="switch-desc">Varsle når lønnskosten passerer 30 % av salget.</span>
+              </span>
+              <button class="switch" type="button" role="switch" aria-checked="true" data-varsel="lonn" aria-label="Lønnsprosent over grensen">
+                <span class="switch-knob" aria-hidden="true"></span>
+              </button>
+            </li>
+            <li class="switch-row">
+              <span class="switch-text">
+                <span class="switch-title">Svake anmeldelser</span>
+                <span class="switch-desc">Varsle ved nye anmeldelser under fire stjerner.</span>
+              </span>
+              <button class="switch" type="button" role="switch" aria-checked="false" data-varsel="anmeldelser" aria-label="Svake anmeldelser">
+                <span class="switch-knob" aria-hidden="true"></span>
+              </button>
+            </li>
+            <li class="switch-row">
+              <span class="switch-text">
+                <span class="switch-title">Kobling som stopper</span>
+                <span class="switch-desc">Varsle hvis et system slutter å levere data.</span>
+              </span>
+              <button class="switch" type="button" role="switch" aria-checked="true" data-varsel="kobling" aria-label="Kobling som stopper">
+                <span class="switch-knob" aria-hidden="true"></span>
+              </button>
+            </li>
+              </ul>
+            </section>
+
+            <section class="card">
+              <h2 class="card-title">Restauranter</h2>
+              <ul class="place-rows" id="settings-places"></ul>
+            </section>
+
+            <section class="card" id="set-brukere">
+              <h2 class="card-title">Brukere og tilganger</h2>
+              <ul class="user-rows">
+            <li class="user-row">
+              <span class="avatar" aria-hidden="true">O</span>
+              <span class="user-row-text">
+                <span class="user-row-name">Ole Frøiland</span>
+                <span class="user-row-mail">ole@heim.no</span>
+              </span>
+              <span class="user-row-role">Eier</span>
+              <span class="user-row-access">Alle fem</span>
+            </li>
+            <li class="user-row">
+              <span class="avatar" aria-hidden="true">M</span>
+              <span class="user-row-text">
+                <span class="user-row-name">Marte Lien</span>
+                <span class="user-row-mail">marte@heim.no</span>
+              </span>
+              <span class="user-row-role">Daglig leder</span>
+              <span class="user-row-access">Jessheim</span>
+            </li>
+            <li class="user-row">
+              <span class="avatar" aria-hidden="true">S</span>
+              <span class="user-row-text">
+                <span class="user-row-name">Sindre Aas</span>
+                <span class="user-row-mail">sindre@heim.no</span>
+              </span>
+              <span class="user-row-role">Kjøkkensjef</span>
+              <span class="user-row-access">Gjøvik</span>
+            </li>
+            <li class="user-row">
+              <span class="avatar" aria-hidden="true">N</span>
+              <span class="user-row-text">
+                <span class="user-row-name">Nina Berg</span>
+                <span class="user-row-mail">nina@heim.no</span>
+              </span>
+              <span class="user-row-role">Regnskap</span>
+              <span class="user-row-access">Alle fem</span>
+            </li>
+              </ul>
+              <button class="btn" type="button" data-demo="Invitasjoner sendes ikke i demoen.">Inviter bruker</button>
+            </section>
+
+            <section class="card">
+              <h2 class="card-title">Konto</h2>
+              <dl class="account-facts">
+                <div><dt>Abonnement</dt><dd>Scope Drift · fem restauranter</dd></div>
+                <div><dt>Organisasjon</dt><dd>Heim Restauranter AS · 923 456 789</dd></div>
+                <div><dt>Kunde siden</dt><dd>Mars 2025</dd></div>
+              </dl>
+              <div class="account-actions">
+                <button class="btn" type="button" id="scope-logout">Logg ut</button>
+                <button class="btn btn-danger" type="button" data-demo="Sletting er slått av i demoen.">Slett konto</button>
+              </div>
+            </section>
+
+            <p class="settings-note" id="settings-note" hidden></p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Spørreboksen ligger utenfor .content-body, så den står uansett hvilken meny som er valgt. -->
+      <div class="ask">
+        <button class="ask-gripe" type="button" id="ask-gripe" aria-controls="ask-thread" aria-label="Dra kanten opp eller ned for å endre høyden" title="Dra for å endre høyden"></button>
+
+        <div class="ask-thread" id="ask-thread" role="log" aria-live="polite" aria-label="Samtale" hidden></div>
+
+        <form class="ask-box" id="ask-form">
+          <label class="visually-hidden" for="ask-input">Spør Scope</label>
+          <textarea class="ask-input" id="ask-input" rows="1" maxlength="4000" placeholder="Spør Scope" autocomplete="off"></textarea>
+          <div class="ask-row">
+            <span class="ask-hint">Enter sender · Shift + Enter gir ny linje</span>
+            <button class="ask-send" type="submit" aria-label="Send spørsmål" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 19V5M6 11l6-6 6 6"></path>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

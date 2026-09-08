@@ -19,10 +19,10 @@ test("de tre kreative retningene har korte URL-er lokalt og på Netlify", async 
   }
 });
 
-test("velgersidene viser alle femten retninger", async () => {
+test("velgersidene viser alle seksten retninger", async () => {
   const pages = await Promise.all([read("landing-velger.html"), read("index.html")]);
   for (const html of pages) {
-    assert.match(html, /Femten designretninger/);
+    assert.match(html, /Seksten designretninger/);
     for (const { route, number, name } of variants) {
       assert.match(html, new RegExp(`href="/${route}"`), route);
       assert.match(html, new RegExp(`<span class="option-number">${number}</span>`), route);

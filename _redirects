@@ -28,3 +28,5 @@
 /signal/  /landing-signal.html  200!
 /vertskap  /landing-vertskap.html 200!
 /vertskap/ /landing-vertskap.html 200!
+/test     /test.html            200!
+/test/    /test.html            200!

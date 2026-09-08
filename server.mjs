@@ -34,6 +34,7 @@ import {
   validateProfile,
 } from "./server/onboarding-service.mjs";
 import { createSyncJob, recoverInterruptedJobs, runFirstSync } from "./server/sync-service.mjs";
+import { createAssistantService, sanitizeAssistantInput } from "./server/assistant-service.mjs";
 
 const scrypt = promisify(scryptCallback);
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
@@ -340,6 +341,9 @@ export async function createScopeServer(options = {}) {
   }
 
   const sessions = new Map();
+  const assistant = createAssistantService(options.assistant);
+  const assistantAttempts = new Map();
+  let assistantBusy = false;
   const loginAttempts = new Map();
   const inquiryAttempts = new Map();
   let saveQueue = Promise.resolve();
@@ -677,6 +681,27 @@ export async function createScopeServer(options = {}) {
     const pathname = decodeURIComponent(url.pathname).replace(/\/{2,}/g, "/");
 
     try {
+      if (pathname === "/api/assistant/status" && request.method === "GET") {
+        return json(response, 200, { mode: await assistant.available() ? "model" : "local", source: "demo", cost: "local-only" });
+      }
+      if (pathname === "/api/assistant/chat" && request.method === "POST") {
+        // Public demo context only. No store, credentials or private data enter the model.
+        if (request.headers["content-type"]?.split(";")[0] !== "application/json" || origin !== expectedOrigin) return json(response, 403, { error: "Ugyldig opprinnelse eller innholdstype." });
+        if (rateLimited(assistantAttempts, request, 20, 60000)) return json(response, 429, { error: "For mange spørsmål. Vent ett minutt." });
+        const input = sanitizeAssistantInput(await readBody(request));
+        if (assistantBusy) return json(response, 429, { error: "Den lokale modellen jobber med et spørsmål. Prøv igjen om litt." });
+        assistantBusy = true;
+        try { return json(response, 200, await assistant.answer(input)); }
+        finally { assistantBusy = false; }
+      }
+      if (pathname === "/api/assistant/logout" && request.method === "POST") {
+        if (origin !== expectedOrigin || request.headers["x-scope-action"] !== "logout") return json(response, 403, { error: "Ugyldig opprinnelse." });
+        const auth = getSession(request);
+        if (auth) { sessions.delete(auth.token); addAudit(auth.user, "Utlogging", "Scope-assistent", "Vellykket", "", request); }
+        const token = parseCookies(request.headers.cookie).scope_onboarding_session;
+        if (token) onboardingSessions.delete(token);
+        return json(response, 200, { ok: true, authenticated: Boolean(auth || token) }, { "Set-Cookie": ["scope_admin_session=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0", "scope_onboarding_session=; HttpOnly; SameSite=Lax; Path=/; Max-Age=0"] });
+      }
       if (pathname === "/favicon.ico" && request.method === "GET") {
         response.writeHead(204, { "Cache-Control": "public, max-age=86400" });
         return response.end();
@@ -686,7 +711,7 @@ export async function createScopeServer(options = {}) {
         return sendPublicFile(response, "/intro.html");
       }
 
-      if (["/clean/", "/leken/", "/enkel/", "/vakt/", "/brutal/", "/kombi/", "/netflix/", "/enkel-2/", "/kvittering/", "/meny/", "/for-etter/", "/sesong/", "/drift/", "/signal/", "/vertskap/"].includes(pathname) && request.method === "GET") {
+      if (["/clean/", "/leken/", "/enkel/", "/vakt/", "/brutal/", "/kombi/", "/netflix/", "/enkel-2/", "/kvittering/", "/meny/", "/for-etter/", "/sesong/", "/drift/", "/signal/", "/vertskap/", "/test/"].includes(pathname) && request.method === "GET") {
         return redirect(response, pathname.slice(0, -1));
       }
 
@@ -706,6 +731,7 @@ export async function createScopeServer(options = {}) {
         "/drift": "/landing-drift.html",
         "/signal": "/landing-signal.html",
         "/vertskap": "/landing-vertskap.html",
+        "/test": "/test.html",
       };
       if (landingPageAliases[pathname] && request.method === "GET") {
         return sendPublicFile(response, landingPageAliases[pathname]);
@@ -1653,7 +1679,7 @@ export async function createScopeServer(options = {}) {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const { server } = await createScopeServer();
-  const port = Number(process.env.PORT) || 4173;
+  const port = Number(process.env.PORT) || 4180;
   const host = process.env.HOST || "127.0.0.1";
   server.listen(port, host, () => console.log(`Scope kjører på http://${host}:${port}`));
 }
