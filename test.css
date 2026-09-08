@@ -1632,7 +1632,7 @@
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  margin-bottom: 7px;
+  margin-bottom: 0;
   color: var(--app-muted);
   font-size: 10.5px;
 }
@@ -1643,7 +1643,7 @@
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  height: 28px;
+  height: 44px;
   touch-action: none;
   cursor: pointer;
   user-select: none;
@@ -1652,11 +1652,11 @@
 
 .modus-spor {
   position: absolute;
-  inset: 0;
+  inset: 20px 0;
   overflow: hidden;
   border-radius: 999px;
   background: var(--app-hover);
-  box-shadow: inset 0 1px 2px rgba(23, 23, 21, 0.07);
+  box-shadow: none;
 }
 
 /* Den fylte delen fram til knappen. */
@@ -1666,33 +1666,8 @@
   overflow: hidden;
   width: var(--modus-stopp);
   border-radius: inherit;
-  background: color-mix(in srgb, var(--app-accent) 55%, var(--app-hover));
+  background: var(--app-ink);
   transition: width 190ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Lyssveip: går én gang når man bytter trinn, og går rundt i avansert. */
-.modus-fyll::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 45%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
-  transform: translateX(-130%);
-}
-
-@keyframes modus-sveip {
-  from { transform: translateX(-130%); }
-  to { transform: translateX(280%); }
-}
-
-.modus-slider.er-endret .modus-fyll::after {
-  animation: modus-sveip 620ms cubic-bezier(0.3, 0.7, 0.4, 1);
-}
-
-.app[data-modus="avansert"] .modus-fyll::after {
-  animation: modus-sveip 2.8s ease-in-out infinite;
 }
 
 .modus-thumb-lag {
@@ -1718,11 +1693,12 @@
 }
 
 .modus-thumb {
-  width: 34px;
-  height: 22px;
-  border-radius: 8px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(23, 23, 21, 0.12);
+  border-radius: 50%;
   background: var(--app-paper);
-  box-shadow: 0 1px 4px rgba(23, 23, 21, 0.28), 0 0 0 0.5px rgba(23, 23, 21, 0.08);
+  box-shadow: 0 1px 3px rgba(23, 23, 21, 0.16);
   transition: transform 140ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -1769,7 +1745,7 @@
   opacity: 0;
 }
 
-.modus-valg:hover .modus-prikk {
+.modus-valg:not([aria-checked="true"]):hover .modus-prikk {
   opacity: 0.9;
 }
 
@@ -1779,107 +1755,30 @@
 }
 
 .modus-note {
-  margin: 9px 2px 0;
+  margin: 2px 0 0;
+  min-height: 32px;
   color: var(--app-muted);
   font-size: 11px;
   line-height: 1.45;
 }
 
-/* Avansert: fargespill i navnet, i baren og rundt knappen. */
-@keyframes modus-skimmer {
-  from { background-position: 0% 50%; }
-  to { background-position: 200% 50%; }
-}
-
-.app[data-modus="avansert"] .modus-verdi,
-.app[data-modus="avansert"] .modus-thumb::after {
-  background-image: linear-gradient(90deg, #1559f7, #27c780, #f04d43, #1559f7);
-  background-size: 200% 100%;
-  animation: modus-skimmer 3.4s linear infinite;
-}
-
-/* Baren tåler ikke full styrke på merkefargene; her går de dempet. */
-.app[data-modus="avansert"] .modus-fyll {
-  background-image: linear-gradient(90deg, #7d9cf7, #5cc79b, #ef978f, #7d9cf7);
-  background-size: 200% 100%;
-  animation: modus-skimmer 3.4s linear infinite;
-}
-
-.app[data-modus="avansert"] .modus-verdi {
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-}
-
-.modus-thumb {
-  position: relative;
-}
-
-.app[data-modus="avansert"] .modus-thumb::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  padding: 1px;
-  border-radius: inherit;
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .modus-thumb-lag,
   .modus-fyll,
-  .modus-thumb {
+  .modus-thumb,
+  .modus-prikk {
     transition: none;
   }
-
-  .app[data-modus="avansert"] .modus-verdi,
-  .app[data-modus="avansert"] .modus-fyll,
-  .app[data-modus="avansert"] .modus-thumb::after,
-  .app[data-modus="avansert"] .modus-fyll::after,
-  .modus-slider.er-endret .modus-fyll::after {
-    animation: none;
-  }
-}
-
-/* Fargespillet trenger lysere stopp mot mørk bakgrunn. */
-.app[data-theme="dark"][data-modus="avansert"] .modus-verdi,
-.app[data-theme="dark"][data-modus="avansert"] .modus-thumb::after {
-  background-image: linear-gradient(90deg, #6f9bff, #5fd7a5, #ff8f80, #6f9bff);
-}
-
-.app[data-theme="dark"][data-modus="avansert"] .modus-fyll {
-  background-image: linear-gradient(90deg, #4d74c9, #3f9d78, #c4736c, #4d74c9);
-}
-
-.app[data-theme="dark"] .modus-fyll::after {
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.32), transparent);
 }
 
 .app[data-theme="dark"] .modus-spor {
   background: var(--app-active);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.app[data-theme="dark"] .modus-fyll {
-  background: color-mix(in srgb, var(--app-accent) 45%, var(--app-active));
 }
 
 .app[data-theme="dark"] .modus-thumb {
   background: #f4f7f5;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
-}
-
-.app[data-theme="dark"] .modus-prikk {
-  background: var(--app-ink);
-  opacity: 0.35;
-}
-
-.app[data-theme="dark"] .modus-valg[data-fylt="true"] .modus-prikk {
-  background: #17231c;
-  opacity: 0.5;
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* Rask: driftspulsen, nøkkeltallene og det som krever handling.
@@ -1926,27 +1825,6 @@
   font-size: 11px;
   line-height: 1.45;
 }
-
-/* Fargespillet trenger lysere stopp mot mørk bakgrunn. */
-.app[data-theme="dark"][data-modus="avansert"] .modus-verdi,
-.app[data-theme="dark"][data-modus="avansert"] .modus-thumb::after {
-  background-image: linear-gradient(90deg, #6f9bff, #5fd7a5, #ff8f80, #6f9bff);
-}
-
-.app[data-theme="dark"] .modus-spor {
-  background: var(--app-active);
-}
-
-.app[data-theme="dark"] .modus-thumb {
-  background: #f4f7f5;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
-}
-
-.app[data-theme="dark"] .modus-prikk {
-  background: var(--app-ink);
-  opacity: 0.4;
-}
-
 
 /* --- Innstillingssiden ---------------------------------------------------- */
 
