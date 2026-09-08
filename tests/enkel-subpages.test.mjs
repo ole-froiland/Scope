@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { access, readFile } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const subpages = {
@@ -58,13 +58,18 @@ test("undersidene deler toppmeny, aktiv side og handlinger med /enkel", () => {
   });
 });
 
-test("Enkel bruker den grønne Scope-logoen og matchende handlingsknapper", async () => {
-  await access(new URL("../assets/scope-green-logo.png", import.meta.url));
-
+test("Enkel bruker det opprinnelige Scope-merket og matchende handlingsknapper", () => {
   [landingEnkel, ...pages].forEach((html) => {
     assert.match(html, /<body class="enkel-site">/);
-    assert.match(html, /class="scope-brand-logo" src="assets\/scope-green-logo\.png"/);
+    assert.match(html, /<span class="brand-mark" aria-hidden="true">/);
+    assert.match(html, /<span class="brand-name">scope<\/span>/);
+    assert.doesNotMatch(html, /scope-green-logo\.png/);
   });
+
+  // Introen spiller igjen de tre sirklene inn mot ordmerket.
+  assert.match(landingEnkel, /<span class="login-intro-mark">/);
+  assert.equal((landingEnkel.match(/class="login-intro-circle login-intro-(?:blue|red|green)"/g) || []).length, 3);
+  assert.match(landingEnkel, /<span class="login-intro-name">scope<\/span>/);
 
   assert.match(css, /--scope-brand-green:\s*#285f2a/);
   assert.match(css, /\.enkel-site \.header-button\.solid\s*\{[^}]*background:\s*var\(--scope-brand-green\)/s);

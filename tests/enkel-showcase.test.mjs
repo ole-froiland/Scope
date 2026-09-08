@@ -3,42 +3,68 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const read = (name) => readFile(new URL(`../${name}`, import.meta.url), "utf8");
-const [html, css, javascript, mainJavascript] = await Promise.all([
+const [html, css, arbCss, arbJavascript, mainJavascript] = await Promise.all([
   read("landing-enkel.html"),
   read("enkel-showcase.css"),
-  read("enkel-showcase.js"),
+  read("enkel-arbeidsflate.css"),
+  read("enkel-arbeidsflate.js"),
   read("script.js"),
 ]);
 
-test("Enkel viser en interaktiv rådsboks rett under heroen", () => {
+const arbStart = html.indexOf('<section class="advice-showcase scope-arb"');
+const arb = html.slice(arbStart, html.indexOf('<section class="slide" id="how"'));
+
+test("Enkel viser Scope-arbeidsflaten rett under heroen", () => {
   const heroStart = html.indexOf('<section class="slide hero-section"');
   const heroEnd = html.indexOf("</section>", heroStart);
-  const showcaseStart = html.indexOf('<section class="advice-showcase"');
   const howStart = html.indexOf('<section class="slide" id="how"');
-  const showcase = html.slice(showcaseStart, howStart);
 
-  assert.ok(heroStart >= 0 && heroEnd < showcaseStart && showcaseStart < howStart);
-  assert.equal((showcase.match(/data-showcase-advice/g) || []).length, 4);
-  assert.equal((showcase.match(/aria-pressed="true"/g) || []).length, 1);
-  assert.match(html, /id="advice-showcase-detail"/);
-  assert.match(html, /class="advice-preview-copy" aria-live="polite"/);
-  assert.match(html, /class="advice-preview-cta" href="#onboarding" data-onboarding-open>[\s\S]*?<span>Sett i gang<\/span>/);
-  assert.match(html, /href="enkel-showcase\.css\?v=20260821-green-logo-v2"/);
-  assert.equal((showcase.match(/class="advice-item-number"/g) || []).length, 4);
-  assert.equal((showcase.match(/data-advice-tone="(?:blue|orange|green|red)"/g) || []).length, 5);
-  assert.doesNotMatch(showcase, /Se alle innsikter|advice-all-link/);
-  assert.doesNotMatch(showcase, /advice-window-chrome|advice-window-bar|advice-window-brand/);
-  assert.match(showcase, /class="advice-browser-bar"/);
-  assert.match(showcase, /class="advice-browser-address">scope\.app \/ bistro-kvartalet/);
-  assert.doesNotMatch(showcase, /God morgen, Ida|Her er rådene dine for i dag\.|Dagens fire grep/);
-  assert.doesNotMatch(showcase, /data-advice-autoplay-toggle|data-advice-autoplay-label|>Auto</);
-  assert.doesNotMatch(showcase, /class="advice-workspace-intro"|class="advice-preview-label"/);
-  assert.match(showcase, /class="advice-detail-graphic" aria-hidden="true"/);
-  assert.match(showcase, /src="assets\/icons\/heroicons-chart-bar-square\.svg"/);
-  assert.match(showcase, /class="advice-detail-label" data-advice-label/);
-  assert.doesNotMatch(showcase, /class="advice-preview-visual"/);
+  assert.ok(heroStart >= 0 && heroEnd < arbStart && arbStart < howStart);
+
+  // Et vindu med sidepanel, tre kolonner og ni kort.
+  assert.match(arb, /class="arb-titlebar"/);
+  assert.match(arb, /class="arb-sidebar"/);
+  assert.equal((arb.match(/data-arb-col=/g) || []).length, 3);
+  assert.equal((arb.match(/data-arb-card="/g) || []).length, 9);
+  assert.equal((arb.match(/data-arb-dropzone/g) || []).length, 3);
+
+  // Tre visninger som alle har et ekte panel.
+  assert.equal((arb.match(/data-arb-view="/g) || []).length, 3);
+  assert.equal((arb.match(/role="tabpanel"/g) || []).length, 3);
+  assert.equal((arb.match(/data-arb-panel="/g) || []).length, 3);
+  assert.match(arb, /data-arb-panel="liste" hidden/);
+  assert.match(arb, /data-arb-panel="tidslinje" hidden/);
+
+  // Én ekte handling ut av flaten, og en ærlig bildetekst under vinduet.
+  assert.equal((arb.match(/data-onboarding-open/g) || []).length, 1);
+  assert.match(arb, /class="arb-caption">Skjermbildet viser Scope med tall fra en eksempelrestaurant/);
+
+  assert.doesNotMatch(arb, /advice-browser-bar|advice-preview-item|advice-window|notat-/);
+  assert.match(html, /href="enkel-arbeidsflate\.css\?v=/);
+  assert.match(html, /src="enkel-arbeidsflate\.js\?v=/);
+  assert.doesNotMatch(html, /enkel-showcase\.js|enkel-notat\./);
   assert.match(html, /src="assets\/hero-restaurant-clean\.mp4"/);
-  assert.match(html, /src="enkel-showcase\.js\?v=20260804-v5"/);
+});
+
+test("tallene på tavlen og i listen går opp", () => {
+  const kroner = (value) => Number(value.replace(/\s/g, ""));
+
+  // Kortene i «Nye råd» skal summere til anslaget i undertittelen.
+  const nyeStart = arb.indexOf('data-arb-col="nye"');
+  const nye = arb.slice(nyeStart, arb.indexOf('data-arb-col="igang"'));
+  const anslag = [...nye.matchAll(/class="arb-card-amount">≈ ([\d\s]+) kr</g)].map((m) => kroner(m[1]));
+  const undertittel = kroner(/data-arb-new-sum>≈ ([\d\s]+) kr/.exec(arb)[1]);
+
+  assert.equal(anslag.length, 3);
+  assert.equal((nye.match(/class="arb-card-amount is-quiet">Ikke tallfestet</g) || []).length, 1);
+  assert.equal(anslag.reduce((a, b) => a + b, 0), undertittel);
+
+  // Listevisningens fotrad skal stemme med de målte radene over.
+  const malt = [...arb.matchAll(/class="arb-right arb-plus">\+ ([\d\s]+) kr</g)].map((m) => kroner(m[1]));
+  const sum = malt.pop();
+
+  assert.equal(malt.length, 3);
+  assert.equal(malt.reduce((a, b) => a + b, 0), sum);
 });
 
 test("heroen bruker Vanguard med Athelas på den kursiverte kontrasten", () => {
@@ -47,72 +73,63 @@ test("heroen bruker Vanguard med Athelas på den kursiverte kontrasten", () => {
   assert.match(html, /<span>Vi kan <em>tall\.<\/em><\/span>/);
 });
 
-test("rådsboksen følger Enkel-stilen og stabler innholdet på små skjermer", () => {
-  assert.match(css, /\.advice-showcase\s*\{[^}]*--advice-showcase-overlap:[^}]*margin-top:\s*calc\(-1 \* var\(--advice-showcase-overlap\)\)/s);
-  assert.match(css, /\.hero-section\s*\{[^}]*min-height:\s*calc\(100svh \+ 72px\)/s);
-  assert.match(css, /--advice-showcase-overlap:\s*clamp\(120px, 12vw, 176px\)/);
-  assert.match(css, /@media \(max-width: 620px\)[\s\S]*?\.hero-section\s*\{[^}]*min-height:\s*calc\(100svh \+ 40px\)[\s\S]*?--advice-showcase-overlap:\s*72px/s);
-  assert.match(css, /\.advice-showcase-inner\s*\{[^}]*width:\s*min\(1320px, 100%\)/s);
-  assert.match(css, /#ffffff var\(--advice-showcase-overlap\)[\s\S]*?#ffffff 100%/);
-  assert.match(css, /\.advice-showcase\s*\{[^}]*border-bottom:\s*0/s);
-  assert.match(css, /#how\s*\{[^}]*background:\s*#ffffff/s);
-  assert.match(css, /\.advice-showcase::after\s*\{[^}]*bottom:\s*0[^}]*height:\s*clamp\(64px, 7vw, 88px\)[^}]*background:\s*#ffffff/s);
-  assert.match(css, /\.advice-window\s*\{[^}]*box-shadow:\s*0 20px 58px rgba\(25, 43, 78, 0\.09\)/s);
-  assert.match(css, /\.advice-window-chrome\s*\{[^}]*min-height:\s*44px/s);
-  assert.match(css, /\.advice-window-bar\s*\{[^}]*min-height:\s*78px[^}]*background:\s*#ffffff/s);
-  assert.match(css, /\.advice-preview-item\s*\{[^}]*min-height:\s*82px/s);
-  assert.match(css, /\.advice-preview-item\.is-active\s*\{[^}]*background:\s*var\(--advice-soft\)[^}]*box-shadow:\s*inset 4px 0 var\(--advice-accent\)/s);
-  assert.match(css, /\.advice-preview-detail\s*\{[^}]*min-height:\s*430px[^}]*background:\s*#ffffff/s);
-  assert.match(css, /\.advice-showcase-grid\s*\{[^}]*grid-template-columns:\s*minmax\(0, 0\.94fr\) minmax\(0, 1\.06fr\)/s);
-  assert.match(css, /\.advice-item-number\s*\{[^}]*font-size:\s*1\.65rem/s);
-  assert.match(css, /\.advice-preview-cta\s*\{[^}]*background:\s*var\(--advice-accent\)/s);
-  assert.match(css, /\.enkel-site \.advice-preview-cta\s*\{[^}]*background:\s*var\(--scope-brand-green\)/s);
-  assert.match(css, /\.advice-preview-cta span\s*\{[^}]*color:\s*#ffffff/s);
-  assert.match(css, /\.header-button\.solid\s*\{[^}]*background:\s*var\(--scope-brand-green\)/s);
-  assert.match(css, /\.button\.primary\s*\{[^}]*background:\s*#ff3c38/s);
-  assert.match(css, /\.contact-bubble\s*\{[^}]*background:\s*var\(--scope-brand-green\)/s);
-  assert.match(css, /@media \(min-width: 861px\)[\s\S]*?\.scope-stack\s*\{[^}]*grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/s);
-  assert.match(css, /@media \(min-width: 1100px\)[\s\S]*?\.scope-stack\s*\{[^}]*grid-template-columns:\s*repeat\(4, minmax\(0, 1fr\)\)/s);
-  assert.match(css, /@media \(min-width: 901px\)[\s\S]*?\.advice-window-chrome\s*\{[^}]*min-height:\s*34px[\s\S]*?\.advice-preview-detail\s*\{[^}]*height:\s*420px[^}]*min-height:\s*420px/s);
-  assert.match(css, /@media \(min-width: 861px\)[\s\S]*?\.scope-panel,[\s\S]*?position:\s*relative;[^}]*min-height:\s*350px/s);
-  assert.match(css, /@media \(max-width: 900px\)[\s\S]*?\.advice-showcase-grid\s*\{[^}]*grid-template-columns:\s*1fr/s);
-  assert.match(css, /@media \(max-width: 620px\)[\s\S]*?\.advice-preview-lower\s*\{[^}]*grid-template-columns:\s*minmax\(0, 1fr\) 88px/s);
-  assert.match(css, /\/\* Refined advice workspace \*\/[\s\S]*?\.advice-preview-list\s*\{[^}]*grid-template-rows:\s*repeat\(4, minmax\(0, 1fr\)\)/s);
-  assert.match(css, /\.advice-preview-item\s*\{[^}]*border-radius:\s*14px[^}]*background:\s*color-mix/s);
-  assert.match(css, /\.advice-detail-label\s*\{[^}]*background:\s*var\(--advice-soft\)/s);
-  assert.match(css, /@media \(min-width: 901px\)[\s\S]*?\.advice-preview-menu,[\s\S]*?height:\s*420px/s);
-  assert.match(css, /\/\* Browser workspace layout \*\/[\s\S]*?\.advice-browser-bar\s*\{[^}]*min-height:\s*52px/s);
-  assert.match(css, /\/\* Browser workspace layout \*\/[\s\S]*?\.advice-showcase-grid\s*\{[^}]*grid-template-columns:\s*minmax\(0, 0\.72fr\) minmax\(0, 1\.28fr\)/s);
-  assert.match(css, /@media \(min-width: 901px\)[\s\S]*?\.advice-preview-menu,[\s\S]*?height:\s*390px[^}]*min-height:\s*390px/s);
-  assert.match(css, /\.advice-item-copy strong\s*\{[^}]*text-overflow:\s*ellipsis[^}]*white-space:\s*nowrap/s);
-  assert.match(css, /\/\* Browser workspace final overrides \*\/[\s\S]*?height:\s*390px[^}]*min-height:\s*390px/s);
-  assert.match(css, /\/\* White advice cards with a larger active state \*\/[\s\S]*?\.advice-preview-item,[\s\S]*?background:\s*#ffffff/s);
-  assert.match(css, /\.advice-preview-item\.is-active,[\s\S]*?transform:\s*scale\(1\.035\)[^}]*box-shadow:\s*inset 4px 0 var\(--advice-accent\)/s);
-  assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.advice-preview-item\.is-active,[\s\S]*?transform:\s*none/s);
-  assert.match(css, /\/\* Crisp white square advice cards \*\/[\s\S]*?border-radius:\s*0;[^}]*background:\s*#ffffff !important;[^}]*background-image:\s*none/s);
-  assert.match(css, /\.advice-preview-item:not\(\.is-active\)\s*\{[^}]*box-shadow:\s*none/s);
-  assert.match(css, /\.advice-item-number,[\s\S]*?border-radius:\s*0;[^}]*background:\s*#ffffff/s);
-  assert.match(css, /\/\* Square detail card without a visible autoplay control \*\/[\s\S]*?\.advice-preview-detail\s*\{[^}]*border-radius:\s*0/s);
-  assert.match(css, /\/\* Compact animated advice workspace \*\/[\s\S]*?\.advice-preview-detail\s*\{[^}]*box-shadow:\s*0 12px 30px/s);
-  assert.match(css, /\/\* Compact animated advice workspace \*\/[\s\S]*?\.advice-window\s*\{[^}]*border-radius:\s*24px 24px 0 0/s);
-  assert.match(css, /\/\* Compact animated advice workspace \*\/[\s\S]*?height:\s*470px;[^}]*min-height:\s*470px/s);
-  assert.match(css, /@keyframes advice-graphic-float/);
-  assert.match(css, /@keyframes advice-detail-enter\s*\{\s*from\s*\{\s*opacity:\s*0\.62;\s*\}\s*to\s*\{\s*opacity:\s*1;\s*\}\s*\}/s);
-  assert.match(css, /\.advice-detail-head,[\s\S]*?\.advice-preview-copy\s*\{[^}]*transition:\s*background-color 0\.28s ease/s);
-  assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.advice-detail-graphic \.advice-chart-icon,[\s\S]*?animation:\s*none/s);
+test("arbeidsflaten ser ut som et program, ikke som en plakat", () => {
+  // Vindusramme, sidepanel og hovedflate.
+  assert.match(arbCss, /\.enkel-site \.arb-window\s*\{[^}]*border-radius:\s*12px[^}]*background:\s*#ffffff/s);
+  assert.match(arbCss, /\.enkel-site \.arb-shell\s*\{[^}]*grid-template-columns:\s*232px minmax\(0, 1fr\)/s);
+  assert.match(arbCss, /\.enkel-site \.arb-board\s*\{[^}]*grid-template-columns:\s*repeat\(3, minmax\(0, 1fr\)\)/s);
+  assert.match(arbCss, /\.enkel-site \.arb-card\s*\{[^}]*border-radius:\s*6px[^}]*background:\s*#ffffff/s);
+
+  // Dra-tilstandene finnes i stilarket, ikke bare i skriptet.
+  assert.match(arbCss, /\.enkel-site \.arb-card\.is-dragging\s*\{\s*opacity:\s*0\.35/);
+  assert.match(arbCss, /\.enkel-site \.arb-col-body\.is-dropzone\s*\{/);
+  assert.match(arbCss, /\.enkel-site \.arb-card-ghost\s*\{[^}]*position:\s*fixed/s);
+
+  // Trefargemerket brukes bare i fanemerket i tittellinjen — én forekomst hver.
+  assert.equal((arbCss.match(/#064dff/g) || []).length, 1);
+  assert.equal((arbCss.match(/#ff3c38/g) || []).length, 1);
+  assert.equal((arbCss.match(/#00bd7b/g) || []).length, 1);
+
+  // Alt er scopet, slik at Netflix-varianten beholder sin egen boks.
+  assert.doesNotMatch(arbCss, /^\.arb-/m);
+  assert.match(css, /\.advice-preview-item\s*\{/);
 });
 
-test("valg av råd oppdaterer detaljene og pressed-tilstanden", () => {
-  assert.match(javascript, /adviceShowcaseDetail\?\.querySelector\("\[data-advice-title\]"\)/);
-  assert.match(javascript, /item\.classList\.toggle\("is-active", isSelected\)/);
-  assert.match(javascript, /item\.setAttribute\("aria-pressed", String\(isSelected\)\)/);
-  assert.match(javascript, /adviceShowcaseTitle\.textContent = selectedItem\.dataset\.adviceTitle/);
-  assert.match(javascript, /adviceShowcaseLabel\.textContent = selectedItem\.dataset\.adviceLabel/);
-  assert.match(javascript, /adviceShowcaseDetail\.dataset\.adviceTone = selectedItem\.dataset\.adviceTone/);
-  assert.match(javascript, /window\.setInterval\(\(\) => \{/);
-  assert.match(javascript, /const nextIndex = \(selectedIndex \+ 1\) % adviceShowcaseItems\.length/);
-  assert.match(javascript, /adviceShowcaseAutoplayToggle\?\.addEventListener\("click"/);
-  assert.match(javascript, /adviceShowcaseMotionQuery\.matches/);
+test("arbeidsflaten legger bort sidepanelet og stabler kolonnene på små skjermer", () => {
+  assert.match(arbCss, /@media \(max-width: 999px\)[\s\S]*?\.enkel-site \.arb-sidebar\s*\{\s*display:\s*none/s);
+  // På smale skjermer blir tavlen en vannrett kanban i stedet for én høy stabel.
+  assert.match(arbCss, /@media \(max-width: 999px\)[\s\S]*?\.enkel-site \.arb-board\s*\{[^}]*grid-auto-flow:\s*column[^}]*overflow-x:\s*auto/s);
+  assert.match(arbCss, /@media \(max-width: 999px\)[\s\S]*?\.enkel-site \.arb-col\s*\{\s*scroll-snap-align:\s*start/s);
+  assert.match(arbCss, /@media \(max-width: 620px\)[\s\S]*?\.enkel-site \.arb-table\s*\{[^}]*overflow-x:\s*auto/s);
+  assert.match(arbCss, /@media \(min-width: 1000px\)[\s\S]*?\.enkel-site \.arb-shell\s*\{\s*height:\s*620px/s);
+  assert.match(arbCss, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?animation:\s*none/s);
+});
+
+test("kortene kan dras mellom kolonnene, og et råd kan settes i gang", () => {
+  // Fanene bytter panel og holder tastaturnavigasjonen i orden.
+  assert.match(arbJavascript, /panel\.hidden = panel\.dataset\.arbPanel !== name/);
+  assert.match(arbJavascript, /view\.setAttribute\("aria-selected", String\(isActive\)\)/);
+  assert.match(arbJavascript, /event\.key !== "ArrowRight" && event\.key !== "ArrowLeft"/);
+
+  // Dra-og-slipp: bare på presise pekere, med terskel før draget starter.
+  assert.match(arbJavascript, /window\.matchMedia\("\(pointer: fine\)"\)/);
+  assert.match(arbJavascript, /Math\.hypot\(dx, dy\) < 6/);
+  assert.match(arbJavascript, /drag\.card\.classList\.add\("is-dragging"\)/);
+  assert.match(arbJavascript, /zone\.append\(drag\.card\)/);
+  assert.match(arbJavascript, /arbSuppressClick/);
+
+  // «Sett i gang» flytter kortet og oppdaterer tellerne.
+  assert.match(arbJavascript, /target\.prepend\(card\)/);
+  assert.match(arbJavascript, /toLocaleTimeString\("nb-NO"/);
+  assert.match(arbJavascript, /function refreshCounts\(\)/);
+
+  // Råd uten kronesum skal aldri telle med i anslaget.
+  assert.match(arbJavascript, /amount\.classList\.contains\("is-quiet"\)/);
+  assert.match(arbJavascript, /toLocaleString\("nb-NO"\)/);
+
+  // Grunnlaget bak hvert av de ni rådene ligger i skriptet.
+  assert.match(arbJavascript, /const arbDetails = \{/);
+  assert.equal((arbJavascript.match(/^\s{4}\d:\s\{$/gm) || []).length, 9);
 });
 
 test("produktvisningen viser tre rene og responsive mobilskjermer", () => {

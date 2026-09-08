@@ -10,12 +10,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Boldonse&amp;family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=20260821-green-logo-v1">
     <link rel="stylesheet" href="enkel-showcase.css?v=20260821-green-logo-v2">
+    <link rel="stylesheet" href="enkel-arbeidsflate.css?v=20260904-arb-v3">
   </head>
   <body class="enkel-site">
     <div class="login-intro" aria-hidden="true">
       <div class="login-intro-shell">
         <div class="login-intro-brand" aria-hidden="true">
-          <img class="scope-brand-logo scope-brand-logo-intro" src="assets/scope-green-logo.png" alt="" width="1774" height="887">
+          <span class="login-intro-mark">
+            <span class="login-intro-circle login-intro-blue"></span>
+            <span class="login-intro-circle login-intro-red"></span>
+            <span class="login-intro-circle login-intro-green"></span>
+          </span>
+          <span class="login-intro-name">scope</span>
         </div>
         <div class="login-progress" role="progressbar" aria-label="Logger inn i Scope" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
           <div class="login-progress-head">
@@ -30,7 +36,12 @@
 
     <header class="site-header" data-scroll-hide>
       <a class="brand" href="/enkel" aria-label="Scope hjem">
-        <img class="scope-brand-logo" src="assets/scope-green-logo.png" alt="" width="1774" height="887">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="mark-circle mark-blue"></span>
+          <span class="mark-circle mark-red"></span>
+          <span class="mark-circle mark-green"></span>
+        </span>
+        <span class="brand-name">scope</span>
       </a>
 
       <nav class="main-nav" aria-label="Hovedmeny">
@@ -98,75 +109,284 @@
         </div>
       </section>
 
-      <section class="advice-showcase" aria-labelledby="advice-showcase-title">
+      <section class="advice-showcase scope-arb" aria-label="Scope-arbeidsflaten">
         <div class="advice-showcase-inner">
-          <div class="advice-window">
-            <div class="advice-browser-bar" aria-hidden="true">
-              <span class="advice-browser-controls">
-                <i class="is-red"></i>
-                <i class="is-yellow"></i>
-                <i class="is-green"></i>
+          <div class="arb-window" data-arb-window>
+            <div class="arb-titlebar">
+              <span class="arb-lights" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="arb-nav" aria-hidden="true">
+                <svg viewBox="0 0 16 16" width="16" height="16"><path d="M10 3.5 5.5 8 10 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg viewBox="0 0 16 16" width="16" height="16"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
-              <span class="advice-browser-address">scope.app / bistro-kvartalet</span>
+              <span class="arb-tab" aria-hidden="true">
+                <span class="arb-tab-mark"><i></i><i></i><i></i></span>
+                Rådstavlen — Bistro Kvartalet
+              </span>
             </div>
-            <div class="advice-showcase-grid">
-              <div class="advice-preview-menu">
-                <div class="advice-preview-list" aria-label="Velg råd">
-                  <button class="advice-preview-item is-active" type="button" aria-pressed="true" aria-controls="advice-showcase-detail" data-showcase-advice data-advice-tone="blue" data-advice-label="Bemanning · torsdag" data-advice-title="To for mange på jobb mellom 14 og 16" data-advice-description="Salget faller 61 % etter lunsj, men bemanningen står stille. Flytt én vakt til fredag kveld." data-advice-source="Planday + PC-Kasse" data-advice-metric-label="Anslått effekt" data-advice-metric="≈ 4 800 kr / uke">
-                    <span class="advice-item-number">1</span>
-                    <span class="advice-item-copy"><span>Bemanning · torsdag</span><strong>To for mange på jobb mellom 14 og 16</strong></span>
-                    <img class="advice-item-arrow" src="assets/icons/heroicons-chevron-right.svg" alt="">
-                  </button>
-                  <button class="advice-preview-item" type="button" aria-pressed="false" aria-controls="advice-showcase-detail" data-showcase-advice data-advice-tone="orange" data-advice-label="Meny · siste 90 dager" data-advice-title="Burratasalaten spiser opp marginen" data-advice-description="Råvareprisen har økt uten at menyprisen har fulgt etter. En liten prisjustering gir rom for samme kvalitet og bedre margin." data-advice-source="Lightspeed + Tripletex" data-advice-metric-label="Anslått effekt" data-advice-metric="≈ 3 200 kr / måned">
-                    <span class="advice-item-number">2</span>
-                    <span class="advice-item-copy"><span>Meny · siste 90 dager</span><strong>Burratasalaten spiser opp marginen</strong></span>
-                    <img class="advice-item-arrow" src="assets/icons/heroicons-chevron-right.svg" alt="">
-                  </button>
-                  <button class="advice-preview-item" type="button" aria-pressed="false" aria-controls="advice-showcase-detail" data-showcase-advice data-advice-tone="green" data-advice-label="Omtaler · helgen" data-advice-title="Fire gjester nevnte lang ventetid — alle lørdag kveld" data-advice-description="Alle fire spiste 19:30–20:15, kvelden kjøkkenet gikk med én kokk mindre. Dette er bemanning, ikke service." data-advice-source="Google Reviews + Quinyx" data-advice-metric-label="Snitt siste 30 dager" data-advice-metric="3,9 av 5">
-                    <span class="advice-item-number">3</span>
-                    <span class="advice-item-copy"><span>Omtaler · helgen</span><strong>Fire gjester nevnte lang ventetid</strong></span>
-                    <img class="advice-item-arrow" src="assets/icons/heroicons-chevron-right.svg" alt="">
-                  </button>
-                  <button class="advice-preview-item" type="button" aria-pressed="false" aria-controls="advice-showcase-detail" data-showcase-advice data-advice-tone="red" data-advice-label="Innkjøp · denne måneden" data-advice-title="12 kg avokado går i søpla hver måned" data-advice-description="Bestillingene følger fjorårets volum, mens salget har falt. Reduser neste bestilling og behold en trygg buffer til helgen." data-advice-source="Tripletex + lager" data-advice-metric-label="Anslått effekt" data-advice-metric="≈ 2 600 kr / måned">
-                    <span class="advice-item-number">4</span>
-                    <span class="advice-item-copy"><span>Innkjøp · denne måneden</span><strong>12 kg avokado går i søpla hver måned</strong></span>
-                    <img class="advice-item-arrow" src="assets/icons/heroicons-chevron-right.svg" alt="">
-                  </button>
-                </div>
-              </div>
 
-              <article class="advice-preview-detail" id="advice-showcase-detail" data-advice-tone="blue">
-                <header class="advice-detail-head">
-                  <span class="advice-detail-label" data-advice-label>Bemanning · torsdag</span>
-                  <div class="advice-preview-badges">
-                    <span class="advice-quality-badge">Kvalitetssikret</span>
-                    <span class="advice-source-badge" data-advice-source>Planday + PC-Kasse</span>
+            <div class="arb-shell">
+              <aside class="arb-sidebar" aria-label="Sidemeny">
+                <div class="arb-workspace">
+                  <span class="arb-avatar arb-avatar-bk" aria-hidden="true">BK</span>
+                  <span class="arb-workspace-name">Bistro Kvartalet</span>
+                  <svg class="arb-chevron" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M4 6.5 8 10.5 12 6.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+
+                <ul class="arb-nav-list">
+                  <li><span class="arb-nav-item"><span class="arb-ico" aria-hidden="true">⌕</span>Søk</span></li>
+                  <li><span class="arb-nav-item"><span class="arb-ico" aria-hidden="true">⌂</span>Hjem</span></li>
+                  <li><span class="arb-nav-item"><span class="arb-ico" aria-hidden="true">✉</span>Innboks<span class="arb-badge">3</span></span></li>
+                </ul>
+
+                <p class="arb-section-label">Råd</p>
+                <ul class="arb-nav-list">
+                  <li><span class="arb-nav-item is-current"><span class="arb-ico" aria-hidden="true">▤</span>Rådstavlen</span></li>
+                  <li><span class="arb-nav-item"><span class="arb-ico" aria-hidden="true">◷</span>Bemanning</span></li>
+                  <li><span class="arb-nav-item"><span class="arb-ico" aria-hidden="true">☷</span>Meny og priser</span></li>
+                  <li><span class="arb-nav-item"><span class="arb-ico" aria-hidden="true">⊞</span>Innkjøp og svinn</span></li>
+                  <li><span class="arb-nav-item"><span class="arb-ico" aria-hidden="true">☆</span>Omtaler</span></li>
+                </ul>
+
+                <p class="arb-section-label">Kilder</p>
+                <ul class="arb-nav-list">
+                  <li><span class="arb-nav-item"><span class="arb-src arb-src-pc" aria-hidden="true">PC</span>PC-Kasse<span class="arb-dot-ok" aria-hidden="true"></span></span></li>
+                  <li><span class="arb-nav-item"><span class="arb-src arb-src-pl" aria-hidden="true">PL</span>Planday<span class="arb-dot-ok" aria-hidden="true"></span></span></li>
+                  <li><span class="arb-nav-item"><span class="arb-src arb-src-tr" aria-hidden="true">TR</span>Tripletex<span class="arb-dot-ok" aria-hidden="true"></span></span></li>
+                  <li><span class="arb-nav-item"><span class="arb-src arb-src-gr" aria-hidden="true">GR</span>Google Reviews<span class="arb-dot-ok" aria-hidden="true"></span></span></li>
+                </ul>
+              </aside>
+
+              <main class="arb-main">
+                <header class="arb-topbar">
+                  <p class="arb-crumbs"><span>Bistro Kvartalet</span><span class="arb-crumb-sep" aria-hidden="true">/</span><strong>Rådstavlen</strong></p>
+                  <div class="arb-topbar-right">
+                    <span class="arb-people" aria-label="Tre medlemmer">
+                      <span class="arb-avatar arb-avatar-1" aria-hidden="true">IH</span>
+                      <span class="arb-avatar arb-avatar-2" aria-hidden="true">MR</span>
+                      <span class="arb-avatar arb-avatar-3" aria-hidden="true">SD</span>
+                    </span>
+                    <span class="arb-ghost-button" aria-hidden="true">Del</span>
+                    <a class="arb-primary-button" href="#onboarding" data-onboarding-open>Book demo</a>
                   </div>
                 </header>
-                <div class="advice-preview-copy" aria-live="polite">
-                  <div class="advice-preview-copy-text">
-                    <h2 id="advice-showcase-title" data-advice-title>To for mange på jobb mellom 14 og 16</h2>
-                    <p data-advice-description>Salget faller 61 % etter lunsj, men bemanningen står stille. Flytt én vakt til fredag kveld.</p>
+
+                <div class="arb-page">
+                  <div class="arb-page-head">
+                    <h2 class="arb-page-title">Rådstavlen</h2>
+                    <p class="arb-page-sub"><span data-arb-new-count>4</span> <span data-arb-new-word>nye råd</span> denne uken · anslått effekt <strong data-arb-new-sum>≈ 7 000 kr / måned</strong> · sist oppdatert i dag 06:12</p>
                   </div>
-                  <div class="advice-detail-graphic" aria-hidden="true">
-                    <img class="advice-chart-icon" src="assets/icons/heroicons-chart-bar-square.svg" alt="">
+
+                  <div class="arb-views" role="tablist" aria-label="Visninger">
+                    <button class="arb-view is-active" type="button" role="tab" aria-selected="true" aria-controls="arb-view-tavle" id="arb-tab-tavle" data-arb-view="tavle">
+                      <span class="arb-view-ico" aria-hidden="true">▤</span>Tavle
+                    </button>
+                    <button class="arb-view" type="button" role="tab" aria-selected="false" aria-controls="arb-view-liste" id="arb-tab-liste" data-arb-view="liste">
+                      <span class="arb-view-ico" aria-hidden="true">☰</span>Liste
+                    </button>
+                    <button class="arb-view" type="button" role="tab" aria-selected="false" aria-controls="arb-view-tidslinje" id="arb-tab-tidslinje" data-arb-view="tidslinje">
+                      <span class="arb-view-ico" aria-hidden="true">▭</span>Tidslinje
+                    </button>
+                  </div>
+
+                  <div class="arb-view-panel" id="arb-view-tavle" role="tabpanel" aria-labelledby="arb-tab-tavle" data-arb-panel="tavle">
+                    <div class="arb-board" data-arb-board>
+                      <section class="arb-col" data-arb-col="nye" aria-label="Nye råd">
+                        <header class="arb-col-head">
+                          <span class="arb-status arb-status-new" aria-hidden="true"></span>
+                          <h3>Nye råd</h3>
+                          <span class="arb-count" data-arb-count>4</span>
+                        </header>
+                        <div class="arb-col-body" data-arb-dropzone>
+                          <button class="arb-card" type="button" data-arb-card="1" aria-haspopup="dialog">
+                            <span class="arb-card-chip">Bemanning</span>
+                            <span class="arb-card-title">To for mange på jobb mellom 14 og 16</span>
+                            <span class="arb-card-foot">
+                              <span class="arb-card-srcs" aria-hidden="true"><i class="arb-src arb-src-pl">PL</i><i class="arb-src arb-src-pc">PC</i></span>
+                              <span class="arb-card-amount">≈ 2 600 kr</span>
+                            </span>
+                          </button>
+                          <button class="arb-card" type="button" data-arb-card="2" aria-haspopup="dialog">
+                            <span class="arb-card-chip">Meny</span>
+                            <span class="arb-card-title">Burratasalaten spiser opp marginen</span>
+                            <span class="arb-card-foot">
+                              <span class="arb-card-srcs" aria-hidden="true"><i class="arb-src arb-src-ls">LS</i><i class="arb-src arb-src-tr">TR</i></span>
+                              <span class="arb-card-amount">≈ 2 800 kr</span>
+                            </span>
+                          </button>
+                          <button class="arb-card" type="button" data-arb-card="3" aria-haspopup="dialog">
+                            <span class="arb-card-chip">Omtaler</span>
+                            <span class="arb-card-title">Fire gjester nevnte lang ventetid — alle lørdag kveld</span>
+                            <span class="arb-card-foot">
+                              <span class="arb-card-srcs" aria-hidden="true"><i class="arb-src arb-src-gr">GR</i><i class="arb-src arb-src-qx">QX</i></span>
+                              <span class="arb-card-amount is-quiet">Ikke tallfestet</span>
+                            </span>
+                          </button>
+                          <button class="arb-card" type="button" data-arb-card="4" aria-haspopup="dialog">
+                            <span class="arb-card-chip">Innkjøp</span>
+                            <span class="arb-card-title">12 kg avokado går i søpla hver måned</span>
+                            <span class="arb-card-foot">
+                              <span class="arb-card-srcs" aria-hidden="true"><i class="arb-src arb-src-tr">TR</i></span>
+                              <span class="arb-card-amount">≈ 1 600 kr</span>
+                            </span>
+                          </button>
+                        </div>
+                      </section>
+
+                      <section class="arb-col" data-arb-col="igang" aria-label="I gang">
+                        <header class="arb-col-head">
+                          <span class="arb-status arb-status-doing" aria-hidden="true"></span>
+                          <h3>I gang</h3>
+                          <span class="arb-count" data-arb-count>2</span>
+                        </header>
+                        <div class="arb-col-body" data-arb-dropzone>
+                          <button class="arb-card" type="button" data-arb-card="5" aria-haspopup="dialog">
+                            <span class="arb-card-chip">Bemanning</span>
+                            <span class="arb-card-title">Ny vaktplan for søndager</span>
+                            <span class="arb-card-foot">
+                              <span class="arb-card-who"><i class="arb-avatar arb-avatar-1">IH</i>Frist 10. sep.</span>
+                            </span>
+                          </button>
+                          <button class="arb-card" type="button" data-arb-card="6" aria-haspopup="dialog">
+                            <span class="arb-card-chip">Meny</span>
+                            <span class="arb-card-title">Nye priser på tre forretter</span>
+                            <span class="arb-card-foot">
+                              <span class="arb-card-who"><i class="arb-avatar arb-avatar-2">MR</i>Frist 8. sep.</span>
+                            </span>
+                          </button>
+                        </div>
+                      </section>
+
+                      <section class="arb-col" data-arb-col="malt" aria-label="Målt effekt">
+                        <header class="arb-col-head">
+                          <span class="arb-status arb-status-done" aria-hidden="true"></span>
+                          <h3>Målt effekt</h3>
+                          <span class="arb-count" data-arb-count>3</span>
+                        </header>
+                        <div class="arb-col-body" data-arb-dropzone>
+                          <button class="arb-card is-done" type="button" data-arb-card="7" aria-haspopup="dialog">
+                            <span class="arb-card-chip">Innkjøp</span>
+                            <span class="arb-card-title">Kuttet fast avokadobestilling</span>
+                            <span class="arb-card-foot">
+                              <span class="arb-card-who"><i class="arb-avatar arb-avatar-1">IH</i>Målt i fire uker</span>
+                              <span class="arb-card-amount is-done">+ 1 600 kr</span>
+                            </span>
+                          </button>
+                          <button class="arb-card is-done" type="button" data-arb-card="8" aria-haspopup="dialog">
+                            <span class="arb-card-chip">Bemanning</span>
+                            <span class="arb-card-title">Flyttet én vakt fra torsdag til fredag</span>
+                            <span class="arb-card-foot">
+                              <span class="arb-card-who"><i class="arb-avatar arb-avatar-3">SD</i>Målt i fire uker</span>
+                              <span class="arb-card-amount is-done">+ 2 400 kr</span>
+                            </span>
+                          </button>
+                          <button class="arb-card is-done" type="button" data-arb-card="9" aria-haspopup="dialog">
+                            <span class="arb-card-chip">Meny</span>
+                            <span class="arb-card-title">Justert pris på husets burger</span>
+                            <span class="arb-card-foot">
+                              <span class="arb-card-who"><i class="arb-avatar arb-avatar-2">MR</i>Målt i seks uker</span>
+                              <span class="arb-card-amount is-done">+ 3 100 kr</span>
+                            </span>
+                          </button>
+                        </div>
+                      </section>
+                    </div>
+                  </div>
+
+                  <div class="arb-view-panel" id="arb-view-liste" role="tabpanel" aria-labelledby="arb-tab-liste" data-arb-panel="liste" hidden>
+                    <table class="arb-table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Råd</th>
+                          <th scope="col">Kategori</th>
+                          <th scope="col">Kilde</th>
+                          <th scope="col">Status</th>
+                          <th scope="col" class="arb-right">Effekt</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><th scope="row">To for mange på jobb mellom 14 og 16</th><td>Bemanning</td><td>Planday + PC-Kasse</td><td><span class="arb-pill arb-pill-new">Nytt</span></td><td class="arb-right">≈ 2 600 kr</td></tr>
+                        <tr><th scope="row">Burratasalaten spiser opp marginen</th><td>Meny</td><td>Lightspeed + Tripletex</td><td><span class="arb-pill arb-pill-new">Nytt</span></td><td class="arb-right">≈ 2 800 kr</td></tr>
+                        <tr><th scope="row">Fire gjester nevnte lang ventetid</th><td>Omtaler</td><td>Google Reviews + Quinyx</td><td><span class="arb-pill arb-pill-new">Nytt</span></td><td class="arb-right arb-quiet">Ikke tallfestet</td></tr>
+                        <tr><th scope="row">12 kg avokado går i søpla hver måned</th><td>Innkjøp</td><td>Tripletex + lager</td><td><span class="arb-pill arb-pill-new">Nytt</span></td><td class="arb-right">≈ 1 600 kr</td></tr>
+                        <tr><th scope="row">Ny vaktplan for søndager</th><td>Bemanning</td><td>Planday</td><td><span class="arb-pill arb-pill-doing">I gang</span></td><td class="arb-right arb-quiet">Måles fra 10. sep.</td></tr>
+                        <tr><th scope="row">Nye priser på tre forretter</th><td>Meny</td><td>Lightspeed</td><td><span class="arb-pill arb-pill-doing">I gang</span></td><td class="arb-right arb-quiet">Måles fra 8. sep.</td></tr>
+                        <tr><th scope="row">Kuttet fast avokadobestilling</th><td>Innkjøp</td><td>Tripletex</td><td><span class="arb-pill arb-pill-done">Målt</span></td><td class="arb-right arb-plus">+ 1 600 kr</td></tr>
+                        <tr><th scope="row">Flyttet én vakt fra torsdag til fredag</th><td>Bemanning</td><td>Planday + PC-Kasse</td><td><span class="arb-pill arb-pill-done">Målt</span></td><td class="arb-right arb-plus">+ 2 400 kr</td></tr>
+                        <tr><th scope="row">Justert pris på husets burger</th><td>Meny</td><td>Lightspeed + Tripletex</td><td><span class="arb-pill arb-pill-done">Målt</span></td><td class="arb-right arb-plus">+ 3 100 kr</td></tr>
+                      </tbody>
+                      <tfoot>
+                        <tr><th scope="row" colspan="4">Målt effekt hittil</th><td class="arb-right arb-plus">+ 7 100 kr</td></tr>
+                      </tfoot>
+                    </table>
+                  </div>
+
+                  <div class="arb-view-panel" id="arb-view-tidslinje" role="tabpanel" aria-labelledby="arb-tab-tidslinje" data-arb-panel="tidslinje" hidden>
+                    <div class="arb-timeline">
+                      <div class="arb-timeline-head" aria-hidden="true">
+                        <span>Man 1.</span><span>Tirs 2.</span><span>Ons 3.</span><span>Tors 4.</span><span>Fre 5.</span><span>Lør 6.</span><span>Søn 7.</span>
+                      </div>
+                      <ul class="arb-timeline-rows">
+                        <li class="arb-timeline-row">
+                          <span class="arb-timeline-label">Ny vaktplan for søndager</span>
+                          <span class="arb-timeline-track"><i class="arb-bar arb-bar-doing" style="--from: 1; --to: 4;">Planlegges</i></span>
+                        </li>
+                        <li class="arb-timeline-row">
+                          <span class="arb-timeline-label">Nye priser på tre forretter</span>
+                          <span class="arb-timeline-track"><i class="arb-bar arb-bar-doing" style="--from: 2; --to: 5;">Prøves ut</i></span>
+                        </li>
+                        <li class="arb-timeline-row">
+                          <span class="arb-timeline-label">Overbemanning torsdag 14–16</span>
+                          <span class="arb-timeline-track"><i class="arb-bar arb-bar-new" style="--from: 4; --to: 5;">Torsdag</i></span>
+                        </li>
+                        <li class="arb-timeline-row">
+                          <span class="arb-timeline-label">Ventetid lørdag kveld</span>
+                          <span class="arb-timeline-track"><i class="arb-bar arb-bar-new" style="--from: 6; --to: 7;">Lørdag</i></span>
+                        </li>
+                        <li class="arb-timeline-row">
+                          <span class="arb-timeline-label">Avokadobestilling</span>
+                          <span class="arb-timeline-track"><i class="arb-bar arb-bar-done" style="--from: 1; --to: 8;">Måles løpende</i></span>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-                <div class="advice-preview-lower">
-                  <footer class="advice-preview-footer">
-                    <div>
-                      <span data-advice-metric-label>Anslått effekt</span>
-                      <strong data-advice-metric>≈ 4 800 kr / uke</strong>
-                    </div>
-                    <a class="advice-preview-cta" href="#onboarding" data-onboarding-open>
-                      <span>Sett i gang</span>
-                      <img src="assets/icons/heroicons-chevron-right.svg" alt="">
-                    </a>
+
+                <div class="arb-peek" data-arb-peek hidden role="dialog" aria-modal="false" aria-labelledby="arb-peek-title">
+                  <header class="arb-peek-head">
+                    <p class="arb-peek-crumb" data-arb-peek-crumb>Rådstavlen / Bemanning</p>
+                    <button class="arb-peek-close" type="button" data-arb-peek-close aria-label="Lukk rådet">
+                      <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                    </button>
+                  </header>
+                  <div class="arb-peek-body">
+                    <h3 class="arb-peek-title" id="arb-peek-title" data-arb-peek-title>To for mange på jobb mellom 14 og 16</h3>
+
+                    <dl class="arb-props">
+                      <div><dt>Status</dt><dd><span class="arb-pill" data-arb-peek-status>Nytt</span></dd></div>
+                      <div><dt>Kilde</dt><dd data-arb-peek-source>Planday + PC-Kasse</dd></div>
+                      <div><dt>Periode</dt><dd data-arb-peek-period>Siste åtte torsdager</dd></div>
+                      <div><dt>Anslått effekt</dt><dd><strong data-arb-peek-effect>≈ 2 600 kr / måned</strong></dd></div>
+                    </dl>
+
+                    <p class="arb-peek-lead" data-arb-peek-lead>Salget faller 61 % etter lunsj, men bemanningen står stille. Flytt én vakt til fredag kveld og ta ut den andre.</p>
+
+                    <p class="arb-peek-label">Grunnlag</p>
+                    <table class="arb-peek-table"><tbody data-arb-peek-rows></tbody></table>
+
+                    <p class="arb-peek-note" data-arb-peek-note>Én vakt tas ut: 2 timer × 305 kr/t × 4,33 torsdager. Den andre vakten flyttes til fredag kveld og regnes ikke som besparelse.</p>
+                  </div>
+                  <footer class="arb-peek-foot">
+                    <button class="arb-peek-secondary" type="button" data-arb-peek-snooze>Utsett</button>
+                    <button class="arb-peek-primary" type="button" data-arb-peek-start>Sett i gang</button>
                   </footer>
                 </div>
-              </article>
+
+                <p class="arb-toast" data-arb-toast role="status" aria-live="polite" hidden></p>
+              </main>
             </div>
           </div>
+
+          <p class="arb-caption">Skjermbildet viser Scope med tall fra en eksempelrestaurant. Dra et kort mellom kolonnene, eller åpne et råd for å se grunnlaget.</p>
         </div>
       </section>
 
@@ -1249,7 +1469,12 @@
       <div class="onboarding-dialog" role="dialog" aria-modal="true" aria-labelledby="onboarding-title" tabindex="-1">
         <header class="onboarding-head">
           <a class="onboarding-brand" href="/enkel" aria-label="Scope hjem">
-            <img class="scope-brand-logo scope-brand-logo-small" src="assets/scope-green-logo.png" alt="" width="1774" height="887">
+            <span class="brand-mark" aria-hidden="true">
+              <span class="mark-circle mark-blue"></span>
+              <span class="mark-circle mark-red"></span>
+              <span class="mark-circle mark-green"></span>
+            </span>
+            <span>scope</span>
           </a>
           <p>Steg <strong data-onboarding-current>1</strong> av 3</p>
           <button class="onboarding-close" type="button" data-onboarding-close aria-label="Lukk oppsett">×</button>
@@ -1354,7 +1579,7 @@
         <button type="button" data-cookie-consent="all">Godta alle</button>
       </div>
     </section>
-    <script src="enkel-showcase.js?v=20260804-v5"></script>
+    <script src="enkel-arbeidsflate.js?v=20260904-arb-v2"></script>
         <script src="script.js?v=20260811-scroll-reveal-v11"></script>
   </body>
 </html>
