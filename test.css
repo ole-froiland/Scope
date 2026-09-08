@@ -1597,7 +1597,7 @@
 
 .menu-modus {
   padding: 6px 10px 8px;
-  --modus-stopp: 16.6667%;
+  --modus-stopp: 0%;
 }
 
 .app[data-modus="vanlig"] .menu-modus {
@@ -1605,7 +1605,7 @@
 }
 
 .app[data-modus="avansert"] .menu-modus {
-  --modus-stopp: 83.3333%;
+  --modus-stopp: 100%;
 }
 
 .modus-topp {
@@ -1628,17 +1628,8 @@
   letter-spacing: -0.01em;
 }
 
-.modus-ender {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 0;
-  color: var(--app-muted);
-  font-size: 10.5px;
-}
-
 /* Sporet: tre stopp, usynlige trykkflater over prikkene, og en knapp
-   som kan dras. Bevegelsen ligger på transform, ikke på layout. */
+   som kan dras helt fra minimum til maksimum. */
 .modus-slider {
   position: relative;
   display: grid;
@@ -1652,7 +1643,7 @@
 
 .modus-spor {
   position: absolute;
-  inset: 10px 0;
+  inset: 10px 14px;
   overflow: hidden;
   border-radius: 999px;
   background: var(--app-hover);
@@ -1682,12 +1673,14 @@
   box-shadow: 0 1px 3px rgba(23, 23, 21, 0.12), 0 0 0 3px rgba(59, 130, 246, 0.12);
 }
 
-.app[data-modus="avansert"] .modus-slider.er-endret .modus-fyll::after {
-  animation: modus-detalj-glimt 650ms ease-out;
+.app[data-modus="avansert"] .modus-fyll::after {
+  animation: modus-detalj-glimt 2.8s ease-in-out infinite;
 }
 
 @keyframes modus-detalj-glimt {
-  to { transform: translateX(100%); }
+  0%, 18% { opacity: 0; transform: translateX(-100%); }
+  42% { opacity: 1; }
+  68%, 100% { opacity: 0; transform: translateX(100%); }
 }
 
 .modus-thumb-lag {
@@ -1697,19 +1690,18 @@
   z-index: 2;
   display: grid;
   place-items: center;
-  width: 33.3333%;
+  width: 28px;
   height: 100%;
-  transform: translate3d(0, 0, 0);
-  transition: transform 190ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
+  transition: left 190ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: left;
 }
 
 .app[data-modus="vanlig"] .modus-thumb-lag {
-  transform: translate3d(100%, 0, 0);
+  left: calc(50% - 14px);
 }
 
 .app[data-modus="avansert"] .modus-thumb-lag {
-  transform: translate3d(200%, 0, 0);
+  left: calc(100% - 28px);
 }
 
 .modus-thumb {
@@ -1782,6 +1774,10 @@
   line-height: 1.45;
 }
 
+.modus-note:empty {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .modus-thumb-lag,
   .modus-fyll,
@@ -1790,7 +1786,7 @@
     transition: none;
   }
 
-  .app[data-modus="avansert"] .modus-slider.er-endret .modus-fyll::after {
+  .app[data-modus="avansert"] .modus-fyll::after {
     animation: none;
   }
 }

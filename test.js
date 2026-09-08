@@ -991,11 +991,6 @@
     const modusTittel = document.getElementById("modus-tittel");
     const modusVerdi = document.getElementById("modus-verdi");
     const modusNote = document.getElementById("modus-note");
-    const modusEnder = [
-      document.getElementById("modus-ende-venstre"),
-      document.getElementById("modus-ende-hoyre"),
-    ];
-    const MODUS_ENDER = { nb: ["Raskere", "Mer detaljer"], en: ["Faster", "More detail"] };
     const modusValg = Array.from(modusSlider.querySelectorAll(".modus-valg"));
     const modusRekke = modusValg.map(function (knapp) {
       return knapp.dataset.modus;
@@ -1012,8 +1007,8 @@
         en: ["Standard", "The full overview, as it is today."],
       },
       avansert: {
-        nb: ["Avansert", "Flere rader, forrige periode og alle fotnotene."],
-        en: ["Advanced", "More rows, prior period and every footnote."],
+        nb: ["Avansert", ""],
+        en: ["Advanced", ""],
       },
     };
 
@@ -1034,16 +1029,12 @@
       modusTittel.textContent = engelsk ? "View" : "Visning";
       modusVerdi.textContent = MODUS_TEKST[valgt][engelsk ? "en" : "nb"][0];
       modusNote.textContent = MODUS_TEKST[valgt][engelsk ? "en" : "nb"][1];
-      MODUS_ENDER[engelsk ? "en" : "nb"].forEach(function (tekst, i) {
-        modusEnder[i].textContent = tekst;
-      });
       modusSlider.lang = engelsk ? "en" : "nb";
       document.querySelector(".menu-modus").lang = engelsk ? "en" : "nb";
     }
 
     function velgModus(nytt, flyttFokus) {
       const gyldig = MODUS_TEKST[nytt] ? nytt : "vanlig";
-      const endret = gjeldendeModus() !== gyldig;
       app.dataset.modus = gyldig;
       store(MODUS_KEY, gyldig);
       syncModus();
@@ -1051,20 +1042,6 @@
         const knapp = modusSlider.querySelector('.modus-valg[data-modus="' + gyldig + '"]');
         if (knapp) knapp.focus();
       }
-      if (endret) sveipOverBaren();
-    }
-
-    // Et lyssveip over baren bekrefter byttet med én gang.
-    let sveipTid;
-    function sveipOverBaren() {
-      modusSlider.classList.remove("er-endret");
-      // Tvinger fram ny animasjon selv om forrige ikke er ferdig.
-      void modusSlider.offsetWidth;
-      modusSlider.classList.add("er-endret");
-      clearTimeout(sveipTid);
-      sveipTid = setTimeout(function () {
-        modusSlider.classList.remove("er-endret");
-      }, 700);
     }
 
     modusValg.forEach(function (knapp) {
@@ -1077,21 +1054,24 @@
     // man, låser den seg til nærmeste trinn.
     function trinnVed(x) {
       const spor = modusSlider.getBoundingClientRect();
-      const del = ((x - spor.left) / spor.width) * modusRekke.length;
-      return modusRekke[Math.max(0, Math.min(modusRekke.length - 1, Math.floor(del)))];
+      const start = 14;
+      const bredde = Math.max(1, spor.width - start * 2);
+      const andel = Math.max(0, Math.min(1, (x - spor.left - start) / bredde));
+      return modusRekke[Math.round(andel * (modusRekke.length - 1))];
     }
 
     function følgFinger(x) {
       const spor = modusSlider.getBoundingClientRect();
-      const senter = Math.max(spor.width / 6, Math.min((spor.width * 5) / 6, x - spor.left));
-      modusLag.style.transform = "translate3d(" + (senter - spor.width / 6) + "px, 0, 0)";
-      modusFyll.style.width = senter + "px";
+      const start = 14;
+      const senter = Math.max(start, Math.min(spor.width - start, x - spor.left));
+      modusLag.style.left = senter - start + "px";
+      modusFyll.style.width = senter - start + "px";
     }
 
     function slippSporet() {
       if (!modusSlider.classList.contains("er-dratt")) return;
       modusSlider.classList.remove("er-dratt");
-      modusLag.style.transform = "";
+      modusLag.style.left = "";
       modusFyll.style.width = "";
       // Etter en dragning skal fokus ligge på trinnet man endte på.
       const valgt = modusSlider.querySelector('.modus-valg[aria-checked="true"]');
