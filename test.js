@@ -267,19 +267,55 @@
     const contentBody = document.getElementById("content-body");
 
     const overviewTabs=document.getElementById("overview-tabs");
+    const overviewTabbar=document.getElementById("overview-tabbar");
     const overviewViews=["oversikt","tiltak","effekt","rapporter"];
 
-    function showView(name) {
+    // Na, Tiltak, Effekt og Rapporter ligger pa samme side. Fanene ruller til
+    // riktig del i stedet for a bytte visning, og fanelinjen folger rullingen.
+    let currentView=null;
+    let rullerTil=null;
+
+    function overviewSection(name) {
+      return views.find(function (view) { return view.dataset.view === name; });
+    }
+
+    function rulleAtferd() {
+      return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+    }
+
+    function merkFane(name) {
+      Array.from(overviewTabs.querySelectorAll(".overview-tab")).forEach(function (tab) {
+        if (tab.dataset.view === name) tab.setAttribute("aria-current", "page");
+        else tab.removeAttribute("aria-current");
+      });
+    }
+
+    function rullTil(name) {
+      const target = overviewSection(name);
+      if (!target) return;
+      rullerTil = name;
+      merkFane(name);
+      if (name === overviewViews[0]) {
+        contentBody.scrollTo({ top: 0, behavior: rulleAtferd() });
+        return;
+      }
+      const avstand = target.getBoundingClientRect().top - contentBody.getBoundingClientRect().top;
+      const topp = contentBody.scrollTop + avstand - overviewTabbar.offsetHeight - 12;
+      contentBody.scrollTo({ top: Math.max(topp, 0), behavior: rulleAtferd() });
+    }
+
+    function showView(name, scroll = true) {
       const known = views.some(function (view) {
         return view.dataset.view === name;
       });
       const active = known ? name : "oversikt";
-      const forrige = views.find(function (view) {
-        return !view.hidden;
-      });
+      const forrige = currentView;
+      const inOverview = overviewViews.includes(active);
 
       views.forEach(function (view) {
-        view.hidden = view.dataset.view !== active;
+        view.hidden = inOverview
+          ? !overviewViews.includes(view.dataset.view)
+          : view.dataset.view !== active;
       });
 
       viewLinks.forEach(function (link) {
@@ -291,26 +327,37 @@
         }
       });
 
-      const inOverview=overviewViews.includes(active);
       overviewTabs.hidden=!inOverview;
+      overviewTabbar.hidden=!inOverview;
       const overviewLink=document.querySelector('.rail-link[data-view="oversikt"]');
       if(inOverview) {
         overviewLink.setAttribute("aria-current","page");
         contentView.textContent=overviewLink.querySelector(".rail-label").textContent;
       }
 
-      // Bare et ekte bytte skal nullstille rullingen. Kontomenyen setter
-      // hash rett etter at den har hoppet til et kort, og hashchange
-      // kaller hit igjen med samme visning.
-      if (!forrige || forrige.dataset.view !== active) contentBody.scrollTop = 0;
+      currentView = active;
+
+      // Bare et ekte bytte skal flytte rullingen. Kontomenyen setter hash rett
+      // etter at den har hoppet til et kort, og hashchange kaller hit igjen
+      // med samme visning.
+      if (scroll && (inOverview || forrige !== active)) {
+        if (inOverview) rullTil(active);
+        else contentBody.scrollTop = 0;
+      }
       workspaceSync();
     }
 
     viewLinks.forEach(function (link) {
-      link.addEventListener("click", function () {
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
         showView(link.dataset.view);
+        history.pushState(null, "", "#" + link.dataset.view);
         if (small.matches) closeDrawer(false);
       });
+    });
+
+    window.addEventListener("popstate", function () {
+      showView(location.hash.replace("#", ""));
     });
 
     window.addEventListener("hashchange", function () {
@@ -318,6 +365,23 @@
     });
 
     showView(location.hash.replace("#", ""));
+
+    // Fanelinjen markerer den delen man faktisk ser pa mens man ruller. Under
+    // en programstyrt rulling star markeringen stille til den har landet.
+    let rulleRo = null;
+    contentBody.addEventListener("scroll", function () {
+      if (overviewTabbar.hidden) return;
+      if (rulleRo) clearTimeout(rulleRo);
+      rulleRo = setTimeout(function () { rullerTil = null; }, 120);
+      if (rullerTil) return;
+      const linje = contentBody.getBoundingClientRect().top + overviewTabbar.offsetHeight + 40;
+      let naa = overviewViews[0];
+      overviewViews.forEach(function (name) {
+        const section = overviewSection(name);
+        if (section && section.getBoundingClientRect().top <= linje) naa = name;
+      });
+      merkFane(naa);
+    }, { passive: true });
 
     // Felles toppmeny: innstillingene følger brukeren mellom visningene.
     const languageOptions=document.getElementById("language-options");
@@ -2266,7 +2330,7 @@
     let workspaceSwitching=false;
     let workspaceTabs=[],workspaceActive="";
     const newWorkspaceId=()=>"work-"+crypto.randomUUID();
-    const activeView=()=>views.find(v=>!v.hidden)?.dataset.view||"oversikt";
+    const activeView=()=>currentView||views.find(v=>!v.hidden)?.dataset.view||"oversikt";
     // Faner lagret før avhukingsmenyen har bare ett navn i «place».
     function faneSteder(tab){const s=tab&&tab.state;if(!s)return [];const liste=Array.isArray(s.steder)?s.steder:[s.place];return STEDSNAVN.filter(navn=>liste.includes(navn));}
     function captureWorkspace(){return {place:placeName.textContent,steder:VALGT.liste.slice(),view:activeView(),hub:{...hubState},periode,salesPeriod,salesMetric,category:document.getElementById("sales-category").value,query:document.getElementById("sales-search").value,detail:document.querySelector('[data-sales-detail][aria-pressed="true"]')?.dataset.salesDetail||"mix",ops:{...opsState},cost:{tab:costUI.tab,supplier:costUI.supplier,invoiceFilter:costUI.invoiceFilter,reduction:costUI.reduction},scroll:contentBody.scrollTop};}
@@ -2290,7 +2354,7 @@
       setSalesDetail(["mix","guests","products"].includes(s.detail)?s.detail:"mix");
       velgSteder(faneSteder(tab));
       opsState.extra=Math.max(0,Math.min(8,Number(s.ops?.extra)||0));staffView();
-      showView(s.view);history.replaceState(null,"","#"+activeView());contentBody.scrollTop=Number(s.scroll)||0;
+      showView(s.view, false);history.replaceState(null,"","#"+activeView());contentBody.scrollTop=Number(s.scroll)||0;
       workspaceSwitching=false;renderWorkspaceTabs();saveWorkspace();
       const button=document.getElementById(id);button.scrollIntoView({block:"nearest",inline:"nearest"});if(focus)button.focus({preventScroll:true});
     }
@@ -2314,7 +2378,7 @@
       const view = activeView();
       const currentPeriod = view === 'oversikt' ? 'igår' : view === 'salg' ? salesPeriod : view === 'varekost' || view === 'resultat' ? opsState[view] : periode;
       return {
-        visibleData: ['oversikt', 'tiltak', 'effekt', 'rapporter', 'salg', 'varekost', 'bemanning', 'resultat'].includes(view) ? views.find(v => !v.hidden).innerText.slice(0, 5000) : '',
+        visibleData: ['oversikt', 'tiltak', 'effekt', 'rapporter', 'salg', 'varekost', 'bemanning', 'resultat'].includes(view) ? views.find(v => v.dataset.view === view).innerText.slice(0, 5000) : '',
         source: 'demo', places: STEDSNAVN.slice(), selected: VALGT.liste.slice(), view, period: currentPeriod,
         periodLabels: Object.fromEntries(Object.entries(PERIODER).map(([key, value]) => [key, value.navn])),
         facts: STEDSNAVN.flatMap(place => Object.keys(PERIODER).map(period => {

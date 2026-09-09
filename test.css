@@ -3097,3 +3097,9 @@
 .overview-tab[aria-current=page] {background:var(--app-active);color:var(--app-ink);font-weight:550}
 .overview-tab:hover {color:var(--app-ink)}
 .overview-tab:focus-visible {outline:2px solid var(--app-ink);outline-offset:2px}
+/* Nå, Tiltak, Effekt og Rapporter ligger på én side. Fanelinjen blir stående
+   mens man ruller, og markerer hvilken del man er i. */
+.overview-tabbar {position:sticky;top:0;z-index:20;margin:-24px -20px 24px;padding:24px 20px 0;background:var(--app-paper)}
+.overview-tabbar[hidden] {display:none}
+.overview-tabbar .overview-tabs {margin-bottom:0}
+.view[data-view=tiltak]:not([hidden]),.view[data-view=effekt]:not([hidden]),.view[data-view=rapporter]:not([hidden]) {margin-top:56px;padding-top:48px;border-top:1px solid var(--app-line)}
