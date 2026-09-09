@@ -262,22 +262,12 @@
     /* ---- Bytte mellom menyvalg ------------------------------------------ */
 
     const views = Array.from(document.querySelectorAll(".view"));
-    const viewLinks = Array.from(document.querySelectorAll(".rail-link[data-view]"));
+    const viewLinks = Array.from(document.querySelectorAll(".rail-link[data-view], .overview-tab[data-view]"));
     const contentView = document.getElementById("content-view");
     const contentBody = document.getElementById("content-body");
 
-    const overviewFolder=document.getElementById("overview-folder");
-    const overviewFolderToggle=document.getElementById("overview-folder-toggle");
-    const overviewSubnav=document.getElementById("overview-subnav");
-    function expandOverviewFolder(open) {
-      overviewSubnav.hidden=!open;
-      overviewFolderToggle.setAttribute("aria-expanded",String(open));
-    }
-    overviewFolderToggle.addEventListener("click",()=>{
-      if(app.classList.contains("is-collapsed")&&!small.matches) {
-        toggleButton.click();expandOverviewFolder(true);
-      } else expandOverviewFolder(overviewSubnav.hidden);
-    });
+    const overviewTabs=document.getElementById("overview-tabs");
+    const overviewViews=["oversikt","tiltak","effekt","rapporter"];
 
     function showView(name) {
       const known = views.some(function (view) {
@@ -301,9 +291,13 @@
         }
       });
 
-      const inOverview=["oversikt","tiltak","effekt"].includes(active);
-      overviewFolder.dataset.active=String(inOverview);
-      if(inOverview) expandOverviewFolder(true);
+      const inOverview=overviewViews.includes(active);
+      overviewTabs.hidden=!inOverview;
+      const overviewLink=document.querySelector('.rail-link[data-view="oversikt"]');
+      if(inOverview) {
+        overviewLink.setAttribute("aria-current","page");
+        contentView.textContent=overviewLink.querySelector(".rail-label").textContent;
+      }
 
       // Bare et ekte bytte skal nullstille rullingen. Kontomenyen setter
       // hash rett etter at den har hoppet til et kort, og hashchange
@@ -330,7 +324,7 @@
     const languageToggle=document.getElementById("language-toggle");
     const themeToggle=document.getElementById("theme-toggle");
     let navigationLanguage=restore("scope-menu-language")==="en"?"en":"nb";
-    const menuNames={tiltak:["Tiltak","Actions"],effekt:["Effekt","Impact"],rapporter:["Rapporter","Reports"],oversikt:["Oversikt","Overview"],salg:["Salg","Sales"],varekost:["Varekost","Food costs"],bemanning:["Bemanning","Staffing"],resultat:["Resultat","Results"],koblinger:["Koblinger","Connections"],innstillinger:["Innstillinger","Settings"]};
+    const menuNames={tiltak:["Tiltak","Actions"],effekt:["Effekt","Impact"],rapporter:["Rapporter","Reports"],oversikt:["Oversikt","Overview"],salg:["Salg","Sales"],varekost:["Varekost","Food costs"],bemanning:["Bemanning","Staffing"],"andre-kostnader":["Andre kostnader","Other costs"],resultat:["Resultat","Results"],koblinger:["Koblinger","Connections"],innstillinger:["Innstillinger","Settings"]};
     const staticMenuLabels=[...document.querySelectorAll(".rail-heading,.rail-new .rail-label")].map(node=>({node,original:node.textContent}));
     const menuTranslations={Restaurant:"Restaurant","Tidligere samtaler":"Recent conversations","Ny samtale":"New conversation"};
     function syncThemeButton() {
@@ -341,9 +335,9 @@
     }
     function applyMenuLanguage() {
       const english=navigationLanguage==="en";
-      document.getElementById("overview-folder-label").textContent=english?"Overview":"Oversikt";
-      overviewFolderToggle.dataset.tooltip=english?"Overview":"Oversikt";
-      viewLinks.forEach(link=>{const label=link.dataset.view==="oversikt"?(english?"Now":"Nå"):menuNames[link.dataset.view][english?1:0];link.querySelector(".rail-label").textContent=label;link.dataset.tooltip=label;if(link.getAttribute("aria-current")==="page")contentView.textContent=label;});
+      viewLinks.forEach(link=>{const label=link.classList.contains("overview-tab")&&link.dataset.view==="oversikt"?(english?"Now":"Nå"):menuNames[link.dataset.view][english?1:0];link.querySelector(".rail-label").textContent=label;link.dataset.tooltip=label;});
+      const current=views.find(view=>!view.hidden)?.dataset.view||"oversikt";
+      contentView.textContent=menuNames[overviewViews.includes(current)?"oversikt":current][english?1:0];
       staticMenuLabels.forEach(({node,original})=>node.textContent=english?(menuTranslations[original]||original):original);
       document.getElementById("language-label").textContent=english?"EN":"NO";
       document.getElementById("language-heading").textContent=english?"Navigation language":"Menyspråk";
@@ -2347,7 +2341,8 @@
       }
       async function navigate(view) {
         await revealSidebar();
-        if (["oversikt", "tiltak", "effekt"].includes(view) && overviewSubnav.hidden) await pointer.click(overviewFolderToggle);
+        if (overviewViews.includes(view) && overviewTabs.hidden) await pointer.click(document.querySelector('.rail-link[data-view="oversikt"]'));
+        if (small.matches && app.classList.contains("is-open") && view !== "oversikt" && overviewViews.includes(view)) await pointer.click(menuButton);
         await pointer.click(viewLinks.find(link => link.dataset.view === view));
         if (activeView() !== view) throw new Error('Kunne ikke bekrefte at visningen ble åpnet.');
       }

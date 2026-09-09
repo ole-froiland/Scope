@@ -7,11 +7,11 @@
     <meta name="description" content="Testflate for Scope: venstremeny, stedsvelger og spørreboks.">
     <meta name="robots" content="noindex">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='20' r='18' fill='%23064dff'/%3E%3Ccircle cx='44' cy='40' r='18' fill='%23ff3c38'/%3E%3Ccircle cx='20' cy='40' r='18' fill='%2300bd7b'/%3E%3C/svg%3E">
-    <link rel="stylesheet" href="test.css?v=overview-folder-1b">
+    <link rel="stylesheet" href="test.css?v=company-navigation-2">
   </head>
   <body class="app">
     <!-- Lastes her, ikke i <head>, slik at lagret menytilstand settes før første tegning. -->
-    <script src="test.js?v=overview-folder-1b"></script>
+    <script src="test.js?v=company-navigation-2"></script>
 
     <aside class="sidebar" id="sidebar" aria-label="Sidemeny">
       <div class="sidebar-top">
@@ -67,19 +67,10 @@
       </button>
 
       <nav class="rail-nav" aria-label="Hovedmeny">
-        <div class="overview-folder" id="overview-folder">
-          <button class="rail-link overview-folder-toggle" type="button" id="overview-folder-toggle" aria-expanded="true" aria-controls="overview-subnav" data-tooltip="Oversikt"><svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6.8" height="6.8" rx="1.6"></rect><rect x="13.2" y="4" width="6.8" height="6.8" rx="1.6"></rect><rect x="4" y="13.2" width="6.8" height="6.8" rx="1.6"></rect><rect x="13.2" y="13.2" width="6.8" height="6.8" rx="1.6"></rect></svg><span class="rail-label" id="overview-folder-label">Oversikt</span><span class="overview-folder-chevron" aria-hidden="true">⌄</span></button>
-          <div class="overview-subnav" id="overview-subnav">
-        <a class="rail-link" href="#oversikt" data-view="oversikt" aria-current="page" data-tooltip="Nå">
+        <a class="rail-link" href="#oversikt" data-view="oversikt" aria-current="page" data-tooltip="Oversikt">
           <svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6.8" height="6.8" rx="1.6"></rect><rect x="13.2" y="4" width="6.8" height="6.8" rx="1.6"></rect><rect x="4" y="13.2" width="6.8" height="6.8" rx="1.6"></rect><rect x="13.2" y="13.2" width="6.8" height="6.8" rx="1.6"></rect></svg>
-          <span class="rail-label">Nå</span>
+          <span class="rail-label">Oversikt</span>
         </a>
-
-<a class="rail-link" href="#tiltak" data-view="tiltak" data-tooltip="Tiltak"><svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6h14M5 12h14M5 18h9"/></svg><span class="rail-label">Tiltak</span></a>
-<a class="rail-link" href="#effekt" data-view="effekt" data-tooltip="Effekt"><svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 17 6-6 4 3 6-9M15 5h5v5"/></svg><span class="rail-label">Effekt</span></a>
-          </div>
-        </div>
-<a class="rail-link" href="#rapporter" data-view="rapporter" data-tooltip="Rapporter"><svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7zM10 11h5M10 15h5"/></svg><span class="rail-label">Rapporter</span></a>
         <a class="rail-link" href="#salg" data-view="salg" data-tooltip="Salg">
           <svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 17.5v-4M12 17.5v-9M17.5 17.5v-6" stroke-width="1.9"></path></svg>
           <span class="rail-label">Salg</span>
@@ -95,6 +86,7 @@
           <span class="rail-label">Bemanning</span>
         </a>
 
+<a class="rail-link" href="#andre-kostnader" data-view="andre-kostnader" data-tooltip="Andre kostnader"><svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6"/></svg><span class="rail-label">Andre kostnader</span></a>
         <a class="rail-link" href="#resultat" data-view="resultat" data-tooltip="Resultat">
           <svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16.5 9.5 11l3 3 6.5-6.5"></path><path d="M14.5 7.5h5v5"></path></svg>
           <span class="rail-label">Resultat</span>
@@ -197,6 +189,10 @@
       </header>
 
       <div class="content-body" id="content-body">
+<nav class="overview-tabs" id="overview-tabs" aria-label="Oversikt"><a class="overview-tab" href="#oversikt" data-view="oversikt" data-tooltip="Nå">
+          <svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6.8" height="6.8" rx="1.6"></rect><rect x="13.2" y="4" width="6.8" height="6.8" rx="1.6"></rect><rect x="4" y="13.2" width="6.8" height="6.8" rx="1.6"></rect><rect x="13.2" y="13.2" width="6.8" height="6.8" rx="1.6"></rect></svg>
+          <span class="rail-label">Nå</span>
+        </a><a class="overview-tab" href="#tiltak" data-view="tiltak" data-tooltip="Tiltak"><svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6h14M5 12h14M5 18h9"/></svg><span class="rail-label">Tiltak</span></a><a class="overview-tab" href="#effekt" data-view="effekt" data-tooltip="Effekt"><svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 17 6-6 4 3 6-9M15 5h5v5"/></svg><span class="rail-label">Effekt</span></a><a class="overview-tab" href="#rapporter" data-view="rapporter" data-tooltip="Rapporter"><svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7zM10 11h5M10 15h5"/></svg><span class="rail-label">Rapporter</span></a></nav>
         <section class="view" data-view="oversikt">
           <p class="visually-hidden" id="dash-status" role="status" aria-live="polite"></p>
           <div class="dash" id="dash"></div>
@@ -221,6 +217,9 @@
         </section>
         <section class="view" data-view="bemanning" hidden>
           <div class="ops" id="ops-bemanning"></div>
+        </section>
+<section class="view" data-view="andre-kostnader" hidden>
+          <div class="ops"><section class="ops-panel"><span class="ops-eyebrow">ANDRE DRIFTSKOSTNADER</span><h2>Det som koster å holde driften i gang</h2><p class="ops-muted">Husleie, strøm, forsikring, vedlikehold, markedsføring og administrasjon.</p><h3>Regnskapstall mangler</h3><p class="ops-muted">Disse kostnadene er ikke tilgjengelige i dagens datagrunnlag. De er derfor heller ikke trukket fra i Resultat, som viser bidrag etter varekost og lønn.</p><a class="ops-button" href="#koblinger">Se koblinger ↗</a></section></div>
         </section>
         <section class="view" data-view="resultat" hidden>
           <div class="ops" id="ops-resultat"></div>

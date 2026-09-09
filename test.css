@@ -3088,13 +3088,12 @@
 @media(prefers-reduced-motion:reduce){.hub *{animation:none!important;transition:none!important}}
 
 /* Nå, tiltak og effekt tilhører Oversikt. */
-.overview-folder-toggle {width:100%;font:inherit;text-align:left;cursor:pointer;background:transparent}
-.overview-folder-chevron {margin-left:auto;font-size:17px;transition:transform 150ms}
-.overview-folder-toggle[aria-expanded=false] .overview-folder-chevron {transform:rotate(-90deg)}
-.overview-folder[data-active=true]>.overview-folder-toggle {color:var(--app-ink);font-weight:550}
-.overview-subnav {display:grid;gap:2px;margin:3px 0 7px 21px;padding-left:10px;border-left:1px solid var(--app-line)}
-.overview-subnav[hidden] {display:none}
-.overview-subnav .rail-link {min-height:34px;font-size:13px;padding:7px 10px}
-.overview-subnav .rail-icon {width:15px;height:15px;opacity:.7}
-@media(min-width:861px){.app.is-collapsed .overview-subnav {display:none}.app.is-collapsed .overview-folder-chevron {display:none}.app.is-collapsed .overview-folder[data-active=true]>.overview-folder-toggle {background:var(--app-active)}}
-@media(prefers-reduced-motion:reduce){.overview-folder-chevron {transition:none}}
+/* Overview details live inside the page; the rail follows the income statement. */
+.overview-tabs {display:flex;gap:4px;flex-wrap:wrap;margin:0 auto 24px;max-width:1120px;border-bottom:1px solid var(--app-line);padding-bottom:10px}
+.overview-tabs[hidden] {display:none}
+.overview-tab {display:flex;align-items:center;gap:7px;padding:8px 12px;border-radius:8px;color:var(--app-muted);text-decoration:none;font-size:13px}
+.app.is-collapsed .overview-tab .rail-label {display:inline}
+.overview-tab .rail-icon {width:16px;height:16px}
+.overview-tab[aria-current=page] {background:var(--app-active);color:var(--app-ink);font-weight:550}
+.overview-tab:hover {color:var(--app-ink)}
+.overview-tab:focus-visible {outline:2px solid var(--app-ink);outline-offset:2px}
