@@ -313,9 +313,7 @@
       const inOverview = overviewViews.includes(active);
 
       views.forEach(function (view) {
-        view.hidden = inOverview
-          ? !overviewViews.includes(view.dataset.view)
-          : view.dataset.view !== active;
+        view.hidden = view.dataset.view !== active;
       });
 
       viewLinks.forEach(function (link) {
@@ -327,22 +325,22 @@
         }
       });
 
-      overviewTabs.hidden=!inOverview;
-      overviewTabbar.hidden=!inOverview;
+      overviewTabs.hidden=true;
+      overviewTabbar.hidden=true;
       const overviewLink=document.querySelector('.rail-link[data-view="oversikt"]');
       if(inOverview) {
         overviewLink.setAttribute("aria-current","page");
         contentView.textContent=overviewLink.querySelector(".rail-label").textContent;
       }
 
+      if (active === "oversikt" && forrige !== null) renderDash();
       currentView = active;
 
       // Bare et ekte bytte skal flytte rullingen. Kontomenyen setter hash rett
       // etter at den har hoppet til et kort, og hashchange kaller hit igjen
       // med samme visning.
       if (scroll && (inOverview || forrige !== active)) {
-        if (inOverview) rullTil(active);
-        else contentBody.scrollTop = 0;
+        contentBody.scrollTop = 0;
       }
       workspaceSync();
     }
@@ -1855,7 +1853,7 @@
     const hubKey=()=>VALGT.liste.slice().sort().join("|");
     function hubButton(text,action,cls="hub-button") {const b=el("button",cls,text);b.type="button";b.addEventListener("click",()=>{action();workspaceSync();});return b;}
     function hubGo(view) {showView(view);location.hash="#"+view;}
-    function hubHead(eyebrow,title,text) {const h=el("header","hub-head");h.append(el("span","overview-eyebrow",eyebrow),el("h2","",title),el("p","",text));return h;}
+    function hubHead(eyebrow,title,text) {const h=el("header","hub-head");h.append(hubButton("← Til oversikt",()=>hubGo("oversikt"),"hub-link"),el("span","overview-eyebrow",eyebrow),el("h2","",title),el("p","",text));return h;}
     function hubTasks() {
       const t=tall(placeName.textContent,"siste30");
       const tasks=[
@@ -1890,13 +1888,20 @@
       const place=placeName.textContent,t=tall(place,"igår"),kv=kveldsTall(t.profil,dagIndeks(NÅ)),tasks=hubTasks();
       dash.className="dash hub hub-now";dash.replaceChildren();
       const top=el("div","hub-top");top.append(el("span","overview-eyebrow","OVERSIKT / "+place),el("span","hub-demo","Demodata · "+stor(datoFormat.format(NÅ))));dash.append(top);
-      const hero=el("section","hub-now-hero");const intro=el("div");
-      intro.append(el("span","hub-live","● I DAG"),el("h2","",kv.perAnsatt>18?"Gjør klart for en travel kveld.":"God oversikt. En roligere start."),el("p","","Vi venter rundt "+Math.round(kv.gjester)+" gjester i kveld, med "+kv.vakt+" ansatte på vakt. "+(kv.perAnsatt>18?"Se over kapasiteten før service.":"Planlagt kapasitet dekker modellanslaget.")),hubButton("Se kveldens bemanning ↗",()=>hubGo("bemanning"),"hub-button hub-hero-button"));
-      const pulse=el("div","hub-pulse");pulse.append(el("strong","",Math.round(kv.gjester)),el("span","","forventede gjester"),el("small","",kv.booket+" er booket · resten er anslag"));hero.append(intro,pulse);dash.append(hero);
-      const stats=el("section","hub-stats");stats.setAttribute("aria-label","Status og siste avsluttede dag");stats.append(hubStat("I kveld · forventet salg",kr(kv.oms),"Prognose, ikke registrert salg"),hubStat("I går · omsetning",kr(t.oms),prosentEndring(t.endring)+" mot "+PERIODER.igår.mot),hubStat("I går · bidrag",kr(t.bidragKr),"Etter varer og lønn, før faste kostnader"),hubStat("Tiltak pågår",String(tasks.filter(x=>x.status==="active").length),tasks.filter(x=>x.status==="done").length+" utført · lagret lokalt"));dash.append(stats);
-      const grid=el("div","hub-now-grid");const priority=el("section","hub-panel");priority.append(el("span","overview-eyebrow","DITT NESTE GREP"));const next=tasks.find(x=>x.status!=="done");if(next)priority.append(taskCard(next,true));else priority.append(el("h3","","Alt i denne listen er fulgt opp ✓"),el("p","","Se etter utviklingen i neste rapport. Utført betyr ikke at effekten er målt."),hubButton("Se utførte tiltak",()=>hubGo("tiltak")));grid.append(priority);
-      const shortcuts=el("section","hub-panel hub-shortcuts");shortcuts.append(el("span","overview-eyebrow","FRA OVERSIKT TIL INNSIKT"));
-      [["tiltak","01","Gjør noe med det","Prioriter, start og følg opp."],["effekt","02","Se hva det kan gi","Utforsk potensialet i små forbedringer."],["rapporter","03","Se tilbake","Dags-, ukes- og månedsrapporter."]].forEach(([view,num,title,text])=>{const b=hubButton("",()=>hubGo(view),"hub-shortcut");b.append(el("span","",num),el("strong","",title),el("small","",text),el("i","","↗"));shortcuts.append(b);});grid.append(shortcuts);dash.append(grid,el("p","hub-footnote","Nå-visningen viser dagens plan og anslag, samt siste avsluttede dag. Ingen tall er hentet fra live-systemer."));
+      dash.classList.add("compact-overview");
+      const status=el("div","compact-status");status.append(el("span","",Math.round(kv.gjester)+" forventede gjester i kveld · "+kv.vakt+" på vakt"),hubButton("Se bemanning ↗",()=>hubGo("bemanning"),"hub-link"));dash.append(status);
+      const stats=el("section","hub-stats");stats.setAttribute("aria-label","Status akkurat nå");stats.append(hubStat("Omsetning · i går",kr(t.oms),prosentEndring(t.endring)+" mot "+PERIODER.igår.mot),hubStat("Varekost · i går",pst(t.varekost),"Mål "+pst(MÅL.varekost)),hubStat("Lønn · i går",pst(t.lonn),"Mål "+pst(MÅL.lonn)),hubStat("Bidrag · i går",kr(t.bidragKr),"Før andre kostnader"));dash.append(stats);
+      const grid=el("div","compact-grid");
+      const actions=el("section","hub-panel compact-actions");actions.append(el("h2","","Tiltak"),el("p","compact-note",tasks.filter(x=>x.status==="active").length+" pågår · "+tasks.filter(x=>x.status==="done").length+" utført"));
+      tasks.forEach(task=>{const row=el("div","compact-task");const text=el("div");text.append(el("strong","",task.title),el("small","",task.basis));const button=hubButton(task.status==="suggested"?"Start":task.status==="active"?"Fullfør":"Åpne igjen",()=>{setTask(task,task.status==="suggested"?"active":task.status==="active"?"done":"suggested");document.querySelector('[data-compact-task="'+task.id+'"]').focus({preventScroll:true});});button.dataset.compactTask=task.id;button.setAttribute("aria-label",button.textContent+": "+task.title);row.append(text,button);actions.append(row);});actions.append(hubButton("Alle detaljer ↗",()=>hubGo("tiltak"),"hub-link"));grid.append(actions);
+      const effect=el("section","hub-panel compact-effect");effect.append(el("h2","","Mulig effekt"));const base=tall(place,"siste30"),amount=el("strong","compact-amount"),note=el("p","compact-note","Økt bidrag over 4 uker · regneeksempel");effect.append(amount,note);
+      const update=()=>{amount.textContent="+ "+kr(improvementEffect(base.oms,hubState.food,hubState.wages));};
+      [["food","Lavere varekost"],["wages","Lavere lønnsandel"]].forEach(([key,title])=>{const label=el("label","compact-slider",title),value=el("output"),input=el("input");input.type="range";input.min="0";input.max="3";input.step="0.1";input.value=hubState[key];input.id="compact-"+key;label.htmlFor=input.id;value.htmlFor=input.id;const change=()=>{hubState[key]=Number(input.value);value.textContent=nf.format(hubState[key])+" pp";input.setAttribute("aria-valuetext",value.textContent);update();};input.addEventListener("input",()=>{change();renderEffect(hubTasks());workspaceSync();});change();label.append(value);effect.append(label,input);});effect.append(el("p","compact-note","Potensial, ikke målt besparelse."),hubButton("Se beregningen ↗",()=>hubGo("effekt"),"hub-link"));grid.append(effect);
+      const report=el("section","hub-panel compact-report");report.append(el("h2","","Rapport"));const types=el("div","hub-filters");[["day","Dag"],["week","Uke"],["month","Måned"]].forEach(([key,label])=>{const button=hubButton(label,()=>{hubState.report=key;hubState.offset=0;renderDash();document.querySelector('[data-compact-report="'+key+'"]').focus({preventScroll:true});},"hub-filter");button.dataset.compactReport=key;button.setAttribute("aria-pressed",String(hubState.report===key));types.append(button);});report.append(types);
+      const r=buildReport(profil(place),hubState.report,hubState.offset,NÅ,DAGVEKT),prior=buildReport(profil(place),hubState.report,hubState.offset+1,NÅ,DAGVEKT);
+      report.append(el("p","compact-note",hubDate.format(r.start)+" – "+hubDate.format(r.end)));
+      [["Omsetning",kr(r.revenue)],["Varekost og lønn",kr(r.cost+r.wages)],["Bidrag",kr(r.contribution)]].forEach(([label,value])=>{const row=el("div","compact-ledger");row.append(el("span","",label),el("strong","",value));report.append(row);});report.append(el("p","compact-note",(r.contribution>=prior.contribution?"+":"−")+kr(Math.abs(r.contribution-prior.contribution))+" i bidrag mot forrige periode"),hubButton("Full rapport og eksport ↗",()=>hubGo("rapporter"),"hub-link"));grid.append(report);dash.append(grid);
+      [actions,effect,report].forEach((panel,i)=>{panel.lastElementChild.dataset.overviewDetail=["tiltak","effekt","rapporter"][i];});
       renderTasks(tasks);renderEffect(tasks);renderReports();
     }
     function renderTasks(tasks) {
@@ -2405,9 +2410,10 @@
       }
       async function navigate(view) {
         await revealSidebar();
-        if (overviewViews.includes(view) && overviewTabs.hidden) await pointer.click(document.querySelector('.rail-link[data-view="oversikt"]'));
-        if (small.matches && app.classList.contains("is-open") && view !== "oversikt" && overviewViews.includes(view)) await pointer.click(menuButton);
-        await pointer.click(viewLinks.find(link => link.dataset.view === view));
+        if (view !== "oversikt" && overviewViews.includes(view)) {
+          await pointer.click(document.querySelector('.rail-link[data-view="oversikt"]'));
+          await pointer.click(document.querySelector('[data-overview-detail="'+view+'"]'));
+        } else await pointer.click(viewLinks.find(link => link.dataset.view === view));
         if (activeView() !== view) throw new Error('Kunne ikke bekrefte at visningen ble åpnet.');
       }
       try {
