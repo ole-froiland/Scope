@@ -268,7 +268,7 @@
 
     const overviewTabs=document.getElementById("overview-tabs");
     const overviewTabbar=document.getElementById("overview-tabbar");
-    const overviewViews=["oversikt","tiltak","effekt","rapporter"];
+    const overviewViews=["oversikt","tiltak","rapporter"];
 
     // Visningen bestemmer hvilke sider som står i menyen (data-visning), men
     // alle sider kan åpnes fra en lenke. En side utenfor menyen hører til en
@@ -288,41 +288,14 @@
       return forelder && iMenyen(forelder) ? forelder : "oversikt";
     }
 
-    // Na, Tiltak, Effekt og Rapporter ligger pa samme side. Fanene ruller til
-    // riktig del i stedet for a bytte visning, og fanelinjen folger rullingen.
+    // Oversikt er delt i tre deler: Nå, Tiltak og Rapporter. Fanelinjen bytter
+    // del, og Effekt ligger nederst på Tiltak.
     let currentView=null;
-    let rullerTil=null;
-
-    function overviewSection(name) {
-      return views.find(function (view) { return view.dataset.view === name; });
-    }
-
-    function rulleAtferd() {
-      return window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
-    }
-
-    function merkFane(name) {
-      Array.from(overviewTabs.querySelectorAll(".overview-tab")).forEach(function (tab) {
-        if (tab.dataset.view === name) tab.setAttribute("aria-current", "page");
-        else tab.removeAttribute("aria-current");
-      });
-    }
-
-    function rullTil(name) {
-      const target = overviewSection(name);
-      if (!target) return;
-      rullerTil = name;
-      merkFane(name);
-      if (name === overviewViews[0]) {
-        contentBody.scrollTo({ top: 0, behavior: rulleAtferd() });
-        return;
-      }
-      const avstand = target.getBoundingClientRect().top - contentBody.getBoundingClientRect().top;
-      const topp = contentBody.scrollTop + avstand - overviewTabbar.offsetHeight - 12;
-      contentBody.scrollTo({ top: Math.max(topp, 0), behavior: rulleAtferd() });
-    }
 
     function showView(name, scroll = true) {
+      // Effekt ligger nå nederst på Tiltak. Gamle lenker og lagrede faner
+      // skal fortsatt finne fram.
+      if (name === "effekt") name = "tiltak";
       const known = views.some(function (view) {
         return view.dataset.view === name;
       });
@@ -343,8 +316,8 @@
         }
       });
 
-      overviewTabs.hidden=true;
-      overviewTabbar.hidden=true;
+      overviewTabs.hidden=!inOverview;
+      overviewTabbar.hidden=!inOverview;
       const overviewLink=document.querySelector('.rail-link[data-view="oversikt"]');
       if(inOverview) {
         overviewLink.setAttribute("aria-current","page");
@@ -411,23 +384,6 @@
     });
 
     showView(location.hash.replace("#", ""));
-
-    // Fanelinjen markerer den delen man faktisk ser pa mens man ruller. Under
-    // en programstyrt rulling star markeringen stille til den har landet.
-    let rulleRo = null;
-    contentBody.addEventListener("scroll", function () {
-      if (overviewTabbar.hidden) return;
-      if (rulleRo) clearTimeout(rulleRo);
-      rulleRo = setTimeout(function () { rullerTil = null; }, 120);
-      if (rullerTil) return;
-      const linje = contentBody.getBoundingClientRect().top + overviewTabbar.offsetHeight + 40;
-      let naa = overviewViews[0];
-      overviewViews.forEach(function (name) {
-        const section = overviewSection(name);
-        if (section && section.getBoundingClientRect().top <= linje) naa = name;
-      });
-      merkFane(naa);
-    }, { passive: true });
 
     // Felles toppmeny: innstillingene følger brukeren mellom visningene.
     const languageOptions=document.getElementById("language-options");
@@ -1895,14 +1851,14 @@
 
     // Periodene i Rapport-delen av oversikten. «Måned» er de siste fire ukene, samme periode som Salg.
     const GLANCE=[["igår","I går"],["uke","Uke"],["siste30","Måned"]];
-    const hubState = {filter:"alle",report:"week",offset:0,food:0.5,wages:0.5,glance:"igår"};
+    const hubState = {filter:"alle",report:"day",offset:0,food:0.5,wages:0.5,glance:"igår"};
     let taskProgress={};
     try { const saved=JSON.parse(restore("scope-actions-v1")||"{}"); if(saved && typeof saved==="object"&&!Array.isArray(saved)) taskProgress=saved; } catch { /* Start empty if local state is unreadable. */ }
     const hubDate=new Intl.DateTimeFormat("nb-NO",{day:"numeric",month:"short",year:"numeric"});
     const hubKey=()=>VALGT.liste.slice().sort().join("|");
     function hubButton(text,action,cls="hub-button") {const b=el("button",cls,text);b.type="button";b.addEventListener("click",()=>{action();workspaceSync();});return b;}
     function hubGo(view) {showView(view);location.hash="#"+view;}
-    function hubHead(eyebrow,title,text) {const h=el("header","hub-head");h.append(hubButton("← Til oversikt",()=>hubGo("oversikt"),"hub-link"),el("span","overview-eyebrow",eyebrow),el("h2","",title),el("p","",text));return h;}
+    function hubHead(eyebrow,title,text) {const h=el("header","hub-head");h.append(el("span","overview-eyebrow",eyebrow),el("h2","",title),el("p","",text));return h;}
     function hubTasks() {
       const t=tall(placeName.textContent,"siste30");
       const tasks=[
@@ -1960,7 +1916,7 @@
       update();
       const advice=el("section","day-actions"),adviceHead=el("header","day-heading");adviceHead.append(el("h3","","Verdt å følge opp"),hubButton("Alle råd ↗",()=>hubGo("tiltak"),"hub-link"));advice.append(adviceHead);
       const list=el("div","day-action-list");tasks.forEach(task=>{const card=el("details","day-action"),summary=el("summary");summary.append(el("span","day-action-dot",task.status==="done"?"✓":"↗"),el("strong","",task.title),el("span","day-action-plus","+"),el("small","",task.basis));card.append(summary,el("p","",task.text));const button=hubButton(task.status==="suggested"?"Start tiltak":task.status==="active"?"Fullfør":"Åpne igjen",()=>{setTask(task,task.status==="suggested"?"active":task.status==="active"?"done":"suggested");document.querySelector('[data-compact-task="'+task.id+'"]').closest("details").open=true;document.querySelector('[data-compact-task="'+task.id+'"]').focus({preventScroll:true});},"hub-button");button.dataset.compactTask=task.id;card.append(button,hubButton("Se grunnlag ↗",()=>hubGo(task.view),"hub-link"));list.append(card);});advice.append(list);dash.append(advice);
-      const note=el("div","day-footnote");note.append(el("span","","Demoanslag · timefordeling og vakter er illustrert, ikke sanntidsdata."),hubButton("Rapporter ↗",()=>hubGo("rapporter"),"hub-link"),hubButton("Beregn potensial ↗",()=>hubGo("effekt"),"hub-link"));dash.append(note);
+      const note=el("div","day-footnote");note.append(el("span","","Demoanslag · timefordeling og vakter er illustrert, ikke sanntidsdata."),hubButton("Rapporter ↗",()=>hubGo("rapporter"),"hub-link"),hubButton("Beregn potensial ↗",()=>hubGo("tiltak"),"hub-link"));dash.append(note);
       renderTasks(tasks);renderEffect(tasks);renderReports();
     }
     function renderTasks(tasks) {
@@ -1980,7 +1936,7 @@
       [["food","Lavere varekostandel",t.varekost],["wages","Lavere lønnsandel",t.lonn]].forEach(([key,title,current])=>{const label=el("label","hub-slider-label",title);label.htmlFor="effect-"+key;const value=el("output");value.htmlFor=label.htmlFor;const input=el("input");input.type="range";input.id=label.htmlFor;input.min="0";input.max="3";input.step="0.1";input.value=hubState[key];function change(){hubState[key]=Number(input.value);value.textContent=nf.format(hubState[key])+" pp · "+pst(current)+" → "+pst(current-hubState[key]);input.setAttribute("aria-valuetext",value.textContent);update();}input.addEventListener("input",change);change();controls.append(label,value,input);});
       controls.append(hubButton("Nullstill scenario",()=>{hubState.food=0;hubState.wages=0;renderEffect(hubTasks());document.getElementById("effect-food").focus();},"hub-link"),el("p","hub-footnote","1 prosentpoeng tilsvarer 1 kr per 100 kr i omsetning. Uendret salg og øvrige kostnader er forutsatt."));
       result.append(el("span","overview-eyebrow","MULIG ØKNING I BIDRAG / 4 UKER"),amount,after,bars,el("p","","Regneeksempel basert på siste 4 ukers demo-omsetning. Dette er ikke målt effekt eller en prognose."));update();grid.append(controls,result);root.append(grid);
-      const measured=el("section","hub-panel hub-measured");measured.append(el("span","overview-eyebrow","OPPFØLGING AV FAKTISK EFFEKT"),el("h3","",tasks.some(t=>t.status==="done")?"Tiltak utført. Effekten må fortsatt måles.":"Ingen målt effekt ennå."),el("p","","For å måle effekt trenger vi faktiske før- og etterdata for sammenlignbare perioder. Et utført tiltak blir derfor ikke automatisk regnet som en besparelse."));tasks.filter(t=>t.status==="done").forEach(t=>measured.append(el("div","hub-measured-row", "✓ "+t.title+" · venter på målegrunnlag")));measured.append(hubButton("Følg opp tiltak →",()=>hubGo("tiltak")));root.append(measured);
+      const measured=el("section","hub-panel hub-measured");measured.append(el("span","overview-eyebrow","OPPFØLGING AV FAKTISK EFFEKT"),el("h3","",tasks.some(t=>t.status==="done")?"Tiltak utført. Effekten må fortsatt måles.":"Ingen målt effekt ennå."),el("p","","For å måle effekt trenger vi faktiske før- og etterdata for sammenlignbare perioder. Et utført tiltak blir derfor ikke automatisk regnet som en besparelse."));tasks.filter(t=>t.status==="done").forEach(t=>measured.append(el("div","hub-measured-row", "✓ "+t.title+" · venter på målegrunnlag")));root.append(measured);
     }
     function renderReports() {
       const root=document.getElementById("hub-rapporter");root.replaceChildren(hubHead("RAPPORTER / "+placeName.textContent,"Se tilbake. Ta med deg det viktigste.","Utforsk avsluttede dager, hele uker og kalendermåneder. Alle rapporter er illustrasjoner med demodata."));
@@ -2433,7 +2389,7 @@
     function activateWorkspace(id,focus=false){
       const tab=workspaceTabs.find(t=>t.id===id);if(!tab)return;saveWorkspace();workspaceSwitching=true;workspaceActive=id;const s=tab.state;
       periode=PERIODER[s.periode]?s.periode:"igår";salesPeriod=PERIODER[s.salesPeriod]?s.salesPeriod:"igår";salesMetric=[0,1,2].includes(s.salesMetric)?s.salesMetric:0;
-      Object.assign(hubState,{filter:["alle","suggested","active","done"].includes(s.hub?.filter)?s.hub.filter:"alle",report:["day","week","month"].includes(s.hub?.report)?s.hub.report:"week",offset:Math.max(0,Math.min(1200,Math.floor(Number(s.hub?.offset)||0))),food:Math.max(0,Math.min(3,Number(s.hub?.food)||0)),wages:Math.max(0,Math.min(3,Number(s.hub?.wages)||0)),glance:GLANCE.some(([key])=>key===s.hub?.glance)?s.hub.glance:"igår"});
+      Object.assign(hubState,{filter:["alle","suggested","active","done"].includes(s.hub?.filter)?s.hub.filter:"alle",report:["day","week","month"].includes(s.hub?.report)?s.hub.report:"day",offset:Math.max(0,Math.min(1200,Math.floor(Number(s.hub?.offset)||0))),food:Math.max(0,Math.min(3,Number(s.hub?.food)||0)),wages:Math.max(0,Math.min(3,Number(s.hub?.wages)||0)),glance:GLANCE.some(([key])=>key===s.hub?.glance)?s.hub.glance:"igår"});
       Object.assign(opsState,{varekost:PERIODER[s.ops?.varekost]?s.ops.varekost:"igår",resultat:PERIODER[s.ops?.resultat]?s.ops.resultat:"uke",kostnader:PERIODER[s.ops?.kostnader]?s.ops.kostnader:"uke",staffWeek:s.ops?.staffWeek===1?1:0,staffDay:Math.max(0,Math.min(6,Number(s.ops?.staffDay)||0)),extra:0});
       Object.assign(costUI,{tab:["invoices","suppliers","variance","recipes"].includes(s.cost?.tab)?s.cost.tab:"invoices",supplier:typeof s.cost?.supplier==="string"?s.cost.supplier:"Alle",invoiceFilter:["Alle","Til kontroll","Kontrollert"].includes(s.cost?.invoiceFilter)?s.cost.invoiceFilter:"Alle",reduction:Math.max(0,Math.min(5,Number(s.cost?.reduction)||0))});
       const category=document.getElementById("sales-category");category.value=[...category.options].some(o=>o.value===s.category)?s.category:"Alle";document.getElementById("sales-search").value=typeof s.query==="string"?s.query:"";

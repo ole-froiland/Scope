@@ -7,11 +7,11 @@
     <meta name="description" content="Testflate for Scope: venstremeny, stedsvelger og spørreboks.">
     <meta name="robots" content="noindex">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='20' r='18' fill='%23064dff'/%3E%3Ccircle cx='44' cy='40' r='18' fill='%23ff3c38'/%3E%3Ccircle cx='20' cy='40' r='18' fill='%2300bd7b'/%3E%3C/svg%3E">
-    <link rel="stylesheet" href="test.css?v=visning-14">
+    <link rel="stylesheet" href="test.css?v=visning-17">
   </head>
   <body class="app">
     <!-- Lastes her, ikke i <head>, slik at lagret menytilstand settes før første tegning. -->
-    <script src="test.js?v=visning-14"></script>
+    <script src="test.js?v=visning-17"></script>
 
     <aside class="sidebar" id="sidebar" aria-label="Sidemeny">
       <div class="sidebar-top">
@@ -194,10 +194,10 @@
       </header>
 
       <div class="content-body" id="content-body">
-<div class="overview-tabbar" id="overview-tabbar"><nav class="overview-tabs" id="overview-tabs" aria-label="Hopp til del av oversikten"><a class="overview-tab" href="#oversikt" data-view="oversikt" data-tooltip="Nå">
+<div class="overview-tabbar" id="overview-tabbar"><nav class="overview-tabs" id="overview-tabs" aria-label="Deler av oversikten"><a class="overview-tab" href="#oversikt" data-view="oversikt" data-tooltip="Nå">
           <svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6.8" height="6.8" rx="1.6"></rect><rect x="13.2" y="4" width="6.8" height="6.8" rx="1.6"></rect><rect x="4" y="13.2" width="6.8" height="6.8" rx="1.6"></rect><rect x="13.2" y="13.2" width="6.8" height="6.8" rx="1.6"></rect></svg>
           <span class="rail-label">Nå</span>
-        </a><a class="overview-tab" href="#tiltak" data-view="tiltak" data-tooltip="Tiltak"><svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6h14M5 12h14M5 18h9"/></svg><span class="rail-label">Tiltak</span></a><a class="overview-tab" href="#effekt" data-view="effekt" data-tooltip="Effekt"><svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 17 6-6 4 3 6-9M15 5h5v5"/></svg><span class="rail-label">Effekt</span></a><a class="overview-tab" href="#rapporter" data-view="rapporter" data-tooltip="Rapporter"><svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7zM10 11h5M10 15h5"/></svg><span class="rail-label">Rapporter</span></a></nav></div>
+        </a><a class="overview-tab" href="#tiltak" data-view="tiltak" data-tooltip="Tiltak"><svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6h14M5 12h14M5 18h9"/></svg><span class="rail-label">Tiltak</span></a><a class="overview-tab" href="#rapporter" data-view="rapporter" data-tooltip="Rapporter"><svg class="rail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7zM10 11h5M10 15h5"/></svg><span class="rail-label">Rapporter</span></a></nav></div>
         <div class="view-back" id="view-back" hidden><button class="hub-link" type="button" id="view-back-button">← Til oversikt</button></div>
         <section class="view" data-view="oversikt">
           <p class="visually-hidden" id="dash-status" role="status" aria-live="polite"></p>
@@ -215,8 +215,7 @@
             <dialog id="sales-dialog" class="sales-dialog" aria-labelledby="sales-dialog-title"><div class="sales-dialog-top"><span class="sales-demo">Demodata</span><button type="button" id="sales-dialog-close" aria-label="Lukk detaljer">×</button></div><p class="sales-eyebrow" id="sales-dialog-context"></p><h2 id="sales-dialog-title"></h2><div id="sales-dialog-body"></div><p class="sales-footnote">Illustrerte tall, ikke hentet fra kassasystemet.</p></dialog>
           </div>
         </section>
-<section class="view" data-view="tiltak" hidden><div class="hub" id="hub-tiltak"></div></section>
-<section class="view" data-view="effekt" hidden><div class="hub" id="hub-effekt"></div></section>
+<section class="view" data-view="tiltak" hidden><div class="hub" id="hub-tiltak"></div><div class="hub" id="hub-effekt"></div></section>
 <section class="view" data-view="rapporter" hidden><div class="hub" id="hub-rapporter"></div></section>
         <section class="view" data-view="kostnader" hidden>
           <div class="ops" id="ops-kostnader"></div>
