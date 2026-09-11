@@ -1923,10 +1923,13 @@
       // Kolonne 2: de konkrete tiltakene, med effekten av dem nederst.
       const tiltak=el("section","kol kol-tiltak"),tiltakHead=el("header","kol-topp");
       tiltakHead.append(el("h3","","Tiltak"),hubButton("Alle tiltak ↗",()=>hubGo("tiltak"),"hub-link"));tiltak.append(tiltakHead);
+      const utfort=tasks.filter(task=>task.status==="done").length,fremdrift=el("div","kol-fremdrift"),spor=el("div"),fyll=el("i");
+      fyll.style.width=Math.round(utfort/Math.max(1,tasks.length)*100)+"%";spor.append(fyll);
+      fremdrift.append(el("span","",utfort+" av "+tasks.length+" utført"),spor);tiltak.append(fremdrift);
       const liste=el("div","kol-liste");
       tasks.forEach(task=>{
         const rad=el("article","kol-rad");rad.dataset.task=task.id;rad.dataset.status=task.status;
-        const tekst=el("div","kol-rad-tekst");tekst.append(el("strong","",task.title),el("small","",task.basis));
+        const tekst=el("div","kol-rad-tekst");tekst.append(el("strong","",task.title),el("small","",task.basis),el("span","kol-chip",task.horizon));
         const knapp=hubButton(task.status==="suggested"?"Start":task.status==="active"?"Fullfør":"Åpne igjen",()=>setTask(task,task.status==="suggested"?"active":task.status==="active"?"done":"suggested"),"hub-button");
         knapp.dataset.compactTask=task.id;
         rad.append(el("span","kol-prikk",task.status==="done"?"✓":task.status==="active"?"◉":"↗"),tekst,knapp);

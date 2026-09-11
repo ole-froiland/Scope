@@ -3226,8 +3226,14 @@
 
 /* Oversikt: Nå, Tiltak og Rapporter side om side. Alt skal få plass på første
    skjerm, så hver kolonne viser det korte og lenker videre til hele siden. */
-.kolonner {display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:stretch}
-.kol {display:flex;flex-direction:column;gap:12px;min-width:0;min-height:0;padding:18px;border:1px solid var(--app-line);border-radius:16px;background:var(--app-paper)}
+.kolonner {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:stretch}
+.kol {display:flex;flex-direction:column;gap:12px;min-width:0;min-height:0;padding:17px 18px 18px;border:1px solid var(--app-line);border-top:3px solid var(--kol-aksent);border-radius:16px;background:var(--app-paper)}
+.kol-naa {--kol-aksent:#287c56;--kol-tint:#edf5ef}
+.kol-tiltak {--kol-aksent:#b07d2f;--kol-tint:#faf2e4}
+.kol-rapport {--kol-aksent:#41739c;--kol-tint:#e9f0f7}
+.app[data-theme=dark] .kol-naa {--kol-aksent:#7fc9a3;--kol-tint:#22302a}
+.app[data-theme=dark] .kol-tiltak {--kol-aksent:#dcb377;--kol-tint:#322a1e}
+.app[data-theme=dark] .kol-rapport {--kol-aksent:#8fb8dc;--kol-tint:#212b35}
 .kol-topp {display:flex;align-items:center;justify-content:space-between;gap:10px}
 .kol-topp h3 {font-size:16px;font-weight:550;letter-spacing:-.025em;margin:0}
 .kol-merke {font-size:9px;letter-spacing:.12em;color:var(--app-muted)}
@@ -3237,13 +3243,17 @@
 .kol .day-chart {gap:5px}
 .kol .day-hour-well {height:78px;margin-bottom:5px}
 .kol .day-total {padding-top:10px}
-.kol-bemanning {margin-top:auto;padding:14px;border-radius:12px;background:var(--app-rail);display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.kol-bemanning {margin-top:auto;padding:14px;border-radius:12px;background:var(--kol-tint);display:flex;flex-direction:column;gap:6px;align-items:flex-start}
 .kol-bemanning-topp {display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%}
 .kol-bemanning-tall {display:flex;align-items:baseline;gap:8px}
 .kol-bemanning-tall strong {font-size:28px;font-weight:550;letter-spacing:-.04em;line-height:1.1}
 .kol-bemanning-tall span {font-size:11px;color:var(--app-muted)}
 .kol-bemanning .day-sim-note {margin:0;font-size:11px;color:var(--app-muted);line-height:1.5}
-.kol-liste {display:flex;flex-direction:column;gap:8px}
+.kol-fremdrift {display:flex;flex-direction:column;gap:7px;font-size:11px;color:var(--app-muted)}
+.kol-fremdrift div {height:5px;border-radius:3px;background:var(--app-rail);overflow:hidden}
+.kol-fremdrift i {display:block;height:100%;background:var(--kol-aksent);border-radius:3px}
+.kol-chip {display:inline-block;margin-top:6px;padding:2px 8px;border-radius:20px;background:var(--kol-tint);color:var(--kol-aksent);font-size:9px;letter-spacing:.05em}
+.kol-liste {display:flex;flex-direction:column;gap:9px}
 .kol-rad {display:grid;grid-template-columns:14px minmax(0,1fr) auto;gap:10px;align-items:center;padding:11px 12px;border:1px solid var(--app-line);border-radius:12px}
 .kol-rad strong {display:block;font-size:13px;font-weight:550;line-height:1.35}
 .kol-rad small {display:block;font-size:10px;color:var(--app-muted);margin-top:3px}
@@ -3252,14 +3262,14 @@
 .kol-rad[data-status=done] {background:var(--app-rail)}
 .kol-rad[data-status=done] strong {color:var(--app-muted)}
 .kol-rad .hub-button {padding:7px 11px;font-size:11px;white-space:nowrap}
-.kol-effekt {margin-top:auto;padding:15px;border-radius:12px;background:var(--app-rail);display:flex;flex-direction:column;gap:2px}
-.kol-effekt strong {font-size:27px;font-weight:550;letter-spacing:-.045em;color:#287c56;line-height:1.15}
+.kol-effekt {margin-top:auto;padding:15px;border-radius:12px;background:var(--kol-tint);border:1px solid color-mix(in srgb,var(--kol-aksent) 24%,transparent);display:flex;flex-direction:column;gap:2px}
+.kol-effekt strong {font-size:27px;font-weight:550;letter-spacing:-.045em;color:var(--kol-aksent);line-height:1.15}
 .kol-effekt-note {font-size:11px;color:var(--app-muted);line-height:1.5}
 .kol-skyv {display:flex;justify-content:space-between;gap:8px;font-size:11px;color:var(--app-muted);margin-top:8px}
-.kol-effekt input {width:100%;margin:2px 0 0;accent-color:#287c56;cursor:pointer}
+.kol-effekt input {width:100%;margin:2px 0 0;accent-color:var(--kol-aksent);cursor:pointer}
 .kol-segment {display:flex;gap:5px}
 .kol-segment button {flex:1;padding:7px 6px;border:1px solid var(--app-line);border-radius:9px;background:var(--app-paper);color:var(--app-muted);font:inherit;font-size:12px;cursor:pointer}
-.kol-segment button[aria-pressed=true] {background:var(--app-ink);color:var(--app-paper);border-color:var(--app-ink)}
+.kol-segment button[aria-pressed=true] {background:var(--kol-aksent);color:var(--app-paper);border-color:var(--kol-aksent);font-weight:550}
 .kol-rapport-kropp {display:flex;flex-direction:column;gap:12px;flex:1;min-height:0}
 .kol-periode {display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px}
 .kol-periode button {border:1px solid var(--app-line);border-radius:8px;background:var(--app-paper);color:var(--app-ink);font:inherit;font-size:12px;padding:4px 10px;cursor:pointer}
@@ -3268,10 +3278,11 @@
 .kol-tall>div {display:flex;flex-direction:column;gap:3px;min-width:0}
 .kol-tall span {font-size:10px;color:var(--app-muted)}
 .kol-tall strong {font-size:18px;font-weight:550;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
-.kol-graf {display:flex;align-items:flex-end;gap:3px;height:86px;margin-top:auto}
+.kol-tall>div:last-child strong {color:var(--kol-aksent)}
+.kol-graf {display:flex;align-items:flex-end;gap:3px;flex:1;min-height:76px;max-height:190px;margin-top:auto}
 .kol-stolpe {flex:1;min-width:0;display:flex;align-items:flex-end;height:100%;padding:0;border:0;background:transparent;cursor:pointer}
-.kol-stolpe i {display:block;width:100%;background:#9bbca5;border-radius:4px 4px 0 0}
-.kol-stolpe:hover i,.kol-stolpe[aria-pressed=true] i {background:#287c56}
+.kol-stolpe i {display:block;width:100%;background:color-mix(in srgb,var(--kol-aksent) 42%,transparent);border-radius:4px 4px 0 0}
+.kol-stolpe:hover i,.kol-stolpe[aria-pressed=true] i {background:var(--kol-aksent)}
 .kol-graf-lese {font-size:11px;color:var(--app-muted);min-height:15px}
 .kol-sammenlign {margin:0;font-size:12px;font-weight:550;color:#398368}
 .kol-sammenlign[data-retning=ned] {color:#a76d31}
@@ -3279,11 +3290,11 @@
 .app[data-theme=dark] .kol-sammenlign {color:#97d9b7}
 .app[data-theme=dark] .kol-sammenlign[data-retning=ned] {color:#ecc38e}
 .app[data-theme=dark] .day-overview {--day-green:#7fc9a3;--day-tint:#26302b;--day-blue:#26303c}
-.app[data-theme=dark] .kol-effekt strong {color:#7fc9a3}
-.app[data-theme=dark] .kol-effekt input {accent-color:#7fc9a3}
-.app[data-theme=dark] .kol-stolpe i {background:#5d7e6b}
-.app[data-theme=dark] .kol-stolpe:hover i,.app[data-theme=dark] .kol-stolpe[aria-pressed=true] i {background:#7fc9a3}
 .app[data-theme=dark] .kol-rad[data-status=active] {border-color:#4e7d63}
+
+/* Menyen holder av plassen til alle seks sidene, så «Ny samtale» og
+   samtalelista står i ro når man bytter mellom Rask, Vanlig og Avansert. */
+.rail-nav:not(.rail-secondary) {min-height:232px}
 
 /* På en vanlig laptop fyller oversikten skjermen. Bare en kolonne som trenger
    mer plass enn den får, ruller selv. */
