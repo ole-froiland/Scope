@@ -388,7 +388,7 @@
     let navigationLanguage=restore("scope-menu-language")==="en"?"en":"nb";
     const menuNames={tiltak:["Tiltak","Actions"],effekt:["Effekt","Impact"],rapporter:["Rapporter","Reports"],oversikt:["Oversikt","Overview"],salg:["Salg","Sales"],varekost:["Varekost","Food costs"],bemanning:["Bemanning","Staffing"],"andre-kostnader":["Andre kostnader","Other costs"],resultat:["Resultat","Results"],koblinger:["Koblinger","Connections"],innstillinger:["Innstillinger","Settings"]};
     const staticMenuLabels=[...document.querySelectorAll(".rail-heading,.rail-new .rail-label")].map(node=>({node,original:node.textContent}));
-    const menuTranslations={Restaurant:"Restaurant","Tidligere samtaler":"Recent conversations","Ny samtale":"New conversation"};
+    const menuTranslations={Restauranter:"Restaurants","Økonomi":"Finances","Tidligere samtaler":"Recent conversations","Ny samtale":"New conversation"};
     function syncThemeButton() {
       const dark=app.dataset.theme==="dark";
       themeToggle.setAttribute("aria-pressed",String(dark));

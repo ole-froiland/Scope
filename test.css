@@ -179,7 +179,7 @@
 }
 
 .rail-new {
-  margin-top: 18px;
+  margin-top: 20px;
   font-weight: 500;
 }
 
@@ -204,7 +204,7 @@
 
 .rail-secondary {
   margin-top: auto;
-  padding-top: 6px;
+  padding-top: 20px;
 }
 
 .rail-bottom {
@@ -533,6 +533,12 @@
 
 .rail-heading-top {
   margin-top: 2px;
+}
+
+/* «Økonomi» under stedsvelgeren: velgerens egen marg gir resten av luften,
+   og når menyen er sammenslått står den margen igjen alene. */
+.place + .rail-heading {
+  margin-top: 10px;
 }
 
 .place-icon {
