@@ -179,7 +179,7 @@
 }
 
 .rail-new {
-  margin-bottom: 12px;
+  margin-top: 18px;
   font-weight: 500;
 }
 
@@ -764,7 +764,11 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
-  margin-top: 18px;
+}
+
+/* «Ny samtale» står rett over overskriften, så den trenger mindre luft. */
+.conversations .rail-heading {
+  margin-top: 8px;
 }
 
 .conv-list {
