@@ -1046,7 +1046,6 @@
     const modusSlider = document.getElementById("modus-slider");
     const modusTittel = document.getElementById("modus-tittel");
     const modusVerdi = document.getElementById("modus-verdi");
-    const modusNote = document.getElementById("modus-note");
     const modusValg = Array.from(modusSlider.querySelectorAll(".modus-valg"));
     const modusRekke = modusValg.map(function (knapp) {
       return knapp.dataset.modus;
@@ -1055,16 +1054,16 @@
     const modusFyll = modusSlider.querySelector(".modus-fyll");
     const MODUS_TEKST = {
       rask: {
-        nb: ["Rask", "Nøkkeltallene og det som krever handling."],
-        en: ["Quick", "Key numbers and what needs action."],
+        nb: ["Rask"],
+        en: ["Quick"],
       },
       vanlig: {
-        nb: ["Vanlig", "Hele oversikten, slik den er i dag."],
-        en: ["Standard", "The full overview, as it is today."],
+        nb: ["Vanlig"],
+        en: ["Standard"],
       },
       avansert: {
-        nb: ["Avansert", ""],
-        en: ["Advanced", ""],
+        nb: ["Avansert"],
+        en: ["Advanced"],
       },
     };
 
@@ -1084,7 +1083,6 @@
       });
       modusTittel.textContent = engelsk ? "View" : "Visning";
       modusVerdi.textContent = MODUS_TEKST[valgt][engelsk ? "en" : "nb"][0];
-      modusNote.textContent = MODUS_TEKST[valgt][engelsk ? "en" : "nb"][1];
       modusSlider.lang = engelsk ? "en" : "nb";
       document.querySelector(".menu-modus").lang = engelsk ? "en" : "nb";
     }
