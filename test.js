@@ -1896,7 +1896,6 @@
       const points=buildDayTimeline(p.oms*factor,p.gjester*factor,planned);
       let selected=Math.max(0,Math.min(11,new Date().getHours()-12)),extra=0;
       dash.className="dash hub day-overview kolonner-flate";dash.replaceChildren();
-      const top=el("div","hub-top");top.append(el("span","overview-eyebrow","OVERSIKT / "+place),el("span","hub-demo","Demodata · "+stor(datoFormat.format(NÅ))));dash.append(top);
       const grid=el("div","kolonner");dash.append(grid);
 
       // Kolonne 1: dagen som den ser ut nå, med bemanningen for valgt time.
@@ -1923,61 +1922,78 @@
       // Kolonne 2: de konkrete tiltakene, med effekten av dem nederst.
       const tiltak=el("section","kol kol-tiltak"),tiltakHead=el("header","kol-topp");
       tiltakHead.append(el("h3","","Tiltak"),hubButton("Alle tiltak ↗",()=>hubGo("tiltak"),"hub-link"));tiltak.append(tiltakHead);
-      const utfort=tasks.filter(task=>task.status==="done").length,fremdrift=el("div","kol-fremdrift"),spor=el("div"),fyll=el("i");
-      fyll.style.width=Math.round(utfort/Math.max(1,tasks.length)*100)+"%";spor.append(fyll);
-      fremdrift.append(el("span","",utfort+" av "+tasks.length+" utført"),spor);tiltak.append(fremdrift);
+      const t30=tall(place,"siste30"),anslag={cost:improvementEffect(t30.oms,1,0),plan:improvementEffect(t30.oms,0,1)};
+      // Hvert råd sier hva det gjør, hva det bygger på og hva det kan gi.
+      const effektTekst=task=>task.id==="cost"?"+ "+kr(anslag.cost)+" på fire uker ved 1 pp lavere varekost":task.id==="plan"?"+ "+kr(anslag.plan)+" på fire uker ved 1 pp lavere lønn":"Riktig grunnlag i regnskapet, ikke et beløp";
       const liste=el("div","kol-liste");
       tasks.forEach(task=>{
-        const rad=el("article","kol-rad");rad.dataset.task=task.id;rad.dataset.status=task.status;
-        const tekst=el("div","kol-rad-tekst");tekst.append(el("strong","",task.title),el("small","",task.basis),el("span","kol-chip",task.horizon));
-        const knapp=hubButton(task.status==="suggested"?"Start":task.status==="active"?"Fullfør":"Åpne igjen",()=>setTask(task,task.status==="suggested"?"active":task.status==="active"?"done":"suggested"),"hub-button");
+        const kort=el("article","kol-raad");kort.dataset.task=task.id;kort.dataset.status=task.status;
+        const topp=el("div","kol-raad-topp");
+        topp.append(el("span","kol-chip",task.horizon),el("span","kol-status",{suggested:"Foreslått",active:"◉ Pågår",done:"✓ Utført"}[task.status]));
+        const fakta=el("dl","kol-fakta");
+        [["Grunnlag",task.basis],["Effekt",effektTekst(task)]].forEach(([navn,verdi])=>fakta.append(el("dt","",navn),el("dd","",verdi)));
+        const knapper=el("div","kol-raad-knapper");
+        const knapp=hubButton(task.status==="suggested"?"Start tiltak":task.status==="active"?"Fullfør":"Åpne igjen",()=>setTask(task,task.status==="suggested"?"active":task.status==="active"?"done":"suggested"),"hub-button");
         knapp.dataset.compactTask=task.id;
-        rad.append(el("span","kol-prikk",task.status==="done"?"✓":task.status==="active"?"◉":"↗"),tekst,knapp);
-        liste.append(rad);
+        knapper.append(knapp,hubButton("Se grunnlag ↗",()=>hubGo(task.view),"hub-link"));
+        kort.append(topp,el("h4","",task.title),el("p","",task.text),fakta,knapper);
+        liste.append(kort);
       });
-      tiltak.append(liste);
-      const t30=tall(place,"siste30"),effekt=el("div","kol-effekt"),effektSum=el("strong"),effektNote=el("span","kol-effekt-note");
-      effekt.append(el("span","kol-merke","MULIG ØKNING I BIDRAG / 4 UKER"),effektSum,effektNote);
-      [["food","Varekost",t30.varekost],["wages","Lønn",t30.lonn]].forEach(([key,label,current])=>{
-        const rad=el("label","kol-skyv"),verdi=el("output"),input=el("input");
-        input.type="range";input.id="kol-"+key;input.min="0";input.max="3";input.step="0.1";input.value=hubState[key];
-        rad.htmlFor=input.id;verdi.htmlFor=input.id;
-        function vis(){verdi.textContent=nf.format(hubState[key])+" pp → "+pst(current-hubState[key]);input.setAttribute("aria-valuetext",label+" "+verdi.textContent);}
-        input.addEventListener("input",()=>{hubState[key]=Number(input.value);vis();tegnEffekt();});
-        vis();rad.append(el("span","",label+" ned"),verdi);effekt.append(rad,input);
-      });
-      function tegnEffekt(){effektSum.textContent="+ "+kr(improvementEffect(t30.oms,hubState.food,hubState.wages));effektNote.textContent="Bidragsgrad "+pst(t30.bidragPst)+" → "+pst(t30.bidragPst+hubState.food+hubState.wages);}
-      tegnEffekt();tiltak.append(effekt);grid.append(tiltak);
+      tiltak.append(liste);grid.append(tiltak);
 
       // Kolonne 3: gårsdagen, uken eller måneden som er avsluttet.
       const rapport=el("section","kol kol-rapport"),rapportHead=el("header","kol-topp");
       rapportHead.append(el("h3","","Rapporter"),hubButton("Hele rapporten ↗",()=>hubGo("rapporter"),"hub-link"));rapport.append(rapportHead);
       const typer=el("div","kol-segment");typer.setAttribute("role","group");typer.setAttribute("aria-label","Rapporttype");
       [["day","Dag"],["week","Uke"],["month","Måned"]].forEach(([id,label])=>{const b=hubButton(label,()=>{hubState.report=id;hubState.offset=0;tegnRapport();typer.querySelector('[data-kol-report="'+id+'"]').focus();},"");b.dataset.kolReport=id;typer.append(b);});
-      const rapportKropp=el("div","kol-rapport-kropp");rapport.append(typer,rapportKropp);
+      const rapportListe=el("div","kol-rapportliste");rapport.append(typer,rapportListe);
+      const ukedagFormat=new Intl.DateTimeFormat("nb-NO",{weekday:"long"}),manedFormat=new Intl.DateTimeFormat("nb-NO",{month:"long",year:"numeric"});
+      // ISO-ukenummer: uken eies av torsdagen.
+      function ukenummer(dato){const d=new Date(Date.UTC(dato.getFullYear(),dato.getMonth(),dato.getDate()));d.setUTCDate(d.getUTCDate()+4-(d.getUTCDay()||7));return Math.ceil(((d-Date.UTC(d.getUTCFullYear(),0,1))/86400000+1)/7);}
+      function periodeNavn(r){return hubState.report==="day"?stor(ukedagFormat.format(r.start))+" "+hubDate.format(r.start):hubState.report==="week"?"Uke "+ukenummer(r.start):stor(manedFormat.format(r.start));}
+      // Alle periodene ligger under hverandre. Kortet man åpner folder seg ut
+      // der det står, så nabo-rapportene fortsatt er synlige over og under.
+      function apneRapport(valgt){
+        hubState.offset=valgt===null?0:valgt;
+        rapportListe.querySelectorAll(".kol-rapportkort").forEach(kort=>{
+          const apen=Number(kort.dataset.offset)===valgt,kropp=kort.querySelector(".kol-rapportkropp");
+          kort.dataset.apen=String(apen);
+          kort.querySelector(".kol-rapportknapp").setAttribute("aria-expanded",String(apen));
+          // Høyden settes her, så utfoldingen animerer til akkurat det
+          // rapporten trenger.
+          kropp.style.maxHeight=apen?kropp.firstElementChild.scrollHeight+14+"px":"0px";
+          if(apen)kort.scrollIntoView({block:"nearest",behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+        });
+      }
       function tegnRapport(){
         typer.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.kolReport===hubState.report)));
-        const r=buildReport(p,hubState.report,hubState.offset,NÅ,DAGVEKT);
-        rapportKropp.replaceChildren();
-        const linje=el("div","kol-periode");
-        const eldre=hubButton("←",()=>{hubState.offset++;tegnRapport();rapportKropp.querySelector('[data-kol-nav="older"]').focus();},"");
-        eldre.dataset.kolNav="older";eldre.setAttribute("aria-label","Eldre periode");
-        const nyere=hubButton("→",()=>{hubState.offset--;tegnRapport();rapportKropp.querySelector('[data-kol-nav="older"]').focus();},"");
-        nyere.setAttribute("aria-label","Nyere periode");nyere.disabled=hubState.offset===0;
-        linje.append(eldre,el("span","",hubDate.format(r.start)+(r.days.length>1?" – "+hubDate.format(r.end):"")),nyere);
-        const fire=el("div","kol-tall");
-        [["Omsetning",kr(r.revenue)],["Gjester",nf.format(r.guests)],["Varekost + lønn",kr(r.cost+r.wages)],["Bidrag",kr(r.contribution)]].forEach(([label,verdi])=>{const boks=el("div");boks.append(el("span","",label),el("strong","",verdi));fire.append(boks);});
-        const forrige=buildReport(p,hubState.report,hubState.offset+1,NÅ,DAGVEKT),diff=r.contribution-forrige.contribution;
-        const forrigeNavn={day:"dag",week:"uke",month:"måned"}[hubState.report];
-        const sammen=el("p","kol-sammenlign",diff===0?"Samme bidrag som forrige "+forrigeNavn:(diff>0?"+ ":"− ")+kr(Math.abs(diff))+" i bidrag mot forrige "+forrigeNavn);
-        sammen.dataset.retning=diff===0?"flat":diff>0?"opp":"ned";
-        rapportKropp.append(linje,fire,sammen);
-        // Dagsrapporten har bare ett punkt, og én enslig stolpe sier ingenting.
-        if(r.points.length>1){
-          const graf=el("div","kol-graf");graf.setAttribute("role","group");graf.setAttribute("aria-label","Omsetning per dag");
-          const lese=el("output","kol-graf-lese","Velg en dag for beløp");const maks=Math.max(...r.points.map(x=>x.revenue));
-          r.points.forEach(x=>{const b=hubButton("",()=>{lese.textContent=hubDate.format(x.date)+" · "+kr(x.revenue);graf.querySelectorAll("button").forEach(y=>y.setAttribute("aria-pressed",String(y===b)));},"kol-stolpe");b.setAttribute("aria-label",hubDate.format(x.date)+": "+kr(x.revenue));b.setAttribute("aria-pressed","false");const i=el("i");i.style.height=Math.max(3,x.revenue/maks*100)+"%";b.append(i);graf.append(b);});
-          rapportKropp.append(graf,lese);
+        rapportListe.replaceChildren();
+        const navn={day:"dag",week:"uke",month:"måned"}[hubState.report];
+        for(let offset=0;offset<8;offset++){
+          const r=buildReport(p,hubState.report,offset,NÅ,DAGVEKT),forrige=buildReport(p,hubState.report,offset+1,NÅ,DAGVEKT);
+          const kort=el("article","kol-rapportkort");kort.dataset.offset=String(offset);kort.dataset.apen="false";
+          const knapp=hubButton("",()=>apneRapport(kort.dataset.apen==="true"?null:offset),"kol-rapportknapp");
+          knapp.setAttribute("aria-expanded","false");
+          const best=r.points.reduce((a,b)=>b.revenue>a.revenue?b:a);
+          const navnBoks=el("div","kol-rapportnavn");
+          navnBoks.append(el("strong","",periodeNavn(r)),el("small","",r.points.length>1?"Best: "+ukedagFormat.format(best.date)+" · "+kr(best.revenue):nf.format(r.guests)+" gjester"));
+          knapp.append(navnBoks,el("span","kol-rapportsum",kr(r.revenue)),el("span","kol-pil","⌄"));
+          const kropp=el("div","kol-rapportkropp"),inner=el("div","kol-rapportinner");
+          const fire=el("div","kol-tall");
+          [["Omsetning",kr(r.revenue)],["Gjester",nf.format(r.guests)],["Varekost + lønn",kr(r.cost+r.wages)],["Bidrag",kr(r.contribution)]].forEach(([label,verdi])=>{const boks=el("div");boks.append(el("span","",label),el("strong","",verdi));fire.append(boks);});
+          const diff=r.contribution-forrige.contribution;
+          const sammen=el("p","kol-sammenlign",diff===0?"Samme bidrag som forrige "+navn:(diff>0?"+ ":"− ")+kr(Math.abs(diff))+" i bidrag mot forrige "+navn);
+          sammen.dataset.retning=diff===0?"flat":diff>0?"opp":"ned";
+          inner.append(fire,sammen);
+          // Dagsrapporten har bare ett punkt, og én enslig stolpe sier ingenting.
+          if(r.points.length>1){
+            const graf=el("div","kol-graf");graf.setAttribute("role","group");graf.setAttribute("aria-label","Omsetning per dag");
+            const lese=el("output","kol-graf-lese","Velg en dag for beløp");const maks=Math.max(...r.points.map(x=>x.revenue));
+            r.points.forEach(x=>{const b=hubButton("",()=>{lese.textContent=hubDate.format(x.date)+" · "+kr(x.revenue);graf.querySelectorAll("button").forEach(y=>y.setAttribute("aria-pressed",String(y===b)));},"kol-stolpe");b.setAttribute("aria-label",hubDate.format(x.date)+": "+kr(x.revenue));b.setAttribute("aria-pressed","false");const i=el("i");i.style.height=Math.max(3,x.revenue/maks*100)+"%";b.append(i);graf.append(b);});
+            inner.append(graf,lese);
+          }
+          inner.append(hubButton("Hele rapporten ↗",()=>{hubState.offset=offset;hubGo("rapporter");},"hub-link"));
+          kropp.append(inner);kort.append(knapp,kropp);rapportListe.append(kort);
         }
       }
       tegnRapport();grid.append(rapport);
