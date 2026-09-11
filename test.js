@@ -39,7 +39,7 @@
   app.dataset.modus = lagretModus === "rask" || lagretModus === "avansert" ? lagretModus : "vanlig";
 
   async function init() {
-    const { buildReport, improvementEffect } = await import("./scope-insights.js?v=1");
+    const { buildReport, improvementEffect, buildDayTimeline } = await import("./scope-insights.js?v=day-overview-11");
     const sidebar = document.getElementById("sidebar");
     const toggleButton = document.getElementById("sidebar-toggle");
     const brandLink = document.querySelector(".brand");
@@ -1885,29 +1885,33 @@
     function hubStat(label,value,note) {const s=el("div","hub-stat");s.append(el("span","",label),el("strong","",value),el("small","",note));return s;}
     function renderDash() {
       if(!dash)return;
-      const place=placeName.textContent,kv=kveldsTall(profil(place),dagIndeks(NÅ)),tasks=hubTasks();
-      dash.className="dash hub hub-now glance";dash.replaceChildren();
+      const place=placeName.textContent,p=profil(place),tasks=hubTasks();
+      const entries=stederI(place).map(name=>kveldsTall(STED_PROFIL[name],dagIndeks(NÅ)));
+      const planned=entries.reduce((sum,entry)=>sum+entry.vakt,0),factor=dagFaktor(dagIndeks(NÅ));
+      const points=buildDayTimeline(p.oms*factor,p.gjester*factor,planned);
+      let selected=Math.max(0,Math.min(11,new Date().getHours()-12)),extra=0;
+      dash.className="dash hub hub-now glance day-overview";dash.replaceChildren();
       const top=el("div","hub-top");top.append(el("span","overview-eyebrow","OVERSIKT / "+place),el("span","hub-demo","Demodata · "+stor(datoFormat.format(NÅ))));dash.append(top);
-      // Tre deler side om side: slik står det nå, hva du bør gjøre, og hovedtallene for en valgt periode.
-      const column=(cls,title,aside)=>{const c=el("section","hub-panel glance-col "+cls),head=el("header","glance-head");head.append(el("h2","",title),aside);c.append(head);return c;};
-      const row=(label,value,note,change,changeCls)=>{const r=el("div","glance-row"),left=el("span","glance-label",label),right=el("span","glance-value");if(note)left.append(el("small","",note));right.append(el("strong","",value));if(change)right.append(el("small",changeCls,change));r.append(left,right);return r;};
-      const rows=(...items)=>{const r=el("div","glance-rows");r.append(...items);return r;};
-      const link=(text,view,before)=>{const b=hubButton(text,()=>{if(before)before();hubGo(view);},"hub-link glance-link");if(overviewViews.includes(view))b.dataset.overviewDetail=view;return b;};
-      const busy=kv.perAnsatt>PER_ANSATT_NORMALT[1],calm=kv.perAnsatt<PER_ANSATT_NORMALT[0];
-      const now=column("glance-now","Nå",el("span","glance-state"+(busy?" is-busy":""),busy?"Travel kveld":calm?"Rolig kveld":"Normal kveld"));
-      const guests=el("div","glance-big");guests.append(el("strong","",nf.format(Math.round(kv.gjester))),el("span","","forventede gjester i kveld"),el("small","",kv.booket+" booket · resten er anslag"));
-      now.append(guests,rows(row("På vakt i kveld",String(kv.vakt)),row("Gjester per ansatt",nf.format(Number(kv.perAnsatt.toFixed(1))),"Normalt "+PER_ANSATT_NORMALT[0]+"–"+PER_ANSATT_NORMALT[1]),row("Forventet salg i kveld",kr(kv.oms),"Prognose, ikke registrert salg")),link("Se bemanning ↗","bemanning"));
-      const advice=column("glance-advice","Råd",el("span","glance-meta",tasks.filter(x=>x.status==="active").length+" pågår · "+tasks.filter(x=>x.status==="done").length+" utført"));
-      const list=el("ol","glance-tasks");
-      tasks.forEach(task=>{const item=el("li","glance-task"),text=el("div");item.dataset.status=task.status;text.append(el("strong","",task.title),el("small","",task.basis));const button=hubButton(task.status==="suggested"?"Start":task.status==="active"?"Fullfør":"Åpne igjen",()=>{setTask(task,task.status==="suggested"?"active":task.status==="active"?"done":"suggested");document.querySelector('[data-compact-task="'+task.id+'"]').focus({preventScroll:true});},"hub-button glance-task-button");button.dataset.compactTask=task.id;button.setAttribute("aria-label",button.textContent+": "+task.title);item.append(text,button);list.append(item);});
-      const gain=el("div","glance-gain");gain.append(el("span","","Mulig gevinst · 4 uker"),el("strong","","+ "+kr(improvementEffect(tall(place,"siste30").oms,hubState.food,hubState.wages))),el("small","","Regneeksempel: varekost −"+nf.format(hubState.food)+" pp, lønn −"+nf.format(hubState.wages)+" pp"),link("Se beregningen ↗","effekt"));
-      advice.append(list,gain,link("Alle råd ↗","tiltak"));
-      const per=GLANCE.some(([key])=>key===hubState.glance)?hubState.glance:"igår",t=tall(place,per),periods=el("div","glance-periods");periods.setAttribute("role","group");periods.setAttribute("aria-label","Rapportperiode");
-      GLANCE.forEach(([key,label])=>{const b=hubButton(label,()=>{hubState.glance=key;renderDash();document.querySelector('[data-glance-period="'+key+'"]').focus({preventScroll:true});},"");b.dataset.glancePeriod=key;b.setAttribute("aria-pressed",String(per===key));periods.append(b);});
-      const tone=(n,upIsGood)=>n===0?"":(n>0)===upIsGood?"overview-positive":"overview-negative";
-      const report=column("glance-report","Rapport",periods);
-      report.append(el("p","glance-meta",PERIODER[per].navn+" · mot "+PERIODER[per].mot),rows(row("Omsetning",kr(t.oms),"",prosentEndring(t.endring),tone(t.endring,true)),row("Gjester",nf.format(t.gjester),kr(t.snittbong)+" per gjest"),row("Varekost",pst(t.varekost),"Mål "+pst(MÅL.varekost),pp(t.varekostEndring),tone(t.varekostEndring,false)),row("Lønn",pst(t.lonn),"Mål "+pst(MÅL.lonn),pp(t.lonnEndring),tone(t.lonnEndring,false)),row("Bidrag",kr(t.bidragKr),"Før andre kostnader",prosentEndring(t.bidragEndring),tone(t.bidragEndring,true))),link("Full rapport og eksport ↗","rapporter",()=>{hubState.report={igår:"day",uke:"week",siste30:"month"}[per];hubState.offset=0;renderReports();}));
-      const grid=el("div","glance-grid");grid.append(now,advice,report);dash.append(grid);
+      const intro=el("div","day-intro");intro.append(el("h2","","Dagen i dag"),el("span","","Fra første gjest til siste servering."));dash.append(intro);
+      const grid=el("div","day-grid"),main=el("section","day-main hub-panel"),team=el("section","day-team hub-panel");
+      const heading=el("header","day-heading"),time=el("span","day-time");heading.append(el("h3","","Slik ligger dagen an"),time);main.append(heading);
+      const stats=el("div","day-stats"),revenue=el("strong"),guests=el("strong"),staff=el("strong"),ratio=el("strong");
+      [["Omsetning",revenue,"Beregnet hittil"],["Gjester",guests,"Beregnet hittil"],["På vakt",staff,"I valgt time"],["Gjester / ansatt",ratio,"I valgt time"]].forEach(([label,value,note])=>{const box=el("div","day-stat");box.append(el("span","",label),value,el("small","",note));stats.append(box);});main.append(stats);
+      const chartHead=el("div","day-chart-head"),hourRead=el("output");chartHead.append(el("span","","Omsetning per time"),hourRead);main.append(chartHead);
+      const chart=el("div","day-chart");chart.setAttribute("role","group");chart.setAttribute("aria-label","Velg time i dagen");const max=Math.max(...points.map(point=>point.revenue));
+      points.forEach((point,index)=>{const button=hubButton("",()=>{selected=index;update();},"day-hour");button.dataset.hour=String(point.hour);button.setAttribute("aria-label","Klokken "+point.label);const well=el("span","day-hour-well"),bar=el("i");bar.style.height=Math.max(2,point.revenue/max*100)+"%";well.append(bar);button.append(well,el("span","",String(point.hour)));chart.append(button);});main.append(chart);
+      const controls=el("div","day-chart-controls"),slider=el("input"),now=hubButton("Denne timen",()=>{selected=Math.max(0,Math.min(11,new Date().getHours()-12));update();},"hub-link");slider.type="range";slider.min="0";slider.max="11";slider.step="1";slider.setAttribute("aria-label","Utforsk tidspunkt");slider.addEventListener("input",()=>{selected=Number(slider.value);update();});controls.append(el("span","","12:00"),slider,el("span","","24:00"),now);main.append(controls);
+      const footer=el("div","day-total");footer.append(el("span","","Hele dagen · "+kr(points.at(-1).totalRevenue)+" / "+nf.format(points.at(-1).totalGuests)+" gjester"),hubButton("Se salg ↗",()=>hubGo("salg"),"hub-link"));main.append(footer);
+      team.append(el("h3","","Bemanning i dag"));const teamRead=el("div","day-team-read"),teamNumber=el("strong"),teamNote=el("span");teamRead.append(teamNumber,teamNote);team.append(teamRead);
+      const shifts=el("div","day-shifts");[["Lunsj","12–16",0],["Ettermiddag","16–18",4],["Kveld","18–22",6],["Avslutning","22–24",10]].forEach(([label,hours,index])=>{const row=el("div","day-shift");row.dataset.shift=String(index);row.append(el("span","",label),el("small","",hours),el("strong","",points[index].staff+" på vakt"));shifts.append(row);});team.append(shifts);
+      const sim=el("div","day-team-sim"),stepper=el("div","glance-stepper"),extraRead=el("output");
+      const minus=hubButton("−",()=>{extra--;update();},"glance-step"),plus=hubButton("+",()=>{extra++;update();},"glance-step");minus.setAttribute("aria-label","Én færre i simuleringen");plus.setAttribute("aria-label","Én ekstra i simuleringen");stepper.append(minus,extraRead,plus);sim.append(el("span","","Prøv ekstra bemanning"),stepper);team.append(sim);
+      const simNote=el("p","day-sim-note");team.append(simNote,hubButton("Åpne vaktoversikten ↗",()=>{opsState.staffDay=dagIndeks(NÅ);opsState.staffWeek=0;hubGo("bemanning");},"hub-link"));grid.append(main,team);dash.append(grid);
+      function update(){const point=points[selected],count=point.staff+extra;time.textContent="Til kl. "+(point.hour+1)+":00";revenue.textContent=kr(point.totalRevenue);guests.textContent=nf.format(point.totalGuests);staff.textContent=String(count);staff.parentElement.querySelector("small").textContent=extra?"Simulert i valgt time":"I valgt time";ratio.parentElement.querySelector("small").textContent=extra?"Simulert i valgt time":"I valgt time";ratio.textContent=nf.format(Number((point.guests/count).toFixed(1)));hourRead.textContent=point.label+" · "+kr(point.revenue)+" · "+point.guests+" gjester";slider.value=String(selected);chart.querySelectorAll("button").forEach((button,index)=>{button.setAttribute("aria-pressed",String(index===selected));button.dataset.future=String(index>selected);});teamNumber.textContent=String(point.staff);teamNote.textContent="på vakt kl. "+point.label;shifts.querySelectorAll(".day-shift").forEach((row,index)=>row.dataset.selected=String(index===(selected<4?0:selected<6?1:selected<10?2:3)));extraRead.textContent=extra===0?"0":"+"+extra;minus.disabled=extra===0;plus.disabled=extra===8;simNote.textContent=extra?"Simulert: "+count+" ansatte · "+nf.format(Number((point.guests/count).toFixed(1)))+" gjester per ansatt denne timen.":"Prøv + og se gjester per ansatt endre seg.";}
+      update();
+      const advice=el("section","day-actions"),adviceHead=el("header","day-heading");adviceHead.append(el("h3","","Verdt å følge opp"),hubButton("Alle råd ↗",()=>hubGo("tiltak"),"hub-link"));advice.append(adviceHead);
+      const list=el("div","day-action-list");tasks.forEach(task=>{const card=el("details","day-action"),summary=el("summary");summary.append(el("span","day-action-dot",task.status==="done"?"✓":"↗"),el("strong","",task.title),el("span","day-action-plus","+"),el("small","",task.basis));card.append(summary,el("p","",task.text));const button=hubButton(task.status==="suggested"?"Start tiltak":task.status==="active"?"Fullfør":"Åpne igjen",()=>{setTask(task,task.status==="suggested"?"active":task.status==="active"?"done":"suggested");document.querySelector('[data-compact-task="'+task.id+'"]').closest("details").open=true;document.querySelector('[data-compact-task="'+task.id+'"]').focus({preventScroll:true});},"hub-button");button.dataset.compactTask=task.id;card.append(button,hubButton("Se grunnlag ↗",()=>hubGo(task.view),"hub-link"));list.append(card);});advice.append(list);dash.append(advice);
+      const note=el("div","day-footnote");note.append(el("span","","Demoanslag · timefordeling og vakter er illustrert, ikke sanntidsdata."),hubButton("Rapporter ↗",()=>hubGo("rapporter"),"hub-link"),hubButton("Beregn potensial ↗",()=>hubGo("effekt"),"hub-link"));dash.append(note);
       renderTasks(tasks);renderEffect(tasks);renderReports();
     }
     function renderTasks(tasks) {

@@ -19,3 +19,17 @@ test('report totals reconcile with daily rows and expenses; months are not four 
 test('scenario has zero baseline and bounded inputs, never recorded realized savings',()=>{
   assert.equal(improvementEffect(100000,0,0),0);assert.equal(improvementEffect(100000,1,1.5),2500);assert.equal(improvementEffect(100000,-1,99),3000);
 });
+
+test('hourly demo reconciles with the day and evening share without losing rounded guests',async()=>{
+  const {buildDayTimeline}=await import('../scope-insights.js');
+  const points=buildDayTimeline(126730,310.3,9);
+  assert.equal(points.length,12);
+  assert.equal(points.reduce((sum,p)=>sum+p.revenue,0),126730);
+  assert.equal(points.reduce((sum,p)=>sum+p.guests,0),310);
+  assert.equal(points.at(-1).totalGuests,310);
+  assert.equal(points.at(-1).totalRevenue,126730);
+  assert.equal(points.slice(6).reduce((sum,p)=>sum+p.revenue,0),126730-Math.round(126730*.45));
+  assert.ok(points.every(p=>p.staff>0&&p.guests>=0));
+  assert.equal(points[6].staff,9);
+  const empty=buildDayTimeline(0,0,3);assert.ok(empty.every(p=>p.revenue===0&&p.guests===0));
+});
