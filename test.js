@@ -270,6 +270,24 @@
     const overviewTabbar=document.getElementById("overview-tabbar");
     const overviewViews=["oversikt","tiltak","effekt","rapporter"];
 
+    // Visningen bestemmer hvilke sider som står i menyen (data-visning), men
+    // alle sider kan åpnes fra en lenke. En side utenfor menyen hører til en
+    // side som står der: kostnadssidene til Kostnader, resten til Oversikt.
+    const MENY_FORELDER={varekost:"kostnader",bemanning:"kostnader","andre-kostnader":"kostnader"};
+    const visningTilbake=document.getElementById("view-back");
+    const visningTilbakeKnapp=document.getElementById("view-back-button");
+
+    function iMenyen(name) {
+      const lenke = document.querySelector('.rail-link[data-view="' + name + '"]');
+      return !lenke || !lenke.dataset.visning || lenke.dataset.visning.split(" ").includes(app.dataset.modus);
+    }
+
+    function menyForelder(name) {
+      if (iMenyen(name)) return name;
+      const forelder = MENY_FORELDER[name];
+      return forelder && iMenyen(forelder) ? forelder : "oversikt";
+    }
+
     // Na, Tiltak, Effekt og Rapporter ligger pa samme side. Fanene ruller til
     // riktig del i stedet for a bytte visning, og fanelinjen folger rullingen.
     let currentView=null;
@@ -333,6 +351,17 @@
         contentView.textContent=overviewLink.querySelector(".rail-label").textContent;
       }
 
+      // Står siden utenfor menyen, markeres siden den hører til, og en lenke
+      // øverst fører tilbake dit.
+      const forelder = menyForelder(active);
+      if (forelder !== active) {
+        document.querySelector('.rail-link[data-view="' + forelder + '"]').setAttribute("aria-current", "page");
+        visningTilbakeKnapp.dataset.view = forelder;
+        visningTilbakeKnapp.textContent = forelder === "kostnader" ? "← Til kostnader" : "← Til oversikt";
+        views.find(function (view) { return view.dataset.view === active; }).prepend(visningTilbake);
+      }
+      visningTilbake.hidden = forelder === active;
+
       if (active === "oversikt" && forrige !== null) renderDash();
       currentView = active;
 
@@ -353,6 +382,25 @@
         if (small.matches) closeDrawer(false);
       });
     });
+
+    visningTilbakeKnapp.addEventListener("click", function () {
+      const target = visningTilbakeKnapp.dataset.view;
+      showView(target);
+      history.pushState(null, "", "#" + target);
+    });
+
+    // Bytter man visning mens man står på en side som ikke er med i den nye
+    // menyen, går man til siden den hører til der.
+    function følgMenyen() {
+      const aktiv = currentView || "oversikt";
+      const mål = menyForelder(aktiv);
+      if (mål !== aktiv) {
+        showView(mål);
+        history.replaceState(null, "", "#" + mål);
+      } else if (aktiv !== "oversikt") {
+        showView(aktiv, false);
+      }
+    }
 
     window.addEventListener("popstate", function () {
       showView(location.hash.replace("#", ""));
@@ -386,7 +434,7 @@
     const languageToggle=document.getElementById("language-toggle");
     const themeToggle=document.getElementById("theme-toggle");
     let navigationLanguage=restore("scope-menu-language")==="en"?"en":"nb";
-    const menuNames={tiltak:["Tiltak","Actions"],effekt:["Effekt","Impact"],rapporter:["Rapporter","Reports"],oversikt:["Oversikt","Overview"],salg:["Salg","Sales"],varekost:["Varekost","Food costs"],bemanning:["Bemanning","Staffing"],"andre-kostnader":["Andre kostnader","Other costs"],resultat:["Resultat","Results"],koblinger:["Koblinger","Connections"],innstillinger:["Innstillinger","Settings"]};
+    const menuNames={tiltak:["Tiltak","Actions"],effekt:["Effekt","Impact"],rapporter:["Rapporter","Reports"],oversikt:["Oversikt","Overview"],salg:["Salg","Sales"],kostnader:["Kostnader","Costs"],varekost:["Varekost","Food costs"],bemanning:["Bemanning","Staffing"],"andre-kostnader":["Andre kostnader","Other costs"],resultat:["Resultat","Results"],koblinger:["Koblinger","Connections"],innstillinger:["Innstillinger","Settings"]};
     const staticMenuLabels=[...document.querySelectorAll(".rail-heading,.rail-new .rail-label")].map(node=>({node,original:node.textContent}));
     const menuTranslations={Restauranter:"Restaurants","Økonomi":"Finances","Tidligere samtaler":"Recent conversations","Ny samtale":"New conversation"};
     function syncThemeButton() {
@@ -1092,6 +1140,7 @@
       app.dataset.modus = gyldig;
       store(MODUS_KEY, gyldig);
       syncModus();
+      følgMenyen();
       if (flyttFokus) {
         const knapp = modusSlider.querySelector('.modus-valg[data-modus="' + gyldig + '"]');
         if (knapp) knapp.focus();
@@ -2174,7 +2223,7 @@
     }
 
     /* Arbeidsflater: beregningene bygger på samme profiler som Salg. */
-    const opsState = { varekost:"igår", resultat:"uke", staffWeek:0, staffDay:dagIndeks(NÅ), extra:0 };
+    const opsState = { varekost:"igår", resultat:"uke", kostnader:"uke", staffWeek:0, staffDay:dagIndeks(NÅ), extra:0 };
     const opsDialog=el("dialog","sales-dialog ops-dialog");opsDialog.id="ops-dialog";opsDialog.setAttribute("aria-labelledby","ops-dialog-title");
     const opsClose=el("button","icon-button","×");opsClose.type="button";opsClose.setAttribute("aria-label","Lukk detaljer");opsClose.addEventListener("click",()=>opsDialog.close());
     const opsDialogTitle=el("h2");opsDialogTitle.id="ops-dialog-title";const opsDialogBody=el("div");
@@ -2318,7 +2367,29 @@
       const comparison=opsPanel("Stedene, side om side","Bidragsgrad for samme periode","ops-location-results");const table=el("div","ops-place-results");const ranked=STEDSLISTE.map(name=>({name,t:tall(name,opsState.resultat)})).sort((a,b)=>b.t.bidragPst-a.t.bidragPst);
       ranked.forEach(({name,t:local})=>{const b=opsButton("",()=>velgSteder([name]),"ops-place-result");b.setAttribute("aria-label","Vis resultat for "+name);b.setAttribute("aria-pressed",String(VALGT.liste.includes(name)));const label=el("span");label.append(el("strong","",name.replace("Heim ","")),el("small","ops-muted",kr(local.bidragKr)+" i bidrag"));const meter=el("span","ops-location-meter");const fill=el("i");fill.style.width=local.bidragPst+"%";meter.append(fill);b.append(label,meter,el("strong","",pst(local.bidragPst)));table.append(b);});comparison.append(table,el("p","ops-footnote","Velg et sted for å bytte restaurant i hele arbeidsflaten."));grid.append(bridge,comparison);root.append(grid);
     }
-    function renderOperations(){costView();staffView();resultView();}
+    // Kostnader i Vanlig: de tre kostnadssidene samlet i hvert sitt kort.
+    function kostnaderView() {
+      const root=document.getElementById("ops-kostnader");root.replaceChildren();const t=tall(placeName.textContent,opsState.kostnader);
+      opsToolbar(root,"kostnader",kostnaderView);
+      const grid=el("div","kostnader-grid");
+      [["Varekost",t.varekost,t.varekostKr,MÅL.varekost,"Start med de største varelinjene.","varekost","Se varekost ↗"],["Lønn",t.lonn,t.lonnKr,MÅL.lonn,"Se om vaktene passer gjestene.","bemanning","Se bemanning ↗"]].forEach(([navn,andel,beløp,mål,råd,view,lenke])=>{
+        const kort=el("section","ops-panel kostnader-kort");
+        kort.append(opsStat(navn,pst(andel),kr(beløp)+" av "+kr(t.oms)+" i salg"),el("p","ops-status "+(andel>mål?"ops-warn":"ops-good"),pp(andel-mål)+" mot målet på "+pst(mål,0)),el("p","ops-muted",andel>mål?råd:"Innenfor målet i perioden."),opsButton(lenke,()=>hubGo(view)));
+        grid.append(kort);
+      });
+      const andre=el("section","ops-panel kostnader-kort");
+      andre.append(opsStat("Andre kostnader","–","Husleie, strøm, forsikring og drift"),el("p","ops-status","Regnskapstall mangler"),el("p","ops-muted","Vises når regnskapet er koblet til."),opsButton("Se andre kostnader ↗",()=>hubGo("andre-kostnader")));
+      grid.append(andre);
+      const deler=[["Varekost",t.varekost,t.varekostKr],["Lønn",t.lonn,t.lonnKr],["Igjen",t.bidragPst,t.bidragKr]];
+      const krone=opsPanel("Hver krone i salget","Varekost, lønn og det som er igjen før faste kostnader","kostnader-krone");
+      const bar=el("div","kostnader-bar");
+      deler.forEach(([navn,andel],i)=>{const del=el("span");del.dataset.del=String(i);del.style.width=andel+"%";del.title=navn+" "+pst(andel);bar.append(del);});
+      const tegn=el("div","kostnader-legend");
+      deler.forEach(([navn,andel,beløp],i)=>{const rad=el("div");rad.dataset.del=String(i);rad.append(el("span","ops-muted",navn),el("strong","",pst(andel)),el("small","ops-muted",kr(beløp)));tegn.append(rad);});
+      krone.append(bar,tegn,opsButton("Se resultat ↗",()=>hubGo("resultat")));
+      root.append(grid,krone,el("p","ops-footnote","Andel av omsetningen i valgt periode · demomodell · beløp eks. mva."));
+    }
+    function renderOperations(){costView();staffView();resultView();kostnaderView();}
     stedsLyttere.push(()=>{opsState.extra=0;renderOperations();});renderOperations();
 
     stedsLyttere.push(renderDash);
@@ -2363,7 +2434,7 @@
       const tab=workspaceTabs.find(t=>t.id===id);if(!tab)return;saveWorkspace();workspaceSwitching=true;workspaceActive=id;const s=tab.state;
       periode=PERIODER[s.periode]?s.periode:"igår";salesPeriod=PERIODER[s.salesPeriod]?s.salesPeriod:"igår";salesMetric=[0,1,2].includes(s.salesMetric)?s.salesMetric:0;
       Object.assign(hubState,{filter:["alle","suggested","active","done"].includes(s.hub?.filter)?s.hub.filter:"alle",report:["day","week","month"].includes(s.hub?.report)?s.hub.report:"week",offset:Math.max(0,Math.min(1200,Math.floor(Number(s.hub?.offset)||0))),food:Math.max(0,Math.min(3,Number(s.hub?.food)||0)),wages:Math.max(0,Math.min(3,Number(s.hub?.wages)||0)),glance:GLANCE.some(([key])=>key===s.hub?.glance)?s.hub.glance:"igår"});
-      Object.assign(opsState,{varekost:PERIODER[s.ops?.varekost]?s.ops.varekost:"igår",resultat:PERIODER[s.ops?.resultat]?s.ops.resultat:"uke",staffWeek:s.ops?.staffWeek===1?1:0,staffDay:Math.max(0,Math.min(6,Number(s.ops?.staffDay)||0)),extra:0});
+      Object.assign(opsState,{varekost:PERIODER[s.ops?.varekost]?s.ops.varekost:"igår",resultat:PERIODER[s.ops?.resultat]?s.ops.resultat:"uke",kostnader:PERIODER[s.ops?.kostnader]?s.ops.kostnader:"uke",staffWeek:s.ops?.staffWeek===1?1:0,staffDay:Math.max(0,Math.min(6,Number(s.ops?.staffDay)||0)),extra:0});
       Object.assign(costUI,{tab:["invoices","suppliers","variance","recipes"].includes(s.cost?.tab)?s.cost.tab:"invoices",supplier:typeof s.cost?.supplier==="string"?s.cost.supplier:"Alle",invoiceFilter:["Alle","Til kontroll","Kontrollert"].includes(s.cost?.invoiceFilter)?s.cost.invoiceFilter:"Alle",reduction:Math.max(0,Math.min(5,Number(s.cost?.reduction)||0))});
       const category=document.getElementById("sales-category");category.value=[...category.options].some(o=>o.value===s.category)?s.category:"Alle";document.getElementById("sales-search").value=typeof s.query==="string"?s.query:"";
       setSalesDetail(["mix","guests","products"].includes(s.detail)?s.detail:"mix");

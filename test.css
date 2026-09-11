@@ -1855,6 +1855,135 @@
   line-height: 1.45;
 }
 
+/* Menyen følger visningen: Rask viser bare Oversikt, Vanlig samler
+   kostnadene på én side og Avansert viser alle sidene. */
+.app[data-modus="rask"] .rail-link[data-visning]:not([data-visning~="rask"]),
+.app[data-modus="vanlig"] .rail-link[data-visning]:not([data-visning~="vanlig"]),
+.app[data-modus="avansert"] .rail-link[data-visning]:not([data-visning~="avansert"]) {
+  display: none;
+}
+
+/* «← Til …» over en side som er åpnet fra en lenke, men som ikke står i
+   menyen. Siden under deler høyden, så fullhøydeoppsettene får plass. */
+.view-back {
+  flex: none;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto 4px;
+  padding-inline: 4px;
+}
+
+.view[data-view="salg"] > .view-back {
+  max-width: 1180px;
+  padding-inline: 10px;
+}
+
+.view:not([hidden]):has(> .view-back:not([hidden])) {
+  display: flex;
+  flex-direction: column;
+}
+
+.view:not([hidden]):has(> .view-back:not([hidden])) > :not(.view-back) {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+}
+
+/* Kostnader (Vanlig): varekost, lønn og andre kostnader side om side. */
+.kostnader-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.kostnader-kort {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.kostnader-kort .ops-button {
+  margin-top: auto;
+}
+
+/* «Hver krone i salget»: én stolpe for varekost, lønn og det som er igjen. */
+.kostnader-krone {
+  display: flex;
+  flex-direction: column;
+  margin-top: 18px;
+}
+
+.kostnader-krone .ops-button {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.kostnader-bar {
+  display: flex;
+  height: 14px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--app-rail);
+}
+
+.kostnader-bar span[data-del="0"] {
+  background: var(--ops-gold);
+}
+
+.kostnader-bar span[data-del="1"] {
+  background: var(--ops-blue);
+}
+
+.kostnader-bar span[data-del="2"] {
+  background: var(--ops-green);
+}
+
+.kostnader-legend {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.kostnader-legend > div {
+  display: grid;
+  gap: 3px;
+  padding-top: 10px;
+  border-top: 2px solid;
+}
+
+.kostnader-legend > div[data-del="0"] {
+  border-color: var(--ops-gold);
+}
+
+.kostnader-legend > div[data-del="1"] {
+  border-color: var(--ops-blue);
+}
+
+.kostnader-legend > div[data-del="2"] {
+  border-color: var(--ops-green);
+}
+
+.kostnader-legend strong {
+  font-size: 20px;
+  font-weight: 550;
+  letter-spacing: -0.03em;
+}
+
+@media (min-width: 1100px) and (min-height: 740px) {
+  .kostnader-krone {
+    flex: 1;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 860px) {
+  .kostnader-grid,
+  .kostnader-legend {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 /* --- Innstillingssiden ---------------------------------------------------- */
 
 .settings {
