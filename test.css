@@ -3011,7 +3011,9 @@
 .header-actions { display:flex; align-items:center; justify-content:flex-end; gap:6px; }.header-control { display:flex; justify-content:center; align-items:center; gap:6px; height:34px; min-width:34px; padding:7px; border:1px solid transparent; border-radius:9px; background:none; color:var(--app-muted); font:inherit; font-size:11px; cursor:pointer; }.header-control:hover,.header-control[aria-expanded=true] { background:var(--app-rail); color:var(--app-ink); border-color:var(--app-line); }.header-control svg { width:17px; height:17px; }.header-control:focus-visible,.header-language-options button:focus-visible { outline:2px solid var(--app-accent); outline-offset:2px; }
 .theme-sun { display:none; }.app[data-theme=dark] .theme-sun { display:block; }.app[data-theme=dark] .theme-moon { display:none; }
 .header-language { position:relative; }.header-language-options { position:absolute; right:0; top:calc(100% + 12px); width:230px; padding:8px; background:var(--app-paper); border:1px solid var(--app-line); border-radius:13px; box-shadow:0 10px 36px #0002; }.header-language-options[hidden] { display:none; }.header-language-options p { margin:5px 8px 8px; font-size:12px; color:var(--app-muted); }.header-language-options button { display:flex; width:100%; align-items:center; justify-content:space-between; border:0; border-radius:7px; background:none; color:var(--app-ink); padding:10px; font:inherit; font-size:13px; cursor:pointer; }.header-language-options button:hover,.header-language-options button[aria-pressed=true] { background:var(--app-rail); }.header-language-options button span { font-size:11px; color:var(--app-muted); }.header-language-options small { display:block; margin:8px; font-size:11px; color:var(--app-muted); line-height:1.6; }
-.app[data-theme=dark] { color-scheme:dark; --app-paper:#171c1b; --app-rail:#202624; --app-line:#343e39; --app-ink:#e6ece7; --app-muted:#a7b3ac; --app-hover:#2a342e; --app-active:#354339; --app-accent:#6bcc9c; }
+/* Mørk modus speiler den lyse paletten: nøytralt varmt grått, ikke grønt.
+   Grønnfargen er en aksent, ikke bakgrunn. */
+.app[data-theme=dark] { color-scheme:dark; --app-paper:#191918; --app-rail:#211f1e; --app-line:#35322e; --app-ink:#ece9e4; --app-muted:#a49f97; --app-hover:#2a2724; --app-active:#34302b; --app-accent:#4fc98f; }
 .app[data-theme=dark] .sales { --sales-green:#84d3ac; }.app[data-theme=dark] .sales-panel,.app[data-theme=dark] .sales-dialog,.app[data-theme=dark] .sales select,.app[data-theme=dark] .sales-table thead,.app[data-theme=dark] .sales-donut-center,.app[data-theme=dark] .sales-segment button[aria-pressed=true] { background:var(--app-paper); color:var(--app-ink); border-color:var(--app-line); }
 .app[data-theme=dark] .sales-stat:first-child { background:#203b2e; color:#b1e5c6; }.app[data-theme=dark] .sales-stat:nth-child(2) { background:#25364c; color:#b9d4f7; }.app[data-theme=dark] .sales-stat:nth-child(3) { background:#3f3421; color:#efcf99; }.app[data-theme=dark] .sales-stat:hover { filter:brightness(1.1); }
 .app[data-theme=dark] .sales-mix { background:#202923; }.app[data-theme=dark] .sales-shift { background:#2b3d2f; }.app[data-theme=dark] .sales-shift:nth-child(2) { background:#3e3527; }.app[data-theme=dark] .sales-shift:nth-child(3) { background:#29364a; }.app[data-theme=dark] .sales-mix-row:hover,.app[data-theme=dark] .sales-table tr:hover { background:var(--app-hover); }
@@ -3222,21 +3224,80 @@
 @media(max-width:700px){.hub-head{margin-bottom:20px}.hub-head h2{font-size:31px}.hub-now-hero{grid-template-columns:1fr;padding:25px;gap:25px}.hub-pulse{border-radius:14px;aspect-ratio:auto;box-shadow:none;padding:16px}.hub-pulse strong{font-size:48px}.hub-now-hero h2{font-size:34px}.hub-top{align-items:flex-start;flex-direction:column;gap:5px}.hub-stats{grid-template-columns:1fr 1fr}.hub-stat:nth-child(2){border-right:0}.hub-stat:nth-child(-n+2){border-bottom:1px solid var(--app-line)}.hub-stat strong{font-size:25px}.hub-now-grid,.hub-effect-grid,.hub-task-grid{grid-template-columns:1fr}.hub-panel,.hub-task{padding:20px}.hub-report-types{gap:7px}.hub-report-type{display:flex;flex-direction:column;padding:12px 8px}.hub-report-type strong{font-size:12px}.hub-report-type small{font-size:10px}.hub-report-toolbar{flex-wrap:wrap}.hub-report-toolbar h3{order:-1;width:100%;font-size:14px}.hub-progress{gap:12px;padding:17px}.hub-report-table{font-size:11px}.hub-report-table th,.hub-report-table td{padding:10px 4px}.hub-effect-result{padding:25px}.hub-task h3{font-size:23px}}
 @media(prefers-reduced-motion:reduce){.hub *{animation:none!important;transition:none!important}}
 
-/* Nå, tiltak og effekt tilhører Oversikt. */
-/* Overview details live inside the page; the rail follows the income statement. */
-.overview-tabs {display:flex;gap:4px;flex-wrap:wrap;margin:0 auto 24px;max-width:1120px;border-bottom:1px solid var(--app-line);padding-bottom:10px}
-.overview-tabs[hidden] {display:none}
-.overview-tab {display:flex;align-items:center;gap:7px;padding:8px 12px;border-radius:8px;color:var(--app-muted);text-decoration:none;font-size:13px}
-.app.is-collapsed .overview-tab .rail-label {display:inline}
-.overview-tab .rail-icon {width:16px;height:16px}
-.overview-tab[aria-current=page] {background:var(--app-active);color:var(--app-ink);font-weight:550}
-.overview-tab:hover {color:var(--app-ink)}
-.overview-tab:focus-visible {outline:2px solid var(--app-ink);outline-offset:2px}
-/* Fanelinjen står øverst i oversikten og blir stående mens man ruller. Den
-   viser hvilken av de tre delene man er i: Nå, Tiltak eller Rapporter. */
-.overview-tabbar {position:sticky;top:0;z-index:20;margin:-24px -20px 24px;padding:24px 20px 0;background:var(--app-paper)}
-.overview-tabbar[hidden] {display:none}
-.overview-tabbar .overview-tabs {margin-bottom:0}
+/* Oversikt: Nå, Tiltak og Rapporter side om side. Alt skal få plass på første
+   skjerm, så hver kolonne viser det korte og lenker videre til hele siden. */
+.kolonner {display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:stretch}
+.kol {display:flex;flex-direction:column;gap:12px;min-width:0;min-height:0;padding:18px;border:1px solid var(--app-line);border-radius:16px;background:var(--app-paper)}
+.kol-topp {display:flex;align-items:center;justify-content:space-between;gap:10px}
+.kol-topp h3 {font-size:16px;font-weight:550;letter-spacing:-.025em;margin:0}
+.kol-merke {font-size:9px;letter-spacing:.12em;color:var(--app-muted)}
+.kol .day-stats {grid-template-columns:1fr 1fr;gap:10px;padding:2px 0}
+.kol .day-stat strong {font-size:23px}
+.kol .day-stat:first-child strong {font-size:25px}
+.kol .day-chart {gap:5px}
+.kol .day-hour-well {height:78px;margin-bottom:5px}
+.kol .day-total {padding-top:10px}
+.kol-bemanning {margin-top:auto;padding:14px;border-radius:12px;background:var(--app-rail);display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.kol-bemanning-topp {display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%}
+.kol-bemanning-tall {display:flex;align-items:baseline;gap:8px}
+.kol-bemanning-tall strong {font-size:28px;font-weight:550;letter-spacing:-.04em;line-height:1.1}
+.kol-bemanning-tall span {font-size:11px;color:var(--app-muted)}
+.kol-bemanning .day-sim-note {margin:0;font-size:11px;color:var(--app-muted);line-height:1.5}
+.kol-liste {display:flex;flex-direction:column;gap:8px}
+.kol-rad {display:grid;grid-template-columns:14px minmax(0,1fr) auto;gap:10px;align-items:center;padding:11px 12px;border:1px solid var(--app-line);border-radius:12px}
+.kol-rad strong {display:block;font-size:13px;font-weight:550;line-height:1.35}
+.kol-rad small {display:block;font-size:10px;color:var(--app-muted);margin-top:3px}
+.kol-prikk {font-size:11px;color:var(--app-muted)}
+.kol-rad[data-status=active] {border-color:#76a48a}
+.kol-rad[data-status=done] {background:var(--app-rail)}
+.kol-rad[data-status=done] strong {color:var(--app-muted)}
+.kol-rad .hub-button {padding:7px 11px;font-size:11px;white-space:nowrap}
+.kol-effekt {margin-top:auto;padding:15px;border-radius:12px;background:var(--app-rail);display:flex;flex-direction:column;gap:2px}
+.kol-effekt strong {font-size:27px;font-weight:550;letter-spacing:-.045em;color:#287c56;line-height:1.15}
+.kol-effekt-note {font-size:11px;color:var(--app-muted);line-height:1.5}
+.kol-skyv {display:flex;justify-content:space-between;gap:8px;font-size:11px;color:var(--app-muted);margin-top:8px}
+.kol-effekt input {width:100%;margin:2px 0 0;accent-color:#287c56;cursor:pointer}
+.kol-segment {display:flex;gap:5px}
+.kol-segment button {flex:1;padding:7px 6px;border:1px solid var(--app-line);border-radius:9px;background:var(--app-paper);color:var(--app-muted);font:inherit;font-size:12px;cursor:pointer}
+.kol-segment button[aria-pressed=true] {background:var(--app-ink);color:var(--app-paper);border-color:var(--app-ink)}
+.kol-rapport-kropp {display:flex;flex-direction:column;gap:12px;flex:1;min-height:0}
+.kol-periode {display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px}
+.kol-periode button {border:1px solid var(--app-line);border-radius:8px;background:var(--app-paper);color:var(--app-ink);font:inherit;font-size:12px;padding:4px 10px;cursor:pointer}
+.kol-periode button:disabled {opacity:.4;cursor:default}
+.kol-tall {display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.kol-tall>div {display:flex;flex-direction:column;gap:3px;min-width:0}
+.kol-tall span {font-size:10px;color:var(--app-muted)}
+.kol-tall strong {font-size:18px;font-weight:550;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+.kol-graf {display:flex;align-items:flex-end;gap:3px;height:86px;margin-top:auto}
+.kol-stolpe {flex:1;min-width:0;display:flex;align-items:flex-end;height:100%;padding:0;border:0;background:transparent;cursor:pointer}
+.kol-stolpe i {display:block;width:100%;background:#9bbca5;border-radius:4px 4px 0 0}
+.kol-stolpe:hover i,.kol-stolpe[aria-pressed=true] i {background:#287c56}
+.kol-graf-lese {font-size:11px;color:var(--app-muted);min-height:15px}
+.kol-sammenlign {margin:0;font-size:12px;font-weight:550;color:#398368}
+.kol-sammenlign[data-retning=ned] {color:#a76d31}
+.kol-sammenlign[data-retning=flat] {color:var(--app-muted);font-weight:500}
+.app[data-theme=dark] .kol-sammenlign {color:#97d9b7}
+.app[data-theme=dark] .kol-sammenlign[data-retning=ned] {color:#ecc38e}
+.app[data-theme=dark] .day-overview {--day-green:#7fc9a3;--day-tint:#26302b;--day-blue:#26303c}
+.app[data-theme=dark] .kol-effekt strong {color:#7fc9a3}
+.app[data-theme=dark] .kol-effekt input {accent-color:#7fc9a3}
+.app[data-theme=dark] .kol-stolpe i {background:#5d7e6b}
+.app[data-theme=dark] .kol-stolpe:hover i,.app[data-theme=dark] .kol-stolpe[aria-pressed=true] i {background:#7fc9a3}
+.app[data-theme=dark] .kol-rad[data-status=active] {border-color:#4e7d63}
+
+/* På en vanlig laptop fyller oversikten skjermen. Bare en kolonne som trenger
+   mer plass enn den får, ruller selv. */
+@media (min-width:1100px) and (min-height:700px) {
+  .content-body:has(.view[data-view=oversikt]:not([hidden])) {padding:16px 20px}
+  .view[data-view=oversikt] {height:100%}
+  .dash.kolonner-flate {display:flex;flex-direction:column;gap:12px;height:100%;max-width:1440px;margin:0 auto;padding-bottom:0}
+  .kolonner {flex:1;min-height:0}
+  .kol {overflow:auto;scrollbar-width:thin}
+}
+
+@media (max-width:1100px) {
+  .kolonner {grid-template-columns:minmax(0,1fr)}
+}
 
 /* Oversikten i tre deler side om side: Nå, Råd og Rapport. Alt får plass på
    første skjerm på en vanlig laptop, så man slipper å rulle. */
