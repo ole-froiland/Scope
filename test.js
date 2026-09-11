@@ -1846,7 +1846,9 @@
       return kort;
     }
 
-    const hubState = {filter:"alle",report:"week",offset:0,food:0.5,wages:0.5};
+    // Periodene i Rapport-delen av oversikten. «Måned» er de siste fire ukene, samme periode som Salg.
+    const GLANCE=[["igår","I går"],["uke","Uke"],["siste30","Måned"]];
+    const hubState = {filter:"alle",report:"week",offset:0,food:0.5,wages:0.5,glance:"igår"};
     let taskProgress={};
     try { const saved=JSON.parse(restore("scope-actions-v1")||"{}"); if(saved && typeof saved==="object"&&!Array.isArray(saved)) taskProgress=saved; } catch { /* Start empty if local state is unreadable. */ }
     const hubDate=new Intl.DateTimeFormat("nb-NO",{day:"numeric",month:"short",year:"numeric"});
@@ -1885,23 +1887,29 @@
     function hubStat(label,value,note) {const s=el("div","hub-stat");s.append(el("span","",label),el("strong","",value),el("small","",note));return s;}
     function renderDash() {
       if(!dash)return;
-      const place=placeName.textContent,t=tall(place,"igår"),kv=kveldsTall(t.profil,dagIndeks(NÅ)),tasks=hubTasks();
-      dash.className="dash hub hub-now";dash.replaceChildren();
+      const place=placeName.textContent,kv=kveldsTall(profil(place),dagIndeks(NÅ)),tasks=hubTasks();
+      dash.className="dash hub hub-now glance";dash.replaceChildren();
       const top=el("div","hub-top");top.append(el("span","overview-eyebrow","OVERSIKT / "+place),el("span","hub-demo","Demodata · "+stor(datoFormat.format(NÅ))));dash.append(top);
-      dash.classList.add("compact-overview");
-      const status=el("div","compact-status");status.append(el("span","",Math.round(kv.gjester)+" forventede gjester i kveld · "+kv.vakt+" på vakt"),hubButton("Se bemanning ↗",()=>hubGo("bemanning"),"hub-link"));dash.append(status);
-      const stats=el("section","hub-stats");stats.setAttribute("aria-label","Status akkurat nå");stats.append(hubStat("Omsetning · i går",kr(t.oms),prosentEndring(t.endring)+" mot "+PERIODER.igår.mot),hubStat("Varekost · i går",pst(t.varekost),"Mål "+pst(MÅL.varekost)),hubStat("Lønn · i går",pst(t.lonn),"Mål "+pst(MÅL.lonn)),hubStat("Bidrag · i går",kr(t.bidragKr),"Før andre kostnader"));dash.append(stats);
-      const grid=el("div","compact-grid");
-      const actions=el("section","hub-panel compact-actions");actions.append(el("h2","","Tiltak"),el("p","compact-note",tasks.filter(x=>x.status==="active").length+" pågår · "+tasks.filter(x=>x.status==="done").length+" utført"));
-      tasks.forEach(task=>{const row=el("div","compact-task");const text=el("div");text.append(el("strong","",task.title),el("small","",task.basis));const button=hubButton(task.status==="suggested"?"Start":task.status==="active"?"Fullfør":"Åpne igjen",()=>{setTask(task,task.status==="suggested"?"active":task.status==="active"?"done":"suggested");document.querySelector('[data-compact-task="'+task.id+'"]').focus({preventScroll:true});});button.dataset.compactTask=task.id;button.setAttribute("aria-label",button.textContent+": "+task.title);row.append(text,button);actions.append(row);});actions.append(hubButton("Alle detaljer ↗",()=>hubGo("tiltak"),"hub-link"));grid.append(actions);
-      const effect=el("section","hub-panel compact-effect");effect.append(el("h2","","Mulig effekt"));const base=tall(place,"siste30"),amount=el("strong","compact-amount"),note=el("p","compact-note","Økt bidrag over 4 uker · regneeksempel");effect.append(amount,note);
-      const update=()=>{amount.textContent="+ "+kr(improvementEffect(base.oms,hubState.food,hubState.wages));};
-      [["food","Lavere varekost"],["wages","Lavere lønnsandel"]].forEach(([key,title])=>{const label=el("label","compact-slider",title),value=el("output"),input=el("input");input.type="range";input.min="0";input.max="3";input.step="0.1";input.value=hubState[key];input.id="compact-"+key;label.htmlFor=input.id;value.htmlFor=input.id;const change=()=>{hubState[key]=Number(input.value);value.textContent=nf.format(hubState[key])+" pp";input.setAttribute("aria-valuetext",value.textContent);update();};input.addEventListener("input",()=>{change();renderEffect(hubTasks());workspaceSync();});change();label.append(value);effect.append(label,input);});effect.append(el("p","compact-note","Potensial, ikke målt besparelse."),hubButton("Se beregningen ↗",()=>hubGo("effekt"),"hub-link"));grid.append(effect);
-      const report=el("section","hub-panel compact-report");report.append(el("h2","","Rapport"));const types=el("div","hub-filters");[["day","Dag"],["week","Uke"],["month","Måned"]].forEach(([key,label])=>{const button=hubButton(label,()=>{hubState.report=key;hubState.offset=0;renderDash();document.querySelector('[data-compact-report="'+key+'"]').focus({preventScroll:true});},"hub-filter");button.dataset.compactReport=key;button.setAttribute("aria-pressed",String(hubState.report===key));types.append(button);});report.append(types);
-      const r=buildReport(profil(place),hubState.report,hubState.offset,NÅ,DAGVEKT),prior=buildReport(profil(place),hubState.report,hubState.offset+1,NÅ,DAGVEKT);
-      report.append(el("p","compact-note",hubDate.format(r.start)+" – "+hubDate.format(r.end)));
-      [["Omsetning",kr(r.revenue)],["Varekost og lønn",kr(r.cost+r.wages)],["Bidrag",kr(r.contribution)]].forEach(([label,value])=>{const row=el("div","compact-ledger");row.append(el("span","",label),el("strong","",value));report.append(row);});report.append(el("p","compact-note",(r.contribution>=prior.contribution?"+":"−")+kr(Math.abs(r.contribution-prior.contribution))+" i bidrag mot forrige periode"),hubButton("Full rapport og eksport ↗",()=>hubGo("rapporter"),"hub-link"));grid.append(report);dash.append(grid);
-      [actions,effect,report].forEach((panel,i)=>{panel.lastElementChild.dataset.overviewDetail=["tiltak","effekt","rapporter"][i];});
+      // Tre deler side om side: slik står det nå, hva du bør gjøre, og hovedtallene for en valgt periode.
+      const column=(cls,title,aside)=>{const c=el("section","hub-panel glance-col "+cls),head=el("header","glance-head");head.append(el("h2","",title),aside);c.append(head);return c;};
+      const row=(label,value,note,change,changeCls)=>{const r=el("div","glance-row"),left=el("span","glance-label",label),right=el("span","glance-value");if(note)left.append(el("small","",note));right.append(el("strong","",value));if(change)right.append(el("small",changeCls,change));r.append(left,right);return r;};
+      const rows=(...items)=>{const r=el("div","glance-rows");r.append(...items);return r;};
+      const link=(text,view,before)=>{const b=hubButton(text,()=>{if(before)before();hubGo(view);},"hub-link glance-link");if(overviewViews.includes(view))b.dataset.overviewDetail=view;return b;};
+      const busy=kv.perAnsatt>PER_ANSATT_NORMALT[1],calm=kv.perAnsatt<PER_ANSATT_NORMALT[0];
+      const now=column("glance-now","Nå",el("span","glance-state"+(busy?" is-busy":""),busy?"Travel kveld":calm?"Rolig kveld":"Normal kveld"));
+      const guests=el("div","glance-big");guests.append(el("strong","",nf.format(Math.round(kv.gjester))),el("span","","forventede gjester i kveld"),el("small","",kv.booket+" booket · resten er anslag"));
+      now.append(guests,rows(row("På vakt i kveld",String(kv.vakt)),row("Gjester per ansatt",nf.format(Number(kv.perAnsatt.toFixed(1))),"Normalt "+PER_ANSATT_NORMALT[0]+"–"+PER_ANSATT_NORMALT[1]),row("Forventet salg i kveld",kr(kv.oms),"Prognose, ikke registrert salg")),link("Se bemanning ↗","bemanning"));
+      const advice=column("glance-advice","Råd",el("span","glance-meta",tasks.filter(x=>x.status==="active").length+" pågår · "+tasks.filter(x=>x.status==="done").length+" utført"));
+      const list=el("ol","glance-tasks");
+      tasks.forEach(task=>{const item=el("li","glance-task"),text=el("div");item.dataset.status=task.status;text.append(el("strong","",task.title),el("small","",task.basis));const button=hubButton(task.status==="suggested"?"Start":task.status==="active"?"Fullfør":"Åpne igjen",()=>{setTask(task,task.status==="suggested"?"active":task.status==="active"?"done":"suggested");document.querySelector('[data-compact-task="'+task.id+'"]').focus({preventScroll:true});},"hub-button glance-task-button");button.dataset.compactTask=task.id;button.setAttribute("aria-label",button.textContent+": "+task.title);item.append(text,button);list.append(item);});
+      const gain=el("div","glance-gain");gain.append(el("span","","Mulig gevinst · 4 uker"),el("strong","","+ "+kr(improvementEffect(tall(place,"siste30").oms,hubState.food,hubState.wages))),el("small","","Regneeksempel: varekost −"+nf.format(hubState.food)+" pp, lønn −"+nf.format(hubState.wages)+" pp"),link("Se beregningen ↗","effekt"));
+      advice.append(list,gain,link("Alle råd ↗","tiltak"));
+      const per=GLANCE.some(([key])=>key===hubState.glance)?hubState.glance:"igår",t=tall(place,per),periods=el("div","glance-periods");periods.setAttribute("role","group");periods.setAttribute("aria-label","Rapportperiode");
+      GLANCE.forEach(([key,label])=>{const b=hubButton(label,()=>{hubState.glance=key;renderDash();document.querySelector('[data-glance-period="'+key+'"]').focus({preventScroll:true});},"");b.dataset.glancePeriod=key;b.setAttribute("aria-pressed",String(per===key));periods.append(b);});
+      const tone=(n,upIsGood)=>n===0?"":(n>0)===upIsGood?"overview-positive":"overview-negative";
+      const report=column("glance-report","Rapport",periods);
+      report.append(el("p","glance-meta",PERIODER[per].navn+" · mot "+PERIODER[per].mot),rows(row("Omsetning",kr(t.oms),"",prosentEndring(t.endring),tone(t.endring,true)),row("Gjester",nf.format(t.gjester),kr(t.snittbong)+" per gjest"),row("Varekost",pst(t.varekost),"Mål "+pst(MÅL.varekost),pp(t.varekostEndring),tone(t.varekostEndring,false)),row("Lønn",pst(t.lonn),"Mål "+pst(MÅL.lonn),pp(t.lonnEndring),tone(t.lonnEndring,false)),row("Bidrag",kr(t.bidragKr),"Før andre kostnader",prosentEndring(t.bidragEndring),tone(t.bidragEndring,true))),link("Full rapport og eksport ↗","rapporter",()=>{hubState.report={igår:"day",uke:"week",siste30:"month"}[per];hubState.offset=0;renderReports();}));
+      const grid=el("div","glance-grid");grid.append(now,advice,report);dash.append(grid);
       renderTasks(tasks);renderEffect(tasks);renderReports();
     }
     function renderTasks(tasks) {
@@ -2352,7 +2360,7 @@
     function activateWorkspace(id,focus=false){
       const tab=workspaceTabs.find(t=>t.id===id);if(!tab)return;saveWorkspace();workspaceSwitching=true;workspaceActive=id;const s=tab.state;
       periode=PERIODER[s.periode]?s.periode:"igår";salesPeriod=PERIODER[s.salesPeriod]?s.salesPeriod:"igår";salesMetric=[0,1,2].includes(s.salesMetric)?s.salesMetric:0;
-      Object.assign(hubState,{filter:["alle","suggested","active","done"].includes(s.hub?.filter)?s.hub.filter:"alle",report:["day","week","month"].includes(s.hub?.report)?s.hub.report:"week",offset:Math.max(0,Math.min(1200,Math.floor(Number(s.hub?.offset)||0))),food:Math.max(0,Math.min(3,Number(s.hub?.food)||0)),wages:Math.max(0,Math.min(3,Number(s.hub?.wages)||0))});
+      Object.assign(hubState,{filter:["alle","suggested","active","done"].includes(s.hub?.filter)?s.hub.filter:"alle",report:["day","week","month"].includes(s.hub?.report)?s.hub.report:"week",offset:Math.max(0,Math.min(1200,Math.floor(Number(s.hub?.offset)||0))),food:Math.max(0,Math.min(3,Number(s.hub?.food)||0)),wages:Math.max(0,Math.min(3,Number(s.hub?.wages)||0)),glance:GLANCE.some(([key])=>key===s.hub?.glance)?s.hub.glance:"igår"});
       Object.assign(opsState,{varekost:PERIODER[s.ops?.varekost]?s.ops.varekost:"igår",resultat:PERIODER[s.ops?.resultat]?s.ops.resultat:"uke",staffWeek:s.ops?.staffWeek===1?1:0,staffDay:Math.max(0,Math.min(6,Number(s.ops?.staffDay)||0)),extra:0});
       Object.assign(costUI,{tab:["invoices","suppliers","variance","recipes"].includes(s.cost?.tab)?s.cost.tab:"invoices",supplier:typeof s.cost?.supplier==="string"?s.cost.supplier:"Alle",invoiceFilter:["Alle","Til kontroll","Kontrollert"].includes(s.cost?.invoiceFilter)?s.cost.invoiceFilter:"Alle",reduction:Math.max(0,Math.min(5,Number(s.cost?.reduction)||0))});
       const category=document.getElementById("sales-category");category.value=[...category.options].some(o=>o.value===s.category)?s.category:"Alle";document.getElementById("sales-search").value=typeof s.query==="string"?s.query:"";
@@ -2381,7 +2389,7 @@
     }
     function assistantContext() {
       const view = activeView();
-      const currentPeriod = view === 'oversikt' ? 'igår' : view === 'salg' ? salesPeriod : view === 'varekost' || view === 'resultat' ? opsState[view] : periode;
+      const currentPeriod = view === 'oversikt' ? hubState.glance :view === 'salg' ? salesPeriod : view === 'varekost' || view === 'resultat' ? opsState[view] : periode;
       return {
         visibleData: ['oversikt', 'tiltak', 'effekt', 'rapporter', 'salg', 'varekost', 'bemanning', 'resultat'].includes(view) ? views.find(v => v.dataset.view === view).innerText.slice(0, 5000) : '',
         source: 'demo', places: STEDSNAVN.slice(), selected: VALGT.liste.slice(), view, period: currentPeriod,

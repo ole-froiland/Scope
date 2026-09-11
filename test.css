@@ -3114,29 +3114,45 @@
 .overview-tabbar .overview-tabs {margin-bottom:0}
 .view[data-view=tiltak]:not([hidden]),.view[data-view=effekt]:not([hidden]),.view[data-view=rapporter]:not([hidden]) {margin-top:56px;padding-top:48px;border-top:1px solid var(--app-line)}
 
-/* Compact decision dashboard: all four summaries share the first desktop screen. */
-.compact-overview {gap:14px!important}
-.compact-status {display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px;color:var(--app-muted)}
-.compact-overview .hub-stats {margin:0}
-.compact-overview .hub-stat {padding:16px;gap:6px}
-.compact-grid {display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:14px}
-.compact-grid .hub-panel {padding:18px;display:flex;flex-direction:column;gap:10px}
-.compact-grid h2 {font-size:19px;font-weight:550;letter-spacing:-.03em;margin:0}
-.compact-grid .compact-note {font-size:11px;line-height:1.5;color:var(--app-muted);margin:0}
-.compact-task {display:flex;gap:10px;align-items:center;justify-content:space-between;border-top:1px solid var(--app-line);padding-top:12px}
-.compact-task strong {display:block;font-size:12px;font-weight:500;line-height:1.4}
-.compact-task small {display:block;font-size:10px;color:var(--app-muted);margin-top:5px}
-.compact-task .hub-button {padding:7px 9px;font-size:11px;flex-shrink:0}
-.compact-grid>.hub-panel>.hub-link {margin-top:auto;align-self:flex-start}
-.compact-amount {font-size:30px;font-weight:550;letter-spacing:-.04em}
-.compact-effect {background:var(--app-rail)}
-.compact-slider {display:flex;justify-content:space-between;font-size:11px;margin-top:5px}
-.compact-slider output {color:var(--app-muted)}
-.compact-effect input {width:100%;accent-color:#619b80;margin:0}
-.compact-report .hub-filters {gap:5px;margin:0}
-.compact-report .hub-filter {padding:5px 12px;font-size:11px}
-.compact-ledger {display:flex;justify-content:space-between;gap:10px;font-size:12px;padding:8px 0;border-bottom:1px solid var(--app-line)}
-.compact-ledger strong {font-weight:550}
-@media(max-width:1100px) and (min-width:861px){.compact-grid{gap:10px}.compact-grid .hub-panel{padding:12px}.compact-task{flex-wrap:wrap}}
-@media(max-width:860px){.compact-grid{grid-template-columns:1fr 1fr}.compact-actions{grid-column:1/-1}.compact-status{font-size:11px}.compact-overview .hub-stat{padding:12px}}
-@media(max-width:520px){.compact-grid{grid-template-columns:1fr}.compact-overview .hub-stat strong{font-size:22px}.compact-status{align-items:flex-start}.compact-grid .hub-panel{padding:16px}}
+/* Oversikten i tre deler side om side: Nå, Råd og Rapport. Alt får plass på
+   første skjerm på en vanlig laptop, så man slipper å rulle. */
+.dash.glance {gap:12px;padding-bottom:0}
+.glance-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.glance-col {display:flex;flex-direction:column;gap:12px;padding:18px}
+.glance-head {display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:30px}
+.glance-head h2 {font-size:19px;font-weight:550;letter-spacing:-.03em}
+.glance-meta {font-size:11px;color:var(--app-muted)}
+.glance-col>p.glance-meta {margin:0;font-size:11px;line-height:1.5}
+.glance-state {display:inline-flex;align-items:center;gap:7px;font-size:11px;color:var(--app-muted)}
+.glance-state::before {content:"";width:7px;height:7px;border-radius:50%;background:#44a07a}
+.glance-state.is-busy::before {background:#d08a3c}
+.glance-big {display:flex;flex-direction:column;gap:4px}
+.glance-big strong {font-size:46px;font-weight:550;letter-spacing:-.05em;line-height:1.05}
+.glance-big span {font-size:13px}
+.glance-big small {font-size:11px;color:var(--app-muted)}
+.glance-row {display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:8px 0;border-top:1px solid var(--app-line)}
+.glance-label {display:flex;flex-direction:column;gap:3px;min-width:0;font-size:12px}
+.glance-value {display:flex;flex-direction:column;align-items:flex-end;gap:3px;white-space:nowrap}
+.glance-value strong {font-size:15px;font-weight:550;letter-spacing:-.02em}
+.glance-label small,.glance-value small {font-size:10px}
+.glance-label small,.glance-value small:not([class]) {color:var(--app-muted)}
+.glance-tasks {list-style:none;margin:0;padding:0;counter-reset:glance}
+.glance-task {display:grid;grid-template-columns:14px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--app-line);counter-increment:glance}
+.glance-task::before {content:counter(glance);align-self:start;font-size:11px;line-height:1.6;color:var(--app-muted)}
+.glance-task strong {display:block;font-size:12px;font-weight:500;line-height:1.4}
+.glance-task small {display:block;font-size:10px;color:var(--app-muted);margin-top:4px}
+.glance-task[data-status=done] strong {color:var(--app-muted)}
+.glance-task-button {padding:7px 10px;font-size:11px}
+.glance-task[data-status=active] .glance-task-button {border-color:#76a48a}
+.glance-gain {margin-top:auto;display:flex;flex-direction:column;gap:3px;padding:12px;border-radius:12px;background:var(--app-rail)}
+.glance-gain>span {font-size:11px;color:var(--app-muted)}
+.glance-gain strong {font-size:22px;font-weight:550;letter-spacing:-.035em}
+.glance-gain small {font-size:10px;color:var(--app-muted)}
+.glance-link {align-self:flex-start}
+.glance-now>.glance-link,.glance-report>.glance-link {margin-top:auto}
+.glance-periods {display:flex;gap:2px;padding:3px;border:1px solid var(--app-line);border-radius:9px;background:var(--app-rail)}
+.glance-periods button {padding:4px 10px;border:0;border-radius:6px;background:transparent;color:var(--app-muted);font:inherit;font-size:11px;cursor:pointer;transition:background 160ms,color 160ms}
+.glance-periods button:hover {color:var(--app-ink)}
+.glance-periods button[aria-pressed=true] {background:var(--app-paper);color:var(--app-ink);box-shadow:0 1px 3px #17171514}
+@media(max-width:1100px) and (min-width:861px){.glance-grid{gap:10px}.glance-col{padding:14px;gap:12px}.glance-big strong{font-size:38px}.glance-head{flex-wrap:wrap}}
+@media(max-width:860px){.glance-grid{grid-template-columns:1fr}}
