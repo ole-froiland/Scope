@@ -928,10 +928,37 @@
   transition: max-height 170ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Stor visning: samtalen tar plassen den har fått, og meldingene hviler
-   mot skrivefeltet slik en samtale gjør. */
+/* Stor visning: dashbordet viker, så samtalen står alene opp mot fanelinja. */
+.content:has(.ask.er-stor) .content-body {
+  display: none;
+}
+
+.ask.er-stor {
+  padding-top: 6px;
+}
+
+/* Samtalen tar plassen den har fått, og meldingene hviler mot skrivefeltet
+   slik en samtale gjør. */
 .ask.er-stor .ask-thread {
   height: var(--ask-traad, 260px);
+  animation: ask-dra-opp 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes ask-dra-opp {
+  from {
+    transform: translateY(28px);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ask.er-stor .ask-thread {
+    animation: none;
+  }
 }
 
 .ask.er-stor .ask-thread > :first-child {
@@ -959,13 +986,13 @@
 
 .ask-message.is-user {
   align-self: flex-end;
-  background: #1f6feb;
-  color: #ffffff;
+  background: #d7e8fc;
+  color: #123a63;
 }
 
 .app[data-theme="dark"] .ask-message.is-user {
-  background: #3b7fe0;
-  color: #0c1526;
+  background: #a9cdf2;
+  color: #0f2138;
 }
 
 .ask-message.is-scope {
@@ -1029,46 +1056,36 @@
   display: none;
 }
 
-/* Knappen som gjør samtalen stor, og liten igjen. */
+/* Pila til venstre drar samtalen opp, og peker ned igjen når den er oppe. */
 .ask-utvid {
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
-  margin-left: auto;
+  width: 30px;
+  height: 30px;
   padding: 0;
-  border: 1px solid var(--app-line);
-  border-radius: 9px;
-  background: var(--app-paper);
-  color: var(--app-muted);
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--app-ink);
   cursor: pointer;
 }
 
 .ask-utvid:hover {
   background: var(--app-hover);
-  color: var(--app-ink);
 }
 
 .ask-utvid svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.ask-utvid .ask-ikon-inn,
-.ask-utvid[aria-pressed="true"] .ask-ikon-ut {
-  display: none;
-}
-
-.ask-utvid[aria-pressed="true"] .ask-ikon-inn {
-  display: block;
-}
-
-.ask-utvid[aria-pressed="true"] {
-  border-color: var(--app-ink);
-  color: var(--app-ink);
+.ask-utvid[aria-pressed="true"] svg {
+  transform: rotate(180deg);
 }
 
 .ask-send {
+  margin-left: auto;
   display: grid;
   place-items: center;
   width: 32px;

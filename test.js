@@ -436,8 +436,14 @@
     const TRÅD_MIN = 96;
     let trådHøyde = 260;
 
+    // Samtalen kan ta alt innholdet har: helt opp til fanelinja. Plassen er
+    // hele kolonnen minus toppfeltet og spørreboksens egen ramme.
     function trådMaks() {
-      return Math.max(TRÅD_MIN, Math.min(900, Math.round(window.innerHeight * 0.82)));
+      const ramme = askArea.parentElement;
+      const topp = ramme.querySelector(".content-header");
+      // Alt kolonnen har, minus fanelinja og spørreboksens egen ramme.
+      const krom = askArea.offsetHeight - askThread.offsetHeight;
+      return Math.max(TRÅD_MIN, Math.round(ramme.clientHeight - (topp ? topp.offsetHeight : 0) - krom - 4));
     }
 
     function settTrådhøyde(piksler) {
