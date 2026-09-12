@@ -921,7 +921,8 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width: 620px;
+  /* Samme bredde som skrivefeltet, så samtalen står rett over det. */
+  max-width: 560px;
   max-height: var(--ask-traad, 260px);
   margin: 0 auto 12px;
   overflow-y: auto;
@@ -995,9 +996,12 @@
 }
 
 .ask-box {
-  max-width: 620px;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  max-width: 560px;
   margin: 0 auto;
-  padding: 10px 12px;
+  padding: 7px 8px 7px 14px;
   border: 1px solid var(--app-line);
   border-radius: 14px;
   background: var(--app-paper);
@@ -1012,9 +1016,11 @@
 
 .ask-input {
   display: block;
-  width: 100%;
-  min-height: 24px;
+  flex: 1;
+  min-width: 0;
+  min-height: 32px;
   max-height: 320px;
+  padding: 5px 0 0;
   border: 0;
   background: transparent;
   color: var(--app-ink);
@@ -1033,11 +1039,12 @@
   color: var(--app-muted);
 }
 
+/* Feltet og de to knappene deler én linje. */
 .ask-row {
   display: flex;
+  flex: none;
   align-items: center;
-  gap: 12px;
-  margin-top: 8px;
+  gap: 4px;
 }
 
 /* Motorlinja er skjult, men står igjen i DOM-en fordi assistenten
@@ -1075,12 +1082,10 @@
 }
 
 .ask-send {
-  margin-left: auto;
   display: grid;
   place-items: center;
   width: 32px;
   height: 32px;
-  margin-left: auto;
   padding: 0;
   border: 0;
   border-radius: 50%;
