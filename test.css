@@ -925,7 +925,17 @@
   max-height: var(--ask-traad, 260px);
   margin: 0 auto 12px;
   overflow-y: auto;
-  transition: max-height 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: max-height 170ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Stor visning: samtalen tar plassen den har fått, og meldingene hviler
+   mot skrivefeltet slik en samtale gjør. */
+.ask.er-stor .ask-thread {
+  height: var(--ask-traad, 260px);
+}
+
+.ask.er-stor .ask-thread > :first-child {
+  margin-top: auto;
 }
 
 /* Under draging skal høyden følge markøren uten etterslep. */
@@ -949,7 +959,13 @@
 
 .ask-message.is-user {
   align-self: flex-end;
-  background: var(--app-active);
+  background: #1f6feb;
+  color: #ffffff;
+}
+
+.app[data-theme="dark"] .ask-message.is-user {
+  background: #3b7fe0;
+  color: #0c1526;
 }
 
 .ask-message.is-scope {
@@ -1011,6 +1027,45 @@
    fortsatt skriver status til den. */
 .ask-hint {
   display: none;
+}
+
+/* Knappen som gjør samtalen stor, og liten igjen. */
+.ask-utvid {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin-left: auto;
+  padding: 0;
+  border: 1px solid var(--app-line);
+  border-radius: 9px;
+  background: var(--app-paper);
+  color: var(--app-muted);
+  cursor: pointer;
+}
+
+.ask-utvid:hover {
+  background: var(--app-hover);
+  color: var(--app-ink);
+}
+
+.ask-utvid svg {
+  width: 16px;
+  height: 16px;
+}
+
+.ask-utvid .ask-ikon-inn,
+.ask-utvid[aria-pressed="true"] .ask-ikon-ut {
+  display: none;
+}
+
+.ask-utvid[aria-pressed="true"] .ask-ikon-inn {
+  display: block;
+}
+
+.ask-utvid[aria-pressed="true"] {
+  border-color: var(--app-ink);
+  color: var(--app-ink);
 }
 
 .ask-send {

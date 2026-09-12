@@ -437,7 +437,7 @@
     let trådHøyde = 260;
 
     function trådMaks() {
-      return Math.max(TRÅD_MIN, Math.min(640, Math.round(window.innerHeight * 0.65)));
+      return Math.max(TRÅD_MIN, Math.min(900, Math.round(window.innerHeight * 0.82)));
     }
 
     function settTrådhøyde(piksler) {
@@ -464,6 +464,8 @@
       // Utgangspunktet er høyden som er satt, ikke hvor høy teksten
       // tilfeldigvis er akkurat nå.
       gripeStart = { y: event.clientY, høyde: trådHøyde };
+      // Drar man selv, er man ute av den store visningen, men beholder høyden.
+      if (storVisning) merkStor(false);
     });
 
     askGripe.addEventListener("pointermove", function (event) {
@@ -490,6 +492,32 @@
       settTrådhøyde(trådHøyde + steg);
       store(TRÅD_KEY, String(trådHøyde));
     });
+    // Stor visning: samtalen fyller skjermen, og samme knapp tar den ned igjen.
+    const askExpand = document.getElementById("ask-expand");
+    let storVisning = false;
+    let høydeFørStor = trådHøyde;
+
+    function merkStor(på) {
+      storVisning = på;
+      askExpand.setAttribute("aria-pressed", String(på));
+      const tekst = på ? "Gjør samtalen liten" : "Gjør samtalen stor";
+      askExpand.setAttribute("aria-label", tekst);
+      askExpand.title = tekst;
+      askArea.classList.toggle("er-stor", på);
+    }
+
+    function settStor(på) {
+      if (på) høydeFørStor = trådHøyde;
+      merkStor(på);
+      settTrådhøyde(på ? trådMaks() : høydeFørStor);
+      store(TRÅD_KEY, String(trådHøyde));
+    }
+
+    askExpand.addEventListener("click", function () {
+      settStor(!storVisning);
+      document.getElementById("ask-input").focus({ preventScroll: true });
+    });
+
     const convList = document.getElementById("conv-list");
     const newChatButton = document.getElementById("new-chat");
 
@@ -2444,6 +2472,8 @@
         closePlaceList(true);
       } else if (app.classList.contains("is-open")) {
         closeDrawer(true);
+      } else if (storVisning) {
+        settStor(false);
       }
     });
 
