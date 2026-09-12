@@ -404,7 +404,7 @@
       staticMenuLabels.forEach(({node,original})=>node.textContent=english?(menuTranslations[original]||original):original);
       document.getElementById("language-label").textContent=english?"EN":"NO";
       document.getElementById("language-heading").textContent=english?"Navigation language":"Menyspråk";
-      document.getElementById("language-note").textContent=english?"Applies to navigation. Reports are in Norwegian.":"Gjelder navigasjonen. Rapportene er på norsk.";
+      document.getElementById("language-note").textContent=english?"Switches the menu. Figures and reports stay in Norwegian.":"Bytter menyen. Tall og rapporter står på norsk.";
       languageToggle.setAttribute("aria-label",english?"Navigation language":"Menyspråk");languageToggle.title=languageToggle.getAttribute("aria-label");
       document.querySelectorAll("[data-language]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.language===navigationLanguage)));
       document.querySelector(".header-actions").lang=english?"en":"nb";
@@ -434,7 +434,7 @@
     // Kanten kan dras. Høyden gjelder samtalen; skrivefeltet står fast.
     const TRÅD_KEY = "scope-test-sporhoyde";
     const TRÅD_MIN = 96;
-    let trådHøyde = 148;
+    let trådHøyde = 260;
 
     function trådMaks() {
       return Math.max(TRÅD_MIN, Math.min(640, Math.round(window.innerHeight * 0.65)));
@@ -1923,20 +1923,22 @@
       const tiltak=el("section","kol kol-tiltak"),tiltakHead=el("header","kol-topp");
       tiltakHead.append(el("h3","","Tiltak"),hubButton("Alle tiltak ↗",()=>hubGo("tiltak"),"hub-link"));tiltak.append(tiltakHead);
       const t30=tall(place,"siste30"),anslag={cost:improvementEffect(t30.oms,1,0),plan:improvementEffect(t30.oms,0,1)};
-      // Hvert råd sier hva det gjør, hva det bygger på og hva det kan gi.
-      const effektTekst=task=>task.id==="cost"?"+ "+kr(anslag.cost)+" på fire uker ved 1 pp lavere varekost":task.id==="plan"?"+ "+kr(anslag.plan)+" på fire uker ved 1 pp lavere lønn":"Riktig grunnlag i regnskapet, ikke et beløp";
+      // Kortet skal leses på et blikk: hva, hvor mye, og én knapp.
+      const gevinst={cost:["+ "+kr(anslag.cost),"på fire uker ved 1 pp lavere varekost"],plan:["+ "+kr(anslag.plan),"på fire uker ved 1 pp lavere lønn"],receipts:[null,"Ingen kroner, men riktig grunnlag i regnskapet"]};
       const liste=el("div","kol-liste");
       tasks.forEach(task=>{
         const kort=el("article","kol-raad");kort.dataset.task=task.id;kort.dataset.status=task.status;
         const topp=el("div","kol-raad-topp");
         topp.append(el("span","kol-chip",task.horizon),el("span","kol-status",{suggested:"Foreslått",active:"◉ Pågår",done:"✓ Utført"}[task.status]));
-        const fakta=el("dl","kol-fakta");
-        [["Grunnlag",task.basis],["Effekt",effektTekst(task)]].forEach(([navn,verdi])=>fakta.append(el("dt","",navn),el("dd","",verdi)));
+        const [sum,note]=gevinst[task.id]||[null,""];
+        const effekt=el("div","kol-raad-effekt");
+        if(sum)effekt.append(el("strong","",sum));
+        effekt.append(el("small","",note));
         const knapper=el("div","kol-raad-knapper");
-        const knapp=hubButton(task.status==="suggested"?"Start tiltak":task.status==="active"?"Fullfør":"Åpne igjen",()=>setTask(task,task.status==="suggested"?"active":task.status==="active"?"done":"suggested"),"hub-button");
+        const knapp=hubButton(task.status==="suggested"?"Start":task.status==="active"?"Fullfør":"Åpne igjen",()=>setTask(task,task.status==="suggested"?"active":task.status==="active"?"done":"suggested"),"hub-button");
         knapp.dataset.compactTask=task.id;
         knapper.append(knapp,hubButton("Se grunnlag ↗",()=>hubGo(task.view),"hub-link"));
-        kort.append(topp,el("h4","",task.title),el("p","",task.text),fakta,knapper);
+        kort.append(topp,el("h4","",task.title),el("p","kol-raad-basis",task.basis),effekt,knapper);
         liste.append(kort);
       });
       tiltak.append(liste);grid.append(tiltak);

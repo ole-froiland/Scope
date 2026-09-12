@@ -922,7 +922,7 @@
   flex-direction: column;
   gap: 10px;
   max-width: 720px;
-  max-height: var(--ask-traad, 148px);
+  max-height: var(--ask-traad, 260px);
   margin: 0 auto 12px;
   overflow-y: auto;
   transition: max-height 200ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -3255,11 +3255,11 @@
 .kol-raad {display:flex;flex-direction:column;gap:7px;flex:1;min-height:0;padding:14px;border:1px solid var(--app-line);border-radius:14px}
 .kol-raad-topp {display:flex;align-items:center;justify-content:space-between;gap:8px}
 .kol-status {font-size:10px;color:var(--app-muted);white-space:nowrap}
-.kol-raad h4 {margin:0;font-size:14px;font-weight:600;letter-spacing:-.015em;line-height:1.3}
-.kol-raad p {margin:0;font-size:11px;line-height:1.55;color:var(--app-muted)}
-.kol-fakta {margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 10px;font-size:11px;line-height:1.45}
-.kol-fakta dt {color:var(--app-muted)}
-.kol-fakta dd {margin:0}
+.kol-raad h4 {margin:0;font-size:15px;font-weight:600;letter-spacing:-.02em;line-height:1.3}
+.kol-raad-basis {margin:0;font-size:11px;color:var(--app-muted)}
+.kol-raad-effekt {display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:2px}
+.kol-raad-effekt strong {font-size:21px;font-weight:600;letter-spacing:-.04em;color:var(--kol-aksent);font-variant-numeric:tabular-nums}
+.kol-raad-effekt small {font-size:10px;color:var(--app-muted);line-height:1.4}
 .kol-raad-knapper {display:flex;align-items:center;gap:12px;margin-top:auto}
 .kol-raad .hub-button {padding:7px 12px;font-size:11px;white-space:nowrap}
 .kol-raad[data-status=active] {border-color:var(--kol-aksent)}
@@ -3298,6 +3298,15 @@
 .app[data-theme=dark] .kol-sammenlign {color:#97d9b7}
 .app[data-theme=dark] .kol-sammenlign[data-retning=ned] {color:#ecc38e}
 .app[data-theme=dark] .day-overview {--day-green:#7fc9a3;--day-tint:#26302b;--day-blue:#26303c}
+/* Språkvelgeren: rolig meny med tydelig valgt rad. */
+.header-language-options {width:250px;padding:10px;border-radius:16px;box-shadow:0 18px 48px #00000026}
+.header-language-options p {margin:4px 10px 8px;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--app-muted)}
+.header-language-options button {gap:10px;padding:11px 12px;border-radius:11px;font-size:14px}
+.header-language-options button span {padding:2px 8px;border-radius:20px;background:var(--app-rail);color:var(--app-muted);font-size:10px;letter-spacing:.06em}
+.header-language-options button[aria-pressed=true] {background:var(--app-active);font-weight:550}
+.header-language-options button[aria-pressed=true] span {background:var(--app-ink);color:var(--app-paper)}
+.header-language-options small {margin:10px 10px 2px;padding-top:10px;border-top:1px solid var(--app-line);font-size:11px;line-height:1.5}
+
 /* Menyen holder av plassen til alle seks sidene, så «Ny samtale» og
    samtalelista står i ro når man bytter mellom Rask, Vanlig og Avansert. */
 .rail-nav:not(.rail-secondary) {min-height:232px}
