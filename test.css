@@ -379,6 +379,7 @@
 /* --- Innhold ------------------------------------------------------------- */
 
 .content {
+  position: relative;
   flex: 1;
   min-width: 0;
   display: flex;
@@ -851,6 +852,7 @@
   min-height: 0;
   overflow-y: auto;
   padding: 24px 20px;
+  transition: opacity 200ms ease;
 }
 
 .view-note {
@@ -869,6 +871,7 @@
 
 .ask {
   position: relative;
+  z-index: 1;
   flex: none;
   padding: 12px 20px 18px;
   border-top: 1px solid var(--app-line);
@@ -929,9 +932,20 @@
   transition: max-height 170ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Stor visning: dashbordet viker, så samtalen står alene opp mot fanelinja. */
+/* Tom samtale skal ikke legge igjen luft over skrivefeltet. */
+.ask-thread:empty {
+  margin-bottom: 0;
+}
+
+/* Stor visning: dashbordet går ut av flyten, men blir stående på samme
+   plass og toner ut. Da glir panelet opp over det i stedet for at dashbordet
+   forsvinner med ett. */
 .content:has(.ask.er-stor) .content-body {
-  display: none;
+  position: absolute;
+  inset: var(--header-height) 0 0;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Uten innholdet under ville feltet falt oppover. Det skal stå i bunn, og

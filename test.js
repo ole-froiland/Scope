@@ -514,19 +514,35 @@
 
     function settStor(på) {
       if (på) høydeFørStor = trådHøyde;
+      // Uten meldinger er samtalen skjult. Den må likevel være framme på vei
+      // opp, ellers er det ingenting som glir.
+      const tom = askThread.childElementCount === 0;
       // Høyden måles før og etter, så bevegelsen blir den samme enten den
       // gamle høyden var satt eller fulgte innholdet.
-      const fra = askThread.getBoundingClientRect().height;
+      const fra = askThread.hidden ? 0 : askThread.getBoundingClientRect().height;
+      if (på) askThread.hidden = false;
       merkStor(på);
       settTrådhøyde(på ? trådMaks() : høydeFørStor);
       store(TRÅD_KEY, String(trådHøyde));
-      const til = askThread.getBoundingClientRect().height;
-      if (Math.abs(til - fra) > 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        askThread.animate(
-          [{ height: fra + "px" }, { height: til + "px" }],
-          { duration: 260, easing: "cubic-bezier(0.16, 1, 0.3, 1)" }
-        );
+      const til = !på && tom ? 0 : askThread.getBoundingClientRect().height;
+
+      function rydd() {
+        // Tom samtale hører ikke hjemme i den lille visningen.
+        if (!storVisning && askThread.childElementCount === 0) askThread.hidden = true;
       }
+
+      if (Math.abs(til - fra) < 1 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        rydd();
+        return;
+      }
+
+      // Panelet er høyt, så det trenger litt mer tid enn et lite sprang, og
+      // en kurve som setter i gang rolig og lander mykt.
+      const bevegelse = askThread.animate([{ height: fra + "px" }, { height: til + "px" }], {
+        duration: 300,
+        easing: "cubic-bezier(0.32, 0.72, 0, 1)"
+      });
+      bevegelse.finished.then(rydd, rydd);
     }
 
     askExpand.addEventListener("click", function () {
@@ -581,7 +597,9 @@
       askThread.textContent = "";
 
       if (!chat || chat.messages.length === 0) {
-        askThread.hidden = true;
+        // I stor visning blir den tomme ruten stående, så panelet ikke
+        // detter ned når man starter en ny samtale.
+        askThread.hidden = !storVisning;
         askGripe.hidden = true;
         return;
       }
