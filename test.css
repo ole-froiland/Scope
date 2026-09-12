@@ -3396,43 +3396,45 @@
 /* Roligere oversikt: korte sammendrag med detaljer ved behov. */
 .day-overview .kol {gap:14px;padding:22px}
 .day-overview .kol-topp h3::before {width:6px;height:6px}
-.day-overview .day-time {background:none;padding:0;color:var(--app-muted)}
+.day-overview .day-time {background:var(--kol-tint);padding:5px 9px;color:var(--kol-aksent)}
 .day-overview .day-stats {gap:16px 14px;padding:6px 0}
 .day-overview .day-chart-head {margin-bottom:0}
 .day-overview .day-stat:nth-child(-n+2) small {display:none}
 .day-overview .day-stat:nth-child(4) small {visibility:hidden}
 .day-overview .day-hour-well {background:transparent}
 .day-overview .day-total {font-size:10px;flex-wrap:wrap}
-.day-overview .kol-bemanning {background:var(--app-rail);padding:14px;gap:10px}
+.day-overview .kol-naa {gap:12px}
+.day-overview .kol-naa .day-hour-well {height:70px}
+.day-overview .kol-bemanning {background:var(--kol-tint);padding:12px;gap:8px}
 .day-overview .kol-merke {font-size:11px;letter-spacing:0}
 .day-overview .kol-bemanning-tall strong {font-size:22px}
 .day-overview .day-sim-note:empty {display:none}
-.day-overview .kol-liste {gap:0}
-.day-overview .kol-raad {position:relative;flex:0 0 auto;gap:10px;padding:20px 0;border:0;border-bottom:1px solid var(--app-line);border-radius:0}
-.day-overview .kol-raad:first-child {padding-top:0}
-.day-overview .kol-raad:last-child {border-bottom:0}
-.day-overview .kol-chip {padding:0;background:none;color:var(--app-muted);letter-spacing:0;font-size:10px}
+.day-overview .kol-liste {gap:10px}
+.day-overview .kol-raad {position:relative;flex:1 0 auto;gap:6px;padding:12px;border:1px solid var(--app-line);border-radius:14px;background:color-mix(in srgb,var(--kol-tint) 24%,var(--app-paper))}
+.day-overview .kol-raad:first-child {border-color:color-mix(in srgb,var(--kol-aksent) 32%,var(--app-line))}
+.day-overview .kol-raad[data-status=active] {border-color:var(--kol-aksent)}
+.day-overview .kol-chip {padding:3px 8px;background:var(--kol-tint);color:var(--kol-aksent);letter-spacing:0;font-size:10px}
 .day-overview .kol-raad h4 {font-size:15px;font-weight:550}
-.day-overview .kol-raad-effekt strong {font-size:22px;color:var(--app-ink);font-weight:550}
-.day-overview .kol-raad-knapper {margin-top:2px;justify-content:flex-end}
-.kol-raad-detaljer {font-size:11px;color:var(--app-muted);margin-top:-39px;margin-right:100px;min-height:29px}
+.day-overview .kol-raad-effekt strong {font-size:22px;color:var(--kol-aksent);font-weight:550}
+.day-overview .kol-raad-knapper {margin-top:auto;justify-content:flex-end}
+.kol-raad-detaljer {font-size:11px;color:var(--app-muted);margin-top:-35px;margin-right:100px;min-height:29px}
 .kol-raad-detaljer summary {width:fit-content;cursor:pointer;padding:8px 0}
 .kol-raad-detaljer[open] {margin-right:0}
 .kol-raad-detaljer p {font-size:11px;line-height:1.6;margin:9px 0}
 .kol-raad-detaljer summary:focus-visible {outline:2px solid var(--kol-aksent);outline-offset:3px}
 .day-overview .kol-status {color:var(--kol-aksent)}
-.day-overview .kol-raad[data-status=done] {background:none}
+.day-overview .kol-raad[data-status=done] {background:var(--app-rail)}
 .day-overview .kol-segment {padding:3px;gap:2px;background:var(--app-rail);border-radius:10px}
 .day-overview .kol-segment button {border-color:transparent;background:transparent}
-.day-overview .kol-segment button[aria-pressed=true] {background:var(--app-paper);color:var(--app-ink);border-color:var(--app-line)}
-.day-overview .kol-rapportliste {gap:0}
-.day-overview .kol-rapportkort {border:0;border-bottom:1px solid var(--app-line);border-radius:0}
-.day-overview .kol-rapportknapp {padding:17px 2px;gap:8px}
+.day-overview .kol-segment button[aria-pressed=true] {background:var(--kol-tint);color:var(--kol-aksent);border-color:color-mix(in srgb,var(--kol-aksent) 25%,var(--app-line))}
+.day-overview .kol-rapportliste {gap:8px}
+.day-overview .kol-rapportkort {border:1px solid var(--app-line);border-radius:12px}
+.day-overview .kol-rapportkort:hover {border-color:color-mix(in srgb,var(--kol-aksent) 35%,var(--app-line));background:color-mix(in srgb,var(--kol-tint) 40%,var(--app-paper))}
+.day-overview .kol-rapportknapp {padding:16px 12px;gap:8px}
 .day-overview .kol-rapportnavn strong {font-weight:500;font-size:12px}
 .day-overview .kol-rapportnavn small {display:none}
 .day-overview .kol-rapportsum {font-weight:550;font-size:13px}
-.day-overview .kol-rapportkort[data-apen=true] {border-radius:8px}
-.day-overview .kol-rapportkort[data-apen=true] .kol-rapportknapp {padding-inline:10px}
+.day-overview .kol-rapportkort[data-apen=true] {border-color:var(--kol-aksent);background:var(--kol-tint)}
 @media(max-width:600px){.day-overview .kol{padding:20px}.day-overview .kol-rapportknapp{min-height:54px}}
 
 /* Språkvelgeren: rolig meny med tydelig valgt rad. */
