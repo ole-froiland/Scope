@@ -998,10 +998,10 @@
 .ask-box {
   display: flex;
   align-items: flex-end;
-  gap: 8px;
+  gap: 6px;
   max-width: 560px;
   margin: 0 auto;
-  padding: 7px 8px 7px 14px;
+  padding: 7px 8px;
   border: 1px solid var(--app-line);
   border-radius: 14px;
   background: var(--app-paper);
@@ -1027,8 +1027,8 @@
   font: inherit;
   font-size: 15px;
   line-height: 1.45;
-  /* Hjørnet kan dras: da bestemmer man høyden selv. */
-  resize: vertical;
+  /* Feltet vokser med teksten; ikke noe drahjørne i veien. */
+  resize: none;
 }
 
 .ask-input:focus {
@@ -1039,7 +1039,7 @@
   color: var(--app-muted);
 }
 
-/* Feltet og de to knappene deler én linje. */
+/* Send-knappen deler linje med feltet. */
 .ask-row {
   display: flex;
   flex: none;
@@ -1056,9 +1056,10 @@
 /* Pila til venstre drar samtalen opp, og peker ned igjen når den er oppe. */
 .ask-utvid {
   display: grid;
+  flex: none;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   padding: 0;
   border: 0;
   border-radius: 8px;

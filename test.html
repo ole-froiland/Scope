@@ -7,11 +7,11 @@
     <meta name="description" content="Testflate for Scope: venstremeny, stedsvelger og spørreboks.">
     <meta name="robots" content="noindex">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='20' r='18' fill='%23064dff'/%3E%3Ccircle cx='44' cy='40' r='18' fill='%23ff3c38'/%3E%3Ccircle cx='20' cy='40' r='18' fill='%2300bd7b'/%3E%3C/svg%3E">
-    <link rel="stylesheet" href="test.css?v=chat-35">
+    <link rel="stylesheet" href="test.css?v=chat-36">
   </head>
   <body class="app">
     <!-- Lastes her, ikke i <head>, slik at lagret menytilstand settes før første tegning. -->
-    <script src="test.js?v=chat-35"></script>
+    <script src="test.js?v=chat-36"></script>
 
     <aside class="sidebar" id="sidebar" aria-label="Sidemeny">
       <div class="sidebar-top">
@@ -406,12 +406,12 @@
 
         <form class="ask-box" id="ask-form">
           <label class="visually-hidden" for="ask-input">Spør Scope</label>
+          <button class="ask-utvid" id="ask-expand" type="button" aria-pressed="false" aria-controls="ask-thread" aria-label="Dra samtalen opp" title="Dra samtalen opp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14.5 12 8.5l6 6"></path></svg>
+          </button>
           <textarea class="ask-input" id="ask-input" rows="1" maxlength="4000" placeholder="Spør Scope" autocomplete="off"></textarea>
           <div class="ask-row">
             <span class="ask-hint">Enter sender · Shift + Enter gir ny linje</span>
-            <button class="ask-utvid" id="ask-expand" type="button" aria-pressed="false" aria-controls="ask-thread" aria-label="Dra samtalen opp" title="Dra samtalen opp">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14.5 12 8.5l6 6"></path></svg>
-            </button>
             <button class="ask-send" type="submit" aria-label="Send spørsmål" disabled>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M12 19V5M6 11l6-6 6 6"></path>

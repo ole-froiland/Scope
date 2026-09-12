@@ -663,28 +663,11 @@
 
     /* ---- Spørreboksen --------------------------------------------------- */
 
-    // Feltet vokser med teksten, men drar man i hjørnet er det høyden som
-    // gjelder til man tømmer feltet igjen.
-    let manuellHøyde = 0;
-    let høydeFørDrag = 0;
-
+    // Feltet vokser med teksten.
     function grow() {
-      if (manuellHøyde) {
-        askInput.style.height = manuellHøyde + "px";
-        return;
-      }
       askInput.style.height = "auto";
       askInput.style.height = askInput.scrollHeight + "px";
     }
-
-    askInput.addEventListener("pointerdown", function () {
-      høydeFørDrag = askInput.offsetHeight;
-    });
-
-    document.addEventListener("pointerup", function () {
-      if (høydeFørDrag && askInput.offsetHeight !== høydeFørDrag) manuellHøyde = askInput.offsetHeight;
-      høydeFørDrag = 0;
-    });
 
     askInput.addEventListener("input", function () {
       askInput.setCustomValidity('');
