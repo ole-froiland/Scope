@@ -852,7 +852,10 @@
   min-height: 0;
   overflow-y: auto;
   padding: 24px 20px;
-  transition: opacity 200ms ease;
+  /* Dashbordet slukkes først når panelet dekker det helt, og er tilbake i
+     samme øyeblikk panelet begynner å gå ned igjen. Begge deler skjer bak
+     panelet, så man ser bare at det glir over. */
+  transition: opacity 0s;
 }
 
 .view-note {
@@ -937,15 +940,15 @@
   margin-bottom: 0;
 }
 
-/* Stor visning: dashbordet går ut av flyten, men blir stående på samme
-   plass og toner ut. Da glir panelet opp over det i stedet for at dashbordet
-   forsvinner med ett. */
+/* Stor visning: dashbordet går ut av flyten, men blir liggende akkurat der
+   det lå, i full styrke, mens panelet glir opp over det. */
 .content:has(.ask.er-stor) .content-body {
   position: absolute;
-  inset: var(--header-height) 0 0;
+  inset: var(--header-height) 0 var(--ask-lukket, 0px);
   z-index: 0;
   opacity: 0;
   pointer-events: none;
+  transition-delay: 350ms;
 }
 
 /* Uten innholdet under ville feltet falt oppover. Det skal stå i bunn, og
@@ -956,6 +959,8 @@
 
 .ask.er-stor {
   padding-top: 6px;
+  /* Kanten kaster en myk skygge, så panelet ligger tydelig oppå dashbordet. */
+  box-shadow: 0 -14px 28px rgba(23, 23, 21, 0.07);
 }
 
 /* Samtalen tar plassen den har fått, og meldingene hviler mot skrivefeltet

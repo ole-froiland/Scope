@@ -520,11 +520,19 @@
       // Høyden måles før og etter, så bevegelsen blir den samme enten den
       // gamle høyden var satt eller fulgte innholdet.
       const fra = askThread.hidden ? 0 : askThread.getBoundingClientRect().height;
+      // Dashbordet går ut av flyten og må få beholde nøyaktig den boksen det
+      // hadde, ellers rykker innholdet idet panelet slippes løs.
+      if (på) askArea.parentElement.style.setProperty("--ask-lukket", askArea.offsetHeight + "px");
       if (på) askThread.hidden = false;
+      // Ruta har sin egen overgang på max-height. Den ville både dratt i
+      // samme høyde som animasjonen under, og gitt feil mål når vi måler
+      // rett etterpå, så den står over mens vi stiller høyden.
+      askThread.style.transition = "none";
       merkStor(på);
       settTrådhøyde(på ? trådMaks() : høydeFørStor);
       store(TRÅD_KEY, String(trådHøyde));
       const til = !på && tom ? 0 : askThread.getBoundingClientRect().height;
+      askThread.style.transition = "";
 
       function rydd() {
         // Tom samtale hører ikke hjemme i den lille visningen.
@@ -536,10 +544,11 @@
         return;
       }
 
-      // Panelet er høyt, så det trenger litt mer tid enn et lite sprang, og
-      // en kurve som setter i gang rolig og lander mykt.
+      // Panelet dekker nesten hele skjermen, så det trenger tid nok til at
+      // man ser det gli over dashbordet. Kurven setter i gang rolig og lander
+      // mykt.
       const bevegelse = askThread.animate([{ height: fra + "px" }, { height: til + "px" }], {
-        duration: 300,
+        duration: 360,
         easing: "cubic-bezier(0.32, 0.72, 0, 1)"
       });
       bevegelse.finished.then(rydd, rydd);
