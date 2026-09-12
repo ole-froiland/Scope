@@ -1991,7 +1991,7 @@
       const naa=el("section","kol kol-naa"),naaHead=el("header","kol-topp"),time=el("span","day-time");
       naaHead.append(el("h3","","Nå"),time);naa.append(naaHead);
       const stats=el("div","day-stats"),revenue=el("strong"),guests=el("strong"),staff=el("strong"),ratio=el("strong");
-      [["Omsetning",revenue,"Hittil i dag"],["Gjester",guests,"Hittil i dag"],["På vakt",staff,"I valgt time"],["Gjester / ansatt",ratio,"I valgt time"]].forEach(([label,value,note])=>{const box=el("div","day-stat");box.append(el("span","",label),value,el("small","",note));stats.append(box);});naa.append(stats);
+      [["Omsetning i dag",revenue,"Hittil i dag"],["Gjester i dag",guests,"Hittil i dag"],["På vakt",staff,"I valgt time"],["Gjester / ansatt",ratio,"I valgt time"]].forEach(([label,value,note])=>{const box=el("div","day-stat");box.append(el("span","",label),value,el("small","",note));stats.append(box);});naa.append(stats);
       const chartHead=el("div","day-chart-head"),hourRead=el("output");chartHead.append(el("span","","Omsetning per time"),hourRead);naa.append(chartHead);
       const chart=el("div","day-chart");chart.setAttribute("role","group");chart.setAttribute("aria-label","Velg time i dagen");const max=Math.max(...points.map(point=>point.revenue));
       points.forEach((point,index)=>{const button=hubButton("",()=>{selected=index;update();},"day-hour");button.dataset.hour=String(point.hour);button.setAttribute("aria-label","Klokken "+point.label);const well=el("span","day-hour-well"),bar=el("i");bar.style.height=Math.max(2,point.revenue/max*100)+"%";well.append(bar);button.append(well,el("span","",String(point.hour)));chart.append(button);});naa.append(chart);
@@ -2002,10 +2002,10 @@
       const minus=hubButton("−",()=>{extra--;update();},"glance-step"),plus=hubButton("+",()=>{extra++;update();},"glance-step");
       minus.setAttribute("aria-label","Én færre i simuleringen");plus.setAttribute("aria-label","Én ekstra i simuleringen");stepper.append(minus,extraRead,plus);
       const simNote=el("p","day-sim-note"),teamTopp=el("div","kol-bemanning-topp");
-      teamTopp.append(el("span","kol-merke","BEMANNING"),stepper);
-      team.append(teamTopp,teamRead,simNote,hubButton("Åpne vaktoversikten ↗",()=>{opsState.staffDay=dagIndeks(NÅ);opsState.staffWeek=0;hubGo("bemanning");},"hub-link"));
+      teamTopp.append(el("span","kol-merke","Test bemanning"),stepper);
+      team.append(teamTopp,teamRead,simNote,hubButton("Se vakter ↗",()=>{opsState.staffDay=dagIndeks(NÅ);opsState.staffWeek=0;hubGo("bemanning");},"hub-link"));
       naa.append(team);grid.append(naa);
-      function update(){const point=points[selected],count=point.staff+extra;time.textContent="Til kl. "+(point.hour+1)+":00";revenue.textContent=kr(point.totalRevenue);guests.textContent=nf.format(point.totalGuests);staff.textContent=String(count);staff.parentElement.querySelector("small").textContent=extra?"Simulert i valgt time":"I valgt time";ratio.parentElement.querySelector("small").textContent=extra?"Simulert i valgt time":"I valgt time";ratio.textContent=nf.format(Number((point.guests/count).toFixed(1)));hourRead.textContent=point.label+" · "+kr(point.revenue)+" · "+point.guests+" gjester";chart.querySelectorAll("button").forEach((button,index)=>{button.setAttribute("aria-pressed",String(index===selected));button.dataset.future=String(index>selected);});teamNumber.textContent=String(count);teamNote.textContent="på vakt kl. "+point.label;extraRead.textContent=extra===0?"0":"+"+extra;minus.disabled=extra===0;plus.disabled=extra===8;simNote.textContent=extra?"Simulert: "+count+" ansatte · "+nf.format(Number((point.guests/count).toFixed(1)))+" gjester per ansatt.":"Prøv + og se gjester per ansatt endre seg.";}
+      function update(){const point=points[selected],count=point.staff+extra;time.textContent="Til kl. "+(point.hour+1)+":00";revenue.textContent=kr(point.totalRevenue);guests.textContent=nf.format(point.totalGuests);staff.textContent=String(count);staff.parentElement.querySelector("small").textContent=extra?"Simulert · kl. "+point.label:"Kl. "+point.label;ratio.parentElement.querySelector("small").textContent=extra?"Simulert · kl. "+point.label:"Kl. "+point.label;ratio.textContent=nf.format(Number((point.guests/count).toFixed(1)));hourRead.textContent=point.label+" · "+kr(point.revenue)+" · "+point.guests+" gjester";chart.querySelectorAll("button").forEach((button,index)=>{button.setAttribute("aria-pressed",String(index===selected));button.dataset.future=String(index>selected);});teamNumber.textContent=String(count);teamNote.textContent="på vakt kl. "+point.label;extraRead.textContent=extra===0?"0":"+"+extra;minus.disabled=extra===0;plus.disabled=extra===8;simNote.textContent=extra?"Simulert: "+count+" ansatte · "+nf.format(Number((point.guests/count).toFixed(1)))+" gjester per ansatt.":"";}
       update();
 
       // Kolonne 2: de konkrete tiltakene, med effekten av dem nederst.
@@ -2014,20 +2014,29 @@
       const t30=tall(place,"siste30"),anslag={cost:improvementEffect(t30.oms,1,0),plan:improvementEffect(t30.oms,0,1)};
       // Kortet skal leses på et blikk: hva, hvor mye, og én knapp.
       const gevinst={cost:["+ "+kr(anslag.cost),"på fire uker ved 1 pp lavere varekost"],plan:["+ "+kr(anslag.plan),"på fire uker ved 1 pp lavere lønn"],receipts:[null,"Ingen kroner, men riktig grunnlag i regnskapet"]};
+      const korteTitler={cost:"Sjekk de største varelinjene",plan:"Tilpass bemanningen",receipts:"Legg ved manglende bilag"};
       const liste=el("div","kol-liste");
       tasks.forEach(task=>{
         const kort=el("article","kol-raad");kort.dataset.task=task.id;kort.dataset.status=task.status;
         const topp=el("div","kol-raad-topp");
-        topp.append(el("span","kol-chip",task.horizon),el("span","kol-status",{suggested:"Foreslått",active:"◉ Pågår",done:"✓ Utført"}[task.status]));
+        topp.append(el("span","kol-chip",task.horizon));
+        if(task.status!=="suggested")topp.append(el("span","kol-status",{active:"◉ Pågår",done:"✓ Utført"}[task.status]));
         const [sum,note]=gevinst[task.id]||[null,""];
         const effekt=el("div","kol-raad-effekt");
         if(sum)effekt.append(el("strong","",sum));
-        effekt.append(el("small","",note));
+        if(sum)effekt.append(el("small","","mulig / 4 uker"));
         const knapper=el("div","kol-raad-knapper");
         const knapp=hubButton(task.status==="suggested"?"Start":task.status==="active"?"Fullfør":"Åpne igjen",()=>setTask(task,task.status==="suggested"?"active":task.status==="active"?"done":"suggested"),"hub-button");
         knapp.dataset.compactTask=task.id;
-        knapper.append(knapp,hubButton("Se grunnlag ↗",()=>hubGo(task.view),"hub-link"));
-        kort.append(topp,el("h4","",task.title),el("p","kol-raad-basis",task.basis),effekt,knapper);
+        const detaljer=el("details","kol-raad-detaljer");
+        detaljer.append(el("summary","","Detaljer"),el("p","",task.basis),el("p","",task.text));
+        if(sum)detaljer.append(el("p","","Anslag "+note+"."));
+        detaljer.append(hubButton("Se grunnlag ↗",()=>hubGo(task.view),"hub-link"));
+        knapper.append(knapp);
+        kort.append(topp,el("h4","",korteTitler[task.id]||task.title));
+        if(sum)kort.append(effekt);
+        else kort.append(el("p","kol-raad-basis",task.basis));
+        kort.append(knapper,detaljer);
         liste.append(kort);
       });
       tiltak.append(liste);grid.append(tiltak);
@@ -2038,10 +2047,11 @@
       const typer=el("div","kol-segment");typer.setAttribute("role","group");typer.setAttribute("aria-label","Rapporttype");
       [["day","Dag"],["week","Uke"],["month","Måned"]].forEach(([id,label])=>{const b=hubButton(label,()=>{hubState.report=id;hubState.offset=0;tegnRapport();typer.querySelector('[data-kol-report="'+id+'"]').focus();},"");b.dataset.kolReport=id;typer.append(b);});
       const rapportListe=el("div","kol-rapportliste");rapport.append(typer,rapportListe);
+      const kortDato=new Intl.DateTimeFormat("nb-NO",{weekday:"short",day:"numeric",month:"short"});
       const ukedagFormat=new Intl.DateTimeFormat("nb-NO",{weekday:"long"}),manedFormat=new Intl.DateTimeFormat("nb-NO",{month:"long",year:"numeric"});
       // ISO-ukenummer: uken eies av torsdagen.
       function ukenummer(dato){const d=new Date(Date.UTC(dato.getFullYear(),dato.getMonth(),dato.getDate()));d.setUTCDate(d.getUTCDate()+4-(d.getUTCDay()||7));return Math.ceil(((d-Date.UTC(d.getUTCFullYear(),0,1))/86400000+1)/7);}
-      function periodeNavn(r){return hubState.report==="day"?stor(ukedagFormat.format(r.start))+" "+hubDate.format(r.start):hubState.report==="week"?"Uke "+ukenummer(r.start):stor(manedFormat.format(r.start));}
+      function periodeNavn(r){return hubState.report==="day"?stor(kortDato.format(r.start))+(r.start.getFullYear()!==NÅ.getFullYear()?" "+r.start.getFullYear():""):hubState.report==="week"?"Uke "+ukenummer(r.start):stor(manedFormat.format(r.start));}
       // Alle periodene ligger under hverandre. Kortet man åpner folder seg ut
       // der det står, så nabo-rapportene fortsatt er synlige over og under.
       function apneRapport(valgt){
