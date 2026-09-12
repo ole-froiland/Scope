@@ -894,12 +894,12 @@
 
 .ask-gripe::before {
   content: "";
-  width: 52px;
-  height: 4px;
+  width: 64px;
+  height: 5px;
   border-radius: 999px;
   background: var(--app-line);
-  /* Svakt synlig hele tiden, så grepet er til å finne. */
-  opacity: 0.5;
+  /* Godt synlig hele tiden, så grepet er til å finne. */
+  opacity: 0.9;
   transition: opacity 140ms ease, background 140ms ease;
 }
 
@@ -921,7 +921,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width: 720px;
+  max-width: 620px;
   max-height: var(--ask-traad, 260px);
   margin: 0 auto 12px;
   overflow-y: auto;
@@ -933,6 +933,12 @@
   display: none;
 }
 
+/* Uten innholdet under ville feltet falt oppover. Det skal stå i bunn, og
+   samtalen vokse opp fra det. */
+.content:has(.ask.er-stor) .ask {
+  margin-top: auto;
+}
+
 .ask.er-stor {
   padding-top: 6px;
 }
@@ -941,24 +947,6 @@
    slik en samtale gjør. */
 .ask.er-stor .ask-thread {
   height: var(--ask-traad, 260px);
-  animation: ask-dra-opp 260ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes ask-dra-opp {
-  from {
-    transform: translateY(28px);
-    opacity: 0.4;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .ask.er-stor .ask-thread {
-    animation: none;
-  }
 }
 
 .ask.er-stor .ask-thread > :first-child {
@@ -1007,7 +995,7 @@
 }
 
 .ask-box {
-  max-width: 720px;
+  max-width: 620px;
   margin: 0 auto;
   padding: 10px 12px;
   border: 1px solid var(--app-line);
@@ -1025,14 +1013,16 @@
 .ask-input {
   display: block;
   width: 100%;
-  max-height: 160px;
+  min-height: 24px;
+  max-height: 320px;
   border: 0;
   background: transparent;
   color: var(--app-ink);
   font: inherit;
   font-size: 15px;
   line-height: 1.45;
-  resize: none;
+  /* Hjørnet kan dras: da bestemmer man høyden selv. */
+  resize: vertical;
 }
 
 .ask-input:focus {

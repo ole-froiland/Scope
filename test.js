@@ -514,9 +514,19 @@
 
     function settStor(på) {
       if (på) høydeFørStor = trådHøyde;
+      // Høyden måles før og etter, så bevegelsen blir den samme enten den
+      // gamle høyden var satt eller fulgte innholdet.
+      const fra = askThread.getBoundingClientRect().height;
       merkStor(på);
       settTrådhøyde(på ? trådMaks() : høydeFørStor);
       store(TRÅD_KEY, String(trådHøyde));
+      const til = askThread.getBoundingClientRect().height;
+      if (Math.abs(til - fra) > 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        askThread.animate(
+          [{ height: fra + "px" }, { height: til + "px" }],
+          { duration: 260, easing: "cubic-bezier(0.16, 1, 0.3, 1)" }
+        );
+      }
     }
 
     askExpand.addEventListener("click", function () {
@@ -653,10 +663,28 @@
 
     /* ---- Spørreboksen --------------------------------------------------- */
 
+    // Feltet vokser med teksten, men drar man i hjørnet er det høyden som
+    // gjelder til man tømmer feltet igjen.
+    let manuellHøyde = 0;
+    let høydeFørDrag = 0;
+
     function grow() {
+      if (manuellHøyde) {
+        askInput.style.height = manuellHøyde + "px";
+        return;
+      }
       askInput.style.height = "auto";
       askInput.style.height = askInput.scrollHeight + "px";
     }
+
+    askInput.addEventListener("pointerdown", function () {
+      høydeFørDrag = askInput.offsetHeight;
+    });
+
+    document.addEventListener("pointerup", function () {
+      if (høydeFørDrag && askInput.offsetHeight !== høydeFørDrag) manuellHøyde = askInput.offsetHeight;
+      høydeFørDrag = 0;
+    });
 
     askInput.addEventListener("input", function () {
       askInput.setCustomValidity('');
