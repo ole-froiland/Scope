@@ -521,8 +521,13 @@
       // gamle høyden var satt eller fulgte innholdet.
       const fra = askThread.hidden ? 0 : askThread.getBoundingClientRect().height;
       // Dashbordet går ut av flyten og må få beholde nøyaktig den boksen det
-      // hadde, ellers rykker innholdet idet panelet slippes løs.
-      if (på) askArea.parentElement.style.setProperty("--ask-lukket", askArea.offsetHeight + "px");
+      // hadde, ellers rykker innholdet idet panelet slippes løs. Boksen er
+      // gitt av panelet slik det står nede: målt før på vei opp, etter på
+      // vei ned.
+      function settLukketHøyde() {
+        askArea.parentElement.style.setProperty("--ask-lukket", askArea.offsetHeight + "px");
+      }
+      if (på) settLukketHøyde();
       if (på) askThread.hidden = false;
       // Ruta har sin egen overgang på max-height. Den ville både dratt i
       // samme høyde som animasjonen under, og gitt feil mål når vi måler
@@ -533,10 +538,17 @@
       store(TRÅD_KEY, String(trådHøyde));
       const til = !på && tom ? 0 : askThread.getBoundingClientRect().height;
       askThread.style.transition = "";
+      // Panelet går ned, men dashbordet skal ikke røre seg før det er nede.
+      // Plassen måles med panelet slik det blir stående, altså før merkelappen
+      // settes på.
+      if (!på) settLukketHøyde();
+      askArea.classList.toggle("er-lukker", !på);
 
       function rydd() {
         // Tom samtale hører ikke hjemme i den lille visningen.
         if (!storVisning && askThread.childElementCount === 0) askThread.hidden = true;
+        // Nede igjen: dashbordet kan ta plassen sin tilbake.
+        if (!storVisning) askArea.classList.remove("er-lukker");
       }
 
       if (Math.abs(til - fra) < 1 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -547,7 +559,12 @@
       // Panelet dekker nesten hele skjermen, så det trenger tid nok til at
       // man ser det gli over dashbordet. Kurven setter i gang rolig og lander
       // mykt.
-      const bevegelse = askThread.animate([{ height: fra + "px" }, { height: til + "px" }], {
+      // Taket må følge med i bevegelsen. Ellers klipper det lille taket
+      // panelet ned med én gang på vei ned, og bare resten glir.
+      const bevegelse = askThread.animate([
+        { height: fra + "px", maxHeight: fra + "px" },
+        { height: til + "px", maxHeight: til + "px" }
+      ], {
         duration: 360,
         easing: "cubic-bezier(0.32, 0.72, 0, 1)"
       });

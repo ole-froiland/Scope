@@ -941,23 +941,31 @@
 }
 
 /* Stor visning: dashbordet går ut av flyten, men blir liggende akkurat der
-   det lå, i full styrke, mens panelet glir opp over det. */
-.content:has(.ask.er-stor) .content-body {
+   det lå, i full styrke, mens panelet glir opp over det. Det står ute av
+   flyten hele veien ned igjen også — ellers ville panelhøyden klemt det
+   sammen og latt det vokse ut mens panelet gikk. */
+.content:has(.ask.er-stor) .content-body,
+.content:has(.ask.er-lukker) .content-body {
   position: absolute;
   inset: var(--header-height) 0 var(--ask-lukket, 0px);
   z-index: 0;
-  opacity: 0;
   pointer-events: none;
+}
+
+.content:has(.ask.er-stor) .content-body {
+  opacity: 0;
   transition-delay: 350ms;
 }
 
 /* Uten innholdet under ville feltet falt oppover. Det skal stå i bunn, og
-   samtalen vokse opp fra det. */
-.content:has(.ask.er-stor) .ask {
+   samtalen vokse opp fra det — hele veien ned igjen også. */
+.content:has(.ask.er-stor) .ask,
+.content:has(.ask.er-lukker) .ask {
   margin-top: auto;
 }
 
-.ask.er-stor {
+.ask.er-stor,
+.ask.er-lukker {
   padding-top: 6px;
   /* Kanten kaster en myk skygge, så panelet ligger tydelig oppå dashbordet. */
   box-shadow: 0 -14px 28px rgba(23, 23, 21, 0.07);
