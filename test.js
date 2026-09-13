@@ -1991,13 +1991,14 @@
       const naa=el("section","kol kol-naa"),naaHead=el("header","kol-topp"),time=el("span","day-time");
       naaHead.append(el("h3","","Nå"),time);naa.append(naaHead);
       const stats=el("div","day-stats"),revenue=el("strong"),guests=el("strong"),staff=el("strong"),ratio=el("strong");
-      [["Omsetning i dag",revenue,"Hittil i dag"],["Gjester i dag",guests,"Hittil i dag"],["På vakt",staff,"I valgt time"],["Gjester / ansatt",ratio,"I valgt time"]].forEach(([label,value,note])=>{const box=el("div","day-stat");box.append(el("span","",label),value,el("small","",note));stats.append(box);});naa.append(stats);
+      [["Omsetning i dag",revenue,"Hittil i dag"],["Gjester i dag",guests,"Hittil i dag"]].forEach(([label,value,note])=>{const box=el("div","day-stat");box.append(el("span","",label),value,el("small","",note));stats.append(box);});naa.append(stats);
       const chartHead=el("div","day-chart-head"),hourRead=el("output");chartHead.append(el("span","","Omsetning per time"),hourRead);naa.append(chartHead);
       const chart=el("div","day-chart");chart.setAttribute("role","group");chart.setAttribute("aria-label","Velg time i dagen");const max=Math.max(...points.map(point=>point.revenue));
       points.forEach((point,index)=>{const button=hubButton("",()=>{selected=index;update();},"day-hour");button.dataset.hour=String(point.hour);button.setAttribute("aria-label","Klokken "+point.label);const well=el("span","day-hour-well"),bar=el("i");bar.style.height=Math.max(2,point.revenue/max*100)+"%";well.append(bar);button.append(well,el("span","",String(point.hour)));chart.append(button);});naa.append(chart);
       const total=el("div","day-total");total.append(el("span","","Hele dagen · "+kr(points.at(-1).totalRevenue)+" / "+nf.format(points.at(-1).totalGuests)+" gjester"),hubButton("Se salg ↗",()=>hubGo("salg"),"hub-link"));naa.append(total);
-      const team=el("div","kol-bemanning"),teamRead=el("div","kol-bemanning-tall"),teamNumber=el("strong"),teamNote=el("span");
-      teamRead.append(teamNumber,teamNote);
+      const chartPanel=el("div","day-chart-panel");chartPanel.append(chartHead,chart,total);naa.append(chartPanel);
+      const team=el("div","kol-bemanning"),teamRead=el("div","day-team-metrics");
+      [["På vakt",staff],["Gjester / ansatt",ratio]].forEach(([label,value])=>{const box=el("div","day-stat");box.append(el("span","",label),value,el("small"));teamRead.append(box);});
       const stepper=el("div","glance-stepper"),extraRead=el("output");
       const minus=hubButton("−",()=>{extra--;update();},"glance-step"),plus=hubButton("+",()=>{extra++;update();},"glance-step");
       minus.setAttribute("aria-label","Én færre i simuleringen");plus.setAttribute("aria-label","Én ekstra i simuleringen");stepper.append(minus,extraRead,plus);
@@ -2005,7 +2006,7 @@
       teamTopp.append(el("span","kol-merke","Test bemanning"),stepper);
       team.append(teamTopp,teamRead,simNote,hubButton("Se vakter ↗",()=>{opsState.staffDay=dagIndeks(NÅ);opsState.staffWeek=0;hubGo("bemanning");},"hub-link"));
       naa.append(team);grid.append(naa);
-      function update(){const point=points[selected],count=point.staff+extra;time.textContent="Til kl. "+(point.hour+1)+":00";revenue.textContent=kr(point.totalRevenue);guests.textContent=nf.format(point.totalGuests);staff.textContent=String(count);staff.parentElement.querySelector("small").textContent=extra?"Simulert · kl. "+point.label:"Kl. "+point.label;ratio.parentElement.querySelector("small").textContent=extra?"Simulert · kl. "+point.label:"Kl. "+point.label;ratio.textContent=nf.format(Number((point.guests/count).toFixed(1)));hourRead.textContent=point.label+" · "+kr(point.revenue)+" · "+point.guests+" gjester";chart.querySelectorAll("button").forEach((button,index)=>{button.setAttribute("aria-pressed",String(index===selected));button.dataset.future=String(index>selected);});teamNumber.textContent=String(count);teamNote.textContent="på vakt kl. "+point.label;extraRead.textContent=extra===0?"0":"+"+extra;minus.disabled=extra===0;plus.disabled=extra===8;simNote.textContent=extra?"Simulert: "+count+" ansatte · "+nf.format(Number((point.guests/count).toFixed(1)))+" gjester per ansatt.":"";}
+      function update(){const point=points[selected],count=point.staff+extra;time.textContent="Til kl. "+(point.hour+1)+":00";revenue.textContent=kr(point.totalRevenue);guests.textContent=nf.format(point.totalGuests);staff.textContent=String(count);staff.parentElement.querySelector("small").textContent=extra?"Simulert · kl. "+point.label:"Kl. "+point.label;ratio.parentElement.querySelector("small").textContent=extra?"Simulert · kl. "+point.label:"Kl. "+point.label;ratio.textContent=nf.format(Number((point.guests/count).toFixed(1)));hourRead.textContent=point.label+" · "+kr(point.revenue)+" · "+point.guests+" gjester";chart.querySelectorAll("button").forEach((button,index)=>{button.setAttribute("aria-pressed",String(index===selected));button.dataset.future=String(index>selected);});extraRead.textContent=extra===0?"0":"+"+extra;minus.disabled=extra===0;plus.disabled=extra===8;simNote.textContent=extra?"Simulert: "+count+" ansatte · "+nf.format(Number((point.guests/count).toFixed(1)))+" gjester per ansatt.":"";}
       update();
 
       // Kolonne 2: de konkrete tiltakene, med effekten av dem nederst.
@@ -2043,7 +2044,7 @@
 
       // Kolonne 3: gårsdagen, uken eller måneden som er avsluttet.
       const rapport=el("section","kol kol-rapport"),rapportHead=el("header","kol-topp");
-      rapportHead.append(el("h3","","Rapporter"),hubButton("Hele rapporten ↗",()=>hubGo("rapporter"),"hub-link"));rapport.append(rapportHead);
+      rapportHead.append(el("h3","","Rapporter"),hubButton("Hele rapporten ↗",()=>openReportStory(),"hub-link"));rapport.append(rapportHead);
       const typer=el("div","kol-segment");typer.setAttribute("role","group");typer.setAttribute("aria-label","Rapporttype");
       [["day","Dag"],["week","Uke"],["month","Måned"]].forEach(([id,label])=>{const b=hubButton(label,()=>{hubState.report=id;hubState.offset=0;tegnRapport();typer.querySelector('[data-kol-report="'+id+'"]').focus();},"");b.dataset.kolReport=id;typer.append(b);});
       const rapportListe=el("div","kol-rapportliste");rapport.append(typer,rapportListe);
@@ -2093,7 +2094,7 @@
             r.points.forEach(x=>{const b=hubButton("",()=>{lese.textContent=hubDate.format(x.date)+" · "+kr(x.revenue);graf.querySelectorAll("button").forEach(y=>y.setAttribute("aria-pressed",String(y===b)));},"kol-stolpe");b.setAttribute("aria-label",hubDate.format(x.date)+": "+kr(x.revenue));b.setAttribute("aria-pressed","false");const i=el("i");i.style.height=Math.max(3,x.revenue/maks*100)+"%";b.append(i);graf.append(b);});
             inner.append(graf,lese);
           }
-          inner.append(hubButton("Hele rapporten ↗",()=>{hubState.offset=offset;hubGo("rapporter");},"hub-link"));
+          inner.append(hubButton("Hele rapporten ↗",()=>{hubState.offset=offset;openReportStory();},"hub-link"));
           kropp.append(inner);kort.append(knapp,kropp);rapportListe.append(kort);
         }
       }
@@ -2386,6 +2387,19 @@
     }
     function moveOpsStory(delta){if(opsStoryIndex===2&&delta===1){opsStory.close();return;}opsStoryIndex=Math.max(0,Math.min(2,opsStoryIndex+delta));renderOpsStory();opsStory.querySelector('.ops-story-nav button:last-child').focus();}
     opsStory.addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();moveOpsStory(e.key==="ArrowRight"?1:-1);}});
+    function openReportStory(){
+      const p=profil(placeName.textContent),kind=hubState.report,offset=hubState.offset;
+      const r=buildReport(p,kind,offset,NÅ,DAGVEKT),previous=buildReport(p,kind,offset+1,NÅ,DAGVEKT);
+      const context=hubDate.format(r.start)+(kind==="day"?"":" – "+hubDate.format(r.end));
+      const period={day:"dag",week:"uke",month:"måned"}[kind];
+      const difference=r.contribution-previous.contribution;
+      opsStoryCards=[
+        {title:"Salg og gjester",value:kr(r.revenue),text:nf.format(r.guests)+" gjester · "+kr(r.guests?r.revenue/r.guests:0)+" per gjest.",bars:[["Valgt "+period,r.revenue,kr(r.revenue)],["Forrige "+period,previous.revenue,kr(previous.revenue)]]},
+        {title:"Varekost og lønn",value:kr(r.cost+r.wages),text:pst(r.revenue?(r.cost+r.wages)/r.revenue*100:0)+" av omsetningen går til varer og lønn.",bars:[["Varekost",r.cost,kr(r.cost)],["Lønn",r.wages,kr(r.wages)]]},
+        {title:"Dette er igjen i bidrag",value:kr(r.contribution),text:(difference===0?"Samme bidrag som forrige "+period:(difference>0?"+ ":"− ")+kr(Math.abs(difference))+" mot forrige "+period)+". Bidrag er før øvrige kostnader, ikke overskudd.",bars:[["Valgt "+period,r.contribution,kr(r.contribution)],["Forrige "+period,previous.contribution,kr(previous.contribution)]]}
+      ].map(card=>({...card,context,tone:"blue"}));
+      opsStoryIndex=0;renderOpsStory();opsStory.showModal();
+    }
     function openOpsStory(key){
       if(key==="bemanning"){
         const d=staffData()[opsState.staffDay],extra=opsState.extra,context=stor(datoFormat.format(d.date))+" · kveld";const ratio=d.guests/d.staff;
