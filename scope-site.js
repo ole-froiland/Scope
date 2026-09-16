@@ -1,11 +1,14 @@
-import { copy, periods, dishes, staff, demoMailto } from './scope-content.js?v=20260916-1';
+import { copy, periods, dishes, staff, demoMailto } from './scope-content.js?v=20260916-2';
+
+import { initExperience, menuPriceScenario } from './scope-motion.js?v=20260916-2';
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const storageKey = 'scope-17-language';
 let language = 'no';
 try { if (localStorage.getItem(storageKey) === 'en') language = 'en'; } catch { /* Private browsers can deny preference storage; the page remains usable. */ }
-const state = { period:'week', view:'overview', scenario:'staffing', source:'pos' };
+const state = { period:'week', view:'overview', scenario:'staffing', source:'pos', story:0 };
+let experience;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const iconPaths = {
   pos:'M5 3h14v18l-3-2-4 2-4-2-3 2V3Zm4 5h6M9 12h6',
@@ -78,11 +81,39 @@ function applyLanguage() {
   $('meta[name="description"]').content = c.description;
   $$('[data-i18n]').forEach(element=>{element.textContent=c[element.dataset.i18n];});
   $$('[data-i18n-aria]').forEach(element=>{element.setAttribute('aria-label',c[element.dataset.i18nAria]);});
+  $$('[data-i18n-alt]').forEach(element=>{element.alt=c[element.dataset.i18nAlt];});
   $$('[data-language]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.language===language)));
   $$('[data-demo]').forEach(link=>{link.href=`mailto:post@scopeanalytics.no?subject=${encodeURIComponent(c.emailSubject)}`;});
   $('.menu-toggle').setAttribute('aria-label',c[$('.menu-toggle').getAttribute('aria-expanded')==='true'?'closeMenu':'openMenu']);
   if ($('#draft-status').textContent) $('#draft-status').textContent=c.draftStatus;
-  renderDashboard(); renderRecommendation(); renderSource();
+  renderDashboard(); renderRecommendation(); renderSource(); renderStory(); renderDish();
+  experience?.refresh();
+}
+function renderStory() {
+  const c = copy[language];
+  const phase = c.storyPhases[state.story];
+  $('#story-title').textContent = phase.title;
+  $('#story-subtitle').textContent = phase.subtitle;
+  $('#story-description').textContent = phase.description;
+  $('#story-index').textContent = String(state.story + 1);
+  $('.fragment-accounts > strong').innerHTML = `${number(28.1,1)} <small>%</small>`;
+  $('.fragment-staff > strong').innerHTML = `${number(37.4,1)} <small>%</small>`;
+  $('.console-metric > strong').innerHTML = `${number(37.4,1)}<small>%</small>`;
+  $('.fragment-pos > strong').innerHTML = `${number(48650)} <small>${c.currency}</small>`;
+  $('.scene-revenue > strong').innerHTML = `${number(48650)} <small>${c.currency}</small>`;
+  $('.action-effect > strong').innerHTML = `${number(3200)} <small>${c.currency}</small>`;
+  $('.scene-meta > span:last-child:not(:first-child)').textContent = `↗ ${percent(8.2)}`;
+}
+function renderDish() {
+  const c = copy[language];
+  const data = menuPriceScenario($('#dish-price-slider').value);
+  $('#dish-margin').innerHTML = `${number(data.margin,1)}<span>%</span>`;
+  $('#dish-price').textContent = `${number(data.price)} ${c.currency}`;
+  $('#dish-cost').textContent = `${number(data.cost)} ${c.currency}`;
+  $('#dish-contribution').textContent = `${number(data.contribution)} ${c.currency}`;
+  $('#margin-fill').style.width = `${data.margin}%`;
+  $('#dish-price-slider').setAttribute('aria-valuetext',`${number(data.price)} ${c.currency}`);
+  $('#dish-impact').textContent = data.weeklyChange === 0 ? c.dishCurrent : `${data.weeklyChange>0?'+':'−'}${number(Math.abs(data.weeklyChange))} ${c.currency} ${c[data.weeklyChange>0?'dishImpactMore':'dishImpactLess']}`;
 }
 function setMenu(open) {
   $('.menu-toggle').setAttribute('aria-expanded',String(open));
@@ -114,7 +145,7 @@ document.addEventListener('click',event=>{
   if(button.closest('#mobile-nav')) setMenu(false);
 });
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&$('.menu-toggle').getAttribute('aria-expanded')==='true'){setMenu(false);$('.menu-toggle').focus();}});
-window.matchMedia('(min-width: 851px)').addEventListener('change',event=>{if(event.matches)setMenu(false);});
+window.matchMedia('(min-width: 901px)').addEventListener('change',event=>{if(event.matches)setMenu(false);});
 $$('dialog').forEach(dialog=>dialog.addEventListener('click',event=>{
   if(event.target!==dialog) return;
   const rect=dialog.getBoundingClientRect();
@@ -130,7 +161,9 @@ $('#demo-form').addEventListener('submit',event=>{
 });
 $$('[data-icon]').forEach(element=>{element.innerHTML=icon(element.dataset.icon);});
 $('#year').textContent=String(new Date().getFullYear());
+$('#dish-price-slider').addEventListener('input',renderDish);
 applyLanguage();
+experience = initExperience({onPhase:phase=>{state.story=phase;renderStory();}});
 if('IntersectionObserver' in window && !reduceMotion.matches) {
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.remove('is-waiting');observer.unobserve(entry.target);}}),{threshold:.08});
   $$('.reveal').forEach(element=>{if(element.getBoundingClientRect().top>window.innerHeight){element.classList.add('is-waiting');observer.observe(element);}});
