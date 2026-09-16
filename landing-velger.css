@@ -514,3 +514,15 @@ h1 {
 .page-option-test .option-preview i:nth-child(1) { width: 32px; background: #ebe8e2; border-right: 1px solid rgba(23,23,21,.14); }
 .page-option-test .option-preview i:nth-child(2) { flex: 1; background: #fff; }
 .page-option-test .option-arrow { background: #171715; }
+
+/* Scope: det syttende nettstedet, med egen mørk produktidentitet. */
+.page-option-scope { background: #101b21; color: #f0f4f5; border-color: #8fada840; }
+.page-option-scope .option-number, .page-option-scope .option-copy > span { color: #adbdc3; }
+.page-option-scope .option-preview { width: 120px; height: 78px; align-items: center; gap: 7px; border: 1px solid #b7ecdd30; border-radius: 12px; background: #162a2d; }
+.page-option-scope .option-preview i { width: 8px; border-radius: 5px; background: #b7ecdd; }
+.page-option-scope .option-preview i:nth-child(1) { height: 22px; }
+.page-option-scope .option-preview i:nth-child(2) { height: 40px; }
+.page-option-scope .option-preview i:nth-child(3) { height: 30px; }
+.page-option-scope .option-preview i:nth-child(4) { height: 50px; }
+.page-option-scope .option-arrow { background: #b7ecdd; color: #132c29; }
+.page-option-scope:hover { border-color: #b7ecdd99; }

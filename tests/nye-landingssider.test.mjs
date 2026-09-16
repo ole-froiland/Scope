@@ -28,7 +28,7 @@ test("velgersidene beholder de fire tidligere retningene som nummer 9–12", asy
   const pages = await Promise.all([read("landing-velger.html"), read("index.html")]);
 
   pages.forEach((html) => {
-    assert.match(html, /Seksten designretninger/);
+    assert.match(html, /Sytten designretninger/);
 
     for (const { route, number, name } of variants) {
       assert.match(html, new RegExp(`href="/${route}"`), route);
