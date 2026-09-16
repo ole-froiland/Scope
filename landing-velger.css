@@ -526,3 +526,14 @@ h1 {
 .page-option-scope .option-preview i:nth-child(4) { height: 50px; }
 .page-option-scope .option-arrow { background: #b7ecdd; color: #132c29; }
 .page-option-scope:hover { border-color: #b7ecdd99; }
+
+/* Enkel Mørk: den kjente signaturen i kullsort og elfenben. */
+.page-option-enkel-dark { background:#171717; color:#efeee9; border-color:#484844; }
+.page-option-enkel-dark .option-number,.page-option-enkel-dark .option-copy>span { color:#b5b5ad; }
+.page-option-enkel-dark .option-preview { position:relative; width:104px; height:78px; background:#242423; border:1px solid #454540; border-radius:12px; }
+.page-option-enkel-dark .option-preview i { position:absolute; width:30px; height:30px; border-radius:50%; }
+.page-option-enkel-dark .option-preview i:nth-child(1) { left:32px; top:16px; background:#eeede7; }
+.page-option-enkel-dark .option-preview i:nth-child(2) { left:43px; top:33px; background:#a8a8a0; }
+.page-option-enkel-dark .option-preview i:nth-child(3) { left:24px; top:36px; background:#6e7069; }
+.page-option-enkel-dark .option-arrow { background:#e5e4dc; color:#171717; }
+.page-option-enkel-dark:hover { border-color:#b9b9af; }

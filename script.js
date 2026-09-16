@@ -90,7 +90,7 @@ function playInteractiveLogin() {
 
     document.body.classList.add("login-loading-complete");
     window.setTimeout(() => {
-      window.location.replace("/enkel?demo=1");
+      window.location.replace(document.body.classList.contains("enkel-dark") ? "/enkel-mork?demo=1" : "/enkel?demo=1");
     }, reducedMotion ? 80 : 420);
   };
 
@@ -260,7 +260,9 @@ async function runTypewriter() {
   }
 }
 
-runTypewriter();
+if (!(document.body.classList.contains("enkel-dark") && window.matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+  runTypewriter();
+}
 
 const scopeStackCards = Array.from(document.querySelectorAll("[data-scope-card]"));
 const scopeStackTrack = document.querySelector("#how .scope-stack");

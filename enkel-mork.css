@@ -1,0 +1,211 @@
+/* Website 18: Enkel's layout and interactions, with a separate charcoal palette. */
+.enkel-dark-root { color-scheme:dark; background:#101010; }
+.enkel-site.enkel-dark {
+  --dark-bg:#101010;
+  --dark-panel:#191919;
+  --dark-raised:#222222;
+  --dark-line:#343432;
+  --dark-ink:#f1f0eb;
+  --dark-text:#babbb7;
+  --dark-muted:#8e918d;
+  --scope-brand-green:#e5e4dc;
+  --scope-brand-green-dark:#ffffff;
+  background:var(--dark-bg);
+  color:var(--dark-ink);
+}
+.enkel-site.enkel-dark :is(h1,h2,h3,h4) { color:var(--dark-ink); }
+.enkel-site.enkel-dark ::selection { color:#fff; background:#62655e; }
+.enkel-site.enkel-dark :is(a,button,input,textarea,summary):focus-visible { outline:2px solid #d9d9d0; outline-offset:5px; }
+.enkel-site.enkel-dark .site-header { background:#101010f5; border-bottom-color:#ffffff12; backdrop-filter:blur(18px); }
+.enkel-site.enkel-dark :is(.brand-name,.main-nav,.main-nav a[aria-current],.about-nav-person,.onboarding-brand,.login-intro-name) { color:var(--dark-ink); }
+.enkel-site.enkel-dark .main-nav { font-weight:600; }
+.enkel-site.enkel-dark .main-nav a::after { background:#e5e4dc; }
+.enkel-site.enkel-dark :is(.mark-blue,.login-intro-blue) { background:#eeede7; }
+.enkel-site.enkel-dark :is(.mark-red,.login-intro-red) { background:#a8a8a0; }
+.enkel-site.enkel-dark :is(.mark-green,.login-intro-green) { background:#6e7069; }
+.enkel-site.enkel-dark .login-intro { background:#101010; }
+.enkel-site.enkel-dark :is(.about-nav-preview,.mobile-menu) { background:#1b1b1b; border-color:var(--dark-line); color:var(--dark-ink); box-shadow:0 20px 50px #0005; }
+.enkel-site.enkel-dark :is(.about-nav-person:hover,.mobile-menu nav a:hover) { background:#292929; }
+.enkel-site.enkel-dark .mobile-menu-button span { background:#efeee9; }
+.enkel-site.enkel-dark :is(.header-button.ghost,.mobile-login-button,.button.secondary,.footer-button) { background:transparent; border-color:#696a65; color:var(--dark-ink); }
+.enkel-site.enkel-dark :is(.header-button.solid,.button.primary,.tester-cta,.enkel-cta-button,.contact-bubble,.contact-submit,.onboarding-next,.onboarding-finish,.onboarding-integration.is-selected button) {
+  background:#e5e4dc; border-color:#e5e4dc; color:#171817;
+}
+.enkel-site.enkel-dark :is(.header-button,.button,.footer-button,.tester-cta,.enkel-cta-button,.onboarding-next):hover { background:#fff; border-color:#fff; color:#151515; }
+.enkel-site.enkel-dark .header-button.ghost:hover { background:#292929; border-color:#999b94; color:#fff; }
+.enkel-site.enkel-dark .hero-section { background:#111; isolation:isolate; }
+.enkel-site.enkel-dark .hero-section::before { display:none; background-image:none; }
+.enkel-site.enkel-dark .dark-hero-image { position:absolute; inset:0; z-index:0; }
+.enkel-site.enkel-dark .dark-hero-image img { width:100%; height:100%; display:block; object-fit:cover; object-position:50% 55%; }
+.enkel-site.enkel-dark .hero-section::after {
+  background:linear-gradient(180deg,#10101030 0%,#10101025 32%,#1010103b 63%,#101010b3 87%,#101010 100%);
+  animation:none;
+}
+.enkel-site.enkel-dark .hero-content h1 { color:#f8f7f0; text-shadow:0 4px 35px #0006; }
+.enkel-site.enkel-dark .hero-content h1 em { color:#dfded4; }
+.enkel-site.enkel-dark .hero-content .typewriter-word { color:#d7d3c6; }
+.enkel-site.enkel-dark .hero-content .tw-sel { color:#171717; background:#d7d3c6; }
+.enkel-site.enkel-dark .hero-content .lead { color:#e0dfd9; text-shadow:0 1px 15px #0008; }
+.enkel-site.enkel-dark .hero-content .button.secondary { background:#1010104d; backdrop-filter:blur(12px); border-color:#bcbdb280; }
+.enkel-site.enkel-dark .hero-content .button.secondary:hover { background:#ffffff; color:#171717; }
+.enkel-site.enkel-dark .advice-showcase { background:linear-gradient(to bottom,transparent 0,transparent var(--advice-showcase-overlap),#101010 var(--advice-showcase-overlap),#101010 100%); }
+.enkel-site.enkel-dark .advice-showcase::after { background:#101010; }
+.enkel-site.enkel-dark :is(#how,#demo,.slide) { background-color:var(--dark-bg); }
+.enkel-site.enkel-dark .section-heading p { color:var(--dark-text); }
+.enkel-site.enkel-dark .scope-panel-media img { filter:saturate(.45) brightness(.62); }
+.enkel-site.enkel-dark .scope-carousel-progress button { background:#555650; }
+.enkel-site.enkel-dark .scope-carousel-progress button.is-active { background:#e5e4dc; }
+.enkel-site.enkel-dark #testkunder { background:#1a1a19; border-block:1px solid #33332f; }
+.enkel-site.enkel-dark .tester-kicker { color:#b9bbae; }
+.enkel-site.enkel-dark .tester-check { background:#72796a; }
+.enkel-site.enkel-dark .site-footer { background:#101010; color:var(--dark-text); }
+.enkel-site.enkel-dark :is(.footer-logo,.footer-cta h2,.footer-links a,.footer-arrow) { color:var(--dark-ink); }
+.enkel-site.enkel-dark :is(.footer-meta,.footer-cta) { border-color:var(--dark-line); }
+.enkel-site.enkel-dark :is(.footer-brand p,.footer-cta p,.footer-company) { color:var(--dark-text); }
+
+/* The working surface keeps the same tabs, advice, and drag-and-drop behavior. */
+.enkel-site.enkel-dark .scope-arb {
+  --arb-chrome:#242423;
+  --arb-panel:#1a1a1a;
+  --arb-line:#30302e;
+  --arb-line-soft:#292927;
+  --arb-edge:#3a3a37;
+  --arb-ink:#eeede8;
+  --arb-text:#bcbeb8;
+  --arb-muted:#989c94;
+  --arb-faint:#858980;
+  --arb-hover:#292a27;
+  --arb-selected:#31332d;
+  --arb-green:#dce2d2;
+  --arb-green-dark:#f2f4ed;
+  --arb-new:#a0a49a;
+  --arb-doing:#bcc7db;
+  --arb-done:#afc6ab;
+}
+.enkel-site.enkel-dark :is(.arb-window,.arb-main,.arb-peek) { background:#1e1e1d; }
+.enkel-site.enkel-dark .arb-window { box-shadow:0 35px 100px -25px #000b,0 0 0 1px #ffffff03; }
+.enkel-site.enkel-dark .arb-tab { background:#333431; }
+.enkel-site.enkel-dark .arb-lights i { background:#5a5b55; }
+.enkel-site.enkel-dark .arb-tab-mark i:nth-child(1) { background:#eeede7; }
+.enkel-site.enkel-dark .arb-tab-mark i:nth-child(2) { background:#a8a8a0; }
+.enkel-site.enkel-dark .arb-tab-mark i:nth-child(3) { background:#6e7069; }
+.enkel-site.enkel-dark .arb-card { background:#272825; border-color:#3a3c35; }
+.enkel-site.enkel-dark .arb-card:hover { background:#30322c; border-color:#777d6d; }
+.enkel-site.enkel-dark :is(.arb-card-chip,.arb-pill,.arb-pill-new,.arb-bar-new) { background:#393b35; color:#c7cbc0; }
+.enkel-site.enkel-dark :is(.arb-pill-doing,.arb-bar-doing) { background:#30353f; color:#c2cede; }
+.enkel-site.enkel-dark :is(.arb-pill-done,.arb-bar-done) { background:#303b30; color:#bed2b8; }
+.enkel-site.enkel-dark .arb-primary-button,.enkel-site.enkel-dark .arb-peek-primary { color:#192016; }
+.enkel-site.enkel-dark .arb-people .arb-avatar { box-shadow:0 0 0 2px #1e1e1d; }
+.enkel-site.enkel-dark .arb-col.is-dragover { background:#343830; }
+.enkel-site.enkel-dark .arb-peek-secondary { background:#2c2e28; border-color:#565b4d; color:#e9eee0; }
+.enkel-site.enkel-dark .arb-peek-primary { background:#dce2d2; border-color:#dce2d2; color:#192016; }
+
+/* Three miniature phones, all in the same dark mode. */
+.enkel-site.enkel-dark .demo-stage-kicker { color:#b3b7ac; }
+.enkel-site.enkel-dark .demo-stage-copy>p { color:#b7bab0; }
+.enkel-site.enkel-dark .demo-product-color { background:#242521; }
+.enkel-site.enkel-dark .phone { background:#343531; border-color:#555650; box-shadow:0 24px 60px #0007; }
+.enkel-site.enkel-dark .phone-screen { background:#191a18; color:#eeeee8; }
+.enkel-site.enkel-dark :is(.phone-top,.phone-nav) { background:#191a18; border-color:#3a3d34; color:#eeeee8; }
+.enkel-site.enkel-dark .phone-notch { background:#0b0b0b; }
+.enkel-site.enkel-dark .phone-brand { color:#eeeee8; }
+.enkel-site.enkel-dark .phone-brand i { background:#d5deca; color:#23291d; }
+.enkel-site.enkel-dark :is(.phone-venue,.phone-advice small,.phone-ledger-head small,.phone-kpis small,.phone-kpis span,.phone-updated,.phone-savings small,.phone-savings span) { color:#abb0a3; }
+.enkel-site.enkel-dark :is(.phone-title h4,.phone-advice strong,.phone-ledger-head strong,.phone-kpis b) { color:#eeeee8; }
+.enkel-site.enkel-dark :is(.phone-advice li,.phone-kpis>div,.phone-summary,.phone-savings,.phone-system) { background:#252821; border-color:#41483a; color:#c2c9b9; }
+.enkel-site.enkel-dark :is(.phone-advice li.is-done,.phone-kpis>div.is-lead) { background:#2b3427; border-color:#526349; }
+.enkel-site.enkel-dark :is(.phone-pill,.phone-kpis em,.phone-system i) { background:#3c4436; color:#cfdec3; }
+.enkel-site.enkel-dark .phone-check { border-color:#9ba991; }
+.enkel-site.enkel-dark .phone-advice li.is-done .phone-check { background:#bfd2ae; border-color:#bfd2ae; color:#1b2715; }
+.enkel-site.enkel-dark :is(.phone-button,.phone-ok) { background:#d2dec7; color:#26331d; }
+.enkel-site.enkel-dark :is(.phone-ledger-row b,.phone-ledger-row.is-plain b,.phone-savings b,.phone-summary strong) { color:#d1dfc7; }
+.enkel-site.enkel-dark :is(.phone-ledger-row,.phone-ledger,.phone-systems) { border-color:#3b4235; }
+.enkel-site.enkel-dark .phone-nav span { color:#969e8d; }
+.enkel-site.enkel-dark .phone-nav span.is-on { color:#dfebd5; }
+.enkel-site.enkel-dark .phone-tabs { background:#23251f; border-color:#3b4033; }
+.enkel-site.enkel-dark .phone-tabs button { color:#b7beac; }
+.enkel-site.enkel-dark .phone-tabs button.is-active { background:#d3dec7; color:#26311e; }
+.enkel-site.enkel-dark .phone-tabs button:not(.is-active) img { filter:grayscale(1) brightness(2.2); }
+
+/* Local navigation never leaves the dark edition for its information pages. */
+.enkel-site.enkel-dark .enkel-page {
+  --enkel-ink:#eeede8;
+  --enkel-muted:#afb1aa;
+  --enkel-body:#b8bcb1;
+  --enkel-line:#30312c;
+  --enkel-border:#3e4137;
+  --enkel-paper:#191a17;
+  --enkel-blue:#e0e5d7;
+  background:#101010;
+}
+.enkel-site.enkel-dark .enkel-section.is-paper { border-color:#30312c; }
+.enkel-site.enkel-dark :is(.enkel-panel,.enkel-step,.enkel-person) {
+  --panel-accent:#e0e3d7;
+  --panel-tint:#20211d;
+  --panel-line:#414438;
+  color:#e0e3d7;
+}
+.enkel-site.enkel-dark :is(.enkel-panel--red,.enkel-step--red,.enkel-person--red) { --panel-tint:#24211f; --panel-line:#48413b; --panel-accent:#e3d6c9; }
+.enkel-site.enkel-dark :is(.enkel-panel--green,.enkel-step--green,.enkel-person--green) { --panel-tint:#20231f; --panel-line:#3c4437; --panel-accent:#cfdec5; }
+.enkel-site.enkel-dark :is(.enkel-panel-art,.enkel-step-art) svg { color:#dbdfd2; }
+.enkel-site.enkel-dark :is(.enkel-panel-art,.enkel-step-art) [stroke="#171715"] { stroke:#d7dacd; }
+.enkel-site.enkel-dark :is(.enkel-panel-art,.enkel-step-art) [fill="#171715"] { fill:#d7dacd; }
+.enkel-site.enkel-dark .enkel-person img { filter:saturate(.55); }
+.enkel-site.enkel-dark .enkel-person-role { color:#b8bdad; }
+.enkel-site.enkel-dark .enkel-cta { background:#1a1a19; border-block:1px solid #30312c; }
+.enkel-site.enkel-dark .enkel-faq-list details { background:#1a1b18; }
+.enkel-site.enkel-dark .enkel-faq-list details[open] { background:#252820; border-color:#6e7860; }
+.enkel-site.enkel-dark .enkel-faq-icon { background:#32362c; border-color:#5a624f; }
+.enkel-site.enkel-dark .enkel-faq-icon::before,.enkel-site.enkel-dark .enkel-faq-icon::after { background:#e0e5d7; }
+.enkel-site.enkel-dark .enkel-faq-list details[open] .enkel-faq-icon { background:#dbe2ce; }
+.enkel-site.enkel-dark .enkel-faq-list details[open] .enkel-faq-icon::before,.enkel-site.enkel-dark .enkel-faq-list details[open] .enkel-faq-icon::after { background:#252d1c; }
+.enkel-site.enkel-dark .integration-buttons button { background:#252622; border-color:#4a4e41; color:#cbd0c1; }
+.enkel-site.enkel-dark .integration-buttons button.is-active { background:#dbdfd1; border-color:#dbdfd1; color:#202719; }
+.enkel-site.enkel-dark .enkel-page .accounting-card { background:#e4e4dd; border-color:#55584c; }
+.enkel-site.enkel-dark .enkel-page .integration-connect-link { background:#272c22; color:#e2e8db; border-color:#272c22; }
+
+/* Forms, chat, consent and settings use readable native dark surfaces. */
+.enkel-site.enkel-dark :is(.contact-panel,.cookie-consent,.onboarding-dialog,.policy-card) { background:#1c1d1a; border-color:#44483b; color:#efeee6; box-shadow:0 20px 70px #0007; }
+.enkel-site.enkel-dark :is(.contact-panel-head,.contact-choice,.onboarding-head,.onboarding-actions,.policy-card-head,.cookie-option) { border-color:#3c4035; }
+.enkel-site.enkel-dark :is(.contact-panel p,.contact-panel label,.cookie-consent-copy p,.cookie-consent-copy a,.cookie-consent-options label,.onboarding-head p,.onboarding-intro,.onboarding-help,.onboarding-fields label,.onboarding-actions p,.policy-page p) { color:#b3b8a9; }
+.enkel-site.enkel-dark :is(.contact-choice button,.cookie-consent-actions button,.onboarding-close,.onboarding-back,.company-selected button,.onboarding-integration button,.policy-page button) { background:#2d3028; border-color:#575e4b; color:#e6ebde; }
+.enkel-site.enkel-dark :is(.contact-choice button.is-active,.cookie-consent-actions button[data-cookie-consent="all"],.cookie-save) { background:#dfe4d5; border-color:#dfe4d5; color:#21291b; }
+.enkel-site.enkel-dark :is(.contact-form input,.contact-form textarea,.onboarding-fields input,.onboarding-search,.company-selected,.onboarding-integration,.onboarding-summary,.company-results,.tripletex-note) { background:#24271f; border-color:#4c5340; color:#edf1e5; }
+.enkel-site.enkel-dark .onboarding-search input { color:#edf1e5; }
+.enkel-site.enkel-dark input::placeholder,.enkel-site.enkel-dark textarea::placeholder { color:#949c87; }
+.enkel-site.enkel-dark :is(.company-result,.company-result strong,.company-selected strong,.onboarding-fields label>span,.onboarding-integration strong,.onboarding-summary strong) { color:#edf1e5; }
+.enkel-site.enkel-dark .company-result:hover { background:#383e2f; }
+.enkel-site.enkel-dark :is(.onboarding-progress,.login-progress-track) { background:#34382d; }
+.enkel-site.enkel-dark :is(.onboarding-progress>span,.login-progress-track>i) { background:#cbd8bc; }
+.enkel-site.enkel-dark .onboarding-actions .onboarding-next:disabled { background:#30342a; border-color:#30342a; color:#a8af9e; opacity:1; }
+.enkel-site.enkel-dark .policy-page { background:#101010; color:#efeee6; }
+.enkel-site.enkel-dark .policy-hero { background:#171815; }
+.enkel-site.enkel-dark :is(.back-link,.policy-kicker,.policy-page a) { color:#d3dcc6; }
+.enkel-site.enkel-dark .contact-bubble svg { stroke:#222a19; }
+.enkel-site.enkel-dark :is(.cookie-settings-form,.cookie-option,.cookie-table) { background:#1c1d1a; border-color:#44483b; }
+.enkel-site.enkel-dark :is(.cookie-option strong,.cookie-table span) { color:#e7e9df; }
+.enkel-site.enkel-dark .cookie-option small { color:#b4b9aa; }
+.enkel-site.enkel-dark .cookie-table strong { background:#292c25; color:#eef1e6; }
+.enkel-site.enkel-dark :is(.policy-section,.cookie-table [role="row"]+[role="row"]) { border-color:#393d33; }
+.enkel-site.enkel-dark .cookie-option input { accent-color:#cbd6bf; }
+@media(max-width:640px) {
+  .enkel-site.enkel-dark .dark-hero-image img { object-position:57% center; }
+  .enkel-site.enkel-dark .hero-section::after { background:linear-gradient(180deg,#10101033,#10101055 65%,#101010 100%); }
+}
+
+/* Match the specificity of the inherited showcase and form styles. */
+.enkel-site.enkel-dark .demo-product-visual { background:transparent; }
+.enkel-site.enkel-dark .phone-ledger-row { color:#b9c0b0; }
+.enkel-site.enkel-dark .onboarding-head strong { color:#e8ecdf; }
+.enkel-site.enkel-dark .onboarding-eyebrow { color:#bdc6b1; }
+.enkel-site.enkel-dark .onboarding-search:focus-within { border-color:#b8c4a8; box-shadow:0 0 0 3px #ffffff08; }
+.enkel-site.enkel-dark .onboarding-search input:focus-visible { outline:none; }
+.enkel-site.enkel-dark #testkunder .tester-kicker { color:#b9bbae; }
+.enkel-site.enkel-dark .arb-peek-primary:disabled { background:#363830; border-color:#46493d; color:#929a85; }
+.enkel-site.enkel-dark .enkel-panel { grid-template-columns:minmax(0,1fr) 104px; }
+.enkel-site.enkel-dark .enkel-panel-art { width:100%; max-width:124px; }
+.enkel-site.enkel-dark .enkel-panel-title { font-size:clamp(1.7rem,2.35vw,2.35rem); overflow-wrap:normal; }
+@media(max-width:600px) {
+  .enkel-site.enkel-dark .enkel-panel { grid-template-columns:1fr; }
+  .enkel-site.enkel-dark .enkel-panel-title { font-size:2rem; }
+}

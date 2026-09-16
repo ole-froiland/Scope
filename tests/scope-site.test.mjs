@@ -8,16 +8,16 @@ import { copy, periods, dishes, demoMailto } from '../scope-content.js';
 import { storyFrame, menuPriceScenario } from '../scope-motion.js';
 
 const read = name => readFile(new URL(`../${name}`, import.meta.url), 'utf8');
-const routes = ['/clean','/leken','/enkel','/vakt','/brutal','/kombi','/netflix','/enkel-2','/kvittering','/meny','/for-etter','/sesong','/drift','/signal','/vertskap','/test','/scope'];
+const routes = ['/clean','/leken','/enkel','/vakt','/brutal','/kombi','/netflix','/enkel-2','/kvittering','/meny','/for-etter','/sesong','/drift','/signal','/vertskap','/test','/scope','/enkel-mork'];
 
-test('collection keeps its original 16 routes in order and adds Scope as number 17', async () => {
+test('collection preserves the first 17 routes and adds Enkel Mørk as number 18', async () => {
   const [gallery,index] = await Promise.all([read('landing-velger.html'),read('index.html')]);
   assert.equal(gallery,index);
   assert.deepEqual([...gallery.matchAll(/class="page-option [^"]+" href="([^"]+)"/g)].map(match=>match[1]),routes);
-  assert.deepEqual([...gallery.matchAll(/class="option-number">(\d+)</g)].map(match=>Number(match[1])),Array.from({length:17},(_,i)=>i+1));
+  assert.deepEqual([...gallery.matchAll(/class="option-number">(\d+)</g)].map(match=>Number(match[1])),Array.from({length:18},(_,i)=>i+1));
 });
 
-test('all 17 websites and Scope modules are served locally; Netlify resolves the same page', async () => {
+test('all 18 websites and Scope modules are served locally; Netlify resolves the same page', async () => {
   const dataDir = await mkdtemp(join(tmpdir(),'scope17-test-'));
   const scope = await createScopeServer({dataDir,silent:true});
   await new Promise(resolve=>scope.server.listen(0,'127.0.0.1',resolve));

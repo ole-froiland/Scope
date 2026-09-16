@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="no" class="enkel-dark-root">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Integrasjoner | Scope</title>
+    <meta name="description" content="Scope kobles til regnskap, kasse og bemanning. Dere beholder systemene dere har.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='20' r='18' fill='%23efeee9'/%3E%3Ccircle cx='44' cy='40' r='18' fill='%239b9b97'/%3E%3Ccircle cx='20' cy='40' r='18' fill='%23575754'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=20260821-green-logo-v1">
+    <meta name="theme-color" content="#101010">
+    <link rel="stylesheet" href="enkel-mork.css?v=20260916-1">
+  </head>
+  <body class="enkel-site enkel-dark">
+    <header class="site-header">
+      <a class="brand" href="/enkel-mork" aria-label="Scope hjem">
+        <span class="brand-mark" aria-hidden="true">
+          <span class="mark-circle mark-blue"></span>
+          <span class="mark-circle mark-red"></span>
+          <span class="mark-circle mark-green"></span>
+        </span>
+        <span class="brand-name">scope</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Hovedmeny">
+        <a href="/enkel-mork-kunder.html">Kunder</a>
+        <a href="/enkel-mork-integrasjoner.html" aria-current="page">Integrasjoner</a>
+        <a href="/enkel-mork-om-oss.html">Om oss</a>
+        <a href="/enkel-mork-faq.html">Ofte stilte spørsmål</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="header-button ghost" href="/enkel-mork?login=1">Logg inn</a>
+        <a class="header-button solid" href="/enkel-mork#onboarding">Book Demo</a>
+      </div>
+
+      <button class="mobile-menu-button" type="button" aria-label="Åpne meny" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="mobile-menu" id="mobile-menu">
+        <nav aria-label="Mobilmeny">
+          <a href="/enkel-mork-kunder.html">Kunder</a>
+          <a href="/enkel-mork-integrasjoner.html" aria-current="page">Integrasjoner</a>
+          <a href="/enkel-mork-om-oss.html">Om oss</a>
+          <a href="/enkel-mork-faq.html">Ofte stilte spørsmål</a>
+        </nav>
+        <a class="mobile-login-button" href="/enkel-mork?login=1">Logg inn</a>
+      </div>
+    </header>
+
+    <main class="enkel-page">
+      <section class="enkel-section enkel-hero" aria-labelledby="integrasjoner-title">
+        <div class="enkel-inner">
+          <p class="enkel-eyebrow">Integrasjoner</p>
+          <h1 id="integrasjoner-title">Systemene du allerede bruker</h1>
+          <p class="enkel-lead">Scope kobles til regnskap, kasse og bemanning. Dere beholder systemene dere har.</p>
+        </div>
+      </section>
+
+      <section class="enkel-section" aria-label="Systemer Scope kobles til">
+        <div class="enkel-inner">
+          <div class="integration-buttons" aria-label="Integrasjonskategorier">
+            <button class="is-active" type="button" data-category="accounting">Regnskap</button>
+            <button type="button" data-color="blue" data-category="pos">Kasse</button>
+            <button type="button" data-color="red" data-category="staff">Bemanning</button>
+            <button type="button" data-color="orange" data-category="other">Andre</button>
+          </div>
+
+          <div class="accounting-grid integration-panel is-active" data-panel="accounting" aria-label="Regnskapssystemer">
+            <article class="accounting-card"><img class="logo-tripletex" src="assets/logos/tripletex.svg" alt="Tripletex"><a class="integration-connect-link" href="/onboarding">Koble til Tripletex →</a><span class="integration-available">Tilgjengelig</span></article>
+            <article class="accounting-card"><img class="logo-poweroffice" src="assets/logos/poweroffice-farge01.png" alt="PowerOffice Go"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><span class="logo-combo fiken-logo"><img src="assets/logos/fiken-icon.svg" alt=""><span>fiken</span></span><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-xledger" src="assets/logos/xledger.svg" alt="Xledger"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-dynamics" src="assets/logos/dynamics365.svg" alt="Microsoft Dynamics 365"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-business-nxt" src="assets/logos/business-nxt.webp" alt="Business NXT by Visma"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-conta" src="assets/logos/conta.svg" alt="Conta"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><span class="text-logo unimicro">unimicro</span><span class="coming-soon">Kommer snart</span></article>
+          </div>
+
+          <div class="accounting-grid integration-panel" data-panel="pos" aria-label="Kassesystemer">
+            <article class="accounting-card"><img class="logo-lightspeed" src="assets/logos/lightspeed.png" alt="Lightspeed"><span class="integration-available">Tilgjengelig</span></article>
+            <article class="accounting-card"><img class="logo-baemingo" src="assets/logos/baemingo.png" alt="Baemingo"><span class="integration-available">Tilgjengelig</span></article>
+            <article class="accounting-card"><img class="logo-munu" src="assets/logos/munu.svg" alt="Munu"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-restolution" src="assets/logos/restolution-new.png" alt="Restolution"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-favrit" src="assets/logos/favrit.svg" alt="Favrit"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-orderx" src="assets/logos/orderx.png" alt="Order X"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-pck" src="assets/logos/pckasse.svg" alt="PCK"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-amendo" src="assets/logos/amendo.png" alt="Amendo"><span class="coming-soon">Kommer snart</span></article>
+          </div>
+
+          <div class="accounting-grid integration-panel" data-panel="staff" aria-label="Bemanningssystemer">
+            <article class="accounting-card"><img class="logo-tamigo" src="assets/logos/tamigo.svg" alt="Tamigo"><span class="integration-available">Tilgjengelig</span></article>
+            <article class="accounting-card"><img class="logo-connecteam" src="assets/logos/connecteam.webp" alt="Connecteam"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-samesystem" src="assets/logos/samesystem.webp" alt="SameSystem"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-tidsbanken" src="assets/logos/tidsbanken.webp" alt="Tidsbanken"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-timegrip" src="assets/logos/timegrip.png" alt="Timegrip"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-easyatwork" src="assets/logos/easyatwork.png" alt="Easy@work"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-quinyx" src="assets/logos/quinyx.svg" alt="Quinyx"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-planday" src="assets/logos/planday.png" alt="Planday"><span class="coming-soon">Kommer snart</span></article>
+          </div>
+
+          <div class="accounting-grid integration-panel" data-panel="other" aria-label="Andre systemer">
+            <article class="accounting-card"><img class="logo-stockifi" src="assets/logos/stockifi.jpg" alt="Stockifi"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-google-reviews" src="assets/logos/google-reviews.png" alt="Google Reviews"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-tripadvisor" src="assets/logos/tripadvisor.png" alt="Tripadvisor"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-gastroplanner" src="assets/logos/gastroplanner.jpeg" alt="GastroPlanner"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-foodora" src="assets/logos/foodora.png" alt="Foodora"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-wolt" src="assets/logos/wolt.jpg" alt="Wolt"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-vipps" src="assets/logos/vipps.png" alt="Vipps"><span class="coming-soon">Kommer snart</span></article>
+            <article class="accounting-card"><img class="logo-et" src="assets/logos/et-gradient.svg" alt="ET"><span class="coming-soon">Kommer snart</span></article>
+          </div>
+
+          <p class="enkel-aside">Savner du systemet ditt? <a href="mailto:post@scopeanalytics.no?subject=Integrasjon%20jeg%20savner">Si fra, så ser vi på det.</a></p>
+        </div>
+      </section>
+
+      <section class="enkel-section is-paper" aria-labelledby="integrasjoner-slik-title">
+        <div class="enkel-inner">
+          <h2 class="enkel-section-title" id="integrasjoner-slik-title">Slik kobler vi oss på</h2>
+
+          <div class="enkel-step-grid">
+            <article class="enkel-step">
+              <div class="enkel-step-head">
+                <span class="enkel-step-num">01</span>
+                <span class="enkel-step-art" aria-hidden="true">
+                  <svg viewBox="0 0 240 240" fill="none" stroke="#171715" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                    <circle cx="78" cy="120" r="48" fill="#ffffff"></circle>
+                    <circle class="art-accent" cx="78" cy="120" r="18"></circle>
+                    <path d="M126 120h92"></path>
+                    <path d="M188 120v34M156 120v24"></path>
+                  </svg>
+                </span>
+              </div>
+              <h3 class="enkel-step-title">Du gir tilgang</h3>
+              <p class="enkel-step-text">Du godkjenner tilkoblingen. Ingen installasjon.</p>
+            </article>
+
+            <article class="enkel-step enkel-step--green">
+              <div class="enkel-step-head">
+                <span class="enkel-step-num">02</span>
+                <span class="enkel-step-art" aria-hidden="true">
+                  <svg viewBox="0 0 240 240" fill="none" stroke="#171715" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                    <path d="M62 26v58M120 26v58M178 26v58"></path>
+                    <path d="m40 66 22 22 22-22M98 66l22 22 22-22M156 66l22 22 22-22"></path>
+                    <path d="M24 118h192v66a20 20 0 0 1-20 20H44a20 20 0 0 1-20-20Z" fill="#ffffff"></path>
+                    <path class="art-accent" d="M48 144h144v40a10 10 0 0 1-10 10H58a10 10 0 0 1-10-10Z"></path>
+                  </svg>
+                </span>
+              </div>
+              <h3 class="enkel-step-title">Vi henter tallene</h3>
+              <p class="enkel-step-text">Hver natt, så oversikten er fersk når du åpner den.</p>
+            </article>
+
+            <article class="enkel-step enkel-step--red">
+              <div class="enkel-step-head">
+                <span class="enkel-step-num">03</span>
+                <span class="enkel-step-art" aria-hidden="true">
+                  <svg viewBox="0 0 240 240" fill="none" stroke="#171715" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                    <path d="M120 22V6M188 46 200 34M52 46 40 34M204 104h16M20 104h16"></path>
+                    <circle cx="120" cy="106" r="54" fill="#ffffff"></circle>
+                    <path d="M104 136c0-18 7-27 16-27s16 9 16 27" stroke-width="6"></path>
+                    <rect class="art-accent" x="94" y="164" width="52" height="18" rx="9"></rect>
+                    <rect class="art-accent" x="102" y="192" width="36" height="18" rx="9"></rect>
+                  </svg>
+                </span>
+              </div>
+              <h3 class="enkel-step-title">Du får rådene</h3>
+              <p class="enkel-step-text">Tallene settes sammen og blir til ett tydelig neste steg.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="enkel-cta" aria-labelledby="integrasjoner-testkunder-title">
+        <div class="enkel-cta-inner">
+          <div class="enkel-cta-copy">
+            <h2 id="integrasjoner-testkunder-title">Vi søker testkunder</h2>
+            <p>Prøv Scope gratis med dine egne tall. Ingen binding.</p>
+          </div>
+          <a class="enkel-cta-button" href="/enkel-mork#onboarding">Bli testkunde</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" aria-labelledby="footer-title">
+      <div class="footer-inner">
+        <div class="footer-cta">
+          <div>
+            <h2 id="footer-title">Har du spørsmål?</h2>
+            <p>Vi svarer gjerne på hvordan Scope passer for akkurat din drift.</p>
+          </div>
+          <a class="footer-button" href="mailto:post@scopeanalytics.no">Ta kontakt</a>
+        </div>
+        <div class="footer-meta">
+          <div class="footer-brand">
+            <p class="footer-logo">SCOPE</p>
+            <p>Programvare og rådgivning til serveringsbransjen</p>
+            <p class="footer-company">SCOPE ANALYTICS AS · 936 372 295 · post@scopeanalytics.no</p>
+          </div>
+          <nav class="footer-links" aria-label="Footer">
+            <a href="mailto:post@scopeanalytics.no">Kontakt</a>
+            <a href="#">Personvern</a>
+            <a href="#">Vilkår</a>
+            <a href="/enkel-mork-cookies.html">Cookie-innstillinger</a>
+            <a href="/enkel-mork?login=1">Logg inn</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
+
+    <section class="cookie-consent" aria-labelledby="cookie-consent-title" hidden><div class="cookie-consent-copy"><h2 id="cookie-consent-title">Cookies</h2><p>Vi bruker nødvendige cookies for å lagre valgene dine. Du kan også tillate analyse og markedsføring.</p><a href="/enkel-mork-cookies.html">Se cookie-innstillinger</a></div><div class="cookie-consent-options" aria-label="Cookie-valg"><label><input type="checkbox" checked disabled><span>Nødvendige</span></label><label><input type="checkbox" name="consent-analytics"><span>Analyse</span></label><label><input type="checkbox" name="consent-marketing"><span>Markedsføring</span></label></div><div class="cookie-consent-actions"><button type="button" data-cookie-consent="necessary">Kun nødvendige</button><button type="button" data-cookie-consent="save">Lagre valg</button><button type="button" data-cookie-consent="all">Godta alle</button></div></section>
+    <script src="script.js?v=20260916-enkel-dark"></script>
+  </body>
+</html>
