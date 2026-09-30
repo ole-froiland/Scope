@@ -28,7 +28,8 @@ får en visuell skisse som Ole godkjenner før bygging.
 
 ## Designsystem
 
-Ligger øverst i `test.css` som tokens på `.app`, redefinert under `.app[data-theme=dark]`.
+Ligger i en ny fil, `scope-ui.css`, som lastes etter `test.css`: tokens på `.app`, redefinert under
+`.app[data-theme=dark]`, og de felles `ui-`-komponentene. Grafhjelperen ligger i `scope-chart.js`.
 
 | Token | Lys | Bruk |
 | --- | --- | --- |
@@ -81,15 +82,17 @@ usynlig aktiv fane).
 ### Data
 
 Alt er demodata fra eksisterende modell i `test.js` (`STED_PROFIL`, `DAGVEKT`, `TIMEVEKT`, `ENDRING`, `NÅ`).
-Nye rene funksjoner i `scope-insights.js` (testbare med `node --test`):
+Nye rene funksjoner i `scope-insights.js` (testbare med `node --test`), samlet av `buildToday(...)`:
 
-- `normalDay(profile, weekdayFactor, hourWeights)` → forventet omsetning og gjester per time for en vanlig ukedag.
-- `todaySoFar(normal, seed, now)` → dagens tall per time til og med nå, med et fast avvik avledet av sted + dato
-  (samme tall ved hver innlasting), timen som pågår som andel.
-- `forecastDay(soFar, normal)` → prognose: faktisk hittil + resterende normal × (hittil/normal hittil), dempet.
+- `normalDay(dayRevenue, dayGuests, hourWeights)` → forventet omsetning og gjester per time for en vanlig ukedag.
+- `dayActuals(normal, seed, now)` → dagens tall per time til og med nå, med et fast avvik avledet av sted + dato
+  (samme tall ved hver innlasting, og en ferdig time endrer seg aldri), timen som pågår som andel.
+- `forecastDay(normal, actuals)` → prognose: faktisk hittil + resterende normal × (hittil/normal hittil), dempet.
+- `staffAt(plannedStaff, hour)` → hvor mange som er på vakt en gitt time, samme form som kveldsmodellen.
 
-Tilstander: før kl. 11 («Vi åpner kl. 11», gårsdagen + prognose), under åpningstid (som over), etter stengetid
-(«Dagen er ferdig», ingen prognose). Flere steder valgt: tall summeres, tittel viser antall steder.
+Tilstander: før kl. 11 («Vi åpner kl. 11», hele dagen vises som prognose) og under åpningstid (som over). Siste time
+er 23–24 (samme timer som Salg), så dagen er åpen til midnatt og trenger ingen egen «stengt»-tilstand. Flere steder
+valgt: tall summeres, og sidehodet viser stedsnavnet slik stedsvelgeren gjør.
 
 Tiltak: `buildOperationalAdvice` (fra den lokale endringen) med begrunnelser og ulike verdier; status lagres som i dag
 (`scope-actions-v1`). Periodesøyler: `buildReport` / `reportRange`.
@@ -114,7 +117,7 @@ Under ca. 900 px stables kortene; scrolling er da greit. Grafen beholder alle ti
 
 ## Verifisering
 
-- `npm test` grønn, med nye tester for `normalDay`, `todaySoFar`, `forecastDay`.
+- `npm test` grønn, med nye tester for `normalDay`, `dayActuals`, `forecastDay`, `staffAt`, `buildToday` og `niceScale`.
 - Nettleser: 1440×900 og 1280×720 uten scroll i innholdet (`scrollHeight <= clientHeight`), mobil 375×812, lys og mørk,
   ingen konsollfeil, alle knapper klikket gjennom.
 - Cache: bump `?v=` på `test.css`/`test.js` i `test.html` ved hver endring.
