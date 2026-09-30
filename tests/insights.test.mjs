@@ -33,3 +33,35 @@ test('hourly demo reconciles with the day and evening share without losing round
   assert.equal(points[6].staff,9);
   const empty=buildDayTimeline(0,0,3);assert.ok(empty.every(p=>p.revenue===0&&p.guests===0));
 });
+
+test('operational advice uses real gaps, staffing pressure and missing receipt counts', async () => {
+  const {buildOperationalAdvice} = await import('../scope-insights.js');
+  const thursday = new Date(2026, 9, 1);
+  const busy = buildOperationalAdvice({varekost: 32, bilag: 3}, {guests: 110, staff: 5, date: thursday}, 500000);
+  assert.equal(busy[0].id, 'plan');
+  assert.match(busy[0].title, /2 ekstra/);
+  assert.match(busy.find(x => x.id === 'receipts').title, /3 manglende kvitteringer/);
+  assert.match(busy.find(x => x.id === 'cost').title, /tre største innkjøpene/);
+  const quiet = buildOperationalAdvice({varekost: 28, bilag: 0}, {guests: 35, staff: 4, date: thursday}, 500000);
+  assert.equal(quiet.length, 2);
+  assert.match(quiet.find(x => x.id === 'plan').title, /prep/);
+  assert.doesNotMatch(quiet.find(x => x.id === 'cost').title, /prisene/);
+  assert.ok(quiet.every(x => !x.text.includes('spar')));
+});
+
+test('operational advice prices the cost gap and names tomorrow evening', async () => {
+  const {buildOperationalAdvice} = await import('../scope-insights.js');
+  const thursday = new Date(2026, 9, 1);
+  const busy = buildOperationalAdvice({varekost: 32, bilag: 3}, {guests: 110, staff: 5, date: thursday}, 500000);
+  const cost = busy.find(x => x.id === 'cost');
+  assert.equal(cost.value.replace(/\s/g, ' '), 'kr 10 000');
+  assert.equal(cost.valueNote, 'per uke');
+  const plan = busy.find(x => x.id === 'plan');
+  assert.equal(plan.value, '+2 på vakt');
+  assert.equal(plan.valueNote, 'torsdag kveld');
+  assert.equal(busy.find(x => x.id === 'receipts').value, '3 igjen');
+  const quiet = buildOperationalAdvice({varekost: 28, bilag: 0}, {guests: 35, staff: 4, date: thursday}, 500000);
+  assert.equal(quiet.find(x => x.id === 'plan').value, '35 gjester');
+  assert.equal(quiet.find(x => x.id === 'cost').value, 'Lager');
+  assert.ok(busy.concat(quiet).every(x => x.value && x.valueNote && x.action));
+});
