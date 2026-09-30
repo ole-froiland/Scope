@@ -1,0 +1,133 @@
+/* ==========================================================================
+   Scope UI – felles designsystem for arbeidsflaten (/test).
+   Lastes etter test.css. Tokens på .app; mørk modus under [data-theme=dark].
+   Grønt og rødt betyr bare opp og ned. Blått er «i dag» / valgt periode.
+   ========================================================================== */
+
+.app {
+  --paper: #ffffff;
+  --rail: #f7f6f3;
+  --line: #ebe8e2;
+  --line-strong: #dcd8d0;
+  --ink: #171715;
+  --muted: #6b675f;
+  --faint: #9a958c;
+  --hover: #f1efea;
+  --active: #e7e3db;
+  --accent: #1f4fe0;
+  --accent-soft: #eaf0fd;
+  --accent-line: #b9c9f6;
+  --pos: #0f8a5f;
+  --pos-soft: #e5f4ec;
+  --neg: #cf3a31;
+  --neg-soft: #fbeceb;
+  --bar-neutral: #e4e0d8;
+  --bar-neutral-hover: #cfcac0;
+  --grid: #f1eee8;
+  --tip-bg: #171715;
+  --tip-ink: #ffffff;
+  --tip-muted: #bdb8ae;
+  --radius-card: 14px;
+  --radius-control: 9px;
+}
+
+.app[data-theme=dark] {
+  --paper: #191918;
+  --rail: #211f1e;
+  --line: #2f2c29;
+  --line-strong: #423e39;
+  --ink: #ece9e4;
+  --muted: #a49f97;
+  --faint: #7d786f;
+  --hover: #262422;
+  --active: #34302b;
+  --accent: #7d9bff;
+  --accent-soft: #1d2640;
+  --accent-line: #3b4f86;
+  --pos: #4fc98f;
+  --pos-soft: #1b3128;
+  --neg: #f08278;
+  --neg-soft: #3a2220;
+  --bar-neutral: #3a3632;
+  --bar-neutral-hover: #4a4540;
+  --grid: #262422;
+  --tip-bg: #ece9e4;
+  --tip-ink: #171715;
+  --tip-muted: #5f5a52;
+}
+
+/* --- Byggeklosser -------------------------------------------------------- */
+
+.ui-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-card); }
+
+.ui-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.ui-panel-head h2 { margin: 0; color: var(--ink); font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+.ui-panel-head h2 small { margin-left: 6px; color: var(--muted); font-size: 13px; font-weight: 400; letter-spacing: 0; }
+
+.ui-btn {
+  display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px;
+  border: 1px solid var(--line-strong); border-radius: var(--radius-control);
+  background: var(--paper); color: var(--ink); font: inherit; font-size: 13px; font-weight: 500;
+  white-space: nowrap; cursor: pointer;
+}
+.ui-btn:hover { background: var(--hover); }
+.ui-btn-primary { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.ui-btn-primary:hover { border-color: var(--accent); background: var(--accent); color: #fff; }
+
+.ui-link { padding: 4px 6px; border: 0; border-radius: 6px; background: none; color: var(--muted); font: inherit; font-size: 12.5px; cursor: pointer; }
+.ui-link:hover { background: var(--hover); color: var(--ink); }
+
+.ui-seg { display: inline-flex; padding: 2px; border: 1px solid var(--line); border-radius: var(--radius-control); background: var(--rail); }
+.ui-seg button { padding: 4px 10px; border: 0; border-radius: 7px; background: none; color: var(--muted); font: inherit; font-size: 12.5px; cursor: pointer; }
+.ui-seg button:hover { color: var(--ink); }
+.ui-seg button[aria-pressed=true] { background: var(--paper); color: var(--ink); font-weight: 500; box-shadow: 0 1px 2px rgb(0 0 0 / 6%); }
+
+.ui-delta { font-size: 12.5px; font-weight: 500; white-space: nowrap; }
+.ui-delta.is-up { color: var(--pos); }
+.ui-delta.is-down { color: var(--neg); }
+.ui-delta.is-flat { color: var(--muted); }
+
+.ui-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 500; white-space: nowrap; }
+.ui-chip.is-up { background: var(--pos-soft); color: var(--pos); }
+.ui-chip.is-down { background: var(--neg-soft); color: var(--neg); }
+.ui-chip.is-flat { background: var(--rail); color: var(--muted); }
+
+.ui-stat-label { display: block; margin: 0 0 6px; color: var(--muted); font-size: 12.5px; }
+.ui-stat-value { display: block; color: var(--ink); font-size: 26px; font-weight: 500; line-height: 1.1; letter-spacing: -.025em; font-variant-numeric: tabular-nums; }
+.ui-stat-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin-top: 6px; color: var(--muted); font-size: 12.5px; }
+.ui-stat-meta b { color: var(--ink); font-weight: 500; }
+
+.ui-row { display: grid; align-items: center; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); }
+.ui-panel-head + .ui-row { border-top: 0; }
+
+.ui-empty { margin: 0; padding: 18px 0; color: var(--muted); font-size: 13px; }
+
+.app :is(.ui-btn, .ui-link, .ui-seg button):focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* --- Graf (scope-chart.js) ----------------------------------------------- */
+
+.ui-chart { position: relative; min-height: 0; }
+.ui-chart > svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.ui-chart-grid { stroke: var(--grid); }
+.ui-chart-grid.is-base { stroke: var(--line-strong); }
+.ui-chart-axis, .ui-chart-label { fill: var(--faint); font-family: inherit; font-size: 11.5px; }
+.ui-chart-label.is-current { fill: var(--accent); font-weight: 600; }
+.ui-chart-bar { fill: var(--accent); fill-opacity: .74; }
+.ui-chart-bar.is-current { fill-opacity: 1; }
+.ui-chart[data-tone=neutral] .ui-chart-bar:not(.is-current) { fill: var(--bar-neutral); fill-opacity: 1; }
+.ui-chart-ghost { fill: var(--accent-soft); stroke: var(--accent-line); stroke-dasharray: 3 3; }
+.ui-chart-line { fill: none; stroke: var(--faint); stroke-width: 1.6; stroke-dasharray: 5 4; stroke-linejoin: round; }
+.ui-chart-now { stroke: var(--accent); stroke-opacity: .3; }
+.ui-chart-hits { position: absolute; top: 0; right: 0; bottom: 22px; display: flex; }
+.ui-chart-hits button { flex: 1; min-width: 0; padding: 0; border: 0; border-radius: 8px; background: none; cursor: pointer; }
+.ui-chart-hits button:hover, .ui-chart-hits button:focus-visible { background: color-mix(in srgb, var(--accent) 7%, transparent); outline: none; }
+.ui-chart-hits button:focus-visible { box-shadow: inset 0 0 0 2px var(--accent); }
+.ui-tip {
+  position: absolute; z-index: 5; min-width: 150px; padding: 9px 11px; border-radius: 10px;
+  background: var(--tip-bg); color: var(--tip-ink); font-size: 12px; line-height: 1.5;
+  pointer-events: none; transform: translate(-50%, -100%); box-shadow: 0 8px 24px rgb(0 0 0 / 14%);
+}
+.ui-tip[hidden] { display: none; }
+.ui-tip b { display: block; font-weight: 600; }
+.ui-tip div { display: flex; justify-content: space-between; gap: 14px; font-variant-numeric: tabular-nums; }
+.ui-tip span { color: var(--tip-muted); }

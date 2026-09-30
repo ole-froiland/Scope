@@ -39,7 +39,7 @@
   app.dataset.modus = lagretModus === "rask" || lagretModus === "avansert" ? lagretModus : "vanlig";
 
   async function init() {
-    const { buildReport, improvementEffect, buildDayTimeline } = await import("./scope-insights.js?v=day-overview-11");
+    const { buildReport, improvementEffect, buildDayTimeline } = await import("./scope-insights.js?v=redesign-0930153352");
     const sidebar = document.getElementById("sidebar");
     const toggleButton = document.getElementById("sidebar-toggle");
     const brandLink = document.querySelector(".brand");
