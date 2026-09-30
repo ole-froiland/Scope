@@ -134,7 +134,7 @@
 
 /* --- Oversikt (scope-overview.js) ---------------------------------------- */
 
-.ov { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 14px; max-width: 1240px; margin: 0 auto; color: var(--ink); font-feature-settings: "tnum" 1; }
+.ov { display: grid; grid-template-rows: auto 1fr auto; gap: 14px; max-width: 1240px; margin: 0 auto; color: var(--ink); font-feature-settings: "tnum" 1; }
 .ov-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 6px 16px; }
 .ov-head h2 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -.02em; }
 .ov-head h2 span { margin-left: 8px; color: var(--muted); font-size: 15px; font-weight: 400; letter-spacing: 0; }
@@ -171,7 +171,7 @@
 .ov-task.is-done .ov-check { border-color: var(--pos); background: var(--pos); }
 .ov-task.is-done .ov-check svg { opacity: 1; }
 .ov-task-text { min-width: 0; }
-.ov-task-title { font-size: 14px; font-weight: 500; line-height: 1.35; }
+.ov-task-title { overflow: hidden; font-size: 14px; font-weight: 500; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
 .ov-task.is-done .ov-task-title { color: var(--faint); text-decoration: line-through; }
 .ov-task-why { margin-top: 2px; overflow: hidden; color: var(--muted); font-size: 12.5px; text-overflow: ellipsis; white-space: nowrap; }
 .ov-task-value { color: var(--muted); font-size: 12.5px; text-align: right; white-space: nowrap; }
@@ -200,15 +200,17 @@
   .ov .ov-sum .ui-stat-value { font-size: 21px; }
   .ov-chart-head { margin: 12px 0 2px; }
   .ov-panel { padding: 12px 16px 6px; }
-  .ov-task { padding: 8px 0; }
+  .ov-task { padding: 7px 0; }
   .ov-sum { margin: 2px 0 6px; }
-  .ov-period-chart { height: 84px; }
+  .ov-period-chart { height: 80px; }
+  .ov-note { margin-top: 4px; }
 }
 @media (max-width: 1099px), (max-height: 639px) {
   .ov-chart { flex: none; height: 200px; }
 }
 @media (max-width: 860px) {
-  .ov-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 16px; }
+  .ov-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; row-gap: 16px; }
+  .ov-task-title, .ov-task-why { white-space: normal; }
   .ov-kpi-main { grid-column: 1 / -1; }
   .ov-kpi:nth-child(even) { padding-left: 0; border-left: 0; }
   .ov-kpi-main .ui-stat-value { font-size: 36px; }

@@ -1,6 +1,6 @@
 // Oversikt: «Hvordan går det i dag?» – I dag-kortet, neste grep og de siste
 // periodene. Bare visning: test.js bygger modellen og eier all tilstand.
-import {barChart} from './scope-chart.js?v=redesign-0930153635';
+import {barChart} from './scope-chart.js?v=redesign-0930153930';
 
 const nf = new Intl.NumberFormat('nb-NO');
 const one = new Intl.NumberFormat('nb-NO', {maximumFractionDigits: 1});
@@ -84,7 +84,7 @@ function hero(model, actions) {
   const kpis = el('div', 'ov-kpis');
   kpis.append(
     kpi(before
-      ? {main: true, label: 'Prognose i dag', value: kr(today.forecastRevenue), meta: 'En vanlig ' + weekdayName + ' gir ' + kr(today.normalDayRevenue)}
+      ? {main: true, label: 'Prognose i dag', value: kr(today.normalDayRevenue), meta: 'Vanlig nivå for en ' + weekdayName}
       : {main: true, label: 'Omsetning så langt', value: kr(today.revenue), chip: change(today.revenue / today.normalRevenue - 1),
         meta: 'mot en vanlig ' + weekdayName, extra: ['Prognose i dag', kr(today.forecastRevenue)]}, actions.openSales),
     kpi(before
@@ -150,7 +150,10 @@ function tasksPanel(tasks, actions) {
     check.setAttribute('aria-label', task.title);
     check.innerHTML = CHECK;
     const text = el('div', 'ov-task-text');
-    text.append(el('div', 'ov-task-title', task.title), el('div', 'ov-task-why', task.basis));
+    const name = el('div', 'ov-task-title', task.title), why = el('div', 'ov-task-why', task.basis);
+    name.title = task.title;
+    why.title = task.basis;
+    text.append(name, why);
     const value = el('div', 'ov-task-value');
     value.append(el('strong', '', task.value), document.createTextNode(task.valueNote));
     row.append(check, text, value, button('ui-btn', task.action, () => actions.runTask(task.id)));
