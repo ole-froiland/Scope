@@ -71,3 +71,83 @@ export function buildOperationalAdvice(profile, tomorrow, weekRevenue) {
   });
   return advice.sort((a,b)=>b.priority-a.priority);
 }
+
+// ---- «I dag» on the overview ---------------------------------------------
+// The demo has no real till, so today is a normal weekday with a steady,
+// seeded swing. Same place + date gives the same day on every reload.
+export const OPEN_HOUR = 11;
+
+export function normalDay(dayRevenue, dayGuests, hourWeights) {
+  return hourWeights.map((weight, index) => ({hour: OPEN_HOUR + index, revenue: dayRevenue * weight, guests: dayGuests * weight}));
+}
+
+export function seededRandom(text) {
+  let h = 2166136261;
+  for (const ch of String(text)) { h ^= ch.codePointAt(0); h = Math.imul(h, 16777619); }
+  return function () {
+    h = (h + 0x6d2b79f5) | 0;
+    let t = Math.imul(h ^ (h >>> 15), 1 | h);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// Every factor is drawn in the same order whatever the time, so an hour that
+// is finished keeps its number for the rest of the day.
+export function dayActuals(normal, seed, now) {
+  const random = seededRandom(seed);
+  const level = -0.06 + random() * 0.16;
+  const clock = now.getHours() + now.getMinutes() / 60;
+  return normal.map(slot => {
+    const revenueFactor = 1 + level + (random() - 0.5) * 0.24;
+    const guestFactor = 1 + level * 0.7 + (random() - 0.5) * 0.16;
+    const share = Math.max(0, Math.min(1, clock - slot.hour));
+    return {hour: slot.hour, share, revenue: Math.round(slot.revenue * revenueFactor * share), guests: Math.round(slot.guests * guestFactor * share)};
+  });
+}
+
+// What is sold so far, plus the rest of a normal day at a damped pace, so a
+// strong lunch does not get extrapolated over the whole evening.
+export function forecastDay(normal, actuals) {
+  const normalSoFar = normal.reduce((sum, slot, index) => sum + slot.revenue * actuals[index].share, 0);
+  const soFar = actuals.reduce((sum, slot) => sum + slot.revenue, 0);
+  const pace = normalSoFar > 0 ? soFar / normalSoFar : 1;
+  const damped = 1 + (pace - 1) * 0.6;
+  const hours = normal.map((slot, index) => {
+    const actual = actuals[index], rest = 1 - actual.share;
+    return {hour: slot.hour, revenue: Math.round(actual.revenue + slot.revenue * rest * damped), guests: Math.round(actual.guests + slot.guests * rest * damped)};
+  });
+  return {pace, hours, revenue: hours.reduce((sum, h) => sum + h.revenue, 0), guests: hours.reduce((sum, h) => sum + h.guests, 0)};
+}
+
+// Same shape as the evening staffing model: thin at lunch, full for dinner.
+export function staffAt(plannedStaff, hour) {
+  if (hour < OPEN_HOUR || hour >= 24) return 0;
+  return Math.max(1, Math.round(plannedStaff * (hour < 16 ? 0.55 : hour < 18 ? 0.75 : hour < 22 ? 1 : 0.7)));
+}
+
+export function buildToday({dayRevenue, dayGuests, hourWeights, seed, now, plannedStaff}) {
+  const normal = normalDay(dayRevenue, dayGuests, hourWeights);
+  const actuals = dayActuals(normal, seed, now);
+  const forecast = forecastDay(normal, actuals);
+  const clock = now.getHours() + now.getMinutes() / 60;
+  const nowIndex = clock < OPEN_HOUR ? -1 : Math.min(normal.length - 1, Math.floor(clock) - OPEN_HOUR);
+  const normalSoFar = key => normal.reduce((sum, slot, index) => sum + slot[key] * actuals[index].share, 0);
+  return {
+    phase: nowIndex < 0 ? 'before' : 'open',
+    nowIndex,
+    hours: normal.map((slot, index) => ({
+      hour: slot.hour, share: actuals[index].share, actual: actuals[index].revenue, normal: Math.round(slot.revenue),
+      forecast: forecast.hours[index].revenue, forecastGuests: forecast.hours[index].guests
+    })),
+    revenue: actuals.reduce((sum, slot) => sum + slot.revenue, 0),
+    guests: actuals.reduce((sum, slot) => sum + slot.guests, 0),
+    normalRevenue: normalSoFar('revenue'),
+    normalGuests: normalSoFar('guests'),
+    forecastRevenue: forecast.revenue,
+    forecastGuests: forecast.guests,
+    normalDayRevenue: dayRevenue,
+    plannedStaff,
+    staffNow: staffAt(plannedStaff, Math.floor(clock))
+  };
+}

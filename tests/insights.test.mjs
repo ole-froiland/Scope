@@ -65,3 +65,74 @@ test('operational advice prices the cost gap and names tomorrow evening', async 
   assert.equal(quiet.find(x => x.id === 'cost').value, 'Lager');
   assert.ok(busy.concat(quiet).every(x => x.value && x.valueNote && x.action));
 });
+
+const W13 = [0.03, 0.09, 0.1, 0.05, 0.04, 0.05, 0.09, 0.14, 0.15, 0.12, 0.08, 0.04, 0.02];
+const at = (h, m) => new Date(2026, 8, 29, h, m);
+
+test('a normal day spreads the whole day over the opening hours', async () => {
+  const {normalDay, OPEN_HOUR} = await import('../scope-insights.js');
+  assert.equal(OPEN_HOUR, 11);
+  const day = normalDay(10000, 100, [0.25, 0.25, 0.5]);
+  assert.deepEqual(day.map(s => s.hour), [11, 12, 13]);
+  assert.equal(day.reduce((s, x) => s + x.revenue, 0), 10000);
+  assert.equal(day[2].guests, 50);
+});
+
+test('demo actuals are stable per seed and a finished hour never changes', async () => {
+  const {normalDay, dayActuals} = await import('../scope-insights.js');
+  const normal = normalDay(65550, 161, W13);
+  const seed = 'Heim Jessheim|2026-9-29';
+  const afternoon = dayActuals(normal, seed, at(16, 30));
+  const evening = dayActuals(normal, seed, at(20, 0));
+  assert.deepEqual(afternoon.slice(0, 5), evening.slice(0, 5));
+  assert.equal(afternoon[5].share, 0.5);
+  assert.equal(afternoon[6].share, 0);
+  assert.equal(afternoon[6].revenue, 0);
+  assert.deepEqual(dayActuals(normal, seed, at(20, 0)), evening);
+  assert.notDeepEqual(dayActuals(normal, 'Heim Hamar|2026-9-29', at(20, 0)), evening);
+});
+
+test('forecast keeps what is sold and adds the rest at a damped pace', async () => {
+  const {normalDay, forecastDay} = await import('../scope-insights.js');
+  const normal = normalDay(1000, 10, [0.5, 0.5]);
+  const f = forecastDay(normal, [{hour: 11, share: 1, revenue: 600, guests: 6}, {hour: 12, share: 0, revenue: 0, guests: 0}]);
+  assert.equal(f.pace, 1.2);
+  assert.equal(f.hours[0].revenue, 600);
+  assert.equal(f.hours[1].revenue, 560);
+  assert.equal(f.revenue, 1160);
+  assert.equal(f.guests, 12);
+  const untouched = forecastDay(normal, [{hour: 11, share: 0, revenue: 0, guests: 0}, {hour: 12, share: 0, revenue: 0, guests: 0}]);
+  assert.equal(untouched.pace, 1);
+  assert.equal(untouched.revenue, 1000);
+});
+
+test('staff on the floor follows the evening shape and is zero when closed', async () => {
+  const {staffAt} = await import('../scope-insights.js');
+  assert.equal(staffAt(6, 9), 0);
+  assert.equal(staffAt(6, 12), 3);
+  assert.equal(staffAt(6, 17), 5);
+  assert.equal(staffAt(6, 19), 6);
+  assert.equal(staffAt(6, 23), 4);
+  assert.equal(staffAt(1, 12), 1);
+});
+
+test('before opening the day is all forecast; during service it splits at the clock', async () => {
+  const {buildToday} = await import('../scope-insights.js');
+  const base = {dayRevenue: 65550, dayGuests: 161, hourWeights: W13, seed: 'Heim Jessheim|2026-9-29', plannedStaff: 6};
+  const early = buildToday({...base, now: at(9, 0)});
+  assert.equal(early.phase, 'before');
+  assert.equal(early.nowIndex, -1);
+  assert.equal(early.revenue, 0);
+  assert.equal(early.staffNow, 0);
+  assert.ok(Math.abs(early.forecastRevenue - 65550) <= 7);
+  assert.ok(early.hours.every(h => h.actual === 0 && h.forecast > 0));
+  const mid = buildToday({...base, now: at(19, 30)});
+  assert.equal(mid.phase, 'open');
+  assert.equal(mid.nowIndex, 8);
+  assert.equal(mid.hours[8].share, 0.5);
+  assert.equal(mid.revenue, mid.hours.reduce((s, h) => s + h.actual, 0));
+  assert.ok(mid.forecastRevenue > mid.revenue);
+  assert.ok(mid.hours.slice(0, 8).every(h => h.forecast === h.actual));
+  assert.equal(mid.staffNow, 6);
+  assert.equal(buildToday({...base, now: at(23, 59)}).nowIndex, 12);
+});
