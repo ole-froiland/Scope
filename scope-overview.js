@@ -1,6 +1,6 @@
 // Oversikt: «Hvordan går det i dag?» – I dag-kortet, neste grep og de siste
 // periodene. Bare visning: test.js bygger modellen og eier all tilstand.
-import {barChart} from './scope-chart.js?v=redesign-0930153930';
+import {barChart} from './scope-chart.js?v=redesign-0930154202';
 
 const nf = new Intl.NumberFormat('nb-NO');
 const one = new Intl.NumberFormat('nb-NO', {maximumFractionDigits: 1});
