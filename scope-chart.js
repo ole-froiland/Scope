@@ -79,6 +79,7 @@ export function barChart(root, {bars, line = null, format = String, onSelect = n
   }
 
   function show(index) {
+    if (!slot) draw(); // hovered before the first resize callback measured the chart
     const bar = bars[index];
     const title = document.createElement('b');
     title.textContent = bar.title;
