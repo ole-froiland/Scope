@@ -65,21 +65,25 @@
 
 /* Hero */
 .n-hero { display: grid; justify-items: center; gap: 0; padding: clamp(56px, 10vw, 112px) 16px clamp(48px, 8vw, 88px); text-align: center; }
-.notion-site .n-hero h1 { display: grid; justify-items: center; color: var(--n-strong); font-size: clamp(2.25rem, 10.5vw, 6.5rem); font-weight: 700; line-height: 1.04; letter-spacing: -.045em; }
+.notion-site .n-hero h1 { display: grid; justify-items: center; color: var(--n-strong); font-size: clamp(2rem, 8.5vw, 4.75rem); font-weight: 700; line-height: 1.04; letter-spacing: -.045em; }
 .n-hero-line { display: inline-flex; align-items: center; flex-wrap: nowrap; white-space: nowrap; }
 .n-pill {
   --pill-bg: var(--n-blue-bg); --pill-dot: var(--n-blue);
   display: inline-flex; align-items: center; gap: .22em; overflow: hidden;
   margin: .06em .03em .06em .24em; padding: .05em .42em .1em .32em; border-radius: 999px;
   background: var(--pill-bg); font-weight: 450; letter-spacing: -.03em;
-  transition: width .45s cubic-bezier(.2,.8,.2,1), background-color .45s ease;
+  transition: background-color .45s ease;
 }
 .n-pill[data-tone="red"] { --pill-bg: var(--n-red-bg); --pill-dot: var(--n-red); }
 .n-pill[data-tone="green"] { --pill-bg: var(--n-green-bg); --pill-dot: var(--n-green); }
 .n-pill-dot { flex: 0 0 auto; width: .3em; height: .3em; border-radius: 50%; background: var(--pill-dot); transition: background-color .45s ease; }
-.n-pill-word { display: inline-block; transition: transform .3s ease, opacity .3s ease; }
-.n-pill-word.is-out { transform: translateY(-.35em); opacity: 0; }
-.n-pill-word.is-in { transform: translateY(.35em); opacity: 0; transition: none; }
+.n-pill-word { display: inline-block; white-space: pre; }
+.n-pill-word::after { content: ""; display: inline-block; width: .07em; height: .78em; margin-left: .06em; background: var(--pill-dot); vertical-align: -.04em; animation: n-caret .9s steps(1) infinite; }
+.n-pill-word.is-selecting::after { display: none; }
+.n-pill-word.is-em { font-style: italic; }
+.n-pill-word.is-strong { font-weight: 750; }
+.n-sel { background: rgba(6, 77, 255, .22); border-radius: .04em; }
+@keyframes n-caret { 50% { opacity: 0; } }
 .n-hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: clamp(32px, 4vw, 44px); }
 .notion-site .n-button-lg { min-height: 48px; padding: 0 24px; border-radius: 8px; font-size: 1rem; font-weight: 600; }
 .n-hero-note { margin-top: 16px; color: var(--n-muted); font-size: .9375rem; }

@@ -1,38 +1,45 @@
-// Scope #19 — Notion: ordet i hero-pillen bytter seg, og Rådstavlen bytter visning med fanene Tabell og Tavle.
+// Scope #19 — Notion: ordet i hero-pillen skrives på nytt, og Rådstavlen bytter visning med fanene Tabell og Tavle.
 const pill = document.querySelector("[data-n-pill]");
 
+// Samme skrivemaskin som /enkel: ordet skrives bokstav for bokstav og slettes med backspace eller markering.
 if (pill && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const word = pill.querySelector("[data-n-word]");
-  const items = [
-    ["mat", "blue"], ["vin", "red"], ["service", "green"],
-    ["kaffe", "blue"], ["drinker", "red"], ["gjester", "green"],
+  const words = [
+    ["mat", "blue"], ["vin", "red"], ["kultur", "green"], ["kaffe", "blue"],
+    ["indisk", "red"], ["stemning", "green"], ["tartar", "blue"],
   ];
-  let index = 0;
+  const removals = ["backspace", "select", "backspace", "select-italic", "backspace", "select-bold"];
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  const fit = () => { pill.style.width = ""; pill.style.width = `${pill.getBoundingClientRect().width}px`; };
-  fit();
-  window.addEventListener("resize", fit);
+  const remove = async (text, style) => {
+    if (style === "backspace") {
+      for (let i = text.length; i >= 0; i -= 1) { word.textContent = text.slice(0, i); await wait(150); }
+      return;
+    }
+    word.classList.add("is-selecting");
+    for (let i = 1; i <= text.length; i += 1) {
+      const start = text.length - i;
+      word.innerHTML = `${text.slice(0, start)}<span class="n-sel">${text.slice(start)}</span>`;
+      await wait(90);
+    }
+    await wait(320);
+    if (style === "select-italic") { word.classList.add("is-em"); await wait(700); }
+    if (style === "select-bold") { word.classList.add("is-strong"); await wait(700); }
+    word.classList.remove("is-selecting", "is-em", "is-strong");
+    word.textContent = "";
+  };
 
-  setInterval(() => {
-    index = (index + 1) % items.length;
-    const [text, tone] = items[index];
-    word.classList.add("is-out");
-    setTimeout(() => {
-      pill.style.width = `${pill.getBoundingClientRect().width}px`;
-      word.textContent = text;
-      word.classList.remove("is-out");
-      word.classList.add("is-in");
+  (async () => {
+    for (let n = 0; ; n += 1) {
+      await wait(2200);
+      const [text] = words[n % words.length];
+      const [next, tone] = words[(n + 1) % words.length];
+      await remove(text, removals[n % removals.length]);
+      await wait(350);
       pill.dataset.tone = tone;
-      const from = pill.style.width;
-      pill.style.width = "";
-      const to = `${pill.getBoundingClientRect().width}px`;
-      pill.style.width = from;
-      void pill.offsetWidth;
-      pill.style.width = to;
-      void word.offsetWidth;
-      word.classList.remove("is-in");
-    }, 300);
-  }, 2400);
+      for (let i = 1; i <= next.length; i += 1) { word.textContent = next.slice(0, i); await wait(210); }
+    }
+  })();
 }
 
 const database = document.querySelector("[data-n-database]");
