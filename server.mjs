@@ -275,11 +275,11 @@ function getClientAddress(request) {
 }
 
 function securityHeaders(response) {
-  response.setHeader("Content-Security-Policy", "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' https://cdn.jsdelivr.net; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'");
+  response.setHeader("Content-Security-Policy", "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' https://cdn.jsdelivr.net; connect-src 'self'; frame-ancestors 'self'; base-uri 'none'; form-action 'self'");
   response.setHeader("Cross-Origin-Opener-Policy", "same-origin");
   response.setHeader("Referrer-Policy", "no-referrer");
   response.setHeader("X-Content-Type-Options", "nosniff");
-  response.setHeader("X-Frame-Options", "DENY");
+  response.setHeader("X-Frame-Options", "SAMEORIGIN");
   response.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
 }
 

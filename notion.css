@@ -64,7 +64,7 @@
 .notion-site .n-button-solid:hover { background: #33322e; border-color: #33322e; }
 
 /* Hero */
-.n-hero { display: grid; justify-items: center; gap: 0; padding: clamp(56px, 10vw, 112px) 16px clamp(48px, 8vw, 88px); text-align: center; }
+.n-hero { display: grid; justify-items: center; gap: 0; padding: clamp(56px, 10vw, 112px) 16px clamp(40px, 6vw, 64px); text-align: center; }
 .notion-site .n-hero h1 { display: grid; justify-items: center; color: var(--n-strong); font-size: clamp(2.4rem, 10vw, 5.75rem); font-weight: 700; line-height: 1.04; letter-spacing: -.045em; }
 .n-hero-line { display: inline-flex; align-items: center; flex-wrap: nowrap; white-space: nowrap; }
 .n-pill { --pill-dot: var(--n-blue); margin-left: .24em; color: var(--pill-dot); transition: color .45s ease; }
@@ -80,6 +80,12 @@
 @keyframes n-caret { 50% { opacity: 0; } }
 .n-hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 28px; }
 .notion-site .n-button-lg { min-height: 48px; padding: 0 24px; border-radius: 8px; font-size: 1rem; font-weight: 600; }
+.n-showcase { width: min(1200px, 100% - 32px); margin: 0 auto clamp(56px, 8vw, 96px); }
+.n-window { overflow: hidden; border: 1px solid var(--n-line); border-radius: 12px; background: var(--n-paper); box-shadow: 0 1px 2px rgba(15,15,15,.04), 0 24px 60px -20px rgba(15,15,15,.18); }
+.n-window-bar { display: flex; gap: 7px; height: 34px; align-items: center; padding: 0 14px; border-bottom: 1px solid var(--n-line); background: var(--n-rail); }
+.n-window-bar i { width: 10px; height: 10px; border-radius: 50%; background: #dcd9d3; }
+.n-window-screen { --n-shot-w: 1440; --n-shot-h: 900; position: relative; overflow: hidden; aspect-ratio: 1440 / 900; }
+.n-window-screen iframe { position: absolute; top: 0; left: 0; width: 1440px; height: 900px; border: 0; transform-origin: 0 0; transform: scale(var(--n-scale, .8)); pointer-events: none; }
 .n-hero-note { margin-top: clamp(20px, 3vw, 32px); color: var(--n-ink); font-size: clamp(1.125rem, 2.2vw, 1.375rem); }
 
 .n-page { width: min(900px, 100% - 32px); margin: 0 auto; padding: 0 0 72px; }

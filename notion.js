@@ -42,6 +42,24 @@ if (pill && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   })();
 }
 
+// Oversikten fra /test vises i full desktopbredde og skaleres ned til vinduet.
+const screen = document.querySelector("[data-n-screen]");
+
+if (screen) {
+  const fit = () => screen.style.setProperty("--n-scale", String(screen.clientWidth / 1440));
+  new ResizeObserver(fit).observe(screen);
+  fit();
+
+  // Forsiden er lys, så oversikten vises alltid lys og med åpen meny, uten å endre valgene i /test.
+  const frame = screen.querySelector("iframe");
+  frame.addEventListener("load", () => {
+    const app = frame.contentDocument?.body;
+    if (!app) return;
+    app.dataset.theme = "light";
+    app.classList.remove("is-collapsed");
+  });
+}
+
 const database = document.querySelector("[data-n-database]");
 
 if (database) {
