@@ -10,8 +10,15 @@
   const VARSEL_KEY = "scope-test-varsler";
   const MODUS_KEY = "scope-test-visning";
   const app = document.body;
+  // ?embed=1 viser flaten inne i forsiden: start alltid rent og husk ingenting.
+  const embedded = new URLSearchParams(location.search).has("embed");
+  const memory = new Map();
 
   function store(key, value) {
+    if (embedded) {
+      memory.set(key, value);
+      return;
+    }
     try {
       localStorage.setItem(key, value);
     } catch (error) {
@@ -20,6 +27,7 @@
   }
 
   function restore(key) {
+    if (embedded) return memory.get(key) ?? null;
     try {
       return localStorage.getItem(key);
     } catch (error) {
