@@ -42,6 +42,13 @@ if (pill && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   })();
 }
 
+// Bakgrunnsvideoen står stille for dem som har slått av bevegelse.
+const heroVideo = document.querySelector("[data-n-hero-video]");
+if (heroVideo && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  heroVideo.removeAttribute("autoplay");
+  heroVideo.pause();
+}
+
 // Oversikten fra /test vises i full desktopbredde og skaleres ned til vinduet.
 const screen = document.querySelector("[data-n-screen]");
 
