@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="notion.css?v=20261001-topbar">
+    <link rel="stylesheet" href="notion.css?v=20261001-hero4">
   </head>
   <body class="notion-site">
     <a class="skip-link" href="#hovedinnhold">Hopp til innholdet</a>
@@ -27,32 +27,19 @@
     </header>
 
     <main id="hovedinnhold">
-      <div class="n-cover" aria-hidden="true"><i></i><i></i><i></i></div>
+      <section class="n-hero" aria-labelledby="hero-title">
+        <h1 id="hero-title" aria-label="Du kan mat. Vi kan tall.">
+          <span class="n-hero-line" aria-hidden="true">Du kan <span class="n-pill" data-n-pill data-tone="blue"><i class="n-pill-dot"></i><span class="n-pill-word" data-n-word>mat</span></span>.</span>
+          <span class="n-hero-line" aria-hidden="true">Vi kan tall.</span>
+        </h1>
+        <div class="n-hero-actions">
+          <a class="n-button n-button-solid n-button-lg" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20bli%20testkunde%20hos%20Scope">Prøv gratis</a>
+          <a class="n-button n-button-lg" href="mailto:post@scopeanalytics.no?subject=Demo%20av%20Scope">Book demo</a>
+        </div>
+        <p class="n-hero-note">Klar på 1-2-3. Ingen bindingstid.</p>
+      </section>
 
       <article class="n-page">
-        <div class="n-icon" aria-hidden="true">
-          <svg viewBox="0 0 46 42" width="58" height="53"><circle cx="21" cy="13" r="13" fill="#064dff" fill-opacity=".9"/><circle cx="33" cy="26" r="13" fill="#ff3c38" fill-opacity=".9"/><circle cx="13" cy="29" r="13" fill="#00bd7b" fill-opacity=".9"/></svg>
-        </div>
-
-        <h1>Mer restaurant. Mindre støy.</h1>
-
-        <dl class="n-props">
-          <div><dt><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5"/></svg>Status</dt><dd><span class="n-tag n-tag-green">Åpent for testkunder</span></dd></div>
-          <div><dt><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 13.5v-9l5.5-3 5.5 3v9M6 13.5v-4h4v4"/></svg>Gjelder</dt><dd><span class="n-tag">Restaurant</span><span class="n-tag">Kafé</span><span class="n-tag">Bar</span></dd></div>
-          <div><dt><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5"/></svg>Binding</dt><dd><span class="n-tag n-tag-blue">Ingen</span></dd></div>
-          <div><dt><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5v6l3.5 2M8 14.5a6.5 6.5 0 1 1 0-13 6.5 6.5 0 0 1 0 13Z"/></svg>Oppdateres</dt><dd>Hver natt</dd></div>
-        </dl>
-
-        <aside class="n-callout">
-          <span class="n-callout-icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 1.5v1.8M8 12.7v1.8M1.5 8h1.8M12.7 8h1.8M3.4 3.4l1.3 1.3M11.3 11.3l1.3 1.3M12.6 3.4l-1.3 1.3M4.7 11.3l-1.3 1.3M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/></svg></span>
-          <p><strong>Du kan mat. Vi kan tall.</strong> Scope samler tallene fra kasse, regnskap og bemanning og gir deg ett tydelig neste steg om gangen. Klar på 1-2-3.</p>
-        </aside>
-
-        <div class="n-actions">
-          <a class="n-button n-button-solid" href="mailto:post@scopeanalytics.no?subject=Demo%20av%20Scope">Book demo</a>
-          <a class="n-button" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20bli%20testkunde%20hos%20Scope">Test gratis</a>
-        </div>
-
         <section class="n-section" id="slik" aria-labelledby="slik-title">
           <h2 id="slik-title"><a class="n-anchor" href="#slik" aria-label="Lenke til Slik virker det">#</a>Slik virker det</h2>
           <p class="n-muted">Fem steg fra tilkobling til råd. Du gjør bare det første.</p>
@@ -157,7 +144,7 @@
       <div><button type="button" data-cookie-choice="necessary">Kun nødvendige</button><button type="button" data-cookie-choice="all">Godta alle</button></div>
     </aside>
 
-    <script src="notion.js?v=20260930-v1"></script>
+    <script src="notion.js?v=20261001-hero4"></script>
     <script src="cookie-consent.js?v=20260718-v1"></script>
   </body>
 </html>

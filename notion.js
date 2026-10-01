@@ -1,4 +1,40 @@
-// Scope #19 — Notion: bytter visning i Rådstavlen med fanene Tabell og Tavle.
+// Scope #19 — Notion: ordet i hero-pillen bytter seg, og Rådstavlen bytter visning med fanene Tabell og Tavle.
+const pill = document.querySelector("[data-n-pill]");
+
+if (pill && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const word = pill.querySelector("[data-n-word]");
+  const items = [
+    ["mat", "blue"], ["vin", "red"], ["service", "green"],
+    ["kaffe", "blue"], ["drinker", "red"], ["gjester", "green"],
+  ];
+  let index = 0;
+
+  const fit = () => { pill.style.width = ""; pill.style.width = `${pill.getBoundingClientRect().width}px`; };
+  fit();
+  window.addEventListener("resize", fit);
+
+  setInterval(() => {
+    index = (index + 1) % items.length;
+    const [text, tone] = items[index];
+    word.classList.add("is-out");
+    setTimeout(() => {
+      pill.style.width = `${pill.getBoundingClientRect().width}px`;
+      word.textContent = text;
+      word.classList.remove("is-out");
+      word.classList.add("is-in");
+      pill.dataset.tone = tone;
+      const from = pill.style.width;
+      pill.style.width = "";
+      const to = `${pill.getBoundingClientRect().width}px`;
+      pill.style.width = from;
+      void pill.offsetWidth;
+      pill.style.width = to;
+      void word.offsetWidth;
+      word.classList.remove("is-in");
+    }, 300);
+  }, 2400);
+}
+
 const database = document.querySelector("[data-n-database]");
 
 if (database) {

@@ -63,34 +63,35 @@
 .notion-site .n-button-solid { color: #fff; border-color: var(--n-strong); background: var(--n-strong); }
 .notion-site .n-button-solid:hover { background: #33322e; border-color: #33322e; }
 
-/* Omslag og side */
-.n-cover { position: relative; height: clamp(150px, 24vw, 240px); overflow: hidden; background: var(--n-rail); border-bottom: 1px solid var(--n-line); }
-.n-cover i { position: absolute; width: clamp(150px, 24vw, 230px); aspect-ratio: 1; border-radius: 50%; opacity: .9; }
-.n-cover i:nth-child(1) { left: 50%; top: -22%; margin-left: -14vw; background: var(--n-blue); opacity: .16; }
-.n-cover i:nth-child(2) { left: 50%; top: 4%; margin-left: -1vw; background: var(--n-red); opacity: .16; }
-.n-cover i:nth-child(3) { left: 50%; top: 14%; margin-left: -23vw; background: var(--n-green); opacity: .18; }
+/* Hero */
+.n-hero { display: grid; justify-items: center; gap: 0; padding: clamp(56px, 10vw, 112px) 16px clamp(48px, 8vw, 88px); text-align: center; }
+.notion-site .n-hero h1 { display: grid; justify-items: center; color: var(--n-strong); font-size: clamp(2.25rem, 10.5vw, 6.5rem); font-weight: 700; line-height: 1.04; letter-spacing: -.045em; }
+.n-hero-line { display: inline-flex; align-items: center; flex-wrap: nowrap; white-space: nowrap; }
+.n-pill {
+  --pill-bg: var(--n-blue-bg); --pill-dot: var(--n-blue);
+  display: inline-flex; align-items: center; gap: .22em; overflow: hidden;
+  margin: .06em .03em .06em .24em; padding: .05em .42em .1em .32em; border-radius: 999px;
+  background: var(--pill-bg); font-weight: 450; letter-spacing: -.03em;
+  transition: width .45s cubic-bezier(.2,.8,.2,1), background-color .45s ease;
+}
+.n-pill[data-tone="red"] { --pill-bg: var(--n-red-bg); --pill-dot: var(--n-red); }
+.n-pill[data-tone="green"] { --pill-bg: var(--n-green-bg); --pill-dot: var(--n-green); }
+.n-pill-dot { flex: 0 0 auto; width: .3em; height: .3em; border-radius: 50%; background: var(--pill-dot); transition: background-color .45s ease; }
+.n-pill-word { display: inline-block; transition: transform .3s ease, opacity .3s ease; }
+.n-pill-word.is-out { transform: translateY(-.35em); opacity: 0; }
+.n-pill-word.is-in { transform: translateY(.35em); opacity: 0; transition: none; }
+.n-hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: clamp(32px, 4vw, 44px); }
+.notion-site .n-button-lg { min-height: 48px; padding: 0 24px; border-radius: 8px; font-size: 1rem; font-weight: 600; }
+.n-hero-note { margin-top: 16px; color: var(--n-muted); font-size: .9375rem; }
 
 .n-page { width: min(900px, 100% - 32px); margin: 0 auto; padding: 0 0 72px; }
-.n-icon { position: relative; z-index: 1; margin: -30px 0 18px; width: 78px; height: 78px; display: grid; place-items: center; border-radius: 16px; background: var(--n-paper); box-shadow: 0 0 0 4px var(--n-paper); }
-.notion-site h1 { color: var(--n-strong); font-size: clamp(2.2rem, 6vw, 3.25rem); font-weight: 700; line-height: 1.1; letter-spacing: -.035em; text-wrap: balance; }
-
-/* Egenskaper */
-.n-props { display: grid; gap: 2px; margin: 24px 0 28px; font-size: .9rem; }
-.n-props > div { display: flex; align-items: center; gap: 8px; min-height: 34px; }
-.n-props dt { display: flex; align-items: center; gap: 8px; flex: 0 0 min(150px, 38%); color: var(--n-muted); }
-.n-props dt svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-.n-props dd { display: flex; flex-wrap: wrap; gap: 6px; }
+.notion-site h1 { color: var(--n-strong); }
 
 .n-tag { display: inline-flex; align-items: center; padding: 1px 8px; border-radius: 4px; background: #eceae6; color: var(--n-ink); font-size: .8125rem; font-weight: 500; line-height: 1.5; white-space: nowrap; }
 .n-tag-blue { background: var(--n-blue-bg); color: var(--n-blue-ink); }
 .n-tag-red { background: var(--n-red-bg); color: var(--n-red-ink); }
 .n-tag-green { background: var(--n-green-bg); color: var(--n-green-ink); }
 
-/* Callout */
-.n-callout { display: flex; gap: 12px; padding: 18px 20px; border-radius: var(--n-radius); background: var(--n-rail); font-size: 1.0625rem; }
-.n-callout-icon { flex: 0 0 auto; margin-top: 3px; width: 22px; height: 22px; }
-.n-callout-icon svg { width: 22px; height: 22px; fill: none; stroke: var(--n-strong); stroke-width: 1.2; stroke-linecap: round; }
-.n-callout strong { color: var(--n-strong); font-weight: 650; }
 .n-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 0; }
 
 /* Seksjoner */
@@ -178,6 +179,15 @@
   .n-anchor { display: none; }
   .n-cookie { flex-direction: column; align-items: stretch; gap: 12px; }
   .n-cookie div > button { flex: 1; }
+}
+
+@media (max-width: 400px) {
+  .n-topbar { padding: 0 12px; gap: 8px; }
+  .n-brand { gap: 8px; padding: 4px 2px; }
+  .n-brand svg { width: 30px; height: 28px; }
+  .n-brand strong { font-size: 1.35rem; }
+  .n-topbar-actions { gap: 6px; }
+  .n-topbar .n-button { padding: 0 10px; font-size: .85rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
