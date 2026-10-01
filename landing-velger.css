@@ -537,3 +537,12 @@ h1 {
 .page-option-enkel-dark .option-preview i:nth-child(3) { left:24px; top:36px; background:#6e7069; }
 .page-option-enkel-dark .option-arrow { background:#e5e4dc; color:#171717; }
 .page-option-enkel-dark:hover { border-color:#b9b9af; }
+
+/* Notion: et hvitt dokument med tittel- og tekstlinjer. */
+.page-option-notion { background:#f7f6f3; }
+.page-option-notion .option-preview { flex-direction:column; align-items:flex-start; justify-content:center; gap:7px; width:104px; height:78px; padding:0 16px; background:#fff; border:1px solid #e0ddd6; border-radius:10px; }
+.page-option-notion .option-preview i { display:block; height:5px; border-radius:3px; background:#d9d6cf; }
+.page-option-notion .option-preview i:nth-child(1) { width:22px; height:9px; background:#171715; }
+.page-option-notion .option-preview i:nth-child(2) { width:68px; }
+.page-option-notion .option-preview i:nth-child(3) { width:46px; background:#064dff; }
+.page-option-notion .option-arrow { background:#171715; }
