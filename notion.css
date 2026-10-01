@@ -38,16 +38,17 @@
 .n-topbar {
   position: sticky; top: 0; z-index: 20;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  height: 52px; padding: 0 16px;
-  background: rgba(255,255,255,.92); backdrop-filter: blur(8px);
-  border-bottom: 1px solid transparent;
+  height: 76px; padding: 0 32px;
+  background: rgba(255,255,255,.96); backdrop-filter: blur(8px);
+  border-bottom: 1px solid #eeeeee;
   font-size: .875rem;
 }
-.n-brand { display: inline-flex; align-items: center; gap: 8px; padding: 4px 6px; border-radius: var(--n-radius); color: var(--n-strong); text-decoration: none; }
+.n-brand { display: inline-flex; align-items: center; gap: 14px; padding: 4px 6px; border-radius: var(--n-radius); color: var(--n-strong); text-decoration: none; }
 .n-brand:hover { background: var(--n-hover); }
-.n-brand strong { font-weight: 650; letter-spacing: -.01em; }
-.n-topbar-actions { display: flex; align-items: center; gap: 6px; }
-.n-login { color: var(--n-strong); font-weight: 500; }
+.n-brand strong { color: #041a3f; font-size: 2rem; font-weight: 650; line-height: 1; letter-spacing: -.01em; }
+.n-topbar-actions { display: flex; align-items: center; gap: 10px; }
+.n-topbar .n-button { min-height: 40px; padding: 0 16px; border-radius: 6px; font-size: .9rem; font-weight: 650; white-space: nowrap; }
+.n-topbar .n-login { border-color: var(--n-strong); }
 .n-link { padding: 5px 9px; border-radius: var(--n-radius); color: var(--n-muted); text-decoration: none; }
 .n-link:hover { background: var(--n-hover); color: var(--n-strong); }
 
@@ -93,7 +94,7 @@
 .n-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 0; }
 
 /* Seksjoner */
-.n-section { margin-top: 56px; scroll-margin-top: 64px; }
+.n-section { margin-top: 56px; scroll-margin-top: 92px; }
 .n-section h2 { position: relative; color: var(--n-strong); font-size: 1.625rem; font-weight: 650; letter-spacing: -.02em; line-height: 1.25; padding-bottom: 6px; border-bottom: 1px solid var(--n-line); margin-bottom: 12px; }
 .notion-site .n-anchor { position: absolute; left: -26px; top: 0; width: 22px; text-align: center; color: transparent; text-decoration: none; font-weight: 500; }
 .notion-site .n-section h2:hover .n-anchor, .notion-site .n-anchor:focus-visible { color: #b8b5ad; }
@@ -167,7 +168,12 @@
 .n-cookie button[data-cookie-choice="all"] { border-color: var(--n-strong); background: var(--n-strong); color: #fff; }
 
 @media (max-width: 760px) {
-  .n-link:not(.n-login) { display: none; }
+  .n-link { display: none; }
+  .n-topbar { height: 64px; padding: 0 16px; }
+  .n-brand { gap: 10px; }
+  .n-brand svg { width: 36px; height: 33px; }
+  .n-brand strong { font-size: 1.6rem; }
+  .n-topbar .n-button { min-height: 36px; padding: 0 12px; }
   .n-board { grid-template-columns: 1fr; }
   .n-anchor { display: none; }
   .n-cookie { flex-direction: column; align-items: stretch; gap: 12px; }
