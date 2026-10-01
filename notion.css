@@ -65,9 +65,9 @@
 
 /* Hero */
 .n-hero { position: relative; isolation: isolate; overflow: hidden; display: grid; justify-items: center; align-content: center; width: calc(100% - 32px); max-width: 1440px; min-height: min(680px, calc(100svh - 108px)); margin: 16px auto 0; padding: clamp(56px, 9vw, 104px) 24px; border-radius: 20px; background: var(--n-rail); text-align: center; }
-.n-hero-video { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 88%; filter: saturate(1.1); pointer-events: none; }
+.n-hero-video { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; filter: saturate(1.15) contrast(1.06); pointer-events: none; }
 .n-hero-video::-webkit-media-controls, .n-hero-video::-webkit-media-controls-start-playback-button { display: none !important; -webkit-appearance: none; }
-.n-hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(48% 46% at 50% 50%, rgba(255,255,255,.62), rgba(255,255,255,.34)); pointer-events: none; }
+.n-hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(36% 32% at 50% 52%, rgba(255,255,255,.6), rgba(255,255,255,0) 100%), rgba(255,255,255,.08); pointer-events: none; }
 .notion-site .n-hero h1 { display: grid; justify-items: center; color: var(--n-strong); font-size: clamp(2.4rem, 10vw, 5.75rem); font-weight: 700; line-height: 1.04; letter-spacing: -.045em; }
 .n-hero-line { display: inline-flex; align-items: center; flex-wrap: nowrap; white-space: nowrap; }
 .n-pill { --pill-dot: var(--n-blue); margin-left: .24em; color: var(--pill-dot); transition: color .45s ease; }
