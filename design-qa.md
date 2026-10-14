@@ -1,38 +1,39 @@
-# Design QA
+# Scope hero — selected direction 2
 
-## Kilder og visningsmål
+Source visual truth: `/Users/ole-froiland/.codex/generated_images/01a12cf0-e35a-70f3-a705-cb850b4910be/exec-599ad6ad-33d2-4218-b132-3f1b31e9fe43.png`.
 
-- Døgnkart-kilde: `/Users/ole-froiland/.codex/generated_images/01a05d14-4533-7182-b5ec-1f481fb4f275/exec-6b9693c4-f466-4693-bf31-127205587be9.png`
-- Signalrom-kilde: `/Users/ole-froiland/.codex/generated_images/01a05d14-4533-7182-b5ec-1f481fb4f275/exec-4aba59dd-1f35-42ed-8f67-0bdfd4531197.png`
-- Servicejournal-kilde: `/Users/ole-froiland/.codex/generated_images/01a05d14-4533-7182-b5ec-1f481fb4f275/exec-30c87df7-c537-4fd3-8e68-c2261ddecd7b.png`
-- Alle kilder: 1487 × 1058 px.
-- Desktop-kontroll: 1487 × 1058 CSS-px ved DPR 1.
-- Mobilkontroll: 390 × 844 CSS-px ved DPR 1.
+Implementation: `/notion`, Netlify preview `6acc24f15ab3e8abbd6b91a3`.
+Screenshots: `output/playwright/notion-ai-hero-1440-final.png` and `output/playwright/notion-ai-hero-390-final.png`.
 
-## Sammenligningsbevis
+Viewport: 1440 × 900 CSS pixels at density 1. Source pixels 1586 × 992, uniformly fitted to 1440 × 900 for comparison with a subpixel-ratio rounding crop. Implementation pixels 1440 × 900. Same video frame at 8 seconds, top of page, cookie notice dismissed.
 
-- `output/design-qa/drift-comparison.png` — kilde og implementasjon side om side, 2974 × 1058 px.
-- `output/design-qa/signal-comparison.png` — kilde og implementasjon side om side, 2974 × 1058 px.
-- `output/design-qa/vertskap-comparison.png` — kilde og implementasjon side om side, 2974 × 1058 px.
-- Desktop: `drift-implementation.png`, `signal-implementation.png`, `vertskap-implementation.png`.
-- Mobil: `drift-mobile.png`, `signal-mobile.png`, `vertskap-mobile.png`.
-- Fullskjermbildene er lesbare nok til å vurdere typografi, regioner, bildeutsnitt, farge og innhold; egne fokusbilder var derfor ikke nødvendig.
+Full-view comparison: `output/playwright/notion-ai-hero-comparison-final.png`. Focused headline, body, buttons and note comparison: `output/playwright/notion-ai-hero-comparison-copy.png`. Both comparisons were opened and inspected together, source left and implementation right.
 
-## Funn og rettelser
+## Findings
 
-1. Døgnkartet hadde først for stor hero og for mye vertikal luft sammenlignet med kilden (P2). Overskrift, topprom, døgnkart og servicepunkter ble komprimert. Ny sammenligning viser døgnlinje, råd og restaurantbilde i samme synlige hovedkomposisjon som kilden.
-2. Servicejournalens hero var først for høy (P2). Høyden ble redusert slik at journalpapiret igjen blir en tydelig del av første skjermbilde, samtidig som mobilutsnittet beholdes.
-3. Signalrommet beholder kildens mørke kontrollrom, monospaced typografi, fire datakilder, dokumentarfoto og ett stort handlingsråd. Implementasjonen bruker kildekort som fungerende kontroller i stedet for dekorative signalstreker; informasjonsarkitektur og visuell retning er bevart.
-4. Ingen P0-, P1- eller P2-avvik står igjen. Mobilskjermbildene har ingen horisontal scrolling eller tekstkollisjoner.
+No remaining actionable P0/P1/P2 differences.
 
-## Funksjonell kontroll
+- Fonts and typography: existing Inter retained; 82px desktop headline, bold two-line hierarchy, blue AI-rådgiver emphasis. Mobile type grows to 34.71px at 390px while fitting at 320px. No truncation or clipped headline.
+- Spacing and layout rhythm: centered headline, two-line explanation, actions and small reassurance line match the selected composition. Existing header, hero height and demo placement retained. Desktop hero height 914px and demo y=918px at 1440 × 900.
+- Colors and tokens: existing Scope blue, near-black type, white secondary button and integration strip retained. No new palette or decorative surfaces.
+- Image quality and asset fidelity: existing real licensed restaurant video and original brand/integration assets reused. The previously approved bottom-anchored chair crop remains; small photographic differences from the generated mock are intentional preservation of the live video.
+- Copy and content: headline and explanation match direction 2. Requested line reads exactly “Klar på 1-2-3. Ingen bindingstid.” below the actions. One semantic h1, without a stale slogan aria-label.
 
-- Døgnkart: klikk på «Lunsj» oppdaterte rådet til «Åpne uteserveringen 30 minutter tidligere.»
-- Signalrom: klikk på «Bemanning» oppdaterte rådet til «Reduser bemanningen med to timer mellom 15 og 17.»
-- Servicejournal: «Bla i journalen» byttet historie og sidetall fra 01 til 02.
-- Konsoll: ingen `error`-logger på `/drift`, `/signal` eller `/vertskap`.
-- Automatiske tester: 111 av 111 bestått.
-- Produksjonsbygg: `npm run build:site` bestått, 84 filer pluss assets og `_redirects`.
-- JavaScript-syntaks og `git diff --check`: bestått.
+## Comparison history
+
+1. Initial desktop comparison found a P2: body/actions sat roughly 25–35px too low versus the selected target. Reduced desktop headline size/line height, tightened paragraph and action spacing, and adjusted desktop bottom padding. Post-fix full and focused comparisons align the intended hierarchy and rhythm.
+2. Initial mobile screenshot found a P2: 26px headline was too small relative to the actions. Added a bounded mobile type scale. Post-fix 390px screenshot shows the stronger hierarchy; 320px, 390px, 768px and 1920px checks show no horizontal overflow, clipped titles or hidden actions/reassurance.
+
+## Verification
+
+- Existing suite: 142 passed, 0 failed. Site build passed.
+- Primary CTA destinations checked: existing test-customer and demo mailto links preserved.
+- Integration band verified paused at page start and running after reaching its natural slot.
+- Local browser layout and Netlify preview visually inspected. Published production `6acc24f15ab3e8abbd6b91a3` verified in a fresh browser tab: correct copy/CSS, no overflow, real video playing without error, and no browser console errors. Live screenshot: `output/playwright/notion-ai-hero-live.png`.
+- All 228 published file hashes verified; 226 unrelated published files preserved.
+
+## Follow-up polish
+
+- P3: retain existing button widths and live photo crop rather than approximate minor raster-mock differences.
 
 final result: passed

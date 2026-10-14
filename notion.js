@@ -1,4 +1,42 @@
-// Scope #19 — Notion: ordet i hero-pillen skrives på nytt, og Rådstavlen bytter visning med fanene Tabell og Tavle.
+// Scope #19 — Notion: hero, demovindu og logobånd.
+const heroTypewriter = document.querySelector("[data-n-hero-typewriter]");
+if (heroTypewriter) {
+  const phrases = ["din AI-rådgiver.", "laget for restaurantbransjen."];
+  const tones = ["blue", "green"];
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let phrase = 0;
+  let characters = phrases[0].length;
+  let deleting = true;
+  let timer;
+  const tick = () => {
+    if (document.hidden) { timer = setTimeout(tick, 250); return; }
+    characters += deleting ? -1 : 1;
+    heroTypewriter.textContent = phrases[phrase].slice(0, characters);
+    let delay = deleting ? 45 : 85;
+    if (characters === 0) {
+      phrase = (phrase + 1) % phrases.length;
+      heroTypewriter.dataset.tone = tones[phrase];
+      deleting = false;
+      delay = 350;
+    } else if (characters === phrases[phrase].length && !deleting) {
+      deleting = true;
+      delay = 2600;
+    }
+    timer = setTimeout(tick, delay);
+  };
+  const updateTyping = () => {
+    clearTimeout(timer);
+    phrase = 0;
+    characters = phrases[0].length;
+    deleting = true;
+    heroTypewriter.textContent = phrases[0];
+    heroTypewriter.dataset.tone = tones[0];
+    if (!reducedMotion.matches) timer = setTimeout(tick, 2600);
+  };
+  reducedMotion.addEventListener("change", updateTyping);
+  updateTyping();
+}
+
 const pill = document.querySelector("[data-n-pill]");
 
 // Samme skrivemaskin som /enkel: ordet skrives bokstav for bokstav og slettes med backspace eller markering.
@@ -49,47 +87,80 @@ if (heroVideo && window.matchMedia("(prefers-reduced-motion: reduce)").matches) 
   heroVideo.pause();
 }
 
-// Oversikten fra /test vises i full desktopbredde og skaleres ned til vinduet.
-const screen = document.querySelector("[data-n-screen]");
+// Den faktiske /test-flaten i miniatyr. embed=1 holder demotilstanden i minnet.
+const dashboardPreview = document.querySelector("[data-n-dashboard-preview]");
+const demoDialog = document.querySelector("#n-demo-dialog");
+if (dashboardPreview && demoDialog) {
+  const previewFrame = dashboardPreview.querySelector("iframe");
+  const liveFrame = demoDialog.querySelector("iframe");
+  const openButton = document.querySelector("[data-n-demo-open]");
+  const loading = demoDialog.querySelector("[data-n-demo-loading]");
+  const fitPreview = () => dashboardPreview.style.setProperty("--n-demo-scale", String(dashboardPreview.clientWidth / 1840));
+  new ResizeObserver(fitPreview).observe(dashboardPreview);
+  fitPreview();
 
-if (screen) {
-  const fit = () => screen.style.setProperty("--n-scale", String(screen.clientWidth / 1440));
-  new ResizeObserver(fit).observe(screen);
-  fit();
-
-  // Forsiden er lys, så oversikten vises alltid lys og med åpen meny, uten å endre valgene i /test.
-  const frame = screen.querySelector("iframe");
-  frame.addEventListener("load", () => {
+  const useLightTheme = (frame) => {
     const app = frame.contentDocument?.body;
-    if (!app) return;
-    app.dataset.theme = "light";
-    app.classList.remove("is-collapsed");
+    if (app) {
+      app.dataset.theme = "light";
+      if (frame === previewFrame) {
+        app.style.overflow = "hidden";
+        const content = app.querySelector(".content-body");
+        if (content) content.style.overflow = "hidden";
+      }
+      app.querySelector("a.brand")?.setAttribute("href", "/test?embed=1#oversikt");
+      if (frame === liveFrame) frame.contentDocument.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !frame.contentDocument.querySelector("dialog[open]")) {
+          event.preventDefault();
+          demoDialog.close();
+        }
+      });
+    }
+  };
+  previewFrame.addEventListener("load", () => useLightTheme(previewFrame));
+  liveFrame.addEventListener("load", () => {
+    if (!liveFrame.hasAttribute("src")) return;
+    useLightTheme(liveFrame);
+    loading.hidden = true;
+  });
+  openButton.addEventListener("click", () => {
+    if (!liveFrame.hasAttribute("src")) liveFrame.src = liveFrame.dataset.src;
+    demoDialog.showModal();
+    document.body.classList.add("is-demo-open");
+  });
+  demoDialog.querySelector("[data-n-demo-close]").addEventListener("click", () => demoDialog.close());
+  demoDialog.addEventListener("close", () => {
+    document.body.classList.remove("is-demo-open");
+    openButton.focus({ preventScroll: true });
   });
 }
 
-const database = document.querySelector("[data-n-database]");
+const logoMarquee = document.querySelector("[data-n-logos]");
+const logoContent = document.querySelector("[data-n-logo-content]");
 
-if (database) {
-  const tabs = [...database.querySelectorAll("[data-n-view]")];
+if (logoMarquee && logoContent) {
+  const slot = logoContent.closest(".n-integrations");
+  const topbar = document.querySelector(".n-topbar");
+  let pendingFrame = 0;
 
-  const show = (selected, moveFocus) => {
-    tabs.forEach((tab) => {
-      const active = tab === selected;
-      tab.setAttribute("aria-selected", String(active));
-      tab.tabIndex = active ? 0 : -1;
-      document.getElementById(tab.getAttribute("aria-controls")).hidden = !active;
-    });
-    if (moveFocus) selected.focus();
+  const positionLogos = () => {
+    pendingFrame = 0;
+    const bounds = slot.getBoundingClientRect();
+    const naturalTop = bounds.top + logoContent.offsetTop;
+    const offset = Math.min(0, innerHeight - logoContent.offsetHeight - naturalTop);
+    logoContent.style.setProperty("--n-logo-viewport", `${document.documentElement.clientWidth}px`);
+    logoContent.style.setProperty("--n-logo-offset", `${offset}px`);
+    logoContent.classList.toggle("is-floating", offset < 0);
+    slot.classList.toggle("is-landed", offset === 0);
+    logoMarquee.classList.toggle("is-visible", offset === 0 && bounds.bottom > (topbar?.offsetHeight || 0));
   };
 
-  tabs.forEach((tab, index) => {
-    tab.addEventListener("click", () => show(tab, false));
-    tab.addEventListener("keydown", (event) => {
-      const step = { ArrowRight: 1, ArrowLeft: -1 }[event.key];
-      if (step) {
-        event.preventDefault();
-        show(tabs[(index + step + tabs.length) % tabs.length], true);
-      }
-    });
-  });
+  const schedulePosition = () => {
+    if (!pendingFrame) pendingFrame = requestAnimationFrame(positionLogos);
+  };
+
+  addEventListener("scroll", schedulePosition, { passive: true });
+  addEventListener("resize", schedulePosition);
+  new ResizeObserver(schedulePosition).observe(slot);
+  positionLogos();
 }

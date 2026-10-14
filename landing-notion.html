@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Scope — Mer restaurant. Mindre støy.</title>
-    <meta name="description" content="Scope samler restaurantens tall og gir konkrete råd om driften. Rolig, tydelig og uten bindingstid.">
+    <title>Scope — Din AI-rådgiver for restaurantbransjen</title>
+    <meta name="description" content="Få oversikt over salg, kostnader og bemanning. Scope bruker AI til å gi råd basert på tallene dine. Klar på 1-2-3. Ingen bindingstid.">
     <meta name="theme-color" content="#ffffff">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='28' cy='22' r='16' fill='%23064dff' fill-opacity='.9'/%3E%3Ccircle cx='42' cy='38' r='16' fill='%23ff3c38' fill-opacity='.9'/%3E%3Ccircle cx='22' cy='42' r='16' fill='%2300bd7b' fill-opacity='.9'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="notion.css?v=20261002-peek1">
+    <link rel="stylesheet" href="notion.css?v=20261013-wide-demo3-logo-tones1-cards7-layout8">
   </head>
   <body class="notion-site">
     <a class="skip-link" href="#hovedinnhold">Hopp til innholdet</a>
@@ -32,9 +32,12 @@
         <video class="n-hero-video" autoplay muted loop playsinline preload="auto" poster="assets/notion-hero-cafe.jpg" aria-hidden="true" tabindex="-1" data-n-hero-video>
           <source src="assets/notion-hero-cafe.mp4?v=boomerang1" type="video/mp4">
         </video>
-        <h1 id="hero-title" aria-label="Du kan mat, vi kan tall.">
-          <span class="n-hero-line" aria-hidden="true">Du kan <span class="n-pill" data-n-pill data-tone="blue"><span class="n-pill-word" data-n-word>mat</span></span></span>
-          <span class="n-hero-line" aria-hidden="true">Vi kan&nbsp;<em>tall.</em></span>
+        <h1 id="hero-title" aria-label="Scope: din AI-rådgiver. Laget for restaurantbransjen.">
+          <span class="n-hero-line n-hero-brand" aria-hidden="true"><svg class="n-hero-logo" viewBox="0 0 46 42" width="46" height="42"><circle cx="21" cy="13" r="13" fill="#064dff" fill-opacity=".9"/><circle cx="33" cy="26" r="13" fill="#ff3c38" fill-opacity=".9"/><circle cx="13" cy="29" r="13" fill="#00bd7b" fill-opacity=".9"/></svg><span>scope:</span></span>
+          <span class="n-hero-accent n-hero-typing" aria-hidden="true">
+            <span class="n-hero-typing-size">laget for restaurantbransjen.</span>
+            <span class="n-hero-typing-text" data-n-hero-typewriter data-tone="blue">din AI-rådgiver.</span>
+          </span>
         </h1>
         <p class="n-hero-note">Klar på 1-2-3. Ingen bindingstid.</p>
         <div class="n-hero-actions">
@@ -43,113 +46,191 @@
         </div>
       </section>
 
-      <figure class="n-showcase" aria-label="Oversikten i Scope, slik den ser ut for en eksempelrestaurant">
+      <figure class="n-showcase" aria-label="Dashboardet i Scope i miniatyr">
         <div class="n-window">
-          <div class="n-window-bar" aria-hidden="true"><i></i><i></i><i></i></div>
-          <div class="n-window-screen" data-n-screen>
-            <iframe src="/test?embed=1#oversikt" title="Scope-oversikten" loading="lazy" tabindex="-1" aria-hidden="true" scrolling="no"></iframe>
+          <div class="n-window-bar"><span class="n-window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>scope <span class="n-window-divider">/</span> Oversikt</span><small>Demodata</small></div>
+          <div class="n-dashboard-preview" data-n-dashboard-preview>
+            <iframe id="n-demo-preview" src="/test?embed=1#oversikt" title="Forhåndsvisning av Scope-dashboardet" loading="lazy" tabindex="-1" aria-hidden="true" inert></iframe>
+          </div>
+          <div class="n-demo-controls">
+            <button class="n-button n-button-solid" type="button" data-n-demo-open aria-haspopup="dialog" aria-controls="n-demo-dialog">Prøv demoen</button>
+            <a href="/test?embed=1#oversikt" target="_blank" rel="noopener">Åpne i ny fane <span aria-hidden="true">↗</span></a>
           </div>
         </div>
       </figure>
 
+      <dialog id="n-demo-dialog" class="n-demo-dialog" aria-labelledby="n-demo-dialog-title">
+        <div class="n-demo-dialog-header">
+          <h2 id="n-demo-dialog-title">Scope <span>· Demodata</span></h2>
+          <button class="n-button" type="button" data-n-demo-close autofocus>Lukk demoen</button>
+        </div>
+        <div class="n-demo-dialog-body">
+          <p class="n-demo-loading" data-n-demo-loading role="status">Åpner demoen…</p>
+          <iframe id="n-demo-live" data-src="/test?embed=1#oversikt" title="Interaktiv Scope-demo"></iframe>
+        </div>
+      </dialog>
+
+      <section class="n-integrations" aria-labelledby="n-integrations-title">
+        <div class="n-integrations-heading">
+          <h2 id="n-integrations-title">Kobler til systemene restaurantbransjen bruker</h2>
+        </div>
+        <div class="n-integrations-content" data-n-logo-content>
+        <div class="n-logo-marquee" data-n-logos>
+          <div class="n-logo-track">
+            <ul class="n-logo-group" aria-label="Systemer">
+              <li><img src="assets/logos/tripletex.svg" alt="Tripletex" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/wolt.png" alt="Wolt" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/restolution-new.png" alt="Restolution" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/munu.svg" alt="Munu" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/poweroffice-farge01.png" alt="PowerOffice Go" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/lightspeed.svg" alt="Lightspeed" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/planday.png" alt="Planday" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/foodora.png" alt="Foodora" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/tamigo.svg" alt="Tamigo" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/favrit.svg" alt="Favrit" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/vipps.png" alt="Vipps" width="128" height="36" loading="lazy"></li>
+              <li class="n-logo-wordmark"><img src="assets/logos/fiken-icon.svg" alt="" width="128" height="36" loading="lazy"><span aria-label="Fiken">fiken</span></li>
+              <li><img src="assets/logos/baemingo.svg" alt="Baemingo" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/xledger.svg" alt="Xledger" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/quinyx.svg" alt="Quinyx" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/orderx.png" alt="Order X" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/dynamics365.svg" alt="Microsoft Dynamics 365" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/business-nxt.png" alt="Business NXT by Visma" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/conta.svg" alt="Conta" width="128" height="36" loading="lazy"></li>
+              <li class="n-logo-wordmark"><span aria-label="Unimicro">unimicro</span></li>
+              <li><img src="assets/logos/pckasse.svg" alt="PCK" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/amendo.png" alt="Amendo" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/connecteam.png" alt="Connecteam" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/samesystem.png" alt="SameSystem" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/tidsbanken.png" alt="Tidsbanken" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/timegrip.png" alt="Timegrip" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/easyatwork.png" alt="Easy@work" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/stockifi.png" alt="Stockifi" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/google-reviews.png" alt="Google Reviews" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/tripadvisor.png" alt="Tripadvisor" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/gastroplanner.png" alt="GastroPlanner" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/et-gradient.svg" alt="ET" width="128" height="36" loading="lazy"></li>
+            </ul>
+            <ul class="n-logo-group" aria-hidden="true">
+              <li><img src="assets/logos/tripletex.svg" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/wolt.png" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/restolution-new.png" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/munu.svg" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/poweroffice-farge01.png" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/lightspeed.svg" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/planday.png" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/foodora.png" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/tamigo.svg" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/favrit.svg" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/vipps.png" alt="" width="128" height="36" loading="lazy"></li>
+              <li class="n-logo-wordmark"><img src="assets/logos/fiken-icon.svg" alt="" width="128" height="36" loading="lazy"><span>fiken</span></li>
+              <li><img src="assets/logos/baemingo.svg" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/xledger.svg" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/quinyx.svg" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/orderx.png" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/dynamics365.svg" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/business-nxt.png" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/conta.svg" alt="" width="128" height="36" loading="lazy"></li>
+              <li class="n-logo-wordmark"><span>unimicro</span></li>
+              <li><img src="assets/logos/pckasse.svg" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/amendo.png" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/connecteam.png" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/samesystem.png" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/tidsbanken.png" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/timegrip.png" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/easyatwork.png" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/stockifi.png" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/google-reviews.png" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/tripadvisor.png" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/trim/gastroplanner.png" alt="" width="128" height="36" loading="lazy"></li>
+              <li><img src="assets/logos/et-gradient.svg" alt="" width="128" height="36" loading="lazy"></li>
+            </ul>
+          </div>
+        </div>
+        </div>
+      </section>
+
       <article class="n-page">
         <section class="n-section" id="slik" aria-labelledby="slik-title">
           <h2 id="slik-title"><a class="n-anchor" href="#slik" aria-label="Lenke til Slik virker det">#</a>Slik virker det</h2>
-          <p class="n-muted">Fem steg fra tilkobling til råd. Du gjør bare det første.</p>
+          <!-- Foto: Tim Douglas (6205494), Ketut Subiyanto (4353610) og Rachel Claire (5865152). Pexels-lisens: https://www.pexels.com/license/ . Kilder: https://www.pexels.com/photo/colleagues-working-on-laptop-in-cafe-6205494/ ; https://www.pexels.com/photo/thoughtful-waitress-in-apron-surfing-laptop-at-bar-counter-4353610/ ; https://www.pexels.com/photo/people-sitting-on-chairs-at-a-restaurant-5865152/ -->
           <div class="n-blocks">
-            <article class="n-block"><span class="n-num">1</span><h3>Koble opp systemene dine</h3><p>Kasse, regnskap og bemanning kobles opp på under 30 minutter.</p></article>
-            <article class="n-block"><span class="n-num">2</span><h3>Hent data</h3><p>Scope henter inn tallene fra driften automatisk – hver eneste natt.</p></article>
-            <article class="n-block"><span class="n-num">3</span><h3>Analyser</h3><p>AI-en finner mønstre og avvik, og ser hva som faktisk påvirker resultatet ditt.</p></article>
-            <article class="n-block"><span class="n-num">4</span><h3>Kvalitetssikre</h3><p>Bransjefolk går gjennom funnene før de blir til råd du kan stole på.</p></article>
-            <article class="n-block"><span class="n-num">5</span><h3>Få råd</h3><p>Du får ett tydelig neste steg med forventet effekt – ikke en rapport du må tolke selv.</p></article>
+            <article class="n-block">
+              <div class="n-block-copy">
+                <span class="n-num" aria-label="Steg 1">01</span>
+                <h3>Koble opp</h3>
+                <p>Vi kobler opp alle systemene dine på 15 minutter.</p>
+              </div>
+              <div class="n-block-media"><img src="assets/notion-how/oppkobling-laptop.jpg" alt="Tre kafémedarbeidere samarbeider rundt en laptop" width="1200" height="800" loading="lazy" decoding="async"></div>
+            </article>
+            <article class="n-block">
+              <div class="n-block-copy">
+                <span class="n-num" aria-label="Steg 2">02</span>
+                <h3>Få råd</h3>
+                <p>Du får nye råd hver dag, basert på tallene dine og kvalitetssikret av folk fra restaurantbransjen.</p>
+              </div>
+              <div class="n-block-media"><img src="assets/notion-how/oversikt-restaurant.jpg" alt="En restaurantmedarbeider arbeider på en laptop ved bardisken" width="1200" height="1800" loading="lazy" decoding="async"></div>
+            </article>
+            <article class="n-block">
+              <div class="n-block-copy">
+                <span class="n-num" aria-label="Steg 3">03</span>
+                <h3>Se effekten</h3>
+                <p>Logg inn, bruk rådene og se effekten i kroner og øre.</p>
+              </div>
+              <div class="n-block-media"><img src="assets/notion-how/restaurant-med-gjester.jpg" alt="En travel restaurant med gjester ved bordene og ansatte som serverer" width="1200" height="800" loading="lazy" decoding="async"></div>
+            </article>
           </div>
         </section>
 
-        <section class="n-section" id="radstavlen" aria-labelledby="rad-title" data-n-database>
-          <h2 id="rad-title"><a class="n-anchor" href="#radstavlen" aria-label="Lenke til Rådstavlen">#</a>Rådstavlen</h2>
-          <p class="n-muted">Slik ser rådene ut for en eksempelrestaurant. Bytt visning for å se dem som tabell eller tavle.</p>
-
-          <div class="n-views" role="tablist" aria-label="Visning">
-            <button type="button" role="tab" id="view-table" aria-selected="true" aria-controls="panel-table" data-n-view="table"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 3.5h11v9h-11zM2.5 7h11M6.5 3.5v9"/></svg>Tabell</button>
-            <button type="button" role="tab" id="view-board" aria-selected="false" aria-controls="panel-board" tabindex="-1" data-n-view="board"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 3.5h3.5v9H2.5zM6.5 3.5H10v6H6.5zM10.5 3.5H14v4h-3.5z"/></svg>Tavle</button>
-          </div>
-
-          <div class="n-panel" id="panel-table" role="tabpanel" aria-labelledby="view-table" tabindex="0">
-            <div class="n-table-wrap">
-              <table class="n-table">
-                <thead><tr><th scope="col">Råd</th><th scope="col">Tema</th><th scope="col">Status</th><th scope="col" class="n-right">Effekt</th></tr></thead>
-                <tbody>
-                  <tr><th scope="row">To for mange på jobb mellom 14 og 16</th><td><span class="n-tag">Bemanning</span></td><td><span class="n-tag n-tag-blue">Nytt</span></td><td class="n-right">≈ 2 600 kr</td></tr>
-                  <tr><th scope="row">Burratasalaten spiser opp marginen</th><td><span class="n-tag">Meny</span></td><td><span class="n-tag n-tag-blue">Nytt</span></td><td class="n-right">≈ 2 800 kr</td></tr>
-                  <tr><th scope="row">Fire gjester nevnte lang ventetid</th><td><span class="n-tag">Omtaler</span></td><td><span class="n-tag n-tag-blue">Nytt</span></td><td class="n-right n-quiet">Ikke tallfestet</td></tr>
-                  <tr><th scope="row">12 kg avokado går i søpla hver måned</th><td><span class="n-tag">Innkjøp</span></td><td><span class="n-tag n-tag-blue">Nytt</span></td><td class="n-right">≈ 1 600 kr</td></tr>
-                  <tr><th scope="row">Ny vaktplan for søndager</th><td><span class="n-tag">Bemanning</span></td><td><span class="n-tag n-tag-red">I gang</span></td><td class="n-right n-quiet">Måles</td></tr>
-                  <tr><th scope="row">Nye priser på tre forretter</th><td><span class="n-tag">Meny</span></td><td><span class="n-tag n-tag-red">I gang</span></td><td class="n-right n-quiet">Måles</td></tr>
-                  <tr><th scope="row">Kuttet fast avokadobestilling</th><td><span class="n-tag">Innkjøp</span></td><td><span class="n-tag n-tag-green">Målt effekt</span></td><td class="n-right n-gain">+ 1 600 kr</td></tr>
-                  <tr><th scope="row">Flyttet én vakt fra torsdag til fredag</th><td><span class="n-tag">Bemanning</span></td><td><span class="n-tag n-tag-green">Målt effekt</span></td><td class="n-right n-gain">+ 2 400 kr</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="n-panel" id="panel-board" role="tabpanel" aria-labelledby="view-board" tabindex="0" hidden>
-            <div class="n-board">
-              <section class="n-col" aria-label="Nye råd">
-                <h3><span class="n-tag n-tag-blue">Nye råd</span><span class="n-count">4</span></h3>
-                <article class="n-card"><span class="n-tag">Bemanning</span><strong>To for mange på jobb mellom 14 og 16</strong><span class="n-quiet">≈ 2 600 kr</span></article>
-                <article class="n-card"><span class="n-tag">Meny</span><strong>Burratasalaten spiser opp marginen</strong><span class="n-quiet">≈ 2 800 kr</span></article>
-                <article class="n-card"><span class="n-tag">Omtaler</span><strong>Fire gjester nevnte lang ventetid</strong><span class="n-quiet">Ikke tallfestet</span></article>
-                <article class="n-card"><span class="n-tag">Innkjøp</span><strong>12 kg avokado går i søpla hver måned</strong><span class="n-quiet">≈ 1 600 kr</span></article>
-              </section>
-              <section class="n-col" aria-label="I gang">
-                <h3><span class="n-tag n-tag-red">I gang</span><span class="n-count">2</span></h3>
-                <article class="n-card"><span class="n-tag">Bemanning</span><strong>Ny vaktplan for søndager</strong><span class="n-quiet">Frist 10. sep.</span></article>
-                <article class="n-card"><span class="n-tag">Meny</span><strong>Nye priser på tre forretter</strong><span class="n-quiet">Frist 8. sep.</span></article>
-              </section>
-              <section class="n-col" aria-label="Målt effekt">
-                <h3><span class="n-tag n-tag-green">Målt effekt</span><span class="n-count">2</span></h3>
-                <article class="n-card"><span class="n-tag">Innkjøp</span><strong>Kuttet fast avokadobestilling</strong><span class="n-gain">+ 1 600 kr</span></article>
-                <article class="n-card"><span class="n-tag">Bemanning</span><strong>Flyttet én vakt fra torsdag til fredag</strong><span class="n-gain">+ 2 400 kr</span></article>
-              </section>
-            </div>
-          </div>
-          <p class="n-footnote">Eksempelrestaurant · Illustrative tall og estimater, ikke faktiske resultater.</p>
-        </section>
-
-        <section class="n-section" id="faq" aria-labelledby="faq-title">
-          <h2 id="faq-title"><a class="n-anchor" href="#faq" aria-label="Lenke til Ofte stilte spørsmål">#</a>Ofte stilte spørsmål</h2>
+        <section class="n-section n-clean-section n-faq" id="faq" aria-labelledby="faq-title">
+          <h2 id="faq-title">Ofte stilte spørsmål</h2>
           <div class="n-toggles">
-            <details><summary>Hvem passer Scope for?</summary><p>Restauranter, barer, kafeer, nattklubber og kjeder med flere lokasjoner.</p></details>
-            <details><summary>Må vi bytte systemer?</summary><p>Nei. Scope kobles til systemene dere allerede bruker.</p></details>
-            <details><summary>Hvilke systemer kan Scope kobles til?</summary><p>Regnskap, kasse, bemanning, booking og levering.</p></details>
-            <details><summary>Hvordan fungerer rådene?</summary><p>Scope analyserer driften og gir korte, konkrete råd. Folk som kjenner bransjen kvalitetssikrer dem før du får dem.</p></details>
-            <details><summary>Kan flere lokasjoner bruke Scope?</summary><p>Ja. Følg hvert sted separat og få samtidig en samlet oversikt.</p></details>
-            <details><summary>Hvor lang tid tar det å komme i gang?</summary><p>Det avhenger av systemene, men målet er at oppsettet skal gå raskt.</p></details>
-            <details><summary>Hva koster det?</summary><p>Vi søker testkunder nå, og da prøver du Scope gratis med dine egne tall.</p></details>
-            <details><summary>Hvor ofte oppdateres tallene?</summary><p>Hver natt, så oversikten er oppdatert når du starter dagen.</p></details>
+            <details><summary>Hvem passer Scope for?</summary><p>Restauranter, kafeer og barer, enten dere driver ett sted eller flere.</p></details>
+            <details><summary>Må vi bytte systemer?</summary><p>Nei. Scope kobles til systemene dere allerede bruker. Vi avklarer hvilke koblinger som er tilgjengelige før dere starter.</p></details>
+            <details><summary>Hvordan brukes AI?</summary><p>AI analyserer salg, kostnader og bemanning og foreslår tiltak. Rådene kvalitetssikres av folk med restauranterfaring.</p></details>
+            <details><summary>Hva innebærer det å være testkunde?</summary><p>Dere prøver Scope med egne tall og gir tilbakemeldinger underveis. Vi hjelper med oppsett og følger dere opp.</p></details>
+            <details><summary>Koster det noe å teste?</summary><p>Testperioden er gratis og uten binding. Vi avtaler omfang og varighet før dere starter.</p></details>
+            <details><summary>Hvordan blir vi med?</summary><p>Send en e-post til <a href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20bli%20testkunde%20hos%20Scope">post@scopeanalytics.no</a> med litt om restauranten og systemene dere bruker. Så tar vi en prat om veien videre.</p></details>
           </div>
         </section>
 
-        <section class="n-section" id="kom-i-gang" aria-labelledby="gang-title">
-          <h2 id="gang-title"><a class="n-anchor" href="#kom-i-gang" aria-label="Lenke til Kom i gang">#</a>Kom i gang</h2>
-          <p class="n-muted">Vi søker testkunder. Driver du restaurant, kafé eller bar? Da får du:</p>
-          <ul class="n-todos" data-n-todos>
-            <li><label><input type="checkbox"><span class="n-box" aria-hidden="true"></span><span>Prøv Scope gratis med dine egne tall</span></label></li>
-            <li><label><input type="checkbox"><span class="n-box" aria-hidden="true"></span><span>Få tett oppfølging underveis</span></label></li>
-            <li><label><input type="checkbox"><span class="n-box" aria-hidden="true"></span><span>Ingen forpliktelse eller binding</span></label></li>
-          </ul>
-          <p class="n-muted">Vi er et oppstartsselskap som vil hjelpe en bransje med små marginer – og gi deg verktøyene til å konkurrere på like vilkår med de store kjedene.</p>
-          <div class="n-actions">
-            <a class="n-button n-button-solid" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20bli%20testkunde%20hos%20Scope">Bli testkunde</a>
-            <a class="n-button" href="tel:+4793637295">Ring 936 37 295</a>
+        <section class="n-section n-clean-section n-pilot" id="kom-i-gang" aria-labelledby="gang-title">
+          <div class="n-pilot-copy">
+            <p class="n-eyebrow">Vi søker testkunder</p>
+            <h2 id="gang-title">Vær med på å utvikle <span>Scope</span></h2>
+            <p>Prøv Scope i restauranten, kafeen eller baren din. Tilbakemeldingene deres hjelper oss å bygge et bedre produkt.</p>
+          </div>
+          <div class="n-pilot-detail">
+            <ul class="n-pilot-points">
+              <li>Gratis testing med egne tall</li>
+              <li>Hjelp med oppsett og tett oppfølging</li>
+              <li>Mulighet til å påvirke produktet</li>
+            </ul>
+            <a class="n-button n-button-solid n-button-lg" href="mailto:post@scopeanalytics.no?subject=Jeg%20vil%20bli%20testkunde%20hos%20Scope">Bli testkunde</a>
+            <p class="n-pilot-note">Ingen binding i testperioden.</p>
           </div>
         </section>
       </article>
     </main>
 
-    <footer class="n-footer">
-      <p>Scope Analytics AS · Org.nr. 936 372 295 · <a href="mailto:post@scopeanalytics.no">post@scopeanalytics.no</a></p>
-      <p>Programvare og rådgivning til serveringsbransjen · <a href="/cookies.html">Cookie-innstillinger</a></p>
+    <footer class="n-footer" aria-label="Om Scope og nyttige lenker">
+      <div class="n-footer-inner">
+        <div class="n-footer-meta">
+          <div class="n-footer-brand">
+            <a class="n-footer-logo" href="/notion" aria-label="Scope, til toppen">SCOPE</a>
+            <p>Programvare og rådgivning til restaurantbransjen</p>
+            <p class="n-footer-company">Scope Analytics AS · Org.nr. 936 372 295</p>
+            <a href="mailto:post@scopeanalytics.no">post@scopeanalytics.no</a>
+          </div>
+          <nav class="n-footer-links" aria-label="Footer">
+            <a href="mailto:post@scopeanalytics.no">Kontakt</a>
+            <a href="/vakt-personvern.html">Personvern</a>
+            <a href="/vakt-vilkar.html">Vilkår</a>
+            <a href="/cookies.html">Cookie-innstillinger</a>
+            <a href="/vakt-logg-inn.html">Logg inn</a>
+          </nav>
+        </div>
+      </div>
     </footer>
 
     <aside class="n-cookie" data-simple-cookie-consent hidden aria-label="Valg for informasjonskapsler">
@@ -157,7 +238,7 @@
       <div><button type="button" data-cookie-choice="necessary">Kun nødvendige</button><button type="button" data-cookie-choice="all">Godta alle</button></div>
     </aside>
 
-    <script src="notion.js?v=20261002-peek1"></script>
+    <script src="notion.js?v=20261013-wide-demo3-logo-tones1"></script>
     <script src="cookie-consent.js?v=20260718-v1"></script>
   </body>
 </html>
