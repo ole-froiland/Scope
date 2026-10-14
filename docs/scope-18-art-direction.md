@@ -1,6 +1,6 @@
 # Scope #18 — Enkel, mørk
 
-A separate dark edition of Enkel. The familiar composition, advice workspace and interactions are retained. Charcoal backgrounds, graphite surfaces, ivory controls, and restrained status colors replace the light palette. The information pages and cookie settings stay in this edition.
+A separate dark edition of Enkel. The familiar composition, advice workspace and interactions are retained. Charcoal backgrounds and graphite surfaces carry a coordinated palette of mint (#8ce8c5), coral (#ff9a85), and periwinkle (#94a7ff). Mint leads the actions, coral adds warmth to the hero, and the three accents carry through the logo, product statuses, phones and illustrations. The information pages and cookie settings stay in this edition.
 
 ## Generated image
 
